@@ -29,7 +29,11 @@ export function Services() {
   const tSec = useTranslations("sectionsSeo");
   const cards = t.raw("cards") as CardMsg[];
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.15 });
+  const isInView = useInView(ref, {
+    once: true,
+    amount: 0.08,
+    margin: "0px 0px 100px 0px"
+  });
 
   return (
     <MotionSection
@@ -142,12 +146,12 @@ export function Services() {
 
               <div className="mt-6 flex items-center justify-between gap-3">
                 <Link
-                  href={c.href}
-                  className="text-sm font-semibold text-primary hover:opacity-90 transition"
+                  href="/#contact"
+                  className="text-sm font-semibold text-primary transition hover:opacity-90"
                 >
                   {t("moreLink")}
                 </Link>
-                <Button href={c.href} className="hover-lift">
+                <Button href="/#contact" className="hover-lift">
                   {t("moreBtn")}
                 </Button>
               </div>

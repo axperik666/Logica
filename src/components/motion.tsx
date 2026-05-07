@@ -5,12 +5,8 @@ import type { ReactNode } from "react";
 import { MotionConfig, motion, useReducedMotion } from "framer-motion";
 import type { HTMLMotionProps, MotionStyle } from "framer-motion";
 
-const gpuHint: MotionStyle = {
-  willChange: "transform, opacity"
-};
-
 function mergeMotionStyle(style?: MotionStyle): MotionStyle {
-  return { ...gpuHint, ...style };
+  return { ...style };
 }
 
 export const MotionDiv = forwardRef<HTMLDivElement, HTMLMotionProps<"div">>(

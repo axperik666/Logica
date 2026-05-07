@@ -41,6 +41,8 @@
   },
   "header": {
     "tagline": "Sites · Ads · Creative",
+    "ctaNow": "Contact now",
+    "ctaFormHint": "site form",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "switchTo": "Switch language"
@@ -48,7 +50,7 @@
   "hero": {
     "badge": "🚀 Launch 2026",
     "title": "Marketing built to<br></br><highlight>compound revenue</highlight>",
-    "subtitle": "Traffic is easy to buy. Profit isn’t. Built‑in systems that pay back 3–8× — not vanity dashboards.",
+    "subtitle": "Traffic is easy to buy. Profit isn’t. Built‑in systems that pay back <roi>3–7×</roi> on average — not vanity dashboards.",
     "ctaPrimary": "Get a free audit",
     "ctaSecondary": "See cases",
     "stats": [
@@ -57,6 +59,7 @@
       { "k": "Speed", "v": "Core Web Vitals" },
       { "k": "UX + meaning", "v": "not fluff" }
     ],
+    "quickMessengersLabel": "Messengers — instant reply:",
     "contactStripTitle": "Contact us now",
     "contactTelegram": "Telegram",
     "contactWhatsapp": "WhatsApp",
@@ -104,7 +107,7 @@
         "title": "Web & landing pages",
         "desc": "Premium Next.js sites: UX, speed, conversion and analytics — built to sell, not just look good.",
         "price": "from 120 000 ₽",
-        "href": "/uslugi/sozdanie-lendinga"
+        "href": "/#contact"
       },
       {
         "title": "Strategy + audit",

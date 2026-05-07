@@ -1,8 +1,7 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, useInView } from "framer-motion";
+import { useRef } from "react";
+import { useInView } from "framer-motion";
 import {
   DollarSign,
   TrendingUp,
@@ -23,8 +22,10 @@ import {
 import { MotionDiv, MotionSection } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
+import { Link } from "@/navigation";
 import { HOME_CASE_IDS, type HomeCaseId } from "@/content/homeCases";
 import { CASE_COVER_IMAGES } from "@/content/caseCovers";
+import { CaseCoverImage } from "@/components/cases/CaseCoverImage";
 
 const ICONS: Record<HomeCaseId, LucideIcon> = {
   "med-center": HeartPulse,
@@ -44,25 +45,16 @@ const ICONS: Record<HomeCaseId, LucideIcon> = {
   saas: Cpu
 };
 
-function useEscToClose(onClose: () => void, enabled: boolean) {
-  useEffect(() => {
-    if (!enabled) return;
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [enabled, onClose]);
-}
-
 export function Cases() {
   const t = useTranslations("cases");
   const tSec = useTranslations("sectionsSeo");
-  const [activeId, setActiveId] = useState<HomeCaseId | null>(null);
-  useEscToClose(() => setActiveId(null), Boolean(activeId));
 
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.12 });
+  const isInView = useInView(sectionRef, {
+    once: true,
+    amount: 0.08,
+    margin: "0px 0px 100px 0px"
+  });
 
   return (
     <MotionSection
@@ -102,7 +94,7 @@ export function Cases() {
       </MotionDiv>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {HOME_CASE_IDS.map((id) => {
+        {HOME_CASE_IDS.map((id, index) => {
           const Icon = ICONS[id];
           const niche = t(`items.${id}.niche`);
           const client = t(`items.${id}.client`);
@@ -125,12 +117,11 @@ export function Cases() {
               className="glass hover-lift overflow-hidden rounded-3xl p-6"
             >
               <div className="relative -mx-6 -mt-6 mb-4 h-40 overflow-hidden sm:h-44">
-                <Image
+                <CaseCoverImage
                   src={CASE_COVER_IMAGES[id]}
-                  alt=""
-                  fill
-                  className="object-cover"
+                  alt={`${niche} — ${client}`}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  priority={index < 3}
                 />
                 <div
                   className="absolute inset-0 bg-gradient-to-t from-[#080a1a] via-[#080a1a]/70 to-transparent"
@@ -158,13 +149,12 @@ export function Cases() {
               <p className="mt-4 text-sm leading-relaxed text-white/85">{summary}</p>
 
               <div className="mt-6">
-                <button
-                  type="button"
-                  onClick={() => setActiveId(id)}
-                  className="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/15 hover-lift"
+                <Link
+                  href="/#contact"
+                  className="inline-flex w-full items-center justify-center rounded-xl border border-white/15 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white/15 hover-lift sm:w-auto"
                 >
                   {t("more")}
-                </button>
+                </Link>
               </div>
             </MotionDiv>
           );
@@ -184,97 +174,6 @@ export function Cases() {
           </div>
         </div>
       </div>
-
-      <AnimatePresence>
-        {activeId ? (
-          <MotionDiv
-            className="fixed inset-0 z-[60] grid place-items-center px-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <button
-              type="button"
-              aria-label={t("modalCloseAria")}
-              className="absolute inset-0 bg-black/70"
-              onClick={() => setActiveId(null)}
-            />
-
-            <MotionDiv
-              role="dialog"
-              aria-modal="true"
-              className="glass relative w-full max-w-2xl overflow-hidden rounded-3xl"
-              initial={{ opacity: 0, y: 16, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 10, scale: 0.98 }}
-              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <div className="relative h-44 w-full sm:h-52">
-                <Image
-                  src={CASE_COVER_IMAGES[activeId]}
-                  alt=""
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 672px"
-                />
-                <div
-                  className="absolute inset-0 bg-gradient-to-t from-[#080a1a] via-[#080a1a]/55 to-transparent"
-                  aria-hidden
-                />
-                <button
-                  type="button"
-                  onClick={() => setActiveId(null)}
-                  className="absolute right-3 top-3 rounded-xl border border-white/20 bg-black/50 px-3 py-2 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-black/60 hover-lift"
-                >
-                  {t("modalClose")}
-                </button>
-              </div>
-
-              <div className="p-6 sm:p-8">
-                <div>
-                  <p className="text-xs font-semibold text-white/80">
-                    {t(`items.${activeId}.niche`)} • {t(`items.${activeId}.client`)}
-                  </p>
-                  <h3 className="mt-2 text-2xl font-semibold text-primary">
-                    {t(`items.${activeId}.result`)}
-                  </h3>
-                  <div className="mt-1 text-sm text-white/75">
-                    {t(`items.${activeId}.period`)}
-                  </div>
-                </div>
-
-                <p className="mt-5 text-sm leading-relaxed text-white/85">
-                  {t(`items.${activeId}.summary`)}
-                </p>
-
-                <div className="mt-6 space-y-3">
-                  {(t.raw(`items.${activeId}.details`) as string[]).map((d) => (
-                    <div
-                      key={d}
-                      className="rounded-2xl border border-white/15 bg-white/10 p-4 text-sm text-white/85"
-                    >
-                      {d}
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                  <Button href="/#contact" className="hover-lift w-full sm:w-auto">
-                    {t("modalCta1")}
-                  </Button>
-                  <Button
-                    href="/uslugi"
-                    variant="ghost"
-                    className="hover-lift w-full sm:w-auto"
-                  >
-                    {t("modalCta2")}
-                  </Button>
-                </div>
-              </div>
-            </MotionDiv>
-          </MotionDiv>
-        ) : null}
-      </AnimatePresence>
     </MotionSection>
   );
 }

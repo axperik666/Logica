@@ -52,42 +52,22 @@ export function Footer() {
                 {f("about")}
               </p>
 
-              <div className="mt-6 grid gap-3 sm:max-w-lg sm:grid-cols-2">
+              <div className="mt-6 flex flex-wrap gap-3">
                 <a
                   href={CONTACTS.telegramHttps}
-                  className="group flex items-center gap-4 rounded-2xl border border-primary/25 bg-primary/10 p-4 shadow-[0_12px_40px_rgba(0,191,255,0.12)] transition hover:border-primary/45 hover:bg-primary/15 hover-lift"
+                  className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-primary/35 bg-primary/10 shadow-[0_12px_40px_rgba(0,191,255,0.12)] transition hover:border-primary/55 hover:bg-primary/18 hover-lift"
                   aria-label={f("ariaTelegram")}
                 >
-                  <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-dark/50">
-                    <Send className="h-8 w-8 text-primary" />
-                  </span>
-                  <span className="min-w-0 text-left">
-                    <span className="block text-xs font-medium uppercase tracking-wide text-white/55">
-                      {f("telegramLabel")}
-                    </span>
-                    <span className="mt-0.5 block text-base font-semibold tracking-tight text-white">
-                      {CONTACTS.telegramDisplay}
-                    </span>
-                  </span>
+                  <Send className="h-7 w-7 text-primary" aria-hidden />
                 </a>
                 <a
                   href={CONTACTS.whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-4 rounded-2xl border border-emerald-400/20 bg-emerald-500/10 p-4 shadow-[0_12px_40px_rgba(16,185,129,0.1)] transition hover:border-emerald-400/40 hover:bg-emerald-500/15 hover-lift"
+                  className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-emerald-400/25 bg-emerald-500/12 shadow-[0_12px_40px_rgba(16,185,129,0.1)] transition hover:border-emerald-400/45 hover:bg-emerald-500/18 hover-lift"
                   aria-label={f("ariaWhatsapp")}
                 >
-                  <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-dark/50">
-                    <MessageCircle className="h-8 w-8 text-emerald-400" />
-                  </span>
-                  <span className="min-w-0 text-left">
-                    <span className="block text-xs font-medium uppercase tracking-wide text-white/55">
-                      {f("whatsappLabel")}
-                    </span>
-                    <span className="mt-0.5 block text-base font-semibold tracking-tight text-white">
-                      {CONTACTS.whatsappDisplay}
-                    </span>
-                  </span>
+                  <MessageCircle className="h-7 w-7 text-emerald-400" aria-hidden />
                 </a>
               </div>
 
@@ -118,41 +98,32 @@ export function Footer() {
 
             <div className="lg:col-span-4">
               <div className="text-sm font-semibold">{f("contactsTitle")}</div>
-              <div className="mt-4 grid gap-3 text-sm text-white/70">
+              <div className="mt-4 flex flex-wrap gap-3">
                 <a
                   href={CONTACTS.telegramHttps}
-                  className="flex items-center gap-4 rounded-2xl border border-primary/20 bg-primary/5 p-5 transition hover:border-primary/35 hover:bg-primary/10 hover-lift"
+                  className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-primary/25 bg-primary/8 shadow-[0_8px_28px_rgba(0,191,255,0.1)] transition hover:border-primary/45 hover:bg-primary/14 hover-lift"
+                  aria-label={f("ariaTelegram")}
                 >
-                  <Send className="h-9 w-9 shrink-0 text-primary" />
-                  <div className="min-w-0">
-                    <div className="text-xs text-white/55">{f("telegramLabel")}</div>
-                    <div className="mt-1 text-lg font-semibold tracking-tight text-white">
-                      {CONTACTS.telegramDisplay}
-                    </div>
-                  </div>
+                  <Send className="h-7 w-7 text-primary" aria-hidden />
                 </a>
                 <a
                   href={CONTACTS.whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 rounded-2xl border border-emerald-400/20 bg-emerald-500/10 p-5 transition hover:border-emerald-400/35 hover:bg-emerald-500/15 hover-lift"
+                  className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-emerald-400/22 bg-emerald-500/10 transition hover:border-emerald-400/40 hover:bg-emerald-500/16 hover-lift"
+                  aria-label={f("ariaWhatsapp")}
                 >
-                  <MessageCircle className="h-9 w-9 shrink-0 text-emerald-400" />
-                  <div className="min-w-0">
-                    <div className="text-xs text-white/55">{f("whatsappLabel")}</div>
-                    <div className="mt-1 text-lg font-semibold tracking-tight text-white">
-                      {CONTACTS.whatsappDisplay}
-                    </div>
-                  </div>
+                  <MessageCircle className="h-7 w-7 text-emerald-400" aria-hidden />
                 </a>
                 <a
                   href={CONTACTS.mailto}
-                  className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:bg-white/10 hover-lift"
+                  className="inline-flex min-h-[3.5rem] flex-1 items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 transition hover:bg-white/10 hover-lift sm:min-w-[220px] sm:flex-none"
+                  aria-label={f("ariaEmail")}
                 >
-                  <Mail className="h-9 w-9 shrink-0 text-primary" />
-                  <div className="min-w-0">
+                  <Mail className="h-9 w-9 shrink-0 text-primary" aria-hidden />
+                  <div className="min-w-0 text-left">
                     <div className="text-xs text-white/55">{f("emailLabel")}</div>
-                    <div className="mt-1 text-lg font-semibold tracking-tight text-white truncate">
+                    <div className="mt-0.5 text-sm font-semibold tracking-tight text-white truncate sm:text-base">
                       {CONTACTS.email}
                     </div>
                   </div>

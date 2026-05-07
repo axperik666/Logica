@@ -30,7 +30,11 @@ export function Testimonials() {
   const items = t.raw("items") as Item[];
   const reduceMotion = useReducedMotion();
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.12 });
+  const isInView = useInView(ref, {
+    once: true,
+    amount: 0.08,
+    margin: "0px 0px 100px 0px"
+  });
 
   const [index, setIndex] = useState(0);
   const dirRef = useRef(1);

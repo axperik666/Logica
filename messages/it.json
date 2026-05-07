@@ -41,6 +41,8 @@
   },
   "header": {
     "tagline": "Sites · Ads · Creative",
+    "ctaNow": "Contatta ora",
+    "ctaFormHint": "modulo sul sito",
     "openMenu": "Apri menu",
     "closeMenu": "Chiudi menu",
     "switchTo": "Cambia lingua"
@@ -48,7 +50,7 @@
   "hero": {
     "badge": "🚀 Lancio 2026",
     "title": "Marketing che<br></br><highlight>moltiplica i ricavi</highlight>",
-    "subtitle": "Non solo traffico: profitto nel bilancio. Sistemi che rendono 3–8×.",
+    "subtitle": "Non solo traffico: profitto nel bilancio. Sistemi che rendono <roi>3–7×</roi> in media.",
     "ctaPrimary": "Richiedi audit gratuito",
     "ctaSecondary": "Vedi i casi",
     "stats": [
@@ -57,6 +59,7 @@
       { "k": "Velocità", "v": "Core Web Vitals" },
       { "k": "UX + senso", "v": "non riempitivo" }
     ],
+    "quickMessengersLabel": "Messaggi istantanei:",
     "contactStripTitle": "Contattaci ora",
     "contactTelegram": "Telegram",
     "contactWhatsapp": "WhatsApp",
@@ -104,7 +107,7 @@
         "title": "Web & landing",
         "desc": "Siti premium su Next.js: UX, velocità, conversione e analytics — per vendere, non solo apparire.",
         "price": "da 120 000 ₽",
-        "href": "/uslugi/sozdanie-lendinga"
+        "href": "/#contact"
       },
       {
         "title": "Strategia + audit",

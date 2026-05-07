@@ -67,7 +67,11 @@ export function CTA() {
   }, [avgCheck, leadsPerMonth, convPct, mult]);
 
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.15 });
+  const isInView = useInView(sectionRef, {
+    once: true,
+    amount: 0.08,
+    margin: "0px 0px 120px 0px"
+  });
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -288,42 +292,24 @@ export function CTA() {
                     <p className="mt-4 text-sm text-white/65">{t("successHint")}</p>
                   </div>
 
-                  <div className="grid gap-3 sm:grid-cols-1">
-                    <MotionDiv
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.08 }}
-                    >
+                    <div className="mt-3 flex justify-center gap-4 sm:gap-5">
                       <a
                         href={CONTACTS.telegramHttps}
-                        className="btn-cta-premium flex w-full items-center justify-center gap-3 rounded-2xl border border-primary/35 bg-primary/12 px-5 py-4 text-base font-semibold text-white shadow-[0_8px_36px_rgba(0,191,255,0.18)] transition hover:border-primary/55 hover:bg-primary/20 hover-lift"
+                        aria-label={t("ctaTelegram")}
+                        className="btn-cta-premium inline-flex h-16 w-16 items-center justify-center rounded-2xl border border-primary/35 bg-primary/12 text-white shadow-[0_8px_36px_rgba(0,191,255,0.18)] transition hover:border-primary/55 hover:bg-primary/20 hover-lift"
                       >
-                        <Send className="h-6 w-6 shrink-0 text-primary" />
-                        {t("ctaTelegram")}
+                        <Send className="h-8 w-8 text-primary" aria-hidden />
                       </a>
-                    </MotionDiv>
-                    <MotionDiv
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.14 }}
-                    >
                       <a
                         href={CONTACTS.whatsappHref}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex w-full items-center justify-center gap-3 rounded-2xl border border-emerald-400/25 bg-emerald-500/10 px-5 py-4 text-base font-semibold text-white shadow-[0_8px_36px_rgba(16,185,129,0.12)] transition hover:border-emerald-400/45 hover:bg-emerald-500/15 hover-lift"
+                        aria-label={t("ctaWhatsapp")}
+                        className="inline-flex h-16 w-16 items-center justify-center rounded-2xl border border-emerald-400/25 bg-emerald-500/10 text-white shadow-[0_8px_36px_rgba(16,185,129,0.12)] transition hover:border-emerald-400/45 hover:bg-emerald-500/15 hover-lift"
                       >
-                        <MessageCircle className="h-6 w-6 shrink-0 text-emerald-400" />
-                        {t("ctaWhatsapp")}
+                        <MessageCircle className="h-8 w-8 text-emerald-400" aria-hidden />
                       </a>
-                    </MotionDiv>
-                  </div>
-
-                  <div className="flex flex-wrap items-center justify-center gap-2 border-t border-white/10 pt-5 text-xs text-white/45 sm:justify-start">
-                    <span>{CONTACTS.telegramDisplay}</span>
-                    <span className="text-white/25">·</span>
-                    <span>{CONTACTS.whatsappDisplay}</span>
-                  </div>
+                    </div>
 
                   <button
                     type="button"
@@ -431,25 +417,25 @@ export function CTA() {
                     </p>
 
                     <div className="mt-6 border-t border-white/10 pt-5">
-                      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/50">
+                      <p className="text-center text-xs font-semibold uppercase tracking-[0.14em] text-white/50 sm:text-left">
                         {t("directMessengersTitle")}
                       </p>
-                      <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                      <div className="mt-4 flex justify-center gap-4 sm:justify-start">
                         <a
                           href={CONTACTS.telegramHttps}
-                          className="inline-flex items-center justify-center gap-3 rounded-2xl border border-[#00BFFF]/35 bg-[rgba(0,191,255,0.08)] px-4 py-3.5 text-sm font-semibold text-white shadow-[0_6px_28px_rgba(0,191,255,0.14)] transition hover:border-[#00BFFF]/55 hover:bg-[rgba(0,191,255,0.14)] hover-lift"
+                          aria-label={t("directTelegram")}
+                          className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-[#00BFFF]/35 bg-[rgba(0,191,255,0.08)] text-white shadow-[0_6px_28px_rgba(0,191,255,0.14)] transition hover:border-[#00BFFF]/55 hover:bg-[rgba(0,191,255,0.14)] hover-lift"
                         >
-                          <Send className="h-5 w-5 shrink-0 text-[#00BFFF]" aria-hidden />
-                          {t("directTelegram")}
+                          <Send className="h-7 w-7 shrink-0 text-[#00BFFF]" aria-hidden />
                         </a>
                         <a
                           href={CONTACTS.whatsappHref}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center gap-3 rounded-2xl border border-emerald-400/35 bg-emerald-500/10 px-4 py-3.5 text-sm font-semibold text-white shadow-[0_6px_28px_rgba(16,185,129,0.12)] transition hover:border-emerald-400/55 hover:bg-emerald-500/15 hover-lift"
+                          aria-label={t("directWhatsapp")}
+                          className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-emerald-400/35 bg-emerald-500/10 text-white shadow-[0_6px_28px_rgba(16,185,129,0.12)] transition hover:border-emerald-400/55 hover:bg-emerald-500/15 hover-lift"
                         >
-                          <MessageCircle className="h-5 w-5 shrink-0 text-emerald-400" aria-hidden />
-                          {t("directWhatsapp")}
+                          <MessageCircle className="h-7 w-7 shrink-0 text-emerald-400" aria-hidden />
                         </a>
                       </div>
                     </div>

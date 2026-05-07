@@ -23,8 +23,9 @@ export function ScrollRevealSection({
   const ref = useRef<HTMLElement | null>(null);
   const isInView = useInView(ref, {
     once: true,
-    amount: 0.12,
-    margin: "0px 0px -8% 0px"
+    amount: 0.08,
+    /** Срабатывает раньше — меньше «пустого» футера на мобилке при скролле */
+    margin: "0px 0px 140px 0px"
   });
 
   const Tag = as === "footer" ? motion.footer : motion.section;
@@ -34,12 +35,12 @@ export function ScrollRevealSection({
       ref={ref}
       id={id}
       className={className}
-      initial={{ opacity: 0, y: 28 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={
-        isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }
+        isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }
       }
       transition={{
-        duration: 0.55,
+        duration: 0.42,
         ease: [0.22, 1, 0.36, 1]
       }}
     >

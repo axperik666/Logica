@@ -95,9 +95,7 @@ export function Header() {
 
   return (
     <MotionHeader
-      initial={{ opacity: 0, y: -12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      initial={false}
       className={cn(
         "site-header glass glass-nav fixed inset-x-0 top-0 z-50 overflow-visible",
         /* усиление контраста на tech-bg + нижнее свечение #00BFFF */
@@ -112,18 +110,18 @@ export function Header() {
             href="/"
             className="group flex min-w-0 shrink items-center gap-3 sm:gap-4"
           >
-            <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-2xl bg-white/5 ring-2 ring-[#00BFFF]/25 shadow-[0_0_28px_rgba(0,191,255,0.22)] transition group-hover:ring-[#00BFFF]/45 group-hover:shadow-[0_0_36px_rgba(0,191,255,0.35)] sm:h-12 sm:w-12">
+            <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-2xl bg-white/5 ring-2 ring-[#00BFFF]/30 shadow-[0_0_32px_rgba(0,191,255,0.28)] transition group-hover:ring-[#00BFFF]/50 group-hover:shadow-[0_0_44px_rgba(0,191,255,0.38)] sm:h-14 sm:w-14">
               <Image
                 src="/logo.png"
                 alt={tSeo("logoAlt")}
                 fill
-                sizes="48px"
+                sizes="56px"
                 className="object-cover"
                 priority
               />
             </div>
             <div className="min-w-0 leading-tight">
-              <div className="brand-glow truncate text-xs font-semibold uppercase tracking-[0.12em] text-white sm:text-lg sm:tracking-[0.14em]">
+              <div className="brand-glow truncate text-sm font-bold uppercase tracking-[0.11em] text-white sm:text-xl sm:tracking-[0.14em] md:text-2xl">
                 LOGICA MARKETING
               </div>
               <div className="mt-0.5 hidden flex-wrap items-baseline gap-x-2 gap-y-0.5 sm:flex">
@@ -159,7 +157,7 @@ export function Header() {
                     {idx > 0 ? (
                       <span
                         aria-hidden
-                        className="hidden shrink-0 select-none px-0.5 text-[11px] font-light text-[#00BFFF]/50 sm:inline sm:px-1"
+                        className="shrink-0 select-none px-0.5 text-[11px] font-light text-[#00BFFF]/55 sm:px-1"
                       >
                         |
                       </span>
@@ -181,12 +179,51 @@ export function Header() {
               })}
             </nav>
 
-            <Button
-              href="/#contact"
-              className="btn-cta-premium hidden hover-lift md:inline-flex"
-            >
-              {t("cta")}
-            </Button>
+            <div className="hidden items-center gap-2 md:flex">
+              <div className="flex items-center gap-1 rounded-2xl border border-[#00BFFF]/42 bg-[rgba(4,10,26,0.92)] p-1 shadow-[inset_0_1px_0_rgba(0,191,255,0.18),0_6px_28px_rgba(0,191,255,0.14)] backdrop-blur-xl">
+                <span className="brand-glow hidden px-2 text-[10px] font-bold uppercase tracking-[0.14em] text-white md:inline">
+                  {tUi("ctaNow")}
+                </span>
+                <a
+                  href={CONTACTS.telegramHttps}
+                  aria-label={tf("telegramLabel")}
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[#00BFFF]/35 bg-[rgba(0,191,255,0.08)] text-[#7AE0FF] shadow-[0_0_20px_rgba(0,191,255,0.2)] transition hover:border-[#00BFFF]/55 hover:bg-[rgba(0,191,255,0.14)] hover-lift"
+                >
+                  <Send className="h-5 w-5" />
+                </a>
+                <a
+                  href={CONTACTS.whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={tf("whatsappLabel")}
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-emerald-400/35 bg-emerald-500/12 text-emerald-300 shadow-[0_0_18px_rgba(52,211,153,0.18)] transition hover:border-emerald-400/55 hover:bg-emerald-500/18 hover-lift"
+                >
+                  <MessageCircle className="h-5 w-5" />
+                </a>
+              </div>
+              <Button href="/#contact" variant="ghost" className="hidden hover-lift xl:inline-flex">
+                {t("cta")}
+              </Button>
+            </div>
+
+            <div className="flex items-center gap-1 md:hidden">
+              <a
+                href={CONTACTS.telegramHttps}
+                aria-label={tf("telegramLabel")}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[#00BFFF]/38 bg-[rgba(6,12,28,0.85)] text-[#7AE0FF] shadow-[0_0_18px_rgba(0,191,255,0.22)] transition hover:border-[#00BFFF]/55 hover-lift"
+              >
+                <Send className="h-5 w-5" />
+              </a>
+              <a
+                href={CONTACTS.whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={tf("whatsappLabel")}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-emerald-400/35 bg-emerald-500/12 text-emerald-300 transition hover:border-emerald-400/55 hover-lift"
+              >
+                <MessageCircle className="h-5 w-5" />
+              </a>
+            </div>
 
             <button
               type="button"
@@ -281,40 +318,43 @@ export function Header() {
               ))}
             </div>
 
-            <div className="mt-5 border-t border-white/12 pt-5">
-              <div className="px-1 text-xs font-semibold uppercase tracking-[0.18em] text-white/55">
-                {tf("mobileContactsTitle")}
+            <div className="mt-5 rounded-2xl border border-[#00BFFF]/35 bg-[rgba(5,10,24,0.75)] px-4 py-3 text-center shadow-[inset_0_1px_0_rgba(0,191,255,0.1)]">
+              <div className="brand-glow text-xs font-bold uppercase tracking-[0.2em] text-white">
+                {tUi("ctaNow")}
               </div>
-              <div className="mt-3 grid grid-cols-3 gap-2">
+              <div className="mt-3 flex justify-center gap-4">
                 <a
                   href={CONTACTS.telegramHttps}
-                  className="flex flex-col items-center gap-1.5 rounded-2xl border border-white/12 bg-white/[0.06] px-2 py-3 text-center text-[11px] font-medium text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition hover:border-[#00BFFF]/35 hover:bg-white/10 hover:shadow-[0_0_20px_rgba(0,191,255,0.2)]"
+                  aria-label={tf("telegramLabel")}
+                  className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-[#00BFFF]/40 bg-[rgba(0,191,255,0.1)] text-[#7AE0FF] shadow-[0_0_24px_rgba(0,191,255,0.2)] transition hover:bg-[rgba(0,191,255,0.18)] hover-lift"
                 >
-                  <Send className="h-5 w-5 text-[#7AE0FF]" />
-                  {tf("telegramLabel")}
+                  <Send className="h-7 w-7" aria-hidden />
                 </a>
                 <a
                   href={CONTACTS.whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col items-center gap-1.5 rounded-2xl border border-white/12 bg-white/[0.06] px-2 py-3 text-center text-[11px] font-medium text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition hover:border-[#00BFFF]/35 hover:bg-white/10 hover:shadow-[0_0_20px_rgba(0,191,255,0.2)]"
+                  aria-label={tf("whatsappLabel")}
+                  className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-emerald-400/45 bg-emerald-500/15 text-emerald-300 shadow-[0_0_20px_rgba(52,211,153,0.18)] transition hover:bg-emerald-500/22 hover-lift"
                 >
-                  <MessageCircle className="h-5 w-5 text-[#7AE0FF]" />
-                  {tf("whatsappLabel")}
-                </a>
-                <a
-                  href={CONTACTS.mailto}
-                  className="flex flex-col items-center gap-1.5 rounded-2xl border border-white/12 bg-white/[0.06] px-2 py-3 text-center text-[11px] font-medium text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition hover:border-[#00BFFF]/35 hover:bg-white/10 hover:shadow-[0_0_20px_rgba(0,191,255,0.2)]"
-                >
-                  <Mail className="h-5 w-5 text-[#7AE0FF]" />
-                  {tf("emailLabel")}
+                  <MessageCircle className="h-7 w-7" aria-hidden />
                 </a>
               </div>
             </div>
 
+            <div className="mt-4 flex justify-center border-t border-white/12 pt-4">
+              <a
+                href={CONTACTS.mailto}
+                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-5 py-2.5 text-sm font-semibold text-white/95 transition hover:border-[#00BFFF]/35 hover:bg-white/10"
+              >
+                <Mail className="h-5 w-5 text-[#7AE0FF]" />
+                {tf("emailLabel")}
+              </a>
+            </div>
+
             <div className="mt-4 px-0.5">
-              <Button href="/#contact" className="btn-cta-premium hover-lift w-full py-3.5 text-base shadow-[0_8px_32px_rgba(0,191,255,0.25)]">
-                {t("cta")}
+              <Button href="/#contact" variant="ghost" className="hover-lift w-full border border-white/15 bg-white/[0.06] py-3.5 text-base font-semibold text-white hover:bg-white/10">
+                {t("cta")} — {tUi("ctaFormHint")}
               </Button>
             </div>
           </div>

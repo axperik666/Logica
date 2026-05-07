@@ -41,13 +41,15 @@
   },
   "header": {
     "tagline": "Sites · Ads · Creative",
+    "ctaNow": "Связаться сейчас",
+    "ctaFormHint": "форма на сайте",
     "openMenu": "Открыть меню",
     "closeMenu": "Закрыть меню",
     "switchTo": "Переключить язык"
   },
   "hero": {
     "badge": "🚀 Запуск в 2026",
-    "title": "Маркетинг, который растёт",
+    "title": "Маркетинг,<br></br><highlight>который растёт</highlight>",
     "subtitle": "Не отчётами, а прибылью: воронка и реклама выстроены так, чтобы окупаемость доходила до <roi>3–7×</roi> к вложениям — с тестами, связками и прозрачной экономикой.",
     "ctaPrimary": "Получить бесплатный аудит",
     "ctaSecondary": "Смотреть кейсы",
@@ -57,6 +59,7 @@
       { "k": "Скорость", "v": "Core Web Vitals" },
       { "k": "UX + смысл", "v": "не «красиво»" }
     ],
+    "quickMessengersLabel": "Мессенджеры — без ожидания:",
     "contactStripTitle": "Связаться сейчас",
     "contactTelegram": "Telegram",
     "contactWhatsapp": "WhatsApp",
@@ -104,7 +107,7 @@
         "title": "Веб‑разработка + Лендинги",
         "desc": "Премиум‑сайт на Next.js: UX, скорость, конверсия и аналитика. Не просто красиво — продаёт.",
         "price": "от 120 000 ₽",
-        "href": "/uslugi/sozdanie-lendinga"
+        "href": "/#contact"
       },
       {
         "title": "Маркетинговая стратегия + Аудит",
