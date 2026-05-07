@@ -1,0 +1,448 @@
+/* Tailwind CSS v4: один импорт заменяет @tailwind base / components / utilities */
+@import "tailwindcss";
+
+/*
+ * Шрифт Inter подключается через next/font в app/layout.tsx (preload, без блокирующего @import).
+ * При желании fallback ниже в body дублирует системный стек.
+ */
+
+:root {
+  --primary: #00bfff;
+  --tech-cyan: #00bfff;
+  --tech-violet: #8a2be2;
+  --tech-line-cyan: color-mix(in srgb, var(--tech-cyan) 11%, transparent);
+  --tech-line-violet: color-mix(in srgb, var(--tech-violet) 9%, transparent);
+  --tech-dot-cyan: color-mix(in srgb, var(--tech-cyan) 28%, transparent);
+  --tech-dot-violet: color-mix(in srgb, var(--tech-violet) 22%, transparent);
+  --header-surface: rgba(8, 12, 28, 0.78);
+  --text-muted: rgba(255, 255, 255, 0.88);
+  --text-subtle: rgba(255, 255, 255, 0.62);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+img {
+  image-rendering: -webkit-optimize-contrast;
+}
+
+body {
+  font-family: var(--font-inter, "Inter"), system-ui, sans-serif;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+body:not(.tech-bg) {
+  background-color: #0a0a1f;
+}
+
+/* Анимированный фон в стиле лого */
+.tech-bg {
+  position: relative;
+  min-height: 100vh;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 35% 25%, rgba(0, 191, 255, 0.18) 0%, transparent 60%),
+    radial-gradient(circle at 75% 65%, rgba(138, 43, 226, 0.16) 0%, transparent 60%),
+    linear-gradient(135deg, #0a0a1f 0%, #1a0b2e 45%, #2a0a3a 100%);
+}
+
+.tech-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 191, 255, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 191, 255, 0.09) 1px, transparent 1px);
+  background-size: 75px 75px;
+  animation: gridMove 90s linear infinite;
+  opacity: 0.65;
+  z-index: -1;
+}
+
+.tech-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.035) 1.5px, transparent 2px);
+  background-size: 110px 110px;
+  animation: dotsDrift 65s linear infinite;
+  opacity: 0.45;
+  z-index: -1;
+}
+
+@keyframes gridMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(45px, 35px);
+  }
+}
+
+@keyframes dotsDrift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 140px 140px;
+  }
+}
+
+.glass {
+  background: rgba(15, 15, 35, 0.82);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border: 1px solid rgba(0, 191, 255, 0.22);
+  box-shadow: 0 10px 40px rgba(0, 191, 255, 0.15);
+  transition:
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s ease;
+}
+
+.glass:hover {
+  border-color: rgba(0, 191, 255, 0.45);
+  box-shadow: 0 25px 60px rgba(0, 191, 255, 0.25);
+  transform: translateY(-4px);
+}
+
+/* Фон на body: сетка/точки на всю страницу; секции внутри main без второго слоя */
+body.tech-bg main > .tech-bg {
+  min-height: unset;
+  background: transparent;
+  box-shadow: none;
+}
+
+body.tech-bg main > .tech-bg::before,
+body.tech-bg main > .tech-bg::after {
+  content: none;
+  display: none;
+}
+
+main {
+  min-height: 100vh;
+}
+
+.brand-glow {
+  text-shadow: 0 0 25px rgba(0, 191, 255, 0.6);
+}
+
+/* Шапка: glass + cyan glow снизу + blur 24px */
+header.site-header.glass-nav {
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  background: rgba(8, 12, 28, 0.78) !important;
+  border-bottom: 1px solid rgba(0, 191, 255, 0.42);
+  box-shadow:
+    0 1px 0 rgba(0, 191, 255, 0.35),
+    0 8px 32px rgba(0, 0, 0, 0.45),
+    0 0 48px rgba(0, 191, 255, 0.14);
+}
+
+.btn-burger-glass {
+  background: rgba(12, 14, 32, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 191, 255, 0.22);
+  box-shadow: 0 4px 22px rgba(0, 191, 255, 0.12);
+}
+
+/* Мобильное выпадающее меню — тот же glass */
+.glass-mobile-drawer {
+  background: rgba(12, 14, 32, 0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(0, 191, 255, 0.28);
+  box-shadow:
+    0 12px 48px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(0, 191, 255, 0.12);
+}
+
+/* Vignette по краям секции (Hero + CTA) */
+.section-edge-vignette {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: radial-gradient(
+    ellipse 100% 85% at 50% 45%,
+    transparent 42%,
+    rgba(5, 6, 18, 0.5) 100%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-edge-vignette {
+    background: radial-gradient(
+      ellipse 100% 85% at 50% 45%,
+      transparent 50%,
+      rgba(5, 6, 18, 0.35) 100%
+    );
+  }
+}
+
+/* Header без «подпрыгивания» при hover (карточный .glass:hover) */
+header.site-header.glass-nav:hover {
+  transform: none !important;
+  border-color: rgba(0, 191, 255, 0.55);
+  box-shadow:
+    0 1px 0 rgba(0, 191, 255, 0.5),
+    0 10px 36px rgba(0, 191, 255, 0.2),
+    0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+@layer utilities {
+  .tech-grid {
+    position: absolute;
+    inset: 0;
+    overflow: visible;
+    pointer-events: none;
+    contain: layout style;
+  }
+
+  .tech-grid__layer {
+    position: absolute;
+    inset: -12%;
+    will-change: transform, opacity;
+  }
+
+  .tech-grid__layer--dots {
+    opacity: 0.48;
+    background-image:
+      radial-gradient(circle at 1px 1px, var(--tech-dot-cyan) 1.1px, transparent 1.1px),
+      radial-gradient(circle at 1px 1px, var(--tech-dot-violet) 1px, transparent 1px);
+    background-size: 46px 46px, 46px 46px;
+    background-position:
+      0 0,
+      23px 23px;
+    -webkit-mask-image: radial-gradient(
+      ellipse 85% 75% at 50% 35%,
+      #000 18%,
+      rgba(0, 0, 0, 0.35) 58%,
+      transparent 88%
+    );
+    mask-image: radial-gradient(
+      ellipse 85% 75% at 50% 35%,
+      #000 18%,
+      rgba(0, 0, 0, 0.35) 58%,
+      transparent 88%
+    );
+  }
+
+  .tech-grid__layer--lines {
+    opacity: 0.38;
+    background-image:
+      linear-gradient(var(--tech-line-cyan) 1px, transparent 1px),
+      linear-gradient(90deg, var(--tech-line-violet) 1px, transparent 1px),
+      repeating-linear-gradient(
+        -26deg,
+        transparent 0,
+        transparent 74px,
+        color-mix(in srgb, var(--tech-cyan) 6%, transparent) 74px,
+        color-mix(in srgb, var(--tech-cyan) 6%, transparent) 75px
+      ),
+      repeating-linear-gradient(
+        48deg,
+        transparent 0,
+        transparent 96px,
+        color-mix(in srgb, var(--tech-violet) 5%, transparent) 96px,
+        color-mix(in srgb, var(--tech-violet) 5%, transparent) 97px
+      );
+    background-size:
+      100% 52px,
+      52px 100%,
+      108px 108px,
+      132px 132px;
+    background-position: center top;
+    -webkit-mask-image: radial-gradient(
+      ellipse 92% 82% at 50% 40%,
+      #000 12%,
+      rgba(0, 0, 0, 0.4) 55%,
+      transparent 84%
+    );
+    mask-image: radial-gradient(
+      ellipse 92% 82% at 50% 40%,
+      #000 12%,
+      rgba(0, 0, 0, 0.4) 55%,
+      transparent 84%
+    );
+  }
+
+  .tech-grid__layer--anim-dots {
+    animation: tech-grid-dots-glow 20s ease-in-out infinite alternate;
+    will-change: opacity;
+  }
+
+  .tech-grid__layer--anim-lines {
+    animation: tech-grid-lines-opacity 28s ease-in-out infinite alternate;
+    will-change: opacity;
+  }
+
+  @keyframes tech-grid-dots-glow {
+    from {
+      opacity: 0.4;
+    }
+    to {
+      opacity: 0.58;
+    }
+  }
+
+  @keyframes tech-grid-lines-opacity {
+    from {
+      opacity: 0.32;
+    }
+    to {
+      opacity: 0.46;
+    }
+  }
+
+  .hero-gradient-mesh {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        ellipse 82% 58% at 68% 12%,
+        color-mix(in srgb, var(--tech-cyan) 14%, transparent),
+        transparent 56%
+      ),
+      radial-gradient(
+        ellipse 52% 44% at 14% 58%,
+        color-mix(in srgb, var(--tech-violet) 12%, transparent),
+        transparent 58%
+      ),
+      radial-gradient(
+        ellipse 68% 52% at 82% 78%,
+        color-mix(in srgb, var(--tech-violet) 8%, transparent),
+        transparent 56%
+      );
+  }
+
+  .tech-grid--hero .tech-grid__layer--dots {
+    inset: -14%;
+    opacity: 0.56;
+    -webkit-mask-image: radial-gradient(
+      ellipse 96% 88% at 50% 38%,
+      #000 14%,
+      rgba(0, 0, 0, 0.45) 52%,
+      transparent 78%
+    );
+    mask-image: radial-gradient(
+      ellipse 96% 88% at 50% 38%,
+      #000 14%,
+      rgba(0, 0, 0, 0.45) 52%,
+      transparent 78%
+    );
+  }
+
+  .tech-grid--hero .tech-grid__layer--lines {
+    inset: -12%;
+    opacity: 0.44;
+    -webkit-mask-image: radial-gradient(
+      ellipse 98% 90% at 48% 36%,
+      #000 10%,
+      rgba(0, 0, 0, 0.38) 50%,
+      transparent 80%
+    );
+    mask-image: radial-gradient(
+      ellipse 98% 90% at 48% 36%,
+      #000 10%,
+      rgba(0, 0, 0, 0.38) 50%,
+      transparent 80%
+    );
+  }
+
+  .tech-grid--hero-sparkle {
+    position: absolute;
+    inset: -8%;
+    opacity: 0.22;
+    background-image: radial-gradient(
+      circle at 2px 2px,
+      color-mix(in srgb, var(--tech-cyan) 45%, transparent) 0.6px,
+      transparent 0.6px
+    );
+    background-size: 18px 18px;
+    mix-blend-mode: screen;
+    will-change: transform, opacity;
+    -webkit-mask-image: radial-gradient(
+      ellipse 90% 85% at 50% 40%,
+      #000 20%,
+      transparent 72%
+    );
+    mask-image: radial-gradient(
+      ellipse 90% 85% at 50% 40%,
+      #000 20%,
+      transparent 72%
+    );
+  }
+
+  .hero-vignette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgba(5, 8, 20, 0.28) 0%,
+      transparent 38%,
+      rgba(10, 6, 28, 0.38) 100%
+    );
+  }
+
+  .container-px {
+    @apply mx-auto w-full max-w-6xl px-4;
+  }
+
+  .btn-cta-premium {
+    box-shadow:
+      0 0 0 1px rgba(0, 191, 255, 0.38),
+      0 10px 36px rgba(0, 191, 255, 0.24),
+      0 0 52px rgba(138, 43, 226, 0.14);
+  }
+
+  .btn-cta-premium:hover {
+    box-shadow:
+      0 0 0 1px rgba(0, 191, 255, 0.55),
+      0 16px 44px rgba(0, 191, 255, 0.32),
+      0 0 64px rgba(138, 43, 226, 0.2);
+  }
+
+  .glass-hover-glow {
+    transition:
+      border-color 0.28s ease,
+      box-shadow 0.28s ease;
+  }
+
+  .glass-hover-glow:hover {
+    border-color: rgba(0, 191, 255, 0.38) !important;
+    box-shadow:
+      0 14px 44px rgba(0, 191, 255, 0.2),
+      0 0 40px rgba(138, 43, 226, 0.14);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .hover-lift {
+    @apply transition will-change-transform hover:-translate-y-1;
+  }
+
+  .hover-lift:hover {
+    border-color: rgba(255, 255, 255, 0.16);
+  }
+
+  .glass.hover-lift:hover {
+    border-color: rgba(0, 191, 255, 0.45);
+    box-shadow: 0 25px 60px rgba(0, 191, 255, 0.25);
+  }
+
+  .text-muted {
+    color: var(--text-muted);
+  }
+
+  .text-subtle {
+    color: var(--text-subtle);
+  }
+}

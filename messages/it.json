@@ -1,0 +1,517 @@
+{
+  "metadata": {
+    "title": "LOGICA Marketing | Marketing che fa crescere",
+    "description": "Performance marketing, SEO, SMM e strategie per moltiplicare le vendite da 3 a 8 volte.",
+    "keywords": "LOGICA Marketing, performance marketing, SEO, pubblicità mirata, SMM, aumento vendite, digital marketing agency, marketing digitale, ROAS, lead",
+    "titleTemplate": "%s | LOGICA Marketing"
+  },
+  "seo": {
+    "logoAlt": "Logo LOGICA Marketing — performance marketing e crescita vendite",
+    "avatarAlt": "Foto avatar: {name}"
+  },
+  "sectionsSeo": {
+    "hero": {
+      "metaTitle": "Performance marketing e crescita ricavi — LOGICA Marketing",
+      "metaDescription": "Strategia, siti e landing, ads Meta / Google / TikTok e analytics: trasformiamo il traffico in lead e ROI misurabile per B2B e B2C."
+    },
+    "services": {
+      "metaTitle": "Servizi LOGICA Marketing — performance, SEO, SMM e web",
+      "metaDescription": "Social e search ads, SEO e contenuti, SMM, landing premium su Next.js e ottimizzazione funnel per la tua nicchia."
+    },
+    "cases": {
+      "metaTitle": "Casi LOGICA Marketing — risultati per settore",
+      "metaDescription": "Crescita di lead, ROAS e fatturato: sanità, e‑commerce, servizi, EdTech e altro — con numeri e insight."
+    },
+    "testimonials": {
+      "metaTitle": "Recensioni clienti LOGICA Marketing",
+      "metaDescription": "Come imprenditori e marketing director scalano le acquisizioni con i playbook performance di LOGICA."
+    },
+    "cta": {
+      "metaTitle": "Contatta LOGICA Marketing — audit e strategia di crescita",
+      "metaDescription": "Calcolatore ROI e contatti rapidi su Telegram o WhatsApp — risposta del team entro 15 minuti."
+    }
+  },
+  "nav": {
+    "services": "Servizi",
+    "cases": "Casi",
+    "testimonials": "Recensioni",
+    "about": "Chi siamo",
+    "contact": "Contatti",
+    "cta": "Strategia"
+  },
+  "header": {
+    "tagline": "Sites · Ads · Creative",
+    "openMenu": "Apri menu",
+    "closeMenu": "Chiudi menu",
+    "switchTo": "Cambia lingua"
+  },
+  "hero": {
+    "badge": "🚀 Lancio 2026",
+    "title": "Marketing,<br></br>che <highlight>fa crescere</highlight>",
+    "subtitle": "Trasformiamo il traffico in clienti. Strategie con ROI da 3–7×.",
+    "ctaPrimary": "Richiedi audit gratuito",
+    "ctaSecondary": "Vedi i casi",
+    "stats": [
+      { "k": "UX + senso", "v": "niente riempitivo" },
+      { "k": "Test", "v": "secondo piano" },
+      { "k": "Velocità", "v": "Core Web Vitals" },
+      { "k": "ROI", "v": "guida le scelte" }
+    ],
+    "contactStripTitle": "Contattaci ora",
+    "contactTelegram": "Telegram",
+    "contactWhatsapp": "WhatsApp",
+    "contactEmail": "Email",
+    "internalNavAria": "Sezioni del sito LOGICA Marketing",
+    "internalNavServices": "Catalogo servizi",
+    "internalNavCasesPage": "Tutti i casi",
+    "internalNavCasesAnchor": "Casi in homepage",
+    "internalNavTestimonials": "Recensioni",
+    "internalNavAbout": "Chi siamo",
+    "internalNavContact": "Contatti"
+  },
+  "services": {
+    "title": "Servizi LOGICA Marketing",
+    "subtitle": "Cosa facciamo per la tua crescita",
+    "cta": "Piano su misura per la tua nicchia",
+    "moreLink": "Scopri di più →",
+    "moreBtn": "Scopri di più",
+    "seeAlso": "Altro sul sito",
+    "internalRelatedAria": "Sezioni correlate LOGICA Marketing",
+    "internalAllServices": "Tutti i servizi",
+    "internalCasesPage": "Pagina casi",
+    "internalAbout": "Il team",
+    "internalCasesAnchor": "Casi in homepage",
+    "cards": [
+      {
+        "title": "Performance marketing",
+        "desc": "Search + social con economia chiara: test, combinazioni vincenti, scale e controllo qualità lead.",
+        "price": "da 150 000 ₽",
+        "href": "/kontakty"
+      },
+      {
+        "title": "SEO & content marketing",
+        "desc": "Pagine per la domanda, struttura, semantica e contenuti che portano lead in modo ripetibile.",
+        "price": "da 90 000 ₽",
+        "href": "/kontakty"
+      },
+      {
+        "title": "SMM & personal branding",
+        "desc": "Packaging profilo, piano contenuti e posizionamento — così ti scelgono prima della prima call.",
+        "price": "da 70 000 ₽",
+        "href": "/kontakty"
+      },
+      {
+        "title": "Web & landing",
+        "desc": "Siti premium su Next.js: UX, velocità, conversione e analytics — per vendere, non solo apparire.",
+        "price": "da 120 000 ₽",
+        "href": "/uslugi/sozdanie-lendinga"
+      },
+      {
+        "title": "Strategia + audit",
+        "desc": "Analisi rapida: offerta, funnel, traffico, creatività e numeri — piano operativo 2–4 settimane.",
+        "price": "da 35 000 ₽",
+        "href": "/kontakty"
+      },
+      {
+        "title": "Analytics & ottimizzazione ROI",
+        "desc": "Eventi, goal, dashboard e attribuzione — ottimizziamo il profitto, non i click vuoti.",
+        "price": "da 60 000 ₽",
+        "href": "/kontakty"
+      }
+    ]
+  },
+  "cases": {
+    "titleBrand": "Casi LOGICA Marketing — risultati che parlano chiaro",
+    "subtitle": "Oltre 15 clienti hanno già scalato con LOGICA",
+    "ctaTop": "Voglio gli stessi risultati",
+    "more": "Dettagli",
+    "bannerTitle": "Vuoi gli stessi risultati?",
+    "bannerSub": "Rispondi a 5 domande — ti proponiamo un piano di crescita per la tua nicchia.",
+    "bannerCta": "Richiedi strategia",
+    "modalCloseAria": "Chiudi finestra",
+    "modalClose": "Chiudi",
+    "modalCta1": "Anch’io",
+    "modalCta2": "Vedi servizi",
+    "items": {
+      "med-center": {
+        "niche": "Sanità",
+        "client": "VitaMed",
+        "result": "+340% lead",
+        "period": "in 4 mesi",
+        "summary": "Rifatto offerta, landing e combinazioni ads. Meno lead spazzatura, retargeting più forte.",
+        "details": [
+          "Audit funnel + nuova struttura landing (mobile‑first).",
+          "Meta + Google: test creatività e segmenti, scale dei vincenti.",
+          "Eventi e goal: ottimizzazione sulla qualità dei lead."
+        ]
+      },
+      "furniture-store": {
+        "niche": "E‑commerce",
+        "client": "NordMebel",
+        "result": "ROAS 8.4",
+        "period": "risultato mensile",
+        "summary": "Allineati catalogo, feed e Performance Max/Meta. Più acquisti ripetuti.",
+        "details": [
+          "Struttura campagne per margine e categoria.",
+          "Ottimizzazione feed + angoli creativi per audience.",
+          "Retention: segmenti + retargeting caldo."
+        ]
+      },
+      "law-firm": {
+        "niche": "Legale",
+        "client": "LexPro",
+        "result": "+180% richieste",
+        "period": "in 10 settimane",
+        "summary": "Focus sulla domanda calda e fiducia: casi, garanzie e percorsi di consulenza.",
+        "details": [
+          "Nuova pagina servizio + blocchi fiducia e FAQ.",
+          "Google Search: semantica + negative per lead più puliti.",
+          "Script di qualifica e filtro irrilevanti."
+        ]
+      },
+      "edu-center": {
+        "niche": "EdTech",
+        "client": "SkillNova",
+        "result": "12 400 studenti",
+        "period": "nel lancio",
+        "summary": "Packaging prodotto + funnel automatizzato: lead magnet, nurture e retarget per segmento.",
+        "details": [
+          "Segmenti principianti/avanzati, offerte e creatività dedicate.",
+          "Pipeline creativa: script UGC + iterazioni rapide.",
+          "Ottimizzazione su LTV, non solo CPL."
+        ]
+      },
+      "beauty-premium": {
+        "niche": "Beauty",
+        "client": "Éclat Studio",
+        "result": "+290% prenotazioni",
+        "period": "in 3 mesi",
+        "summary": "Posizionamento premium, landing essenziale e ads su risultati prima/dopo.",
+        "details": [
+          "Packaging offerta + ancoraggi di prezzo e trigger di fiducia.",
+          "Meta: test formati (Reels/Stories/Feed) e combinazioni.",
+          "Ottimizzazione calendario: domanda distribuita nei giorni."
+        ]
+      },
+      "construction": {
+        "niche": "Edilizia",
+        "client": "BuildCraft",
+        "result": "47 nuovi cantieri",
+        "period": "stagione",
+        "summary": "Sito multi‑pagina per servizi e lancio search + remarketing di preriscaldamento.",
+        "details": [
+          "Struttura servizi + portfolio con pacchetti chiari.",
+          "Google Search: query calde + estensioni.",
+          "Remarketing: riscaldamento e ritorno audience."
+        ]
+      },
+      "electronics": {
+        "niche": "E‑commerce",
+        "client": "TechPoint",
+        "result": "+520% vendite",
+        "period": "via Meta",
+        "summary": "Feed, creatività e audience più forti. Vincenti trovati in fretta e scala per categoria.",
+        "details": [
+          "Campagne catalogo + segmenti di marginalità.",
+          "Angoli creativi: benefici, confronti, prova sociale.",
+          "Stabilizzazione: frequenza, budget, controllo qualità."
+        ]
+      },
+      "dentistry": {
+        "niche": "Sanità",
+        "client": "SmileLine",
+        "result": "380 pazienti/mese",
+        "period": "flusso stabile",
+        "summary": "Funnel diagnosi → piano cure; ottimizzazione per prenotazioni, non click.",
+        "details": [
+          "Landing servizi + fiducia: team, licenze, casi.",
+          "Meta + Search: offerte per verticali.",
+          "Eventi: prenotazione/chiamata/chat per qualità."
+        ]
+      },
+      "real-estate": {
+        "niche": "Immobiliare",
+        "client": "PrimeEstate",
+        "result": "2,8 mln ₽",
+        "period": "per lead qualificato",
+        "summary": "Flusso qualifica + nurture così le trattative chiudono su lead caldi.",
+        "details": [
+          "Segmentazione immobili + offerte per budget.",
+          "Retargeting: 3 tocchi (creatività + prove).",
+          "KPI: qualità lead e conversione visite."
+        ]
+      },
+      "fitness": {
+        "niche": "Fitness",
+        "client": "Pulse Gym",
+        "result": "+410% vendite abbonamenti",
+        "period": "",
+        "summary": "Valore dell’offerta, prima sessione e test creatività/offerte.",
+        "details": [
+          "Offerta: prova a tempo limitato.",
+          "Meta: video/UGC e audience locali.",
+          "Ottimizzazione costo per iscrizione confermata."
+        ]
+      },
+      "custom-furniture": {
+        "niche": "Manifattura",
+        "client": "Atelier Mebel",
+        "result": "+670% richieste",
+        "period": "in 5 mesi",
+        "summary": "Nuova struttura servizi, casi prima/dopo e ads per tipi di progetto.",
+        "details": [
+          "Sito multi‑pagina: cucine/guardaroba/commerciale.",
+          "Search + Meta: test per segmenti e materiali.",
+          "Gestione lead e qualifica."
+        ]
+      },
+      "autoservice": {
+        "niche": "Auto",
+        "client": "AutoHub",
+        "result": "940 clienti",
+        "period": "nuovi",
+        "summary": "Funnel per servizio + domanda locale. Più conversione click‑chiamata/prenotazione.",
+        "details": [
+          "Pagine per servizio (tagliando/diagnostica/riparazioni).",
+          "Call tracking ed eventi: ottimizzazione chiamate.",
+          "Campagne locali + remarketing."
+        ]
+      },
+      "trading-courses": {
+        "niche": "EdTech",
+        "client": "TradeMind",
+        "result": "1 840 studenti",
+        "period": "trimestre",
+        "summary": "Segmentazione livelli, nurture più forte e pipeline creativa.",
+        "details": [
+          "Offerte e landing diverse per principianti/pratici.",
+          "UGC e video: iterazioni rapide.",
+          "Ottimizzazione su pagamenti e LTV."
+        ]
+      },
+      "food-delivery": {
+        "niche": "HoReCa",
+        "client": "UrbanKitchen",
+        "result": "+380% scontrino medio",
+        "period": "in 8 settimane",
+        "summary": "Upsell, bundle e offerte — le ads vendono combo, non singoli piatti.",
+        "details": [
+          "Menu e offerte combo/bundle.",
+          "Meta: creatività appetito + retarget carrello.",
+          "Ottimizzazione scontrino medio e margine."
+        ]
+      },
+      "saas": {
+        "niche": "IT / SaaS",
+        "client": "CloudDesk",
+        "result": "+12 000 MRR",
+        "period": "in 3 mesi",
+        "summary": "Valore chiaro, funnel demo e traffico ad alta intenzione via search + retarget.",
+        "details": [
+          "Pagina prodotto + use case e confronti.",
+          "Google: query ad alta intenzione.",
+          "Eventi: demo/trial → ottimizzazione attivazione."
+        ]
+      }
+    }
+  },
+  "testimonials": {
+    "badge": "Voci · LOGICA Marketing",
+    "title": "Cosa dicono i clienti di LOGICA Marketing",
+    "subtitle": "Brand premium e team in crescita si affidano a LOGICA Marketing per risultati misurabili e chiarezza.",
+    "prev": "Indietro",
+    "next": "Avanti",
+    "auto": "Scorrimento auto",
+    "items": [
+      {
+        "name": "Alexander Volkov",
+        "role": "Fondatore, retail premium",
+        "text": "Con LOGICA Marketing la pubblicità è un investimento misurabile: bundle, economia per SKU e roadmap di scaling chiara. Marginalità in crescita a doppia cifra.",
+        "result": "Ricavi +47%",
+        "avatarId": 33
+      },
+      {
+        "name": "Francesca Romano",
+        "role": "Brand Director, lifestyle luxury EU",
+        "text": "LOGICA Marketing ha costruito un funnel ad alto ticket mantenendo il tono del brand. La qualità dei lead supera nettamente l’agenzia precedente.",
+        "result": "CPL −31% con GMV in crescita",
+        "avatarId": 45
+      },
+      {
+        "name": "Michael Chen",
+        "role": "Managing Partner, growth fund",
+        "text": "Abbiamo coinvolto LOGICA Marketing per accelerare il portafoglio: paid social e iterazioni landing. Reporting pronto per il board.",
+        "result": "Velocità pipeline ×3.1",
+        "avatarId": 12
+      },
+      {
+        "name": "Sofia Laurent",
+        "role": "CMO, beauty tech",
+        "text": "LOGICA Marketing ha trasformato la domanda in sistema: eventi, attribuzione, test creativi. Il marketing non è più «magia».",
+        "result": "CAC −28%",
+        "avatarId": 68
+      },
+      {
+        "name": "Igor Nikolaev",
+        "role": "CEO, fintech",
+        "text": "Serviva performance disciplinata senza perdere fiducia nel prodotto. LOGICA Marketing ha allineato prodotto e acquisizione — crescita senza caos nei lead.",
+        "result": "Qualità lead ×2.4",
+        "avatarId": 25
+      },
+      {
+        "name": "Victoria Palmer",
+        "role": "VP Growth, B2B SaaS",
+        "text": "LOGICA Marketing ha ricostruito narrativa e misurazione. Ottimizziamo sulla pipeline — non sui click vanitosi.",
+        "result": "Win‑rate inbound +18%",
+        "avatarId": 52
+      },
+      {
+        "name": "Marina Alexeeva",
+        "role": "Direttrice, rete cliniche",
+        "text": "Eliminato il rumore nei lead, offerta e landing più forti. LOGICA Marketing è un partner — KPI chiari e responsabilità.",
+        "result": "Prenotazioni +62%",
+        "avatarId": 17
+      },
+      {
+        "name": "Lorenzo Bianchi",
+        "role": "Sales Director, automotive IT",
+        "text": "LOGICA Marketing ha allineato messaggio, landing e campagne: pipeline più pulita e forecast affidabile.",
+        "result": "SQL +41%",
+        "avatarId": 44
+      },
+      {
+        "name": "Anna Keller",
+        "role": "Partner, strategy boutique CH",
+        "text": "Il posizionamento premium richiede esecuzione premium. LOGICA Marketing: UX pulita, test rigorosi e ROI trasparente.",
+        "result": "Chiusura proposte +27%",
+        "avatarId": 61
+      },
+      {
+        "name": "Oleg Safronov",
+        "role": "Proprietario, manifattura B2B",
+        "text": "LOGICA Marketing per strategia e acquisizione su cicli lunghi. Canali e contenuti allineati — conversione SQL in crescita costante.",
+        "result": "Deal +35% YoY",
+        "avatarId": 39
+      }
+    ]
+  },
+  "cta": {
+    "badge": "Audit + strategia in 1 giorno — gratis",
+    "title": "Pronti a scalare nel 2026?",
+    "sub": "Ti mostriamo dove si perdono budget, cosa accelera la crescita e come trasformare il traffico in profitto — preview ROI e modulo qui sotto.",
+    "brandLine": "LOGICA Marketing — il tuo partner per la crescita",
+    "calcTitle": "Calcolatore ROI",
+    "calcSub": "Previsione rapida in base ai tuoi numeri",
+    "multAria": "Moltiplicatore ricavi x{mult}",
+    "labelAvgCheck": "Ticket medio cliente",
+    "labelLeads": "Lead al mese (ora)",
+    "labelConv": "Conversione lead → cliente (%)",
+    "afterBlock": "Dopo LOGICA",
+    "forecast": "previsione: ×{mult}",
+    "forecastHint": "(di solito 3–5× con funnel sistematico)",
+    "revCurrent": "Ricavi attuali/mese",
+    "revAfter": "Dopo LOGICA/mese",
+    "roi6m": "ROI 6 mesi",
+    "disclaimer": "È un’indicazione. La previsione reale la affiniamo in audit gratuito (nicchia, margine, LTV, ciclo, canali).",
+    "formTitle": "Richiedi la strategia",
+    "formSub": "Compila il modulo — poi scrivici su Telegram o WhatsApp. Rispondiamo entro 15 minuti.",
+    "name": "Nome",
+    "phone": "Telefono",
+    "email": "Email",
+    "niche": "Nicchia",
+    "nichePlaceholder": "Seleziona la nicchia",
+    "nicheOptions": [
+      { "value": "med", "label": "Sanità e cliniche" },
+      { "value": "ecom", "label": "E‑commerce e retail" },
+      { "value": "services", "label": "Servizi professionali e B2B" },
+      { "value": "edu", "label": "EdTech / formazione" },
+      { "value": "beauty", "label": "Beauty / wellness" },
+      { "value": "re", "label": "Real estate / HoReCa" },
+      { "value": "saas", "label": "IT / SaaS" },
+      { "value": "other", "label": "Altro" }
+    ],
+    "message": "Messaggio",
+    "phMessage": "Descrivi obiettivo, prodotto o campagna",
+    "phName": "Come chiamarti?",
+    "phPhone": "+1 (509) 780-3788",
+    "phEmail": "you@company.com",
+    "phAvg": "es. 15 000",
+    "phLeads": "es. 120",
+    "phConv": "es. 12",
+    "submitApplication": "Invia richiesta",
+    "consent": "Il modulo serve solo per organizzare le idee — non invia dati ai nostri server. Per contattare LOGICA Marketing usa Telegram o WhatsApp dopo il passaggio successivo.",
+    "invalidPhone": "Inserisci un numero valido (10–15 cifre).",
+    "successTitle": "Perfetto!",
+    "successSub": "Un manager ti contatterà entro 15 minuti.",
+    "successHint": "Scrivici direttamente per una risposta più veloce:",
+    "ctaTelegram": "Scrivi su Telegram",
+    "ctaWhatsapp": "Scrivi su WhatsApp",
+    "submitAgain": "Compila di nuovo il modulo",
+    "currencySuffix": " ₽"
+  },
+  "footer": {
+    "subtitle": "Marketing che fa crescere",
+    "about": "LOGICA Marketing costruisce un sistema: sito → funnel → ads → creatività → analytics. UX premium, velocità e scelte guidate dal ROI.",
+    "quickLinks": "Link rapidi",
+    "contactsTitle": "Contatti LOGICA Marketing",
+    "whatsappLabel": "WhatsApp",
+    "telegramLabel": "Telegram",
+    "emailLabel": "Email",
+    "copyright": "© 2026 LOGICA Marketing. Tutti i diritti riservati.",
+    "marquee": "LOGICA MARKETING • LOGICA MARKETING • LOGICA MARKETING",
+    "ariaTelegram": "Scrivi su Telegram",
+    "ariaWhatsapp": "Scrivi su WhatsApp",
+    "ariaEmail": "Invia email",
+    "mobileContactsTitle": "Contatto rapido"
+  },
+  "notFound": {
+    "badge": "404",
+    "title": "Pagina non trovata",
+    "description": "Il link potrebbe essere scaduto o la pagina è in lavorazione.",
+    "home": "Torna alla home",
+    "services": "Servizi",
+    "contactHint": "Serve aiuto? Scrivici ai",
+    "contactLink": "contatti"
+  },
+  "jsonLd": {
+    "description": "LOGICA Marketing — performance marketing, SEO, ads e SMM: più lead, ROAS più alto e crescita vendite.",
+    "country": "Italia e internazionale",
+    "faq": [
+      {
+        "q": "Cosa fa LOGICA Marketing?",
+        "a": "Unisce strategia, siti e landing, ads Meta/Google/TikTok, produzione creatività e analytics — così la crescita è misurabile e guidata dal ROI."
+      },
+      {
+        "q": "Cosa include il performance marketing?",
+        "a": "Test di combinazioni, scala dei vincenti, controllo qualità lead, attribuzione e reporting economico — dal CPL al contributo in ricavi."
+      },
+      {
+        "q": "Lavorate con clienti internazionali?",
+        "a": "Sì: lanci e scala su più mercati, landing localizzate e analytics unica per KPI confrontabili."
+      },
+      {
+        "q": "Come misurate ROI e ROAS?",
+        "a": "Eventi, conversioni e goal; colleghiamo spend a CRM e ricavi; dashboard e review periodiche con il team cliente."
+      },
+      {
+        "q": "Come iniziare?",
+        "a": "Richiesta nella sezione contatti — call breve per obiettivi e nicchia, poi audit e piano 2–4 settimane."
+      },
+      {
+        "q": "Con quali budget pubblicitari lavorate?",
+        "a": "Il minimo dipende da nicchia e canale: serve volume per test e scaling. All’avvio definiamo economia CPL/CPA e soglia di payback, poi scaliamo le combinazioni vincenti."
+      }
+    ]
+  },
+  "casesPage": {
+    "title": "Casi",
+    "description": "Esempi di approccio: struttura sito, ads, creatività e conclusioni dai dati.",
+    "intro": "Qui arriveranno analisi approfondite — per ora schede sintetiche (sostituibile con casi reali).",
+    "readMore": "Leggi →"
+  },
+  "servicesPage": {
+    "title": "Servizi",
+    "description": "Landing e siti, ads Meta/Google/TikTok e creatività — conversione e ROI al centro.",
+    "intro": "Scegli cosa serve ora. Non sei sicuro — partiamo da audit: sito → funnel → ads → creatività."
+  }
+}
