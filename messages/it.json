@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "LOGICA Marketing | Marketing che fa crescere",
-    "description": "Performance marketing, SEO, SMM e strategie per moltiplicare le vendite da 3 a 8 volte.",
+    "title": "LOGICA Marketing | Marketing che cresce",
+    "description": "Performance marketing e funnel con ROI misurabile fino a 3–7× — strategia, siti, ads e analytics.",
     "keywords": "LOGICA Marketing, performance marketing, SEO, pubblicità mirata, SMM, aumento vendite, digital marketing agency, marketing digitale, ROAS, lead",
     "titleTemplate": "%s | LOGICA Marketing"
   },
@@ -37,7 +37,7 @@
     "testimonials": "Recensioni",
     "about": "Chi siamo",
     "contact": "Contatti",
-    "cta": "Strategia"
+    "cta": "Contatti"
   },
   "header": {
     "tagline": "Sites · Ads · Creative",
@@ -47,15 +47,15 @@
   },
   "hero": {
     "badge": "🚀 Lancio 2026",
-    "title": "Marketing,<br></br>che <highlight>fa crescere</highlight>",
-    "subtitle": "Trasformiamo il traffico in clienti. Strategie con ROI da 3–7×.",
+    "title": "Marketing che<br></br><highlight>moltiplica i ricavi</highlight>",
+    "subtitle": "Non solo traffico: profitto nel bilancio. Sistemi che rendono 3–8×.",
     "ctaPrimary": "Richiedi audit gratuito",
     "ctaSecondary": "Vedi i casi",
     "stats": [
-      { "k": "UX + senso", "v": "niente riempitivo" },
+      { "k": "ROI al centro", "v": "spesso 3–7×" },
       { "k": "Test", "v": "secondo piano" },
       { "k": "Velocità", "v": "Core Web Vitals" },
-      { "k": "ROI", "v": "guida le scelte" }
+      { "k": "UX + senso", "v": "non riempitivo" }
     ],
     "contactStripTitle": "Contattaci ora",
     "contactTelegram": "Telegram",
@@ -86,19 +86,19 @@
         "title": "Performance marketing",
         "desc": "Search + social con economia chiara: test, combinazioni vincenti, scale e controllo qualità lead.",
         "price": "da 150 000 ₽",
-        "href": "/kontakty"
+        "href": "/#contact"
       },
       {
         "title": "SEO & content marketing",
         "desc": "Pagine per la domanda, struttura, semantica e contenuti che portano lead in modo ripetibile.",
         "price": "da 90 000 ₽",
-        "href": "/kontakty"
+        "href": "/#contact"
       },
       {
         "title": "SMM & personal branding",
         "desc": "Packaging profilo, piano contenuti e posizionamento — così ti scelgono prima della prima call.",
         "price": "da 70 000 ₽",
-        "href": "/kontakty"
+        "href": "/#contact"
       },
       {
         "title": "Web & landing",
@@ -110,13 +110,13 @@
         "title": "Strategia + audit",
         "desc": "Analisi rapida: offerta, funnel, traffico, creatività e numeri — piano operativo 2–4 settimane.",
         "price": "da 35 000 ₽",
-        "href": "/kontakty"
+        "href": "/#contact"
       },
       {
         "title": "Analytics & ottimizzazione ROI",
         "desc": "Eventi, goal, dashboard e attribuzione — ottimizziamo il profitto, non i click vuoti.",
         "price": "da 60 000 ₽",
-        "href": "/kontakty"
+        "href": "/#contact"
       }
     ]
   },
@@ -439,7 +439,10 @@
     "phLeads": "es. 120",
     "phConv": "es. 12",
     "submitApplication": "Invia richiesta",
-    "consent": "Il modulo serve solo per organizzare le idee — non invia dati ai nostri server. Per contattare LOGICA Marketing usa Telegram o WhatsApp dopo il passaggio successivo.",
+    "consent": "Il modulo non invia dati ai server — è un brief strutturato. Per una risposta rapida: Telegram o WhatsApp subito sotto.",
+    "directMessengersTitle": "Messaggi diretti",
+    "directTelegram": "Telegram",
+    "directWhatsapp": "WhatsApp",
     "invalidPhone": "Inserisci un numero valido (10–15 cifre).",
     "successTitle": "Perfetto!",
     "successSub": "Un manager ti contatterà entro 15 minuti.",

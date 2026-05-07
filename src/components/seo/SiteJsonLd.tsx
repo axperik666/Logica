@@ -1,4 +1,5 @@
 import { getLocale, getMessages } from "next-intl/server";
+import { CONTACTS } from "@/lib/contacts";
 import { getSiteUrl } from "@/lib/site";
 
 type JsonLdMessages = {
@@ -41,6 +42,7 @@ export async function SiteJsonLd() {
         caption: "LOGICA Marketing"
       },
       description: jd.description,
+      email: CONTACTS.email,
       areaServed: {
         "@type": "Country",
         name: jd.country

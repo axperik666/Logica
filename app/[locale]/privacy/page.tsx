@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CONTACTS } from "@/lib/contacts";
 
 export const metadata: Metadata = {
   title: "Политика конфиденциальности",
@@ -23,10 +24,11 @@ export default function PrivacyPage() {
         </p>
         <p>
           По вопросам обработки данных:{" "}
-          <span className="text-white">hello@logicamarketing.pro</span>
+          <a href={CONTACTS.mailto} className="text-white underline-offset-2 hover:underline">
+            {CONTACTS.email}
+          </a>
         </p>
       </div>
     </section>
   );
 }
-

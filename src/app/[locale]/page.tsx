@@ -33,7 +33,7 @@ export default function HomePage() {
     <>
       <HomePageJsonLd />
       <Header />
-      <main className="relative z-10 min-h-screen">
+      <main className="relative z-10 min-h-screen overflow-x-clip">
         <Hero />
         <Services />
         <Cases />

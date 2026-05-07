@@ -15,8 +15,8 @@
   --tech-dot-cyan: color-mix(in srgb, var(--tech-cyan) 28%, transparent);
   --tech-dot-violet: color-mix(in srgb, var(--tech-violet) 22%, transparent);
   --header-surface: rgba(8, 12, 28, 0.78);
-  --text-muted: rgba(255, 255, 255, 0.88);
-  --text-subtle: rgba(255, 255, 255, 0.62);
+  --text-muted: rgba(255, 255, 255, 0.94);
+  --text-subtle: rgba(255, 255, 255, 0.78);
 }
 
 html {
@@ -91,21 +91,31 @@ body:not(.tech-bg) {
 }
 
 .glass {
-  background: rgba(15, 15, 35, 0.82);
+  background: rgba(10, 12, 28, 0.93);
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
-  border: 1px solid rgba(0, 191, 255, 0.22);
-  box-shadow: 0 10px 40px rgba(0, 191, 255, 0.15);
+  border: 1px solid rgba(0, 191, 255, 0.32);
+  box-shadow:
+    0 10px 40px rgba(0, 191, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
   transition:
     border-color 0.35s ease,
     box-shadow 0.35s ease,
     transform 0.35s ease;
+  color: rgba(255, 255, 255, 0.96);
 }
 
 .glass:hover {
-  border-color: rgba(0, 191, 255, 0.45);
-  box-shadow: 0 25px 60px rgba(0, 191, 255, 0.25);
+  border-color: rgba(0, 191, 255, 0.5);
+  box-shadow:
+    0 25px 60px rgba(0, 191, 255, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
   transform: translateY(-4px);
+}
+
+.glass h3,
+.glass .font-semibold:not(.text-primary) {
+  color: rgba(255, 255, 255, 0.98);
 }
 
 /* Фон на body: сетка/точки на всю страницу; секции внутри main без второго слоя */
@@ -129,16 +139,18 @@ main {
   text-shadow: 0 0 25px rgba(0, 191, 255, 0.6);
 }
 
-/* Шапка: glass + cyan glow снизу + blur 24px */
+/* Шапка: усиленный glass + явное свечение #00BFFF */
 header.site-header.glass-nav {
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  background: rgba(8, 12, 28, 0.78) !important;
-  border-bottom: 1px solid rgba(0, 191, 255, 0.42);
+  backdrop-filter: blur(28px) saturate(1.25);
+  -webkit-backdrop-filter: blur(28px) saturate(1.25);
+  background: rgba(4, 8, 22, 0.88) !important;
+  border-bottom: 1px solid rgba(0, 191, 255, 0.55);
   box-shadow:
-    0 1px 0 rgba(0, 191, 255, 0.35),
-    0 8px 32px rgba(0, 0, 0, 0.45),
-    0 0 48px rgba(0, 191, 255, 0.14);
+    inset 0 1px 0 rgba(0, 191, 255, 0.18),
+    0 1px 0 rgba(0, 191, 255, 0.42),
+    0 10px 40px rgba(0, 0, 0, 0.55),
+    0 0 56px rgba(0, 191, 255, 0.28),
+    0 0 1px rgba(0, 191, 255, 0.65);
 }
 
 .btn-burger-glass {
@@ -149,15 +161,16 @@ header.site-header.glass-nav {
   box-shadow: 0 4px 22px rgba(0, 191, 255, 0.12);
 }
 
-/* Мобильное выпадающее меню — тот же glass */
+/* Мобильное меню — плотнее фон и контур, чтобы читалось на tech-bg */
 .glass-mobile-drawer {
-  background: rgba(12, 14, 32, 0.92);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(0, 191, 255, 0.28);
+  background: rgba(6, 8, 20, 0.97);
+  backdrop-filter: blur(28px) saturate(1.2);
+  -webkit-backdrop-filter: blur(28px) saturate(1.2);
+  border: 1px solid rgba(0, 191, 255, 0.48);
   box-shadow:
-    0 12px 48px rgba(0, 0, 0, 0.5),
-    0 0 40px rgba(0, 191, 255, 0.12);
+    0 20px 56px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(0, 191, 255, 0.15),
+    0 0 48px rgba(0, 191, 255, 0.28);
 }
 
 /* Vignette по краям секции (Hero + CTA) */
@@ -186,11 +199,13 @@ header.site-header.glass-nav {
 /* Header без «подпрыгивания» при hover (карточный .glass:hover) */
 header.site-header.glass-nav:hover {
   transform: none !important;
-  border-color: rgba(0, 191, 255, 0.55);
+  border-color: rgba(0, 191, 255, 0.72);
   box-shadow:
-    0 1px 0 rgba(0, 191, 255, 0.5),
-    0 10px 36px rgba(0, 191, 255, 0.2),
-    0 8px 32px rgba(0, 0, 0, 0.5);
+    inset 0 1px 0 rgba(0, 191, 255, 0.28),
+    0 1px 0 rgba(0, 191, 255, 0.55),
+    0 14px 48px rgba(0, 191, 255, 0.22),
+    0 10px 40px rgba(0, 0, 0, 0.55),
+    0 0 72px rgba(0, 191, 255, 0.35);
 }
 
 @layer utilities {
@@ -390,8 +405,20 @@ header.site-header.glass-nav:hover {
     );
   }
 
+  /* Горизонтальные отступы + safe-area на вырезах / жестовой полоске */
   .container-px {
-    @apply mx-auto w-full max-w-6xl px-4;
+    @apply mx-auto w-full max-w-6xl;
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1rem, env(safe-area-inset-right, 0px));
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 
   .btn-cta-premium {

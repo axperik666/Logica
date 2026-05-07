@@ -5,6 +5,6 @@ export const CONTACTS = {
   telegramHttps: "https://t.me/+77761575171",
   whatsappDisplay: "+1 509 780 3788",
   whatsappHref: "https://wa.me/15097803788",
-  email: "hello@logicamarketing.pro",
-  mailto: "mailto:hello@logicamarketing.pro"
+  email: "logicamarketingit@gmail.com",
+  mailto: "mailto:logicamarketingit@gmail.com"
 } as const;

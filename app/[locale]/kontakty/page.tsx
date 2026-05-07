@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Button } from "@/components/ui/button";
+import { CONTACTS } from "@/lib/contacts";
 
 export const metadata: Metadata = {
   title: "Контакты",
@@ -23,9 +24,7 @@ export default function ContactsPage() {
           <div className="mt-8 grid gap-4">
             <div className="glass rounded-2xl p-5">
               <div className="text-sm font-semibold">Email</div>
-              <div className="mt-2 text-sm text-white/70">
-                hello@logicamarketing.pro
-              </div>
+              <div className="mt-2 text-sm text-white/70">{CONTACTS.email}</div>
             </div>
             <div className="glass rounded-2xl p-5">
               <div className="text-sm font-semibold">Telegram</div>

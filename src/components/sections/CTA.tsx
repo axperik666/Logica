@@ -429,6 +429,30 @@ export function CTA() {
                     <p className="mt-3 text-xs leading-relaxed text-white/55">
                       {t("consent")}
                     </p>
+
+                    <div className="mt-6 border-t border-white/10 pt-5">
+                      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/50">
+                        {t("directMessengersTitle")}
+                      </p>
+                      <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                        <a
+                          href={CONTACTS.telegramHttps}
+                          className="inline-flex items-center justify-center gap-3 rounded-2xl border border-[#00BFFF]/35 bg-[rgba(0,191,255,0.08)] px-4 py-3.5 text-sm font-semibold text-white shadow-[0_6px_28px_rgba(0,191,255,0.14)] transition hover:border-[#00BFFF]/55 hover:bg-[rgba(0,191,255,0.14)] hover-lift"
+                        >
+                          <Send className="h-5 w-5 shrink-0 text-[#00BFFF]" aria-hidden />
+                          {t("directTelegram")}
+                        </a>
+                        <a
+                          href={CONTACTS.whatsappHref}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center gap-3 rounded-2xl border border-emerald-400/35 bg-emerald-500/10 px-4 py-3.5 text-sm font-semibold text-white shadow-[0_6px_28px_rgba(16,185,129,0.12)] transition hover:border-emerald-400/55 hover:bg-emerald-500/15 hover-lift"
+                        >
+                          <MessageCircle className="h-5 w-5 shrink-0 text-emerald-400" aria-hidden />
+                          {t("directWhatsapp")}
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </form>
               )}

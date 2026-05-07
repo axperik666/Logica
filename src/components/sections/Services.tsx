@@ -105,7 +105,7 @@ export function Services() {
           </nav>
         </div>
 
-        <Button href="/kontakty" variant="ghost" className="hover-lift shrink-0">
+        <Button href="/#contact" variant="ghost" className="hover-lift shrink-0">
           {t("cta")}
         </Button>
       </MotionDiv>
