@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { Platforms } from "@/components/sections/Platforms";
 import { WhyUs } from "@/components/sections/WhyUs";
@@ -37,20 +35,16 @@ export default function HomePage() {
   return (
     <>
       <HomePageJsonLd />
-      <Header />
-      <main className="relative z-10 min-h-screen overflow-x-clip">
-        <Hero />
-        <Platforms />
-        <WhyUs />
-        <Process />
-        <Services />
-        <Clients />
-        <Cases />
-        <Testimonials />
-        <FAQ />
-        <CTA />
-      </main>
-      <Footer />
+      <Hero />
+      <Platforms />
+      <WhyUs />
+      <Process />
+      <Services />
+      <Clients />
+      <Cases />
+      <Testimonials />
+      <FAQ />
+      <CTA />
     </>
   );
 }

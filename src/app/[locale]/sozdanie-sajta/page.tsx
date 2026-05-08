@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { homeContactLink } from "@/lib/contactHref";
 
@@ -46,10 +44,7 @@ export default async function SozdanieSajtaPage({
   const captions = Array.isArray(captionsRaw) ? (captionsRaw as string[]) : [];
 
   return (
-    <>
-      <Header />
-      <main className="relative z-10 min-h-screen overflow-x-clip pt-[calc(4.375rem+env(safe-area-inset-top,0px))] lg:pt-[calc(5.75rem+env(safe-area-inset-top,0px))]">
-        <section className="tech-bg site-container py-10 sm:py-14">
+    <section className="tech-bg site-container py-10 sm:py-14">
           <h1 className="brand-glow text-2xl font-semibold tracking-tight sm:text-4xl">
             {t("title")}
           </h1>
@@ -95,8 +90,5 @@ export default async function SozdanieSajtaPage({
             <p className="text-sm text-white/55">{t("ctaHint")}</p>
           </div>
         </section>
-      </main>
-      <Footer />
-    </>
   );
 }

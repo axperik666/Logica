@@ -17,15 +17,30 @@
   --header-surface: rgba(8, 12, 28, 0.78);
   --text-muted: rgba(255, 255, 255, 0.94);
   --text-subtle: rgba(255, 255, 255, 0.78);
+  /* Высота fixed header (используется для anchor-scroll и верхних отступов). */
+  --header-h: 4.375rem;
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px));
 }
 
 @media (max-width: 767px) {
   html {
     scroll-behavior: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --header-h: 5.75rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --header-h: 6rem;
   }
 }
 

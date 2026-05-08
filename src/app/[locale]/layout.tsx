@@ -3,6 +3,8 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -23,7 +25,11 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      {children}
+      <Header />
+      <main className="relative z-10 min-h-screen overflow-x-clip pt-[calc(var(--header-h)+env(safe-area-inset-top,0px))]">
+        {children}
+      </main>
+      <Footer />
     </NextIntlClientProvider>
   );
 }
