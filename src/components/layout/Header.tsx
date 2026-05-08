@@ -32,20 +32,20 @@ const LANG_DISPLAY: Record<
 
 const navLinkClass = (active: boolean) =>
   cn(
-    "relative whitespace-nowrap rounded-xl px-2.5 py-2.5 text-sm font-medium transition-all duration-300 xl:px-3.5",
+    "relative shrink-0 whitespace-nowrap rounded-xl px-2 py-2 text-[13px] font-medium transition-all duration-300 lg:px-2.5 lg:py-2 lg:text-sm xl:px-3",
     "hover:bg-white/[0.09] hover:text-white",
-    "hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_0_32px_rgba(0,191,255,0.42),0_0_1px_rgba(0,191,255,0.6)]",
+    "hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_0_16px_rgba(0,191,255,0.22)]",
     active
-      ? "text-white shadow-[inset_0_1px_0_rgba(0,191,255,0.22),0_0_28px_rgba(0,191,255,0.28)] bg-white/[0.07]"
+      ? "text-white shadow-[inset_0_1px_0_rgba(0,191,255,0.22),0_0_14px_rgba(0,191,255,0.18)] bg-white/[0.07]"
       : "text-white/80"
   );
 
 const langLinkClass = (active: boolean) =>
   cn(
-    "inline-flex h-9 min-w-[2.75rem] shrink-0 flex-nowrap items-center justify-center rounded-lg px-2.5 text-[11px] font-bold uppercase tracking-[0.12em] transition-all duration-300 sm:h-10 sm:min-w-[3rem] sm:px-3 sm:text-[11px] sm:tracking-[0.14em]",
+    "inline-flex h-9 min-w-[2.75rem] shrink-0 flex-nowrap items-center justify-center rounded-md px-2.5 text-[11px] font-bold uppercase tracking-[0.12em] transition-all duration-300 sm:h-10 sm:min-w-[3rem] sm:px-3 sm:text-[11px] sm:tracking-[0.14em]",
     active
-      ? "border border-[#00BFFF]/65 bg-[rgba(0,191,255,0.2)] text-[#D4FBFF] shadow-[0_0_28px_rgba(0,191,255,0.5),inset_0_1px_0_rgba(255,255,255,0.14)]"
-      : "border border-transparent text-white/88 hover:border-[#00BFFF]/42 hover:bg-white/[0.08] hover:text-white hover:shadow-[0_0_26px_rgba(0,191,255,0.28)]"
+      ? "bg-[rgba(0,191,255,0.22)] text-[#D4FBFF] ring-1 ring-inset ring-[#00BFFF]/75"
+      : "text-white/88 hover:bg-white/[0.08] hover:text-white"
   );
 
 export function Header() {
@@ -103,7 +103,7 @@ export function Header() {
       )}
     >
       <div className="container-px">
-        <div className="flex min-h-[4rem] flex-wrap items-center justify-between gap-y-2 py-2 sm:min-h-[4.5rem] sm:gap-4 lg:grid lg:min-h-[5rem] lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:items-center lg:gap-3 lg:gap-y-0 xl:gap-6">
+        <div className="flex min-h-[4rem] flex-wrap items-center justify-between gap-y-2 py-2 sm:min-h-[4.5rem] sm:gap-4 lg:grid lg:min-h-[5rem] lg:grid-cols-[minmax(0,auto)_minmax(0,1fr)_auto] lg:items-center lg:gap-x-4 lg:gap-y-0 xl:gap-x-8">
           <Link
             href="/"
             className="group flex min-w-0 max-w-[calc(100%-8rem)] shrink items-center gap-2.5 sm:gap-4 lg:max-w-none lg:shrink-0"
@@ -139,25 +139,24 @@ export function Header() {
           </Link>
 
           <nav
-            className="hidden w-full min-w-0 justify-center justify-self-center lg:flex lg:w-auto lg:max-w-none"
+            className="hidden min-h-0 min-w-0 justify-self-stretch lg:flex"
             aria-label={tHero("internalNavAria")}
           >
-            <div className="flex max-w-full flex-nowrap items-center justify-center gap-0.5 overflow-x-auto pb-0.5 [-webkit-overflow-scrolling:touch] lg:gap-1 xl:gap-0.5">
-              {items.map((i) => (
-                <Link key={i.href} href={i.href} className={navLinkClass(i.active)}>
-                  {i.label}
-                </Link>
-              ))}
+            <div className="flex h-full w-full min-w-0 items-center justify-center overflow-x-auto overscroll-x-contain px-0.5 [-webkit-overflow-scrolling:touch]">
+              <div className="flex w-max max-w-full flex-nowrap items-center gap-0.5 lg:gap-1">
+                {items.map((i) => (
+                  <Link key={i.href} href={i.href} className={navLinkClass(i.active)}>
+                    {i.label}
+                  </Link>
+                ))}
+              </div>
             </div>
           </nav>
 
-          <div className="flex min-w-0 shrink-0 items-center justify-end gap-1.5 sm:gap-2 lg:justify-self-end">
+          <div className="flex min-w-0 shrink-0 items-center justify-end gap-2 sm:gap-2.5 lg:justify-self-end lg:border-l lg:border-white/[0.12] lg:pl-5 xl:pl-6">
             <nav
               aria-label={tUi("switchTo")}
-              className={cn(
-                "lang-switcher-glass flex shrink-0 flex-nowrap items-stretch overflow-x-auto p-1 sm:p-1.5",
-                "scrollbar-hide [-webkit-overflow-scrolling:touch]"
-              )}
+              className="lang-switcher-glass inline-flex shrink-0 flex-nowrap items-stretch overflow-hidden rounded-xl p-1 sm:p-1.5"
             >
               {routing.locales.map((loc, idx) => {
                 const { label } = LANG_DISPLAY[loc];
@@ -167,10 +166,8 @@ export function Header() {
                     {idx > 0 ? (
                       <span
                         aria-hidden
-                        className="lang-switcher-sep flex w-px shrink-0 items-center justify-center px-1 text-[10px] font-light text-[#00BFFF]/50 sm:px-1.5"
-                      >
-                        |
-                      </span>
+                        className="lang-switcher-sep flex shrink-0 items-center justify-center self-stretch border-0 border-l border-solid border-[#00BFFF]/35 px-1.5 text-[10px] font-light text-[#00BFFF]/45 sm:px-2"
+                      />
                     ) : null}
                     <Link
                       href={pathname}
