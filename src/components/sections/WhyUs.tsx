@@ -73,7 +73,7 @@ export function WhyUs() {
         }}
         className="mx-auto max-w-3xl text-center"
       >
-        <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(0,191,255,0.2)] bg-[rgba(0,191,255,0.08)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#7AE0FF]">
+        <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(0,191,255,0.24)] bg-[rgba(0,191,255,0.09)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#7AE0FF] shadow-[0_0_22px_rgba(0,191,255,0.14)]">
           <BadgeCheck className="h-4 w-4" aria-hidden />
           {t("badge")}
         </div>
@@ -105,11 +105,11 @@ export function WhyUs() {
                   transition: { duration: 0.52, delay: idx * 0.02 }
                 }
               }}
-              className="glass hover-lift group relative overflow-hidden rounded-3xl p-6 transition-[box-shadow,transform] duration-300"
+              className="glass hover-lift group relative overflow-hidden rounded-3xl p-6 transition-[box-shadow,transform,border-color] duration-300 hover:border-[#00BFFF]/32 hover:shadow-[0_30px_92px_rgba(0,0,0,0.6),0_0_58px_rgba(0,191,255,0.18)]"
             >
               <div
                 aria-hidden
-                className="pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full bg-[rgba(0,191,255,0.08)] blur-2xl transition group-hover:bg-[rgba(0,191,255,0.14)]"
+                className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-[rgba(0,191,255,0.08)] blur-2xl transition group-hover:bg-[rgba(0,191,255,0.18)]"
               />
               <div className="relative flex items-start gap-4">
                 <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-[rgba(0,191,255,0.32)] bg-[rgba(0,191,255,0.1)] shadow-[0_0_32px_rgba(0,191,255,0.22)] transition group-hover:border-[rgba(0,191,255,0.48)]">

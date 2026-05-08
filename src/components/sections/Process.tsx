@@ -66,7 +66,7 @@ export function Process() {
         }}
         className="mx-auto max-w-3xl text-center"
       >
-        <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.06] px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-white/70">
+        <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.06] px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-white/70 shadow-[0_0_22px_rgba(0,191,255,0.10)]">
           {t("badge")}
         </div>
         <h2 className="brand-glow mt-4 text-balance text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">
@@ -78,7 +78,7 @@ export function Process() {
       <div className="relative mx-auto mt-14 max-w-3xl">
         <div
           aria-hidden
-          className="pointer-events-none absolute left-[2.125rem] top-10 bottom-10 w-px bg-gradient-to-b from-[#00BFFF]/55 via-[#00BFFF]/22 to-transparent sm:left-[2.375rem]"
+          className="pointer-events-none absolute left-[2.125rem] top-10 bottom-10 w-px bg-gradient-to-b from-[#00BFFF]/65 via-[#00BFFF]/24 to-transparent sm:left-[2.375rem]"
         />
 
         <ol className="relative space-y-5 sm:space-y-7">
@@ -107,7 +107,7 @@ export function Process() {
                   </span>
                 </div>
 
-                <div className="glass hover-lift min-w-0 flex-1 rounded-3xl p-5 sm:p-6">
+                <div className="glass hover-lift min-w-0 flex-1 rounded-3xl p-5 sm:p-6 transition-[box-shadow,border-color] duration-300 hover:border-[#00BFFF]/28 hover:shadow-[0_28px_88px_rgba(0,0,0,0.6),0_0_54px_rgba(0,191,255,0.16)]">
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[rgba(0,191,255,0.35)] bg-[rgba(0,191,255,0.12)] shadow-[0_0_28px_rgba(0,191,255,0.18)]">
                       <Icon className="h-6 w-6 text-[#7AE0FF]" aria-hidden />
