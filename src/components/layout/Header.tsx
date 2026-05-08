@@ -176,20 +176,44 @@ export function Header() {
     };
   }, [open]);
 
+  const [hash, setHash] = useState("");
+
+  useEffect(() => {
+    const sync = () => setHash(typeof window !== "undefined" ? window.location.hash : "");
+    sync();
+    window.addEventListener("hashchange", sync);
+    window.addEventListener("popstate", sync);
+    return () => {
+      window.removeEventListener("hashchange", sync);
+      window.removeEventListener("popstate", sync);
+    };
+  }, [pathname]);
+
   const items = useMemo(() => {
+    const onHome = pathname === "/" || pathname === "";
+
     return ROUTES.map((i) => {
-      const baseHref = i.href.split("#")[0] ?? i.href;
-      const active =
-        baseHref === "/"
-          ? pathname === "/"
-          : pathname === baseHref || pathname.startsWith(baseHref + "/");
+      const hashIdx = i.href.indexOf("#");
+      const hashPart = hashIdx >= 0 ? i.href.slice(hashIdx) : null;
+      const baseHref = hashIdx >= 0 ? i.href.slice(0, hashIdx) || "/" : i.href;
+
+      let active = false;
+      if (hashPart) {
+        /** На главной подсвечиваем только пункт, совпадающий с #якорем (иначе все якоря «активны»). */
+        active = onHome && hash === hashPart;
+      } else {
+        active =
+          pathname === baseHref ||
+          (baseHref !== "/" && pathname.startsWith(`${baseHref}/`));
+      }
+
       return {
         ...i,
         label: t(i.key),
         active
       };
     });
-  }, [pathname, t]);
+  }, [pathname, t, hash]);
 
   return (
     <MotionHeader
@@ -199,12 +223,11 @@ export function Header() {
       )}
     >
       <div className="container-px">
-        {/* lg+: две строки — бренд/действия и полноширинная навигация с переносом (ничего не обрезается). */}
-        <div className="flex flex-col gap-2 py-2 sm:gap-2.5 sm:py-2.5 lg:gap-3 lg:pt-2 lg:pb-3">
-          <div className="flex min-h-[3.75rem] w-full min-w-0 items-center justify-between gap-2 sm:min-h-[4.25rem]">
+        {/* Одна строка на lg+: логотип | меню по центру | язык + CTA; на мобилке меню в бургере. */}
+        <div className="flex min-h-[3.75rem] items-center justify-between gap-2 py-2 sm:min-h-[4rem] sm:gap-3 lg:min-h-[4.25rem] lg:flex-nowrap lg:gap-4 lg:py-2.5">
             <Link
               href="/"
-              className="group flex min-w-0 max-w-[calc(100%-9rem)] shrink items-center gap-2.5 sm:max-w-[calc(100%-10rem)] sm:gap-4 md:max-w-none"
+              className="group flex min-w-0 max-w-[calc(100%-9rem)] shrink items-center gap-2 sm:max-w-[calc(100%-10rem)] sm:gap-3 lg:max-w-[min(42vw,14rem)] xl:max-w-[min(46vw,18rem)] 2xl:max-w-none"
             >
             <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-2xl bg-white/5 ring-[3px] ring-[#00BFFF]/35 shadow-[0_0_40px_rgba(0,191,255,0.35)] transition group-hover:ring-[#00BFFF]/55 group-hover:shadow-[0_0_52px_rgba(0,191,255,0.45)] sm:h-14 sm:w-14 md:h-16 md:w-16">
               <Image
@@ -225,7 +248,7 @@ export function Header() {
               >
                 LOGICA MARKETING
               </div>
-              <div className="mt-0.5 hidden flex-wrap items-baseline gap-x-2 lg:flex lg:mt-1">
+              <div className="mt-0.5 hidden flex-wrap items-baseline gap-x-2 xl:flex xl:mt-1">
                 <span className="text-[10px] text-white/72 sm:text-[11px]">
                   {tUi("tagline")}
                 </span>
@@ -236,7 +259,20 @@ export function Header() {
             </div>
           </Link>
 
-          <div className="flex min-w-0 shrink-0 items-center justify-end gap-2 sm:gap-2.5 lg:border-l-0 lg:pl-0">
+          <nav
+            className="hidden min-w-0 flex-1 justify-center px-1 lg:flex"
+            aria-label={tHero("internalNavAria")}
+          >
+            <div className="scrollbar-hide mx-auto flex max-w-full items-center justify-center gap-x-0.5 overflow-x-auto overscroll-x-contain py-0.5 [-webkit-overflow-scrolling:touch] sm:gap-x-1 lg:gap-x-1">
+              {items.map((i) => (
+                <Link key={i.href} href={i.href} className={navLinkClass(i.active)}>
+                  {i.label}
+                </Link>
+              ))}
+            </div>
+          </nav>
+
+          <div className="flex min-w-0 shrink-0 items-center justify-end gap-2 sm:gap-2.5 lg:border-l lg:border-white/[0.12] lg:pl-4 xl:pl-5">
             <LocaleSwitcher variant="toolbar" />
 
             {/* Десктоп / планшет: «Связаться» + TG + WA в одной glass-пилюле */}
@@ -296,20 +332,6 @@ export function Header() {
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
-        </div>
-
-          <nav
-            className="hidden w-full min-w-0 border-t border-white/[0.1] pt-2.5 lg:block"
-            aria-label={tHero("internalNavAria")}
-          >
-            <div className="flex w-full flex-wrap items-center justify-center gap-x-0.5 gap-y-2 sm:gap-x-1 lg:gap-x-1.5">
-              {items.map((i) => (
-                <Link key={i.href} href={i.href} className={navLinkClass(i.active)}>
-                  {i.label}
-                </Link>
-              ))}
-            </div>
-          </nav>
         </div>
       </div>
 
