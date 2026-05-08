@@ -26,6 +26,7 @@ export async function HomePageJsonLd() {
     { key: "whyUs", hash: "#why-us" },
     { key: "process", hash: "#process" },
     { key: "services", hash: "#services" },
+    { key: "clients", hash: "#clients" },
     { key: "cases", hash: "#cases" },
     { key: "testimonials", hash: "#testimonials" },
     { key: "homeFaq", hash: "#faq" },

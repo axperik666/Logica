@@ -113,13 +113,13 @@ body:not(.tech-bg) {
 }
 
 .glass {
-  background: rgba(10, 12, 28, 0.93);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
-  border: 1px solid rgba(0, 191, 255, 0.32);
+  background: rgba(7, 9, 22, 0.94);
+  backdrop-filter: blur(26px) saturate(1.25);
+  -webkit-backdrop-filter: blur(26px) saturate(1.25);
+  border: 1px solid rgba(0, 191, 255, 0.38);
   box-shadow:
-    0 10px 40px rgba(0, 191, 255, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    0 12px 44px rgba(0, 191, 255, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
   transition:
     border-color 0.35s ease,
     box-shadow 0.35s ease,
@@ -161,28 +161,34 @@ main {
   text-shadow: 0 0 25px rgba(0, 191, 255, 0.6);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .platform-card:hover .platform-card-surface {
+    transform: none !important;
+  }
+}
+
 /* Шапка: максимально плотный glass + линия свечения #00BFFF снизу */
 header.site-header.glass-nav {
   position: fixed;
   inset-inline: 0;
   top: 0;
   z-index: 50;
-  backdrop-filter: blur(40px) saturate(1.45);
-  -webkit-backdrop-filter: blur(40px) saturate(1.45);
+  backdrop-filter: blur(52px) saturate(1.65);
+  -webkit-backdrop-filter: blur(52px) saturate(1.65);
   background: linear-gradient(
       180deg,
-      rgba(5, 9, 22, 0.94) 0%,
-      rgba(3, 6, 16, 0.9) 100%
+      rgba(3, 6, 18, 0.97) 0%,
+      rgba(2, 4, 14, 0.93) 100%
     )
     !important;
-  border-bottom: 1px solid rgba(0, 191, 255, 0.68);
+  border-bottom: 1px solid rgba(0, 191, 255, 0.78);
   box-shadow:
-    inset 0 1px 0 rgba(0, 191, 255, 0.26),
-    0 1px 0 rgba(0, 191, 255, 0.58),
-    0 14px 52px rgba(0, 0, 0, 0.62),
-    0 0 88px rgba(0, 191, 255, 0.38),
-    0 0 1px rgba(0, 191, 255, 0.78),
-    0 16px 60px rgba(0, 191, 255, 0.16);
+    inset 0 1px 0 rgba(0, 191, 255, 0.32),
+    0 1px 0 rgba(0, 191, 255, 0.62),
+    0 18px 56px rgba(0, 0, 0, 0.68),
+    0 0 96px rgba(0, 191, 255, 0.42),
+    0 0 1px rgba(0, 191, 255, 0.85),
+    0 18px 72px rgba(0, 191, 255, 0.18);
 }
 
 header.site-header.glass-nav::after {
@@ -302,21 +308,21 @@ header.site-header.glass-nav::after {
 /* Header без «подпрыгивания» при hover (карточный .glass:hover) */
 header.site-header.glass-nav:hover {
   transform: none !important;
-  border-color: rgba(0, 191, 255, 0.82);
+  border-color: rgba(0, 191, 255, 0.88);
   box-shadow:
-    inset 0 1px 0 rgba(0, 191, 255, 0.32),
-    0 1px 0 rgba(0, 191, 255, 0.62),
-    0 16px 52px rgba(0, 191, 255, 0.26),
-    0 12px 44px rgba(0, 0, 0, 0.58),
-    0 0 92px rgba(0, 191, 255, 0.42);
+    inset 0 1px 0 rgba(0, 191, 255, 0.38),
+    0 1px 0 rgba(0, 191, 255, 0.68),
+    0 18px 56px rgba(0, 191, 255, 0.3),
+    0 14px 48px rgba(0, 0, 0, 0.62),
+    0 0 102px rgba(0, 191, 255, 0.48);
 }
 
 header.site-header.glass-nav:hover::after {
   opacity: 1;
   box-shadow:
-    0 0 28px #00bfff,
-    0 0 56px rgba(0, 191, 255, 0.62),
-    0 0 96px rgba(0, 191, 255, 0.35);
+    0 0 32px #00bfff,
+    0 0 64px rgba(0, 191, 255, 0.68),
+    0 0 108px rgba(0, 191, 255, 0.4);
 }
 
 /* Переключатель языков — отдельный glass-блок */
@@ -656,6 +662,122 @@ header.site-header.glass-nav:hover::after {
       transparent 38%,
       rgba(10, 6, 28, 0.38) 100%
     );
+  }
+
+  /* Hero: сетка «плотнее» справа + декор */
+  .hero-section .tech-grid--hero-fine {
+    opacity: 0.34;
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.35) 38%,
+      rgba(0, 0, 0, 0.92) 68%,
+      #000 100%
+    );
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.35) 38%,
+      rgba(0, 0, 0, 0.92) 68%,
+      #000 100%
+    );
+  }
+
+  .hero-right-grid-mask {
+    position: absolute;
+    inset: 0;
+    left: 46%;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(0, 191, 255, 0.13) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 191, 255, 0.09) 1px, transparent 1px);
+    background-size: 22px 22px;
+    opacity: 0.52;
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      transparent 6%,
+      black 18%,
+      black 82%,
+      transparent 94%
+    );
+    mask-image: linear-gradient(
+      180deg,
+      transparent 6%,
+      black 18%,
+      black 82%,
+      transparent 94%
+    );
+  }
+
+  .hero-ambient-lines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .hero-ambient-lines__beam {
+    position: absolute;
+    height: 1px;
+    border-radius: 999px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(0, 191, 255, 0.45),
+      rgba(0, 191, 255, 0.95),
+      rgba(0, 191, 255, 0.45),
+      transparent
+    );
+    box-shadow:
+      0 0 22px rgba(0, 191, 255, 0.55),
+      0 0 52px rgba(0, 191, 255, 0.28);
+    opacity: 0.62;
+  }
+
+  .hero-particle {
+    position: absolute;
+    border-radius: 999px;
+    background: rgba(0, 191, 255, 0.85);
+    filter: blur(4px);
+    opacity: 0.38;
+    animation: hero-particle-float 14s ease-in-out infinite;
+  }
+
+  @keyframes hero-particle-float {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.26;
+    }
+    50% {
+      transform: translate(-14px, -22px) scale(1.12);
+      opacity: 0.52;
+    }
+  }
+
+  .hero-roi-float {
+    animation: hero-roi-drift 9s ease-in-out infinite;
+  }
+
+  @keyframes hero-roi-drift {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-particle {
+      animation: none;
+      opacity: 0.22;
+    }
+
+    .hero-roi-float {
+      animation: none;
+    }
   }
 
   /* Горизонтальные отступы + safe-area на вырезах / жестовой полоске */

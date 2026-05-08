@@ -43,8 +43,8 @@
       "metaDescription": "Cinque fasi: diagnosi, strategia, go‑live, ottimizzazione data‑driven e scale delle combinazioni vincenti."
     },
     "clients": {
-      "metaTitle": "Clienti LOGICA Marketing — brand che si fidano",
-      "metaDescription": "Sanità, e‑commerce, B2B e EdTech — partnership con KPI misurabili e crescita controllata."
+      "metaTitle": "Clienti LOGICA — leader di mercato e brand in crescita",
+      "metaDescription": "Partnership in retail, e‑commerce, B2B, EdTech e servizi: crescita misurabile, KPI chiari e reporting affidabile."
     },
     "homeFaq": {
       "metaTitle": "FAQ — LOGICA Marketing",
@@ -83,6 +83,10 @@
     "contactTelegram": "Telegram",
     "contactWhatsapp": "WhatsApp",
     "contactEmail": "Email",
+    "roiVisualKicker": "Payback",
+    "visualRoiPill": "ROI",
+    "visualLiveBadge": "Test live",
+    "roiVisualCaption": "Intervallo tipico di payback con economia delle combinazioni allineata — una cornice di test, non una promessa fissa.",
     "internalNavAria": "Sezioni del sito LOGICA Marketing",
     "internalNavServices": "Catalogo servizi",
     "internalNavCasesPage": "Tutti i casi",
@@ -424,15 +428,33 @@
   },
   "platforms": {
     "badge": "Piattaforme leader",
-    "title": "Lanciamo ads su tutti i canali chiave",
-    "subtitle": "Targeting • Search • Video • Performance",
+    "title": "Lanciamo ads su tutte le piattaforme chiave",
+    "subtitle": "Targeting • Contesto • Performance",
     "items": {
-      "google": "Google Ads",
-      "meta": "Meta (Facebook + Instagram)",
-      "tiktok": "TikTok Ads",
-      "yandex": "Yandex Direct",
-      "vk": "VK Ads",
-      "telegram": "Telegram Ads"
+      "google": {
+        "name": "Google Ads",
+        "caption": "Search e performance"
+      },
+      "meta": {
+        "name": "Meta",
+        "caption": "Facebook e Instagram"
+      },
+      "tiktok": {
+        "name": "TikTok Ads",
+        "caption": "Video breve"
+      },
+      "yandex": {
+        "name": "Yandex Direct",
+        "caption": "Ricerca e reti"
+      },
+      "vk": {
+        "name": "VK Ads",
+        "caption": "Social e app"
+      },
+      "telegram": {
+        "name": "Telegram Ads",
+        "caption": "Reach nel messaging"
+      }
     }
   },
   "whyUs": {
@@ -506,9 +528,9 @@
     ]
   },
   "clients": {
-    "badge": "Affidabilità",
-    "title": "Si fidano di noi",
-    "subtitle": "Retail, sanità, e‑commerce, B2B e EdTech — KPI misurabili e reporting sereno per il team."
+    "badge": "Partner",
+    "title": "I leader del mercato si affidano a noi",
+    "subtitle": "Aziende che sono già cresciute con LOGICA Marketing"
   },
   "homeFaq": {
     "badge": "FAQ",

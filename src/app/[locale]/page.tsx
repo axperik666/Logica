@@ -7,6 +7,7 @@ import { Platforms } from "@/components/sections/Platforms";
 import { WhyUs } from "@/components/sections/WhyUs";
 import { Process } from "@/components/sections/Process";
 import { Services } from "@/components/sections/Services";
+import { Clients } from "@/components/sections/Clients";
 import { Cases } from "@/components/sections/Cases";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { FAQ } from "@/components/sections/FAQ";
@@ -43,6 +44,7 @@ export default function HomePage() {
         <WhyUs />
         <Process />
         <Services />
+        <Clients />
         <Cases />
         <Testimonials />
         <FAQ />

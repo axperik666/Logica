@@ -1,20 +1,39 @@
 "use client";
 
 import { useRef } from "react";
-import { useInView } from "framer-motion";
+import { useInView, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Building2 } from "lucide-react";
 import { MotionDiv, MotionSection } from "@/components/motion";
 import { useTranslations } from "next-intl";
 import { HOME_CASE_IDS } from "@/content/homeCases";
+import { cn } from "@/lib/cn";
 
-/** Первые 10 кейсов на главной — имена брендов как «логотипы» (wordmark). */
-const LOGO_COUNT = 10;
+const LOGO_COUNT = 12;
+
+function ClientChip({ label, className }: { label: string; className?: string }) {
+  return (
+    <div
+      className={cn(
+        "group/client shrink-0 rounded-2xl border border-white/[0.12] bg-[rgba(5,9,24,0.65)] px-7 py-3.5 backdrop-blur-xl transition-all duration-[400ms] ease-out sm:px-9 sm:py-4",
+        "grayscale",
+        "hover:-translate-y-1 hover:grayscale-0 hover:border-[#00BFFF]/48 hover:shadow-[0_16px_48px_rgba(0,0,0,0.48),0_0_28px_rgba(0,191,255,0.42)]",
+        className
+      )}
+    >
+      <span className="block max-w-[14rem] text-center text-[13px] font-bold uppercase tracking-[0.14em] text-white/38 transition duration-300 group-hover/client:scale-[1.02] group-hover/client:text-white sm:text-sm">
+        {label}
+      </span>
+    </div>
+  );
+}
 
 export function Clients() {
   const t = useTranslations("clients");
   const tCases = useTranslations("cases");
   const tSec = useTranslations("sectionsSeo");
   const ref = useRef(null);
+  const reduceMotion = useReducedMotion();
   const isInView = useInView(ref, {
     once: true,
     amount: 0.08,
@@ -22,6 +41,7 @@ export function Clients() {
   });
 
   const ids = HOME_CASE_IDS.slice(0, LOGO_COUNT);
+  const doubled = [...ids, ...ids];
 
   return (
     <MotionSection
@@ -44,19 +64,21 @@ export function Clients() {
 
       <MotionDiv
         variants={{
-          hidden: { opacity: 0, y: 10 },
+          hidden: { opacity: 0, y: 14 },
           show: { opacity: 1, y: 0, transition: { duration: 0.55 } }
         }}
         className="mx-auto max-w-3xl text-center"
       >
-        <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.06] px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-white/70">
-          <Building2 className="h-4 w-4 text-[#7AE0FF]" aria-hidden />
+        <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(0,191,255,0.28)] bg-[rgba(0,191,255,0.08)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#9AE8FF]">
+          <Building2 className="h-4 w-4" aria-hidden />
           {t("badge")}
         </div>
-        <h2 className="brand-glow mt-4 text-balance text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">
+        <h2 className="brand-glow mt-4 text-balance text-2xl font-semibold tracking-tight text-white sm:text-3xl lg:text-4xl">
           {t("title")}
         </h2>
-        <p className="mt-3 text-sm text-white/72 sm:text-base">{t("subtitle")}</p>
+        <p className="mt-3 text-sm font-medium leading-relaxed text-white/78 sm:text-base">
+          {t("subtitle")}
+        </p>
       </MotionDiv>
 
       <MotionDiv
@@ -64,30 +86,40 @@ export function Clients() {
           hidden: { opacity: 0 },
           show: {
             opacity: 1,
-            transition: { staggerChildren: 0.04, delayChildren: 0.08 }
+            transition: { duration: 0.6, delay: 0.08 }
           }
         }}
-        className="mt-12 flex flex-wrap items-center justify-center gap-3 sm:gap-4 lg:gap-5"
+        className="relative mx-auto mt-12 max-w-[100vw] overflow-hidden px-0 sm:mt-14"
       >
-        {ids.map((id) => {
-          const label = tCases(`items.${id}.client`);
-          return (
-            <MotionDiv
-              key={id}
-              variants={{
-                hidden: { opacity: 0, scale: 0.96 },
-                show: { opacity: 1, scale: 1, transition: { duration: 0.4 } }
+        {!reduceMotion ? (
+          <div className="relative [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
+            <motion.div
+              className="flex w-max gap-3 sm:gap-4"
+              animate={isInView ? { x: ["0%", "-50%"] } : { x: "0%" }}
+              transition={{
+                x: {
+                  duration: 46,
+                  repeat: isInView ? Infinity : 0,
+                  ease: "linear",
+                  repeatType: "loop"
+                }
               }}
-              className="group"
             >
-              <div className="glass flex min-h-[3.25rem] min-w-[8.5rem] items-center justify-center rounded-2xl px-6 py-3 transition duration-300 grayscale hover:grayscale-0">
-                <span className="text-center text-sm font-bold uppercase tracking-[0.14em] text-white/45 transition group-hover:text-white">
-                  {label}
-                </span>
-              </div>
-            </MotionDiv>
-          );
-        })}
+              {doubled.map((id, idx) => (
+                <ClientChip
+                  key={`${id}-${idx}`}
+                  label={tCases(`items.${id}.client`)}
+                />
+              ))}
+            </motion.div>
+          </div>
+        ) : (
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+            {ids.map((id) => (
+              <ClientChip key={id} label={tCases(`items.${id}.client`)} />
+            ))}
+          </div>
+        )}
       </MotionDiv>
     </MotionSection>
   );

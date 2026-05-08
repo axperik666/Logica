@@ -43,8 +43,8 @@
       "metaDescription": "Пять шагов: диагностика, стратегия, запуск, оптимизация по данным и масштабирование победивших связок."
     },
     "clients": {
-      "metaTitle": "Клиенты LOGICA Marketing — кому доверяют",
-      "metaDescription": "Бренды из медицины, e‑commerce, B2B и EdTech — партнёрство с измеримыми KPI и управляемым ростом."
+      "metaTitle": "Клиенты LOGICA — лидеры рынка и бренды с ростом",
+      "metaDescription": "Партнёрства в retail, e‑commerce, B2B, EdTech и сервисах: измеримый рост, прозрачные KPI и спокойная отчётность."
     },
     "homeFaq": {
       "metaTitle": "Частые вопросы — LOGICA Marketing",
@@ -83,6 +83,10 @@
     "contactTelegram": "Telegram",
     "contactWhatsapp": "WhatsApp",
     "contactEmail": "Email",
+    "roiVisualKicker": "Окупаемость",
+    "visualRoiPill": "ROI",
+    "visualLiveBadge": "Тесты live",
+    "roiVisualCaption": "Типичный диапазон окупаемости при выстроенной экономике связок — не обещание, а рамка для тестов.",
     "internalNavAria": "Разделы сайта LOGICA Marketing",
     "internalNavServices": "Каталог услуг",
     "internalNavCasesPage": "Все кейсы",
@@ -425,14 +429,32 @@
   "platforms": {
     "badge": "Работаем с ведущими платформами",
     "title": "Запускаем рекламу на всех ключевых площадках",
-    "subtitle": "Таргет • Контекст • Видео • Performance",
+    "subtitle": "Таргет • Контекст • Performance",
     "items": {
-      "google": "Google Ads",
-      "meta": "Meta (Facebook + Instagram)",
-      "tiktok": "TikTok Ads",
-      "yandex": "Яндекс Директ",
-      "vk": "VK Ads",
-      "telegram": "Telegram Ads"
+      "google": {
+        "name": "Google Ads",
+        "caption": "Поиск и performance"
+      },
+      "meta": {
+        "name": "Meta",
+        "caption": "Facebook и Instagram"
+      },
+      "tiktok": {
+        "name": "TikTok Ads",
+        "caption": "Короткое видео"
+      },
+      "yandex": {
+        "name": "Яндекс Директ",
+        "caption": "Поиск и сети"
+      },
+      "vk": {
+        "name": "VK Ads",
+        "caption": "Соцсети и приложения"
+      },
+      "telegram": {
+        "name": "Telegram Ads",
+        "caption": "Охват в мессенджере"
+      }
     }
   },
   "whyUs": {
@@ -506,9 +528,9 @@
     ]
   },
   "clients": {
-    "badge": "Надёжность",
-    "title": "Нам доверяют",
-    "subtitle": "Ритейл, медицина, e‑commerce, B2B и EdTech — измеримые KPI и спокойная отчётность для команды."
+    "badge": "Партнёры",
+    "title": "Нам доверяют лидеры рынка",
+    "subtitle": "Компании, которые уже выросли с LOGICA Marketing"
   },
   "homeFaq": {
     "badge": "FAQ",

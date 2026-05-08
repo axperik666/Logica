@@ -19,42 +19,47 @@ const PLATFORM_ORDER: PlatformKey[] = [
   "telegram"
 ];
 
-/** Фирменные акценты при hover (официальные/узнаваемые оттенки). */
-const PLATFORM_STYLE: Record<
-  PlatformKey,
-  { glow: string; ring: string; labelClass: string }
-> = {
+type PlatformVisual = {
+  /** Три числа через пробел — для rgb(var(--platform-rgb) / α) в CSS */
+  rgb: string;
+  ring: string;
+  nameHover: string;
+};
+
+const PLATFORM_VISUAL: Record<PlatformKey, PlatformVisual> = {
   google: {
-    glow: "rgba(66, 133, 244, 0.55)",
+    rgb: "66 133 244",
     ring: "group-hover:border-[#4285F4]/55",
-    labelClass: "group-hover:text-[#4285F4]"
+    nameHover: "group-hover:text-[#8AB4F8]"
   },
   meta: {
-    glow: "rgba(0, 104, 224, 0.5)",
+    rgb: "0 104 224",
     ring: "group-hover:border-[#0668E1]/55",
-    labelClass: "group-hover:text-[#0668E1]"
+    nameHover: "group-hover:text-[#7AB8FF]"
   },
   tiktok: {
-    glow: "rgba(37, 244, 238, 0.45)",
+    rgb: "37 244 238",
     ring: "group-hover:border-[#25F4EE]/45",
-    labelClass: "group-hover:text-[#25F4EE]"
+    nameHover: "group-hover:text-[#6DF7F2]"
   },
   yandex: {
-    glow: "rgba(252, 63, 29, 0.5)",
+    rgb: "252 63 29",
     ring: "group-hover:border-[#FC3F1D]/55",
-    labelClass: "group-hover:text-[#FC3F1D]"
+    nameHover: "group-hover:text-[#FF8A75]"
   },
   vk: {
-    glow: "rgba(0, 119, 255, 0.5)",
+    rgb: "0 119 255",
     ring: "group-hover:border-[#0077FF]/55",
-    labelClass: "group-hover:text-[#0077FF]"
+    nameHover: "group-hover:text-[#66B3FF]"
   },
   telegram: {
-    glow: "rgba(38, 165, 228, 0.55)",
+    rgb: "38 165 228",
     ring: "group-hover:border-[#26A5E4]/55",
-    labelClass: "group-hover:text-[#26A5E4]"
+    nameHover: "group-hover:text-[#7FD4FA]"
   }
 };
+
+type PlatformCopy = { name: string; caption: string };
 
 function LogoGoogle({ className }: { className?: string }) {
   return (
@@ -181,6 +186,12 @@ export function Platforms() {
     margin: "0px 0px 80px 0px"
   });
 
+  const itemsRaw = t.raw("items");
+  const items =
+    itemsRaw && typeof itemsRaw === "object"
+      ? (itemsRaw as Record<PlatformKey, PlatformCopy>)
+      : ({} as Record<PlatformKey, PlatformCopy>);
+
   return (
     <MotionSection
       ref={ref}
@@ -228,12 +239,14 @@ export function Platforms() {
         }}
         className="mx-auto mt-10 max-w-5xl"
       >
-        <div className="glass rounded-[2rem] border border-white/10 px-4 py-8 sm:px-8 sm:py-10">
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-3 lg:gap-5">
+        <div className="glass rounded-[2rem] border border-white/12 px-4 py-9 backdrop-blur-xl sm:px-8 sm:py-11">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 lg:gap-5">
             {PLATFORM_ORDER.map((key) => {
               const Logo = LOGOS[key];
-              const st = PLATFORM_STYLE[key];
-              const label = t(`items.${key}`);
+              const visual = PLATFORM_VISUAL[key];
+              const copy = items[key];
+              const name = copy?.name ?? key;
+              const caption = copy?.caption ?? "";
               return (
                 <MotionDiv
                   key={key}
@@ -246,38 +259,47 @@ export function Platforms() {
                       transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] }
                     }
                   }}
-                  className="group relative"
+                  className="platform-card group relative"
                 >
                   <div
                     className={cn(
-                      "relative flex min-h-[7.5rem] flex-col items-center justify-center gap-3 rounded-2xl border border-white/10 bg-[rgba(8,12,28,0.55)] px-3 py-5 transition-all duration-300",
-                      "hover:-translate-y-0.5 hover:border-white/20",
-                      st.ring
+                      "platform-card-surface relative flex min-h-[9rem] flex-col items-center justify-start gap-3 rounded-2xl border border-white/[0.12] bg-[rgba(5,9,24,0.72)] px-3 pb-5 pt-6 backdrop-blur-xl transition-all duration-300 ease-out will-change-transform sm:min-h-[9.5rem]",
+                      "hover:-translate-y-2 hover:scale-[1.03] hover:border-[#00BFFF]/50",
+                      "hover:shadow-[0_20px_56px_rgba(0,0,0,0.55),0_0_30px_rgba(0,191,255,0.55),0_0_52px_rgba(0,191,255,0.18)]",
+                      visual.ring
                     )}
                     style={
                       {
-                        ["--platform-glow" as string]: st.glow
+                        ["--platform-rgb" as string]: visual.rgb
                       } as CSSProperties
                     }
                   >
                     <div
                       className={cn(
-                        "flex h-14 w-full max-w-[8.5rem] items-center justify-center transition-all duration-300",
-                        "grayscale-[0.85] opacity-[0.72] contrast-[1.05]",
-                        "group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110",
-                        "group-hover:[filter:drop-shadow(0_0_22px_var(--platform-glow))]"
+                        "flex h-[3.25rem] w-full max-w-[9rem] items-center justify-center transition-all duration-[400ms] ease-out",
+                        "grayscale brightness-[0.88] opacity-[0.72]",
+                        "group-hover:grayscale-0 group-hover:brightness-100 group-hover:opacity-100 group-hover:scale-[1.08]",
+                        "group-hover:[filter:drop-shadow(0_0_20px_rgb(var(--platform-rgb)/0.55))]"
                       )}
                     >
-                      <Logo className="h-11 w-auto max-w-full sm:h-12" />
+                      <Logo className="h-[3.25rem] w-auto max-w-full sm:h-14" />
                     </div>
-                    <span
-                      className={cn(
-                        "text-center text-[11px] font-semibold uppercase tracking-[0.12em] text-white/55 transition-colors duration-300 sm:text-xs",
-                        st.labelClass
-                      )}
-                    >
-                      {label}
-                    </span>
+
+                    <div className="flex w-full flex-col items-center gap-1 px-1 pb-0.5 text-center">
+                      <span
+                        className={cn(
+                          "text-[13px] font-semibold leading-tight text-white/88 transition-colors duration-300 sm:text-sm",
+                          visual.nameHover
+                        )}
+                      >
+                        {name}
+                      </span>
+                      {caption ? (
+                        <span className="text-[10px] leading-snug text-white/42 transition-colors duration-300 group-hover:text-white/58 sm:text-[11px]">
+                          {caption}
+                        </span>
+                      ) : null}
+                    </div>
                   </div>
                 </MotionDiv>
               );

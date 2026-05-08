@@ -47,7 +47,7 @@ export function WhyUs() {
     <MotionSection
       ref={ref}
       id="why-us"
-      className="tech-bg relative py-16 container-px sm:py-20"
+      className="tech-bg relative py-20 container-px"
       initial="hidden"
       animate={isInView ? "show" : "hidden"}
       variants={{
