@@ -54,6 +54,11 @@ body:not(.tech-bg) {
     linear-gradient(135deg, #0a0a1f 0%, #1a0b2e 45%, #2a0a3a 100%);
 }
 
+/* Без полноэкранной высоты (футер, узкие прослойки) — иначе «пустота» под контентом на десктопе */
+.tech-bg--compact {
+  min-height: 0;
+}
+
 .tech-bg::before {
   content: "";
   position: absolute;

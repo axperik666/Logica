@@ -10,13 +10,13 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "i.pravatar.cc",
+        hostname: "images.unsplash.com",
         pathname: "/**"
       },
       {
         protocol: "https",
-        hostname: "images.unsplash.com",
-        pathname: "/**"
+        hostname: "randomuser.me",
+        pathname: "/api/portraits/**"
       }
     ]
   }

@@ -21,7 +21,8 @@ type Item = {
   role: string;
   text: string;
   result: string;
-  avatarId: number;
+  face: "men" | "women";
+  faceIdx: number;
 };
 
 export function Testimonials() {
@@ -181,7 +182,7 @@ export function Testimonials() {
                 <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
                   <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-2xl ring-2 ring-[rgba(0,191,255,0.25)]">
                     <Image
-                      src={`https://i.pravatar.cc/200?img=${testimonial.avatarId}`}
+                      src={`https://randomuser.me/api/portraits/${testimonial.face}/${testimonial.faceIdx}.jpg`}
                       alt={tAvatar("avatarAlt", { name: testimonial.name })}
                       fill
                       sizes="64px"

@@ -87,37 +87,31 @@
       {
         "title": "Performance marketing",
         "desc": "Search + social con economia chiara: test, combinazioni vincenti, scale e controllo qualità lead.",
-        "price": "da 150 000 ₽",
         "href": "/#contact"
       },
       {
         "title": "SEO & content marketing",
         "desc": "Pagine per la domanda, struttura, semantica e contenuti che portano lead in modo ripetibile.",
-        "price": "da 90 000 ₽",
         "href": "/#contact"
       },
       {
         "title": "SMM & personal branding",
         "desc": "Packaging profilo, piano contenuti e posizionamento — così ti scelgono prima della prima call.",
-        "price": "da 70 000 ₽",
         "href": "/#contact"
       },
       {
         "title": "Web & landing",
         "desc": "Siti premium su Next.js: UX, velocità, conversione e analytics — per vendere, non solo apparire.",
-        "price": "da 120 000 ₽",
         "href": "/#contact"
       },
       {
         "title": "Strategia + audit",
         "desc": "Analisi rapida: offerta, funnel, traffico, creatività e numeri — piano operativo 2–4 settimane.",
-        "price": "da 35 000 ₽",
         "href": "/#contact"
       },
       {
         "title": "Analytics & ottimizzazione ROI",
         "desc": "Eventi, goal, dashboard e attribuzione — ottimizziamo il profitto, non i click vuoti.",
-        "price": "da 60 000 ₽",
         "href": "/#contact"
       }
     ]
@@ -331,70 +325,80 @@
         "role": "Fondatore, retail premium",
         "text": "Con LOGICA Marketing la pubblicità è un investimento misurabile: bundle, economia per SKU e roadmap di scaling chiara. Marginalità in crescita a doppia cifra.",
         "result": "Ricavi +47%",
-        "avatarId": 33
+        "face": "men",
+        "faceIdx": 14
       },
       {
         "name": "Francesca Romano",
         "role": "Brand Director, lifestyle luxury EU",
         "text": "LOGICA Marketing ha costruito un funnel ad alto ticket mantenendo il tono del brand. La qualità dei lead supera nettamente l’agenzia precedente.",
         "result": "CPL −31% con GMV in crescita",
-        "avatarId": 45
+        "face": "women",
+        "faceIdx": 26
       },
       {
         "name": "Michael Chen",
         "role": "Managing Partner, growth fund",
         "text": "Abbiamo coinvolto LOGICA Marketing per accelerare il portafoglio: paid social e iterazioni landing. Reporting pronto per il board.",
         "result": "Velocità pipeline ×3.1",
-        "avatarId": 12
+        "face": "men",
+        "faceIdx": 41
       },
       {
         "name": "Sofia Laurent",
         "role": "CMO, beauty tech",
         "text": "LOGICA Marketing ha trasformato la domanda in sistema: eventi, attribuzione, test creativi. Il marketing non è più «magia».",
         "result": "CAC −28%",
-        "avatarId": 68
+        "face": "women",
+        "faceIdx": 58
       },
       {
         "name": "Igor Nikolaev",
         "role": "CEO, fintech",
         "text": "Serviva performance disciplinata senza perdere fiducia nel prodotto. LOGICA Marketing ha allineato prodotto e acquisizione — crescita senza caos nei lead.",
         "result": "Qualità lead ×2.4",
-        "avatarId": 25
+        "face": "men",
+        "faceIdx": 63
       },
       {
         "name": "Victoria Palmer",
         "role": "VP Growth, B2B SaaS",
         "text": "LOGICA Marketing ha ricostruito narrativa e misurazione. Ottimizziamo sulla pipeline — non sui click vanitosi.",
         "result": "Win‑rate inbound +18%",
-        "avatarId": 52
+        "face": "women",
+        "faceIdx": 22
       },
       {
         "name": "Marina Alexeeva",
         "role": "Direttrice, rete cliniche",
         "text": "Eliminato il rumore nei lead, offerta e landing più forti. LOGICA Marketing è un partner — KPI chiari e responsabilità.",
         "result": "Prenotazioni +62%",
-        "avatarId": 17
+        "face": "women",
+        "faceIdx": 49
       },
       {
         "name": "Lorenzo Bianchi",
         "role": "Sales Director, automotive IT",
         "text": "LOGICA Marketing ha allineato messaggio, landing e campagne: pipeline più pulita e forecast affidabile.",
         "result": "SQL +41%",
-        "avatarId": 44
+        "face": "men",
+        "faceIdx": 36
       },
       {
         "name": "Anna Keller",
         "role": "Partner, strategy boutique CH",
         "text": "Il posizionamento premium richiede esecuzione premium. LOGICA Marketing: UX pulita, test rigorosi e ROI trasparente.",
         "result": "Chiusura proposte +27%",
-        "avatarId": 61
+        "face": "women",
+        "faceIdx": 71
       },
       {
         "name": "Oleg Safronov",
         "role": "Proprietario, manifattura B2B",
         "text": "LOGICA Marketing per strategia e acquisizione su cicli lunghi. Canali e contenuti allineati — conversione SQL in crescita costante.",
         "result": "Deal +35% YoY",
-        "avatarId": 39
+        "face": "men",
+        "faceIdx": 85
       }
     ]
   },

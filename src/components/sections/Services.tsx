@@ -19,7 +19,6 @@ import { useNarrowViewport } from "@/lib/use-narrow-viewport";
 type CardMsg = {
   title: string;
   desc: string;
-  price: string;
   href: string;
 };
 
@@ -145,7 +144,6 @@ export function Services() {
                   </div>
                   <div>
                     <h3 className="text-sm font-semibold leading-snug">{c.title}</h3>
-                    <div className="mt-1 text-xs text-white/55">{c.price}</div>
                   </div>
                 </div>
               </div>
