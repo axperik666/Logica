@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import {
@@ -144,10 +144,30 @@ export function Header() {
   const tf = useTranslations("footer");
   const tSeo = useTranslations("seo");
   const [open, setOpen] = useState(false);
+  const headerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+
+    const setVar = () => {
+      const h = Math.ceil(el.getBoundingClientRect().height);
+      if (h > 0) {
+        document.documentElement.style.setProperty("--header-h", `${h}px`);
+      }
+    };
+
+    setVar();
+
+    if (typeof ResizeObserver === "undefined") return;
+    const ro = new ResizeObserver(() => setVar());
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -208,6 +228,7 @@ export function Header() {
 
   return (
     <MotionHeader
+      ref={headerRef}
       initial={false}
       className={cn(
         "site-header glass glass-nav fixed inset-x-0 top-0 z-50 w-full min-w-0 max-w-[100vw] overflow-visible"
