@@ -52,7 +52,7 @@ function HeroParticles({ side }: { side: "left" | "right" }) {
       className={cn(
         "pointer-events-none absolute overflow-visible",
         side === "right"
-          ? "inset-y-[10%] right-0 z-0 hidden w-[min(52%,520px)] lg:block"
+          ? "inset-y-[8%] right-0 z-0 hidden w-[min(92%,620px)] lg:block"
           : "inset-x-0 top-0 z-0 h-40 w-full overflow-visible lg:hidden"
       )}
     >
@@ -93,7 +93,7 @@ function HeroRoiVisual({
       <div
         className={cn(
           "relative w-full",
-          compact ? "max-w-[100%]" : "max-w-[min(440px,100%)]"
+          compact ? "max-w-[100%]" : "max-w-full"
         )}
       >
         <div
@@ -106,7 +106,7 @@ function HeroRoiVisual({
           {t("visualRoiPill")}
         </div>
 
-        <div className={cn("relative", compact ? "h-[120px]" : "h-[min(200px,28vw)] lg:h-[220px]")}>
+        <div className={cn("relative", compact ? "h-[120px]" : "h-[min(220px,32vw)] lg:h-[min(260px,28vh)] xl:h-[280px]")}>
           <svg
             className="absolute inset-0 h-full w-full overflow-visible"
             viewBox="0 0 440 200"
@@ -252,9 +252,9 @@ export function Hero() {
             <p>{tSec("hero.metaDescription")}</p>
           </div>
 
-          <div className="flex flex-col gap-10 lg:flex-row lg:items-stretch lg:gap-12 xl:gap-16">
-            {/* Левая колонка ~62% — типографика и действия */}
-            <div className="w-full shrink-0 lg:w-[62%] lg:max-w-[62%]">
+          <div className="flex flex-col gap-10 lg:flex-row lg:items-stretch lg:gap-10 xl:gap-14 2xl:gap-16">
+            {/* Левая колонка — типографика и действия */}
+            <div className="w-full shrink-0 lg:w-[56%] lg:max-w-[56%] xl:w-[54%] xl:max-w-[54%]">
               <div className="relative border-l-[3px] border-[#00BFFF]/40 bg-gradient-to-r from-[rgba(0,191,255,0.09)] via-[rgba(0,191,255,0.03)] to-transparent py-1 pl-5 sm:pl-7 lg:border-l-[4px] lg:pl-9 xl:pl-11">
                 <HeroParticles side="left" />
 
@@ -430,10 +430,10 @@ export function Hero() {
                   }
                 }
               }}
-              className="relative hidden min-h-0 flex-1 lg:flex lg:items-center lg:justify-center"
+              className="relative hidden min-h-0 flex-1 min-w-0 lg:flex lg:items-stretch lg:justify-center"
             >
               <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-bl from-[rgba(0,191,255,0.08)] via-transparent to-[rgba(138,43,226,0.06)] blur-2xl" />
-              <div className="relative z-[1] w-full max-w-[min(100%,440px)] rounded-[2rem] border border-white/[0.1] bg-[rgba(4,8,20,0.45)] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl xl:p-8">
+              <div className="relative z-[1] flex h-full w-full min-h-[min(420px,52vh)] max-w-none flex-col justify-center rounded-[2rem] border border-white/[0.1] bg-[rgba(4,8,20,0.45)] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:p-6 xl:p-8">
                 <HeroRoiVisual reduceMotion={reduceMotion} />
               </div>
             </MotionDiv>

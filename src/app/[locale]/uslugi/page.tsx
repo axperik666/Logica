@@ -21,7 +21,7 @@ export default async function ServicesPage() {
   const tSvc = await getTranslations("services");
 
   return (
-    <section className="tech-bg relative container-px py-10 sm:py-14">
+    <section className="tech-bg relative container py-10 sm:py-14">
       <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
         {t("title")}
       </h1>

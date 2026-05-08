@@ -26,7 +26,7 @@ export function FAQ() {
     <MotionSection
       ref={ref}
       id="faq"
-      className="tech-bg relative py-20 container-px"
+      className="tech-bg relative py-20 container"
       initial="hidden"
       animate={isInView ? "show" : "hidden"}
       variants={{

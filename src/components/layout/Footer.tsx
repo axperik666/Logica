@@ -26,7 +26,7 @@ export function Footer() {
       as="footer"
       className="tech-bg tech-bg--compact relative border-t border-white/10 pt-16 pb-[max(5rem,calc(3rem+env(safe-area-inset-bottom,0px)))] sm:py-20"
     >
-      <div className="container-px">
+      <div className="container">
         <div className="glass overflow-hidden rounded-[2rem] p-6 sm:p-10">
           <div className="grid gap-10 lg:grid-cols-12">
             <div className="lg:col-span-5">

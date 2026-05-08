@@ -443,14 +443,6 @@
         "name": "TikTok Ads",
         "caption": "Короткое видео"
       },
-      "yandex": {
-        "name": "Яндекс Директ",
-        "caption": "Поиск и сети"
-      },
-      "vk": {
-        "name": "VK Ads",
-        "caption": "Соцсети и приложения"
-      },
       "telegram": {
         "name": "Telegram Ads",
         "caption": "Охват в мессенджере"

@@ -443,14 +443,6 @@
         "name": "TikTok Ads",
         "caption": "Video breve"
       },
-      "yandex": {
-        "name": "Yandex Direct",
-        "caption": "Ricerca e reti"
-      },
-      "vk": {
-        "name": "VK Ads",
-        "caption": "Social e app"
-      },
       "telegram": {
         "name": "Telegram Ads",
         "caption": "Reach nel messaging"

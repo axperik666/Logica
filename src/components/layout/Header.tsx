@@ -24,12 +24,11 @@ const ROUTES: {
 
 const LOCALE_SEGMENTS: {
   locale: (typeof routing.locales)[number];
-  flag: string;
   label: string;
 }[] = [
-  { locale: "ru", flag: "🇷🇺", label: "RU" },
-  { locale: "en", flag: "🇬🇧", label: "EN" },
-  { locale: "it", flag: "🇮🇹", label: "IT" }
+  { locale: "ru", label: "RU" },
+  { locale: "en", label: "EN" },
+  { locale: "it", label: "IT" }
 ];
 
 function LocaleSegments({
@@ -55,7 +54,7 @@ function LocaleSegments({
         variant === "drawer" && "w-full justify-stretch gap-0"
       )}
     >
-      {LOCALE_SEGMENTS.map(({ locale: loc, flag, label }, idx) => {
+      {LOCALE_SEGMENTS.map(({ locale: loc, label }, idx) => {
         const active = locale === loc;
         return (
           <div key={loc} className="flex min-w-0 flex-1 items-stretch">
@@ -72,25 +71,14 @@ function LocaleSegments({
               className={cn(
                 "locale-segments__btn flex flex-1 items-center justify-center font-bold uppercase tracking-[0.12em] transition-all duration-300",
                 isDrawer
-                  ? "min-h-[2.65rem] gap-1 rounded-xl px-2 py-2 text-[10px] sm:min-h-[2.75rem] sm:gap-1.5 sm:px-2.5 sm:text-[11px]"
-                  : "gap-0.5 rounded-[10px] px-1 py-1.5 text-[9px] sm:gap-1 sm:px-1.5 sm:text-[10px] lg:min-h-[2.75rem] lg:gap-1.5 lg:rounded-xl lg:px-2.5 lg:py-2 lg:text-[11px]",
+                  ? "min-h-[2.65rem] rounded-xl px-3 py-2 text-[12px] sm:min-h-[2.75rem] sm:px-4 sm:text-[13px]"
+                  : "min-h-[2.5rem] rounded-[10px] px-2 py-1.5 text-[11px] sm:min-h-[2.65rem] sm:px-2.5 sm:text-[12px] lg:min-h-[3rem] lg:rounded-xl lg:px-3.5 lg:py-2.5 lg:text-[13px]",
                 active
                   ? "bg-[rgba(0,191,255,0.28)] text-white shadow-[inset_0_1px_0_rgba(0,191,255,0.45),0_0_32px_rgba(0,191,255,0.42)]"
                   : "text-white/72 hover:bg-white/[0.09] hover:text-white hover:shadow-[0_0_22px_rgba(0,191,255,0.28)]"
               )}
               onClick={() => onNavigate?.()}
             >
-              <span
-                className={cn(
-                  "select-none leading-none",
-                  isDrawer
-                    ? "text-[0.95rem] sm:text-base"
-                    : "text-[0.85rem] sm:text-[0.95rem] lg:text-base"
-                )}
-                aria-hidden
-              >
-                {flag}
-              </span>
               <span className="tabular-nums">{label}</span>
             </Link>
           </div>
@@ -206,9 +194,11 @@ export function Header() {
   return (
     <MotionHeader
       initial={false}
-      className={cn("site-header glass glass-nav fixed inset-x-0 top-0 z-50 overflow-visible")}
+      className={cn(
+        "site-header glass glass-nav fixed inset-x-0 top-0 z-50 w-full min-w-0 max-w-[100vw] overflow-visible"
+      )}
     >
-      <div className="container-px">
+      <div className="container">
         {/*
           Mobile ~70px (min-h 4.375rem), desktop ~80px (min-h 5rem).
           Воздух: gap растёт от sm к xl.
@@ -217,8 +207,8 @@ export function Header() {
           className={cn(
             "flex min-h-[4.375rem] items-center justify-between gap-2 py-2",
             "sm:gap-3 sm:py-2.5",
-            "lg:min-h-[5rem] lg:gap-5 lg:py-2.5",
-            "xl:gap-7 xl:py-3"
+            "lg:min-h-[5.75rem] lg:gap-5 lg:py-3.5",
+            "xl:min-h-[6rem] xl:gap-7 xl:py-4"
           )}
         >
           <Link
@@ -375,7 +365,7 @@ export function Header() {
           initial={false}
           animate={open ? { y: 0, opacity: 1 } : { y: -14, opacity: 0.97 }}
           transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
-          className="container-px relative mt-[calc(4.375rem+env(safe-area-inset-top,0px))] pb-[max(1rem,env(safe-area-inset-bottom,0px))] sm:mt-[calc(4.5rem+env(safe-area-inset-top,0px))]"
+          className="container relative mt-[calc(4.375rem+env(safe-area-inset-top,0px))] pb-[max(1rem,env(safe-area-inset-bottom,0px))] sm:mt-[calc(5rem+env(safe-area-inset-top,0px))] lg:mt-[calc(5.75rem+env(safe-area-inset-top,0px))]"
         >
           <div className="glass-mobile-drawer rounded-[1.75rem] border border-[#00BFFF]/55 p-5 shadow-[0_32px_96px_rgba(0,0,0,0.82),0_0_80px_rgba(0,191,255,0.35)] sm:rounded-[2rem] sm:p-6">
             <div className="flex flex-col gap-5 border-b border-white/[0.14] pb-5 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between">

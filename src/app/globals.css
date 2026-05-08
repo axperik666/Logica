@@ -172,6 +172,10 @@ header.site-header.glass-nav {
   position: fixed;
   inset-inline: 0;
   top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 100vw;
   z-index: 50;
   backdrop-filter: blur(52px) saturate(1.65);
   -webkit-backdrop-filter: blur(52px) saturate(1.65);
@@ -793,7 +797,8 @@ header.site-header.glass-nav:hover::after {
 
   /* Горизонтальные отступы + safe-area на вырезах / жестовой полоске */
   .container-px {
-    @apply mx-auto w-full max-w-6xl;
+    @apply mx-auto w-full;
+    max-width: 1400px;
     padding-left: max(1rem, env(safe-area-inset-left, 0px));
     padding-right: max(1rem, env(safe-area-inset-right, 0px));
   }
@@ -802,13 +807,12 @@ header.site-header.glass-nav:hover::after {
   .full-bleed {
     width: 100vw;
     margin-left: calc(50% - 50vw);
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding: 0 2rem;
   }
 
   /* Обычный контент */
   .container {
-    max-width: 1280px;
+    max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
     padding-left: 1.5rem;

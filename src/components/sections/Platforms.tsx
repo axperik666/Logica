@@ -8,16 +8,9 @@ import { MotionDiv, MotionSection } from "@/components/motion";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/cn";
 
-type PlatformKey = "google" | "meta" | "tiktok" | "yandex" | "vk" | "telegram";
+type PlatformKey = "google" | "meta" | "tiktok" | "telegram";
 
-const PLATFORM_ORDER: PlatformKey[] = [
-  "google",
-  "meta",
-  "tiktok",
-  "yandex",
-  "vk",
-  "telegram"
-];
+const PLATFORM_ORDER: PlatformKey[] = ["google", "meta", "tiktok", "telegram"];
 
 type PlatformVisual = {
   /** Три числа через пробел — для rgb(var(--platform-rgb) / α) в CSS */
@@ -41,16 +34,6 @@ const PLATFORM_VISUAL: Record<PlatformKey, PlatformVisual> = {
     rgb: "37 244 238",
     ring: "group-hover:border-[#25F4EE]/45",
     nameHover: "group-hover:text-[#6DF7F2]"
-  },
-  yandex: {
-    rgb: "252 63 29",
-    ring: "group-hover:border-[#FC3F1D]/55",
-    nameHover: "group-hover:text-[#FF8A75]"
-  },
-  vk: {
-    rgb: "0 119 255",
-    ring: "group-hover:border-[#0077FF]/55",
-    nameHover: "group-hover:text-[#66B3FF]"
   },
   telegram: {
     rgb: "38 165 228",
@@ -171,8 +154,6 @@ const LOGOS: Record<PlatformKey, FC<{ className?: string }>> = {
   google: LogoGoogle,
   meta: LogoMeta,
   tiktok: LogoTikTok,
-  yandex: LogoYandex,
-  vk: LogoVk,
   telegram: LogoTelegram
 };
 
@@ -241,7 +222,7 @@ export function Platforms() {
         className="mx-auto mt-10 max-w-5xl"
       >
         <div className="glass rounded-[2rem] border border-white/12 px-4 py-9 backdrop-blur-xl sm:px-8 sm:py-11">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 lg:gap-5">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4 lg:gap-5">
             {PLATFORM_ORDER.map((key) => {
               const Logo = LOGOS[key];
               const visual = PLATFORM_VISUAL[key];
