@@ -23,16 +23,16 @@ const ROUTES: {
 
 const LANG_DISPLAY: Record<
   (typeof routing.locales)[number],
-  { flag: string; label: string }
+  { label: string }
 > = {
-  ru: { flag: "🇷🇺", label: "RU" },
-  en: { flag: "🇬🇧", label: "EN" },
-  it: { flag: "🇮🇹", label: "IT" }
+  ru: { label: "RU" },
+  en: { label: "EN" },
+  it: { label: "IT" }
 };
 
 const navLinkClass = (active: boolean) =>
   cn(
-    "relative rounded-xl px-3.5 py-2.5 text-sm font-medium transition-all duration-300",
+    "relative whitespace-nowrap rounded-xl px-2.5 py-2.5 text-sm font-medium transition-all duration-300 xl:px-3.5",
     "hover:bg-white/[0.09] hover:text-white",
     "hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_0_32px_rgba(0,191,255,0.42),0_0_1px_rgba(0,191,255,0.6)]",
     active
@@ -42,7 +42,7 @@ const navLinkClass = (active: boolean) =>
 
 const langLinkClass = (active: boolean) =>
   cn(
-    "inline-flex min-h-9 min-w-9 shrink-0 items-center justify-center gap-1.5 rounded-lg px-2 py-2 text-[10px] font-bold uppercase tracking-[0.1em] transition-all duration-300 sm:min-h-10 sm:gap-2 sm:px-3 sm:text-[11px] sm:tracking-[0.14em]",
+    "inline-flex h-9 min-w-[2.75rem] shrink-0 flex-nowrap items-center justify-center rounded-lg px-2.5 text-[11px] font-bold uppercase tracking-[0.12em] transition-all duration-300 sm:h-10 sm:min-w-[3rem] sm:px-3 sm:text-[11px] sm:tracking-[0.14em]",
     active
       ? "border border-[#00BFFF]/65 bg-[rgba(0,191,255,0.2)] text-[#D4FBFF] shadow-[0_0_28px_rgba(0,191,255,0.5),inset_0_1px_0_rgba(255,255,255,0.14)]"
       : "border border-transparent text-white/88 hover:border-[#00BFFF]/42 hover:bg-white/[0.08] hover:text-white hover:shadow-[0_0_26px_rgba(0,191,255,0.28)]"
@@ -103,12 +103,12 @@ export function Header() {
       )}
     >
       <div className="container-px">
-        <div className="flex min-h-[4rem] items-center justify-between gap-1 py-2 sm:min-h-[4.5rem] sm:gap-4 lg:min-h-[5rem]">
+        <div className="flex min-h-[4rem] flex-wrap items-center justify-between gap-y-2 py-2 sm:min-h-[4.5rem] sm:gap-4 lg:grid lg:min-h-[5rem] lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:items-center lg:gap-3 lg:gap-y-0 xl:gap-6">
           <Link
             href="/"
-            className="group flex min-w-0 shrink items-center gap-3 sm:gap-4"
+            className="group flex min-w-0 max-w-[calc(100%-8rem)] shrink items-center gap-2.5 sm:gap-4 lg:max-w-none lg:shrink-0"
           >
-            <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-2xl bg-white/5 ring-[3px] ring-[#00BFFF]/35 shadow-[0_0_40px_rgba(0,191,255,0.35)] transition group-hover:ring-[#00BFFF]/55 group-hover:shadow-[0_0_52px_rgba(0,191,255,0.45)] sm:h-16 sm:w-16">
+            <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-2xl bg-white/5 ring-[3px] ring-[#00BFFF]/35 shadow-[0_0_40px_rgba(0,191,255,0.35)] transition group-hover:ring-[#00BFFF]/55 group-hover:shadow-[0_0_52px_rgba(0,191,255,0.45)] sm:h-14 sm:w-14 md:h-16 md:w-16">
               <Image
                 src="/logo.png"
                 alt={tSeo("logoAlt")}
@@ -119,14 +119,19 @@ export function Header() {
               />
             </div>
             <div className="min-w-0 leading-[1.05]">
-              <div className="brand-glow truncate text-[0.95rem] font-extrabold uppercase tracking-[0.12em] text-white sm:text-2xl sm:tracking-[0.14em] md:text-[1.75rem] md:tracking-[0.15em]">
+              <div
+                className={cn(
+                  "brand-glow text-[0.82rem] font-extrabold uppercase tracking-[0.1em] text-white sm:text-lg sm:tracking-[0.12em]",
+                  "max-lg:truncate lg:whitespace-nowrap lg:text-[clamp(0.95rem,1.6vw,1.35rem)] lg:tracking-[0.12em] xl:text-2xl xl:tracking-[0.14em]"
+                )}
+              >
                 LOGICA MARKETING
               </div>
-              <div className="mt-1 hidden flex-wrap items-baseline gap-x-2 sm:flex">
-                <span className="text-[11px] text-white/72 sm:text-xs">
+              <div className="mt-0.5 hidden flex-wrap items-baseline gap-x-2 md:flex lg:mt-1">
+                <span className="text-[10px] text-white/72 sm:text-[11px]">
                   {tUi("tagline")}
                 </span>
-                <span className="font-mono text-[10px] tracking-wide text-[#00BFFF]/60">
+                <span className="hidden font-mono text-[10px] tracking-wide text-[#00BFFF]/60 xl:inline">
                   logicamarketing.pro
                 </span>
               </div>
@@ -134,33 +139,35 @@ export function Header() {
           </Link>
 
           <nav
-            className="hidden items-center gap-0.5 lg:flex"
+            className="hidden w-full min-w-0 justify-center justify-self-center lg:flex lg:w-auto lg:max-w-none"
             aria-label={tHero("internalNavAria")}
           >
-            {items.map((i) => (
-              <Link key={i.href} href={i.href} className={navLinkClass(i.active)}>
-                {i.label}
-              </Link>
-            ))}
+            <div className="flex max-w-full flex-nowrap items-center justify-center gap-0.5 overflow-x-auto pb-0.5 [-webkit-overflow-scrolling:touch] lg:gap-1 xl:gap-0.5">
+              {items.map((i) => (
+                <Link key={i.href} href={i.href} className={navLinkClass(i.active)}>
+                  {i.label}
+                </Link>
+              ))}
+            </div>
           </nav>
 
-          <div className="flex min-w-0 shrink items-center justify-end gap-1.5 sm:gap-2">
+          <div className="flex min-w-0 shrink-0 items-center justify-end gap-1.5 sm:gap-2 lg:justify-self-end">
             <nav
               aria-label={tUi("switchTo")}
               className={cn(
-                "lang-switcher-glass flex max-w-[calc(100vw-11.5rem)] shrink items-center overflow-x-auto p-1 sm:max-w-none sm:p-1.5",
+                "lang-switcher-glass flex shrink-0 flex-nowrap items-stretch overflow-x-auto p-1 sm:p-1.5",
                 "scrollbar-hide [-webkit-overflow-scrolling:touch]"
               )}
             >
               {routing.locales.map((loc, idx) => {
-                const { flag, label } = LANG_DISPLAY[loc];
+                const { label } = LANG_DISPLAY[loc];
                 const active = locale === loc;
                 return (
-                  <span key={loc} className="flex items-center">
+                  <span key={loc} className="flex items-stretch">
                     {idx > 0 ? (
                       <span
                         aria-hidden
-                        className="lang-switcher-sep shrink-0 select-none px-0.5 text-sm font-light sm:px-1.5"
+                        className="lang-switcher-sep flex w-px shrink-0 items-center justify-center px-1 text-[10px] font-light text-[#00BFFF]/50 sm:px-1.5"
                       >
                         |
                       </span>
@@ -174,10 +181,7 @@ export function Header() {
                       aria-label={label}
                       title={label}
                     >
-                      <span aria-hidden className="text-[1.05rem] leading-none sm:text-[1.15rem]">
-                        {flag}
-                      </span>
-                      <span className="hidden min-[380px]:inline">{label}</span>
+                      {label}
                     </Link>
                   </span>
                 );
@@ -280,7 +284,7 @@ export function Header() {
                 className="lang-switcher-glass flex flex-wrap items-center gap-0 p-1.5 sm:self-center"
               >
                 {routing.locales.map((loc, idx) => {
-                  const { flag, label } = LANG_DISPLAY[loc];
+                  const { label } = LANG_DISPLAY[loc];
                   const active = locale === loc;
                   return (
                     <span key={loc} className="flex items-center">
@@ -302,10 +306,7 @@ export function Header() {
                         title={label}
                         onClick={() => setOpen(false)}
                       >
-                        <span aria-hidden className="text-[1.15rem] leading-none">
-                          {flag}
-                        </span>
-                        <span>{label}</span>
+                        {label}
                       </Link>
                     </span>
                   );
