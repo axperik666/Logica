@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <section className="tech-bg relative container py-10 sm:py-14">
+    <section className="tech-bg relative site-container py-10 sm:py-14">
       <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
         Условия
       </h1>

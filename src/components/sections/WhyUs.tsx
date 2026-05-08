@@ -60,7 +60,7 @@ export function WhyUs() {
         }
       }}
     >
-      <div className="container">
+      <div className="site-container">
       <div className="sr-only">
         <p>{tSec("whyUs.metaTitle")}</p>
         <p>{tSec("whyUs.metaDescription")}</p>

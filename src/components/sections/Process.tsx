@@ -53,7 +53,7 @@ export function Process() {
         }
       }}
     >
-      <div className="container">
+      <div className="site-container">
       <div className="sr-only">
         <p>{tSec("process.metaTitle")}</p>
         <p>{tSec("process.metaDescription")}</p>

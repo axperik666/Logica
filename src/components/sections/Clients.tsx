@@ -57,7 +57,7 @@ export function Clients() {
         }
       }}
     >
-      <div className="container">
+      <div className="site-container">
       <div className="sr-only">
         <p>{tSec("clients.metaTitle")}</p>
         <p>{tSec("clients.metaDescription")}</p>

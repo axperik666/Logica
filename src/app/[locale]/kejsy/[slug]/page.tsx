@@ -35,7 +35,7 @@ export default async function CasePage({
   if (!c) return notFound();
 
   return (
-    <section className="tech-bg relative container py-10 sm:py-14">
+    <section className="tech-bg relative site-container py-10 sm:py-14">
       <div className="max-w-3xl">
         <div className="text-xs font-semibold text-brand-300">{c.niche}</div>
         <h1 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">

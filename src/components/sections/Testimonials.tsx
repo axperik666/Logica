@@ -98,7 +98,7 @@ export function Testimonials() {
         }
       }}
     >
-      <div className="container">
+      <div className="site-container">
       <div className="sr-only">
         <p>{tSec("testimonials.metaTitle")}</p>
         <p>{tSec("testimonials.metaDescription")}</p>

@@ -15,7 +15,7 @@ export default function LocaleError({
   }, [error]);
 
   return (
-    <section className="tech-bg relative container py-20">
+    <section className="tech-bg relative site-container py-20">
       <div className="glass mx-auto max-w-lg rounded-3xl p-8 text-center">
         <p className="text-sm font-semibold text-brand-300">
           LOGICA Marketing

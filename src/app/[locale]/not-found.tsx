@@ -6,7 +6,7 @@ export default async function NotFound() {
   const t = await getTranslations("notFound");
 
   return (
-    <section className="tech-bg relative container py-16">
+    <section className="tech-bg relative site-container py-16">
       <div className="glass mx-auto max-w-xl rounded-3xl p-8 text-center">
         <div className="text-sm font-semibold text-brand-300">{t("badge")}</div>
         <h1 className="mt-2 text-2xl font-semibold tracking-tight">

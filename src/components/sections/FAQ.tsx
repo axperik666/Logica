@@ -36,7 +36,7 @@ export function FAQ() {
         }
       }}
     >
-      <div className="container">
+      <div className="site-container">
       <div className="sr-only">
         <p>{tSec("homeFaq.metaTitle")}</p>
         <p>{tSec("homeFaq.metaDescription")}</p>
