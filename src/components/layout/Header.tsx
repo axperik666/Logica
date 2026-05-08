@@ -31,7 +31,7 @@ const STATIC_NAV: Array<{
   href: ReturnType<typeof homeSectionHref> | "/o-nas";
 }> = [
   { key: "cases", href: homeSectionHref("cases") },
-  { key: "testimonials", href: homeSectionHref("testimonials") },
+  { key: "testimonials", href: "/otzyvy" },
   { key: "about", href: "/o-nas" },
   { key: "contact", href: homeSectionHref("contact") }
 ];
@@ -256,7 +256,7 @@ export function Header() {
             className={cn(
               "flex min-w-0 shrink items-center gap-2 sm:gap-3 lg:gap-4",
               "max-w-[calc(100%-13.5rem)] sm:max-w-[calc(100%-16rem)]",
-              "lg:max-w-[min(52vw,24rem)] xl:max-w-[min(54vw,26rem)] 2xl:max-w-none"
+              "lg:max-w-[min(44vw,22rem)] xl:max-w-[min(46vw,24rem)] 2xl:max-w-none"
             )}
           >
             <Link

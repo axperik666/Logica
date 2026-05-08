@@ -486,7 +486,7 @@ export function Hero() {
                 ·
               </span>
               <Link
-                href={homeSectionHref("testimonials")}
+                href="/otzyvy"
                 className="shrink-0 whitespace-nowrap underline-offset-4 transition hover:text-white hover:underline"
               >
                 {t("internalNavTestimonials")}
