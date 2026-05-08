@@ -366,7 +366,7 @@ export function Hero() {
                     <a
                       href={CONTACTS.telegramHttps}
                       aria-label={t("contactTelegram")}
-                      className="group inline-flex min-h-[3.25rem] w-full items-center justify-center gap-2.5 rounded-2xl border border-[#00BFFF]/52 bg-[rgba(0,191,255,0.14)] px-4 py-3 text-sm font-bold text-white shadow-[0_0_36px_rgba(0,191,255,0.35),inset_0_1px_0_rgba(255,255,255,0.12)] transition hover:border-[#00BFFF]/75 hover:bg-[rgba(0,191,255,0.24)] hover:shadow-[0_0_48px_rgba(0,191,255,0.45)] hover-lift sm:w-auto sm:min-w-[11rem] sm:px-6"
+                      className="group inline-flex min-h-[3.25rem] w-full items-center justify-center gap-2.5 rounded-2xl border border-[#00BFFF]/52 bg-[rgba(0,191,255,0.14)] px-4 py-3 text-sm font-bold text-white shadow-[0_0_36px_rgba(0,191,255,0.35),inset_0_1px_0_rgba(255,255,255,0.12)] transition hover:border-[#00BFFF]/80 hover:bg-[rgba(0,191,255,0.26)] hover:shadow-[0_0_70px_rgba(0,191,255,0.55),0_0_22px_rgba(0,191,255,0.38)] hover-lift sm:w-auto sm:min-w-[11rem] sm:px-6"
                     >
                       <Send
                         className="h-6 w-6 shrink-0 text-[#9AE8FF] transition group-hover:scale-110"
@@ -379,7 +379,7 @@ export function Hero() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={t("contactWhatsapp")}
-                      className="group inline-flex min-h-[3.25rem] w-full items-center justify-center gap-2.5 rounded-2xl border border-emerald-400/48 bg-emerald-500/18 px-4 py-3 text-sm font-bold text-white shadow-[0_0_32px_rgba(52,211,153,0.28),inset_0_1px_0_rgba(255,255,255,0.08)] transition hover:border-emerald-400/68 hover:bg-emerald-500/28 hover:shadow-[0_0_44px_rgba(52,211,153,0.38)] hover-lift sm:w-auto sm:min-w-[11rem] sm:px-6"
+                      className="group inline-flex min-h-[3.25rem] w-full items-center justify-center gap-2.5 rounded-2xl border border-emerald-400/48 bg-emerald-500/18 px-4 py-3 text-sm font-bold text-white shadow-[0_0_32px_rgba(52,211,153,0.28),inset_0_1px_0_rgba(255,255,255,0.08)] transition hover:border-emerald-400/72 hover:bg-emerald-500/30 hover:shadow-[0_0_64px_rgba(52,211,153,0.45),0_0_18px_rgba(52,211,153,0.32)] hover-lift sm:w-auto sm:min-w-[11rem] sm:px-6"
                     >
                       <MessageCircle
                         className="h-6 w-6 shrink-0 text-emerald-200 transition group-hover:scale-110"

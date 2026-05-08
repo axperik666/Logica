@@ -252,8 +252,8 @@ export function Platforms() {
                   <div
                     className={cn(
                       "platform-card-surface relative flex min-h-[9rem] flex-col items-center justify-start gap-3 rounded-2xl border border-white/[0.12] bg-[rgba(5,9,24,0.72)] px-3 pb-5 pt-6 backdrop-blur-xl transition-all duration-300 ease-out will-change-transform sm:min-h-[9.5rem]",
-                      "hover:-translate-y-2 hover:scale-[1.03] hover:border-[#00BFFF]/50",
-                      "hover:shadow-[0_20px_56px_rgba(0,0,0,0.55),0_0_30px_rgba(0,191,255,0.55),0_0_52px_rgba(0,191,255,0.18)]",
+                      "hover:-translate-y-2 hover:scale-[1.05] hover:border-[#00BFFF]/60",
+                      "hover:shadow-[0_22px_62px_rgba(0,0,0,0.55),0_0_46px_rgba(0,191,255,0.62),0_0_82px_rgba(0,191,255,0.22)]",
                       visual.ring
                     )}
                     style={
@@ -274,6 +274,15 @@ export function Platforms() {
                     </div>
 
                     <div className="flex w-full flex-col items-center gap-1 px-1 pb-0.5 text-center">
+                      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/45 group-hover:text-[#9AE8FF]/75 transition-colors duration-300">
+                        {key === "google"
+                          ? "Google Ads"
+                          : key === "meta"
+                            ? "Meta"
+                            : key === "tiktok"
+                              ? "TikTok Ads"
+                              : "Telegram Ads"}
+                      </span>
                       <span
                         className={cn(
                           "text-[13px] font-semibold leading-tight text-white/88 transition-colors duration-300 sm:text-sm",

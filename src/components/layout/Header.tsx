@@ -62,7 +62,7 @@ function LocaleSegments({
       role="group"
       aria-label={tUi("switchTo")}
       className={cn(
-        "locale-segments inline-flex items-stretch rounded-[13px] border border-[#00BFFF]/48 bg-[linear-gradient(168deg,rgba(10,18,42,0.97)_0%,rgba(4,10,26,0.93)_100%)] shadow-[inset_0_1px_0_rgba(0,191,255,0.2),0_8px_32px_rgba(0,0,0,0.5),0_0_36px_rgba(0,191,255,0.18)] backdrop-blur-2xl",
+        "locale-segments inline-flex items-stretch rounded-[13px] border border-[#00BFFF]/44 bg-[linear-gradient(160deg,rgba(6,14,34,0.96)_0%,rgba(4,10,26,0.9)_100%)] shadow-[inset_0_1px_0_rgba(0,191,255,0.22),0_10px_36px_rgba(0,0,0,0.55),0_0_44px_rgba(0,191,255,0.18)] backdrop-blur-2xl",
         isDrawer ? "p-1" : "p-[3px] lg:p-1",
         variant === "toolbar" && "shrink-0",
         variant === "drawer" && "w-full justify-stretch gap-0"
@@ -88,8 +88,8 @@ function LocaleSegments({
                   ? "min-h-[2.65rem] rounded-xl px-3 py-2 text-[12px] sm:min-h-[2.75rem] sm:px-4 sm:text-[13px]"
                   : "min-h-[2.5rem] rounded-[10px] px-2 py-1.5 text-[11px] sm:min-h-[2.65rem] sm:px-2.5 sm:text-[12px] lg:min-h-[3rem] lg:rounded-xl lg:px-3.5 lg:py-2.5 lg:text-[13px]",
                 active
-                  ? "bg-[rgba(0,191,255,0.28)] text-white shadow-[inset_0_1px_0_rgba(0,191,255,0.45),0_0_32px_rgba(0,191,255,0.42)]"
-                  : "text-white/72 hover:bg-white/[0.09] hover:text-white hover:shadow-[0_0_22px_rgba(0,191,255,0.28)]"
+                  ? "bg-[rgba(0,191,255,0.3)] text-white shadow-[inset_0_1px_0_rgba(0,191,255,0.48),0_0_38px_rgba(0,191,255,0.45)]"
+                  : "text-white/72 hover:bg-white/[0.08] hover:text-white hover:shadow-[0_0_28px_rgba(0,191,255,0.32)]"
               )}
               onClick={() => onNavigate?.()}
             >
@@ -105,10 +105,11 @@ function LocaleSegments({
 const navLinkClass = (active: boolean) =>
   cn(
     "relative shrink-0 whitespace-nowrap rounded-xl px-2.5 py-2 text-[12px] font-medium transition-all duration-300 sm:text-[13px] lg:px-3 lg:py-2.5 lg:text-sm xl:px-3.5",
-    "hover:bg-white/[0.1] hover:text-white",
-    "hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_0_28px_rgba(0,191,255,0.42),0_0_1px_rgba(0,191,255,0.8)]",
+    "hover:bg-white/[0.08] hover:text-white",
+    "hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_0_34px_rgba(0,191,255,0.5),0_0_1px_rgba(0,191,255,0.9)]",
+    "after:pointer-events-none after:absolute after:left-3 after:right-3 after:bottom-1.5 after:h-px after:rounded after:bg-[#00BFFF] after:opacity-0 after:transition-opacity after:duration-300 hover:after:opacity-100",
     active
-      ? "bg-white/[0.09] text-white shadow-[inset_0_1px_0_rgba(0,191,255,0.35),0_0_26px_rgba(0,191,255,0.38)]"
+      ? "bg-white/[0.09] text-white shadow-[inset_0_1px_0_rgba(0,191,255,0.35),0_0_30px_rgba(0,191,255,0.44)] after:opacity-100"
       : "text-white/82"
   );
 
@@ -127,7 +128,11 @@ function HeaderCtaLink({
       href={homeSectionHref("contact")}
       onClick={onClick}
       className={cn(
-        "header-cta-link shrink-0 rounded-lg px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_0_28px_rgba(0,191,255,0.32)] transition-all duration-300 hover:bg-white/[0.12] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_0_44px_rgba(0,191,255,0.48)] hover-lift sm:px-4 sm:text-xs sm:tracking-[0.15em]",
+        "header-cta-link shrink-0 rounded-lg px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-white",
+        "border border-[#00BFFF]/40 bg-[rgba(0,191,255,0.12)]",
+        "shadow-[inset_0_1px_0_rgba(255,255,255,0.14),0_0_52px_rgba(0,191,255,0.38),0_0_18px_rgba(0,191,255,0.32)]",
+        "transition-all duration-300 hover:bg-[rgba(0,191,255,0.22)] hover:border-[#00BFFF]/65 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_0_72px_rgba(0,191,255,0.56),0_0_22px_rgba(0,191,255,0.4)] hover-lift",
+        "sm:px-4 sm:text-xs sm:tracking-[0.15em]",
         className
       )}
     >
@@ -263,8 +268,8 @@ export function Header() {
               className={cn(
                 "relative shrink-0 overflow-hidden rounded-xl bg-white/[0.06] ring-[2.5px] ring-[#00BFFF]/44 shadow-[0_0_40px_rgba(0,191,255,0.38)] transition duration-300",
                 "h-10 w-10 sm:h-11 sm:w-11 sm:rounded-2xl sm:ring-[3px]",
-                "lg:h-[3.75rem] lg:w-[3.75rem] lg:rounded-[1.15rem]",
-                "xl:h-[4.25rem] xl:w-[4.25rem] xl:rounded-[1.35rem]",
+                "lg:h-[4rem] lg:w-[4rem] lg:rounded-[1.2rem]",
+                "xl:h-[4.5rem] xl:w-[4.5rem] xl:rounded-[1.4rem]",
                 "group-hover:ring-[#00BFFF]/68 group-hover:shadow-[0_0_72px_rgba(0,191,255,0.48)]"
               )}
             >
