@@ -8,5 +8,12 @@ export default createMiddleware({
 });
 
 export const config = {
-  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"]
+  matcher: [
+    /**
+     * Корень `/` обязателен отдельной строкой: шаблон ниже не всегда матчит пустой путь,
+     * тогда middleware не делает rewrite на `[locale]` → 404 на главной.
+     */
+    "/",
+    "/((?!api|trpc|_next|_vercel|.*\\..*).*)"
+  ]
 };
