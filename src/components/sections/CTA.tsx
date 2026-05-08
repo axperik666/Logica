@@ -175,7 +175,7 @@ function CTAInner() {
           <p className="mt-3 max-w-3xl text-sm text-white/75 sm:text-base">
             {t("sub")}
           </p>
-          <div className="brand-glow mt-3 text-xs font-semibold tracking-[0.18em] text-white/55">
+          <div className="brand-glow mt-3 text-xs font-semibold text-white/55 max-md:tracking-normal max-md:normal-case">
             {t("brandLine")}
           </div>
         </MotionDiv>
@@ -379,7 +379,7 @@ function CTAInner() {
                     </p>
 
                     <div className="mt-6 border-t border-white/10 pt-5">
-                      <p className="text-center text-xs font-semibold uppercase tracking-[0.14em] text-white/50 sm:text-left">
+                      <p className="text-center text-xs font-semibold uppercase tracking-[0.14em] text-white/50 max-md:normal-case max-md:tracking-normal sm:text-left">
                         {t("directMessengersTitle")}
                       </p>
                       <div className="mt-4 flex justify-center gap-4 sm:justify-start">
