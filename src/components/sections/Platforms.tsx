@@ -252,7 +252,7 @@ export function Platforms() {
                   <div
                     className={cn(
                       "platform-card-surface relative flex min-h-[9rem] flex-col items-center justify-start gap-3 rounded-2xl border border-white/[0.12] bg-[rgba(5,9,24,0.72)] px-3 pb-5 pt-6 backdrop-blur-xl transition-all duration-300 ease-out will-change-transform sm:min-h-[9.5rem]",
-                      "hover:-translate-y-2 hover:scale-[1.05] hover:border-[#00BFFF]/60",
+                      "hover:-translate-y-2 hover:scale-[1.10] hover:border-[#00BFFF]/65",
                       "hover:shadow-[0_22px_62px_rgba(0,0,0,0.55),0_0_46px_rgba(0,191,255,0.62),0_0_82px_rgba(0,191,255,0.22)]",
                       visual.ring
                     )}

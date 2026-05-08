@@ -103,7 +103,7 @@ export function Cases() {
         </Button>
       </MotionDiv>
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:grid-flow-dense">
+      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:grid-flow-dense">
         {HOME_CASE_IDS.map((id, index) => {
           const Icon = ICONS[id];
           const niche = t(`items.${id}.niche`);
@@ -124,7 +124,7 @@ export function Cases() {
                   transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
                 }
               }}
-              className="glass hover-lift overflow-hidden rounded-3xl p-6 transition-[transform,box-shadow,border-color] duration-300 hover:border-[#00BFFF]/35 hover:shadow-[0_28px_84px_rgba(0,0,0,0.58),0_0_58px_rgba(0,191,255,0.18)]"
+              className="glass hover-lift overflow-hidden rounded-3xl p-6 transition-[transform,box-shadow,border-color] duration-300 hover:border-[#00BFFF]/35 hover:shadow-[0_28px_84px_rgba(0,0,0,0.58),0_0_58px_rgba(0,191,255,0.18)] hover:scale-[1.01]"
             >
               <div
                 className={cn(

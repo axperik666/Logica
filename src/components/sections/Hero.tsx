@@ -254,8 +254,8 @@ export function Hero() {
           </div>
 
           <div className="flex flex-col gap-12 lg:flex-row lg:items-stretch lg:gap-6 xl:gap-10 2xl:gap-12">
-            {/* Слева ~60%: типографика, асимметрия как у премиум-студий */}
-            <div className="w-full shrink-0 lg:w-[60%] lg:max-w-[60%] lg:pr-2 xl:pr-4">
+            {/* Слева ~70%: типографика, асимметрия как у премиум-студий */}
+            <div className="w-full shrink-0 lg:w-[70%] lg:max-w-[70%] lg:pr-2 xl:pr-4">
               <div className="relative border-l-[3px] border-[#00BFFF]/40 bg-gradient-to-r from-[rgba(0,191,255,0.09)] via-[rgba(0,191,255,0.03)] to-transparent py-1 pl-5 sm:pl-7 lg:border-l-[4px] lg:pl-9 xl:pl-11">
                 <HeroParticles side="left" />
 
@@ -274,7 +274,7 @@ export function Hero() {
                     }
                   }}
                 >
-                  <h1 className="brand-glow text-left text-balance break-words text-[clamp(2.35rem,6.8vw,5.75rem)] font-black leading-[1.02] tracking-[-0.045em] text-white sm:tracking-[-0.04em] md:leading-[1.03] md:tracking-[-0.038em] drop-shadow-[0_16px_80px_rgba(0,191,255,0.45)] [text-shadow:0_2px_0_rgba(0,0,0,0.35),0_0_60px_rgba(0,191,255,0.38)]">
+                  <h1 className="brand-glow text-left text-balance break-words text-[clamp(2.6rem,7.2vw,6.25rem)] font-black leading-[1.02] tracking-[-0.045em] text-white sm:tracking-[-0.04em] md:leading-[1.03] md:tracking-[-0.038em] drop-shadow-[0_16px_80px_rgba(0,191,255,0.45)] [text-shadow:0_2px_0_rgba(0,0,0,0.35),0_0_60px_rgba(0,191,255,0.38)]">
                     {t.rich("title", {
                       br: () => <br />,
                       highlight: (chunks) => (
@@ -416,7 +416,7 @@ export function Hero() {
               </div>
             </div>
 
-            {/* Справа ~40%: крупный ROI-визуал */}
+            {/* Справа ~30%: крупный ROI-визуал */}
             <MotionDiv
               variants={{
                 hidden: { opacity: 0, y: 28, scale: 0.96 },
@@ -431,7 +431,7 @@ export function Hero() {
                   }
                 }
               }}
-              className="relative hidden min-h-0 w-full shrink-0 lg:flex lg:w-[40%] lg:max-w-[40%] lg:items-stretch lg:justify-stretch"
+              className="relative hidden min-h-0 w-full shrink-0 lg:flex lg:w-[30%] lg:max-w-[30%] lg:items-stretch lg:justify-stretch"
             >
               <div className="pointer-events-none absolute -inset-[2px] rounded-[2.35rem] bg-gradient-to-br from-[#00BFFF]/25 via-transparent to-[#a855f740] opacity-90 blur-xl" />
               <div className="hero-roi-stage relative z-[1] flex h-full min-h-[min(440px,58vh)] w-full flex-col justify-center rounded-[2.25rem] border border-white/[0.12] bg-[linear-gradient(165deg,rgba(6,12,32,0.72)_0%,rgba(4,8,22,0.55)_45%,rgba(5,8,28,0.62)_100%)] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-xl sm:p-7 xl:p-9">
