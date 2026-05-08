@@ -1,6 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Link } from "@/navigation";
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { routing } from "@/i18n/routing";
 
 export default async function NotFound() {
@@ -9,6 +8,11 @@ export default async function NotFound() {
     locale: routing.defaultLocale,
     namespace: "notFound"
   });
+
+  const btn =
+    "inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 transform-gpu hover:scale-[1.02] active:scale-[0.99]";
+  const btnPrimary = `${btn} btn-cta-premium bg-primary text-dark hover:brightness-110`;
+  const btnGhost = `${btn} bg-white/0 text-white hover:bg-white/10 border border-white/12`;
 
   return (
     <section className="tech-bg relative container-px py-16">
@@ -19,12 +23,12 @@ export default async function NotFound() {
         </h1>
         <p className="mt-3 text-sm text-white/65">{t("description")}</p>
         <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
-          <Button href="/" className="w-full sm:w-auto">
+          <Link href="/" className={`${btnPrimary} w-full sm:w-auto`}>
             {t("home")}
-          </Button>
-          <Button href="/uslugi" variant="ghost" className="w-full sm:w-auto">
+          </Link>
+          <Link href="/uslugi" className={`${btnGhost} w-full sm:w-auto`}>
             {t("services")}
-          </Button>
+          </Link>
         </div>
         <div className="mt-6 text-xs text-white/55">
           {t("contactHint")}{" "}

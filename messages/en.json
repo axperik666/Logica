@@ -324,6 +324,7 @@
     "prev": "Previous",
     "next": "Next",
     "auto": "Auto‑rotate",
+    "itemsUnavailable": "Reviews are temporarily unavailable.",
     "items": [
       {
         "name": "Alexander Volkov",

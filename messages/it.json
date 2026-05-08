@@ -324,6 +324,7 @@
     "prev": "Indietro",
     "next": "Avanti",
     "auto": "Scorrimento auto",
+    "itemsUnavailable": "Le recensioni non sono temporaneamente disponibili.",
     "items": [
       {
         "name": "Alexander Volkov",
