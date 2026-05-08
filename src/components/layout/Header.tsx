@@ -28,7 +28,7 @@ type StaticNavKey = "cases" | "testimonials" | "about" | "contact";
 
 const STATIC_NAV: Array<{
   key: StaticNavKey;
-  href: ReturnType<typeof homeSectionHref> | "/o-nas";
+  href: ReturnType<typeof homeSectionHref> | "/o-nas" | "/otzyvy";
 }> = [
   { key: "cases", href: homeSectionHref("cases") },
   { key: "testimonials", href: "/otzyvy" },
