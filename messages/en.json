@@ -28,7 +28,7 @@
     },
     "cta": {
       "metaTitle": "Contact LOGICA Marketing — audit & growth strategy",
-      "metaDescription": "ROI calculator and contact paths — reach us on Telegram or WhatsApp; our team replies within 15 minutes."
+      "metaDescription": "Contact form and fast replies on Telegram or WhatsApp — our team responds within 15 minutes. Clear language, no ROI jargon."
     }
   },
   "nav": {
@@ -401,46 +401,29 @@
   "cta": {
     "badge": "Audit + strategy roadmap in 1 day — free",
     "title": "Ready to scale in 2026?",
-    "sub": "We show where money leaks, what drives growth fastest, and how to turn traffic into profit — ROI preview and form below.",
+    "sub": "We’ll show where budgets leak and what moves the needle fastest. Below: what happens after you submit — plus a short form (type your niche in your own words).",
     "brandLine": "LOGICA Marketing — your growth partner",
-    "calcTitle": "ROI calculator",
-    "calcSub": "Quick forecast based on your numbers",
-    "multAria": "Revenue multiplier x{mult}",
-    "labelAvgCheck": "Average order value",
-    "labelLeads": "Monthly leads today",
-    "labelConv": "Lead‑to‑customer conversion (%)",
-    "afterBlock": "After LOGICA",
-    "forecast": "forecast: ×{mult}",
-    "forecastHint": "(typically 3–5× with a systematic funnel)",
-    "revCurrent": "Current revenue/mo",
-    "revAfter": "After LOGICA/mo",
-    "roi6m": "6‑month ROI upside",
-    "disclaimer": "Indicative only. We refine the forecast on a free audit (niche, margin, LTV, sales cycle, channels).",
+    "valueTitle": "What you get after reaching out",
+    "valueSub": "Plain language — we talk leads, spend and your funnel without buzzwords",
+    "valuePoints": [
+      "A quick read: traffic sources, lead volume, and the weakest link on the page or in creatives",
+      "2–3 priority moves: what to fix first to get more qualified requests",
+      "A clear funnel view: from click to lead — structure, not hype",
+      "Messenger follow‑up: we reply within 15 minutes"
+    ],
+    "valueFootnote": "We explain cost per lead, payback and next steps in simple terms. No pressure to buy on the spot — clarity first.",
     "formTitle": "Request a strategy",
     "formSub": "Fill in the form — then message us on Telegram or WhatsApp. We reply within 15 minutes.",
     "name": "Name",
     "phone": "Phone",
     "email": "Email",
-    "niche": "Niche",
-    "nichePlaceholder": "Select your niche",
-    "nicheOptions": [
-      { "value": "med", "label": "Healthcare & clinics" },
-      { "value": "ecom", "label": "E‑commerce & retail" },
-      { "value": "services", "label": "Professional services & B2B" },
-      { "value": "edu", "label": "EdTech / education" },
-      { "value": "beauty", "label": "Beauty / wellness" },
-      { "value": "re", "label": "Real estate / HoReCa" },
-      { "value": "saas", "label": "IT / SaaS" },
-      { "value": "other", "label": "Other" }
-    ],
+    "niche": "Niche / industry",
+    "phNiche": "Type yours: dental clinic, apparel store, industrial B2B…",
     "message": "Message",
     "phMessage": "Briefly describe your goal, product or campaign",
     "phName": "How should we address you?",
     "phPhone": "+1 (509) 780-3788",
     "phEmail": "you@company.com",
-    "phAvg": "e.g. 15 000",
-    "phLeads": "e.g. 120",
-    "phConv": "e.g. 12",
     "submitApplication": "Submit request",
     "consent": "This form doesn’t send data to our servers — it’s a structured brief. Telegram and WhatsApp below are the fastest way to reach LOGICA Marketing.",
     "directMessengersTitle": "Messengers — fastest reply",
@@ -452,8 +435,7 @@
     "successHint": "Message us directly for the fastest reply:",
     "ctaTelegram": "Message on Telegram",
     "ctaWhatsapp": "Message on WhatsApp",
-    "submitAgain": "Fill the form again",
-    "currencySuffix": " ₽"
+    "submitAgain": "Fill the form again"
   },
   "footer": {
     "subtitle": "Marketing that compounds",

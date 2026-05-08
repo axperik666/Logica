@@ -1,47 +1,26 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useInView } from "framer-motion";
 import {
-  Calculator,
   CheckCircle2,
   MessageCircle,
   PartyPopper,
   Send,
-  Sparkles
+  Sparkles,
+  Target
 } from "lucide-react";
 import { MotionDiv, MotionSection } from "@/components/motion";
 import { Button } from "@/components/ui/button";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { formatPhoneMask, isPhonePlausible } from "@/lib/phoneMask";
 import { CONTACTS } from "@/lib/contacts";
 import { useNarrowViewport } from "@/lib/use-narrow-viewport";
-
-function clamp(n: number, min: number, max: number) {
-  return Math.min(max, Math.max(min, n));
-}
-
-type NicheOption = { value: string; label: string };
 
 export function CTA() {
   const t = useTranslations("cta");
   const tSec = useTranslations("sectionsSeo");
   const narrow = useNarrowViewport();
-  const locale = useLocale();
-  const nfLocale =
-    locale === "ru" ? "ru-RU" : locale === "it" ? "it-IT" : "en-US";
-
-  const formatMoney = (value: number) => {
-    const safe = Number.isFinite(value) ? Math.max(0, value) : 0;
-    return (
-      new Intl.NumberFormat(nfLocale).format(Math.round(safe)) + t("currencySuffix")
-    );
-  };
-
-  const [avgCheck, setAvgCheck] = useState<number>(15000);
-  const [leadsPerMonth, setLeadsPerMonth] = useState<number>(120);
-  const [convPct, setConvPct] = useState<number>(12);
-  const [mult, setMult] = useState<number>(4);
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -51,22 +30,10 @@ export function CTA() {
   const [formSuccess, setFormSuccess] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
 
-  const nicheOptionsRaw = t.raw("nicheOptions");
-  const nicheOptions = Array.isArray(nicheOptionsRaw)
-    ? (nicheOptionsRaw as NicheOption[])
+  const valuePointsRaw = t.raw("valuePoints");
+  const valuePoints = Array.isArray(valuePointsRaw)
+    ? (valuePointsRaw as string[])
     : [];
-
-  const calc = useMemo(() => {
-    const conv = clamp(convPct, 0, 100) / 100;
-    const current = avgCheck * leadsPerMonth * conv;
-    const after = current * clamp(mult, 3, 5);
-    const roi6m = (after - current) * 6;
-    return {
-      current,
-      after,
-      roi6m
-    };
-  }, [avgCheck, leadsPerMonth, convPct, mult]);
 
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, {
@@ -162,103 +129,34 @@ export function CTA() {
             className="lg:col-span-7"
           >
             <div className="rounded-3xl border border-white/10 bg-white/5 p-5 sm:p-6">
-              <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
-                    <Calculator className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-semibold">{t("calcTitle")}</h3>
-                    <div className="mt-0.5 text-xs text-white/55">{t("calcSub")}</div>
-                  </div>
+              <div className="flex items-start gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
+                  <Target className="h-5 w-5 text-primary" aria-hidden />
                 </div>
+                <div className="min-w-0">
+                  <h3 className="text-sm font-semibold leading-snug">{t("valueTitle")}</h3>
+                  <p className="mt-1 text-xs leading-relaxed text-white/55">{t("valueSub")}</p>
+                </div>
+              </div>
 
-                <div className="flex items-center gap-2 rounded-2xl border border-white/10 bg-dark/40 p-1">
-                  {[3, 4, 5].map((m) => (
-                    <button
-                      key={m}
-                      type="button"
-                      onClick={() => setMult(m)}
-                      className={
-                        "rounded-xl px-3 py-2 text-xs font-semibold transition " +
-                        (mult === m
-                          ? "bg-primary text-dark"
-                          : "text-white/75 hover:bg-white/10")
-                      }
-                      aria-label={t("multAria", { mult: m })}
-                    >
-                      ×{m}
-                    </button>
+              {valuePoints.length > 0 ? (
+                <ul className="mt-6 space-y-3.5">
+                  {valuePoints.map((line, i) => (
+                    <li key={i} className="flex gap-3 text-sm leading-relaxed text-white/88">
+                      <CheckCircle2
+                        className="mt-0.5 h-5 w-5 shrink-0 text-primary"
+                        aria-hidden
+                      />
+                      <span>{line}</span>
+                    </li>
                   ))}
-                </div>
-              </div>
+                </ul>
+              ) : null}
 
-              <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                <label className="grid gap-2">
-                  <span className="text-xs text-white/70">{t("labelAvgCheck")}</span>
-                  <input
-                    inputMode="numeric"
-                    className="h-11 rounded-xl border border-white/10 bg-dark/40 px-4 text-sm outline-none focus:ring-2 focus:ring-primary/60"
-                    value={avgCheck}
-                    onChange={(e) => setAvgCheck(Number(e.target.value || 0))}
-                    placeholder={t("phAvg")}
-                  />
-                </label>
-                <label className="grid gap-2">
-                  <span className="text-xs text-white/70">{t("labelLeads")}</span>
-                  <input
-                    inputMode="numeric"
-                    className="h-11 rounded-xl border border-white/10 bg-dark/40 px-4 text-sm outline-none focus:ring-2 focus:ring-primary/60"
-                    value={leadsPerMonth}
-                    onChange={(e) => setLeadsPerMonth(Number(e.target.value || 0))}
-                    placeholder={t("phLeads")}
-                  />
-                </label>
-                <label className="grid gap-2">
-                  <span className="text-xs text-white/70">{t("labelConv")}</span>
-                  <input
-                    inputMode="decimal"
-                    className="h-11 rounded-xl border border-white/10 bg-dark/40 px-4 text-sm outline-none focus:ring-2 focus:ring-primary/60"
-                    value={convPct}
-                    onChange={(e) => setConvPct(Number(e.target.value || 0))}
-                    placeholder={t("phConv")}
-                  />
-                </label>
-
-                <div className="rounded-2xl border border-white/10 bg-dark/40 p-4">
-                  <div className="text-xs text-white/55">{t("afterBlock")}</div>
-                  <div className="mt-1 text-sm font-semibold">
-                    {t("forecast", { mult: clamp(mult, 3, 5) })}
-                  </div>
-                  <div className="mt-2 text-xs text-white/55">{t("forecastHint")}</div>
-                </div>
-              </div>
-
-              <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                <div className="rounded-2xl border border-white/10 bg-dark/40 p-4">
-                  <div className="text-xs text-white/55">{t("revCurrent")}</div>
-                  <div className="mt-1 text-lg font-semibold text-white">
-                    {formatMoney(calc.current)}
-                  </div>
-                </div>
-                <div className="rounded-2xl border border-primary/25 bg-primary/10 p-4">
-                  <div className="text-xs text-white/65">{t("revAfter")}</div>
-                  <div className="mt-1 text-lg font-semibold text-primary">
-                    {formatMoney(calc.after)}
-                  </div>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-dark/40 p-4">
-                  <div className="text-xs text-white/55">{t("roi6m")}</div>
-                  <div className="mt-1 text-lg font-semibold text-white">
-                    {formatMoney(calc.roi6m)}
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-5 flex items-start gap-2 text-xs text-white/55">
-                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                {t("disclaimer")}
-              </div>
+              <p className="mt-6 flex items-start gap-2 text-xs leading-relaxed text-white/55">
+                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary/80" aria-hidden />
+                {t("valueFootnote")}
+              </p>
             </div>
           </MotionDiv>
 
@@ -299,24 +197,24 @@ export function CTA() {
                     <p className="mt-4 text-sm text-white/65">{t("successHint")}</p>
                   </div>
 
-                    <div className="mt-3 flex justify-center gap-4 sm:gap-5">
-                      <a
-                        href={CONTACTS.telegramHttps}
-                        aria-label={t("ctaTelegram")}
-                        className="btn-cta-premium inline-flex h-16 w-16 items-center justify-center rounded-2xl border border-primary/35 bg-primary/12 text-white shadow-[0_8px_36px_rgba(0,191,255,0.18)] transition hover:border-primary/55 hover:bg-primary/20 hover-lift"
-                      >
-                        <Send className="h-8 w-8 text-primary" aria-hidden />
-                      </a>
-                      <a
-                        href={CONTACTS.whatsappHref}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={t("ctaWhatsapp")}
-                        className="inline-flex h-16 w-16 items-center justify-center rounded-2xl border border-emerald-400/25 bg-emerald-500/10 text-white shadow-[0_8px_36px_rgba(16,185,129,0.12)] transition hover:border-emerald-400/45 hover:bg-emerald-500/15 hover-lift"
-                      >
-                        <MessageCircle className="h-8 w-8 text-emerald-400" aria-hidden />
-                      </a>
-                    </div>
+                  <div className="mt-3 flex justify-center gap-4 sm:gap-5">
+                    <a
+                      href={CONTACTS.telegramHttps}
+                      aria-label={t("ctaTelegram")}
+                      className="btn-cta-premium inline-flex h-16 w-16 items-center justify-center rounded-2xl border border-primary/35 bg-primary/12 text-white shadow-[0_8px_36px_rgba(0,191,255,0.18)] transition hover:border-primary/55 hover:bg-primary/20 hover-lift"
+                    >
+                      <Send className="h-8 w-8 text-primary" aria-hidden />
+                    </a>
+                    <a
+                      href={CONTACTS.whatsappHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={t("ctaWhatsapp")}
+                      className="inline-flex h-16 w-16 items-center justify-center rounded-2xl border border-emerald-400/25 bg-emerald-500/10 text-white shadow-[0_8px_36px_rgba(16,185,129,0.12)] transition hover:border-emerald-400/45 hover:bg-emerald-500/15 hover-lift"
+                    >
+                      <MessageCircle className="h-8 w-8 text-emerald-400" aria-hidden />
+                    </a>
+                  </div>
 
                   <button
                     type="button"
@@ -333,7 +231,7 @@ export function CTA() {
                     <input
                       name="name"
                       autoComplete="name"
-                      className="h-11 rounded-xl border border-white/10 bg-dark/40 px-4 text-sm outline-none focus:ring-2 focus:ring-primary/60"
+                      className="h-11 rounded-xl border border-white/10 bg-[rgba(8,12,28,0.92)] px-4 text-sm text-white outline-none placeholder:text-white/35 focus:ring-2 focus:ring-primary/60"
                       placeholder={t("phName")}
                       value={name}
                       onChange={(e) => setName(e.target.value)}
@@ -348,10 +246,8 @@ export function CTA() {
                       autoComplete="tel"
                       inputMode="tel"
                       className={
-                        "h-11 rounded-xl border bg-dark/40 px-4 text-sm outline-none focus:ring-2 focus:ring-primary/60 " +
-                        (phoneError
-                          ? "border-red-400/60"
-                          : "border-white/10")
+                        "h-11 rounded-xl border bg-[rgba(8,12,28,0.92)] px-4 text-sm text-white outline-none placeholder:text-white/35 focus:ring-2 focus:ring-primary/60 " +
+                        (phoneError ? "border-red-400/60" : "border-white/10")
                       }
                       placeholder={t("phPhone")}
                       value={phone}
@@ -371,7 +267,7 @@ export function CTA() {
                       name="email"
                       type="email"
                       autoComplete="email"
-                      className="h-11 rounded-xl border border-white/10 bg-dark/40 px-4 text-sm outline-none focus:ring-2 focus:ring-primary/60"
+                      className="h-11 rounded-xl border border-white/10 bg-[rgba(8,12,28,0.92)] px-4 text-sm text-white outline-none placeholder:text-white/35 focus:ring-2 focus:ring-primary/60"
                       placeholder={t("phEmail")}
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -381,22 +277,17 @@ export function CTA() {
 
                   <label className="grid gap-2">
                     <span className="text-xs text-white/70">{t("niche")}</span>
-                    <select
+                    <input
                       name="niche"
-                      required
+                      type="text"
+                      autoComplete="organization"
+                      maxLength={120}
+                      className="h-11 rounded-xl border border-white/10 bg-[rgba(8,12,28,0.92)] px-4 text-sm text-white outline-none placeholder:text-white/35 focus:ring-2 focus:ring-primary/60"
+                      placeholder={t("phNiche")}
                       value={niche}
                       onChange={(e) => setNiche(e.target.value)}
-                      className="h-11 rounded-xl border border-white/10 bg-dark/40 px-3 text-sm outline-none focus:ring-2 focus:ring-primary/60"
-                    >
-                      <option value="" disabled>
-                        {t("nichePlaceholder")}
-                      </option>
-                      {nicheOptions.map((opt) => (
-                        <option key={opt.value} value={opt.value}>
-                          {opt.label}
-                        </option>
-                      ))}
-                    </select>
+                      required
+                    />
                   </label>
 
                   <label className="grid gap-2">
@@ -405,7 +296,7 @@ export function CTA() {
                       name="message"
                       rows={4}
                       required
-                      className="min-h-[104px] resize-y rounded-xl border border-white/10 bg-dark/40 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-primary/60"
+                      className="min-h-[104px] resize-y rounded-xl border border-white/10 bg-[rgba(8,12,28,0.92)] px-4 py-3 text-sm text-white outline-none placeholder:text-white/35 focus:ring-2 focus:ring-primary/60"
                       placeholder={t("phMessage")}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}

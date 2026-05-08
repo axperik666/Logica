@@ -28,7 +28,7 @@
     },
     "cta": {
       "metaTitle": "Contatta LOGICA Marketing — audit e strategia di crescita",
-      "metaDescription": "Calcolatore ROI e contatti rapidi su Telegram o WhatsApp — risposta del team entro 15 minuti."
+      "metaDescription": "Modulo di contatto e risposta rapida su Telegram o WhatsApp — il team risponde entro 15 minuti. Linguaggio chiaro, senza gergo ROI."
     }
   },
   "nav": {
@@ -401,46 +401,29 @@
   "cta": {
     "badge": "Audit + strategia in 1 giorno — gratis",
     "title": "Pronti a scalare nel 2026?",
-    "sub": "Ti mostriamo dove si perdono budget, cosa accelera la crescita e come trasformare il traffico in profitto — preview ROI e modulo qui sotto.",
+    "sub": "Ti mostriamo dove si perdono budget e cosa accelera davvero la crescita. Sotto: cosa succede dopo la richiesta e un modulo breve — la nicchia la scrivi tu a parole tue.",
     "brandLine": "LOGICA Marketing — il tuo partner per la crescita",
-    "calcTitle": "Calcolatore ROI",
-    "calcSub": "Previsione rapida in base ai tuoi numeri",
-    "multAria": "Moltiplicatore ricavi x{mult}",
-    "labelAvgCheck": "Ticket medio cliente",
-    "labelLeads": "Lead al mese (ora)",
-    "labelConv": "Conversione lead → cliente (%)",
-    "afterBlock": "Dopo LOGICA",
-    "forecast": "previsione: ×{mult}",
-    "forecastHint": "(di solito 3–5× con funnel sistematico)",
-    "revCurrent": "Ricavi attuali/mese",
-    "revAfter": "Dopo LOGICA/mese",
-    "roi6m": "ROI 6 mesi",
-    "disclaimer": "È un’indicazione. La previsione reale la affiniamo in audit gratuito (nicchia, margine, LTV, ciclo, canali).",
+    "valueTitle": "Cosa ottieni dopo il primo contatto",
+    "valueSub": "Senza termini complicati — parliamo di lead, budget e funnel in modo chiaro",
+    "valuePoints": [
+      "Lettura rapida: da dove arriva il traffico, quanti lead, dove si perde la conversione (pagina o creatività)",
+      "2–3 mosse prioritarie: cosa sistemare per prime per avere più richieste qualificate",
+      "Visione chiara del funnel: dal clic al lead — struttura, non slogan",
+      "Messaggi diretti: risposta entro 15 minuti"
+    ],
+    "valueFootnote": "Spieghiamo costo per lead, payback e prossimi passi in modo semplice. Nessuna pressione per comprare subito — prima chiarezza.",
     "formTitle": "Richiedi la strategia",
     "formSub": "Compila il modulo — poi scrivici su Telegram o WhatsApp. Rispondiamo entro 15 minuti.",
     "name": "Nome",
     "phone": "Telefono",
     "email": "Email",
-    "niche": "Nicchia",
-    "nichePlaceholder": "Seleziona la nicchia",
-    "nicheOptions": [
-      { "value": "med", "label": "Sanità e cliniche" },
-      { "value": "ecom", "label": "E‑commerce e retail" },
-      { "value": "services", "label": "Servizi professionali e B2B" },
-      { "value": "edu", "label": "EdTech / formazione" },
-      { "value": "beauty", "label": "Beauty / wellness" },
-      { "value": "re", "label": "Real estate / HoReCa" },
-      { "value": "saas", "label": "IT / SaaS" },
-      { "value": "other", "label": "Altro" }
-    ],
+    "niche": "Nicchia / settore",
+    "phNiche": "Scrivila tu: studio dentistico, fashion retail, B2B industriale…",
     "message": "Messaggio",
     "phMessage": "Descrivi obiettivo, prodotto o campagna",
     "phName": "Come chiamarti?",
     "phPhone": "+1 (509) 780-3788",
     "phEmail": "you@company.com",
-    "phAvg": "es. 15 000",
-    "phLeads": "es. 120",
-    "phConv": "es. 12",
     "submitApplication": "Invia richiesta",
     "consent": "Il modulo non invia dati ai server — è un brief strutturato. Per una risposta rapida: Telegram o WhatsApp subito sotto.",
     "directMessengersTitle": "Messaggi diretti",
@@ -452,8 +435,7 @@
     "successHint": "Scrivici direttamente per una risposta più veloce:",
     "ctaTelegram": "Scrivi su Telegram",
     "ctaWhatsapp": "Scrivi su WhatsApp",
-    "submitAgain": "Compila di nuovo il modulo",
-    "currencySuffix": " ₽"
+    "submitAgain": "Compila di nuovo il modulo"
   },
   "footer": {
     "subtitle": "Marketing che fa crescere",
