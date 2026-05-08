@@ -1,8 +1,11 @@
+import type { ComponentProps } from "react";
 import { Link } from "@/navigation";
 import { cn } from "@/lib/cn";
 
+type LinkHref = ComponentProps<typeof Link>["href"];
+
 type Props = {
-  href?: string;
+  href?: LinkHref;
   children: React.ReactNode;
   variant?: "primary" | "ghost";
   className?: string;

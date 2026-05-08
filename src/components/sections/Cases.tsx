@@ -23,6 +23,7 @@ import { MotionDiv, MotionSection } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import { Link } from "@/navigation";
+import { homeSectionHref } from "@/lib/navHref";
 import { HOME_CASE_IDS, type HomeCaseId } from "@/content/homeCases";
 import { CASE_COVER_IMAGES } from "@/content/caseCovers";
 import { CaseCoverImage } from "@/components/cases/CaseCoverImage";
@@ -75,7 +76,7 @@ export function Cases() {
         }
       }}
     >
-      <div className="container">
+      <div className="site-container">
       <div className="sr-only">
         <p>{tSec("cases.metaTitle")}</p>
         <p>{tSec("cases.metaDescription")}</p>
@@ -96,7 +97,7 @@ export function Cases() {
           </p>
         </div>
 
-        <Button href="/#contact" variant="ghost" className="hover-lift">
+        <Button href={homeSectionHref("contact")} variant="ghost" className="hover-lift">
           {t("ctaTop")}
         </Button>
       </MotionDiv>
@@ -150,7 +151,7 @@ export function Cases() {
 
               <div className="mt-6">
                 <Link
-                  href="/#contact"
+                  href={homeSectionHref("contact")}
                   className="inline-flex w-full items-center justify-center rounded-xl border border-white/15 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white/15 hover-lift sm:w-auto"
                 >
                   {t("more")}
@@ -168,7 +169,7 @@ export function Cases() {
               <h3 className="text-sm font-semibold">{t("bannerTitle")}</h3>
               <p className="mt-2 text-sm text-white/85">{t("bannerSub")}</p>
             </div>
-            <Button href="/#contact" className="hover-lift w-full sm:w-auto">
+            <Button href={homeSectionHref("contact")} className="hover-lift w-full sm:w-auto">
               {t("bannerCta")}
             </Button>
           </div>

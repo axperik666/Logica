@@ -4,22 +4,36 @@ import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { Mail, Menu, MessageCircle, Send, X } from "lucide-react";
+import {
+  ChevronDown,
+  Mail,
+  Menu,
+  MessageCircle,
+  Send,
+  X
+} from "lucide-react";
 import { cn } from "@/lib/cn";
 import { MotionDiv, MotionHeader } from "@/components/motion";
 import { Link, usePathname } from "@/navigation";
 import { routing } from "@/i18n/routing";
 import { CONTACTS } from "@/lib/contacts";
+import { homeSectionHref } from "@/lib/navHref";
+import {
+  CONTACT_SERVICE_ORDER,
+  homeServiceAnchorHref,
+  type ContactServiceKey
+} from "@/lib/contactHref";
 
-const ROUTES: {
-  href: string;
-  key: "services" | "cases" | "testimonials" | "about" | "contact";
-}[] = [
-  { href: "/#services", key: "services" },
-  { href: "/#cases", key: "cases" },
-  { href: "/#testimonials", key: "testimonials" },
-  { href: "/o-nas", key: "about" },
-  { href: "/#contact", key: "contact" }
+type StaticNavKey = "cases" | "testimonials" | "about" | "contact";
+
+const STATIC_NAV: Array<{
+  key: StaticNavKey;
+  href: ReturnType<typeof homeSectionHref> | "/o-nas";
+}> = [
+  { key: "cases", href: homeSectionHref("cases") },
+  { key: "testimonials", href: homeSectionHref("testimonials") },
+  { key: "about", href: "/o-nas" },
+  { key: "contact", href: homeSectionHref("contact") }
 ];
 
 const LOCALE_SEGMENTS: {
@@ -110,7 +124,7 @@ function HeaderCtaLink({
 }) {
   return (
     <Link
-      href="/#contact"
+      href={homeSectionHref("contact")}
       onClick={onClick}
       className={cn(
         "header-cta-link shrink-0 rounded-lg px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_0_28px_rgba(0,191,255,0.32)] transition-all duration-300 hover:bg-white/[0.12] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_0_44px_rgba(0,191,255,0.48)] hover-lift sm:px-4 sm:text-xs sm:tracking-[0.15em]",
@@ -166,30 +180,31 @@ export function Header() {
     };
   }, [pathname]);
 
-  const items = useMemo(() => {
-    const onHome = pathname === "/" || pathname === "";
+  const onHome = pathname === "/" || pathname === "";
 
-    return ROUTES.map((i) => {
-      const hashIdx = i.href.indexOf("#");
-      const hashPart = hashIdx >= 0 ? i.href.slice(hashIdx) : null;
-      const baseHref = hashIdx >= 0 ? i.href.slice(0, hashIdx) || "/" : i.href;
+  const servicesActive = useMemo(
+    () =>
+      onHome &&
+      (hash === "#services" ||
+        CONTACT_SERVICE_ORDER.some((k) => hash === `#service-${k}`)),
+    [hash, onHome]
+  );
 
+  const staticNavItems = useMemo(() => {
+    return STATIC_NAV.map((i) => {
       let active = false;
-      if (hashPart) {
-        active = onHome && hash === hashPart;
-      } else {
-        active =
-          pathname === baseHref ||
-          (baseHref !== "/" && pathname.startsWith(`${baseHref}/`));
+      if (typeof i.href === "object" && i.href !== null && "hash" in i.href) {
+        active = onHome && hash === `#${i.href.hash}`;
+      } else if (i.href === "/o-nas") {
+        active = pathname === "/o-nas";
       }
-
       return {
         ...i,
         label: t(i.key),
         active
       };
     });
-  }, [pathname, t, hash]);
+  }, [pathname, t, hash, onHome]);
 
   return (
     <MotionHeader
@@ -198,7 +213,7 @@ export function Header() {
         "site-header glass glass-nav fixed inset-x-0 top-0 z-50 w-full min-w-0 max-w-[100vw] overflow-visible"
       )}
     >
-      <div className="container">
+      <div className="site-container">
         {/*
           Mobile ~70px (min-h 4.375rem), desktop ~80px (min-h 5rem).
           Воздух: gap растёт от sm к xl.
@@ -211,14 +226,17 @@ export function Header() {
             "xl:min-h-[6rem] xl:gap-7 xl:py-4"
           )}
         >
-          <Link
-            href="/"
+          <div
             className={cn(
-              "group flex min-w-0 shrink items-center gap-2 sm:gap-3",
+              "flex min-w-0 shrink items-center gap-2 sm:gap-3 lg:gap-4",
               "max-w-[calc(100%-13.5rem)] sm:max-w-[calc(100%-16rem)]",
-              "lg:max-w-[min(44vw,19rem)] xl:max-w-[min(46vw,22rem)] 2xl:max-w-none"
+              "lg:max-w-[min(52vw,24rem)] xl:max-w-[min(54vw,26rem)] 2xl:max-w-none"
             )}
           >
+            <Link
+              href="/"
+              className={cn("group flex min-w-0 shrink items-center gap-2 sm:gap-3")}
+            >
             {/* Лого: меньше на мобилке, крупнее на desktop */}
             <div
               className={cn(
@@ -262,13 +280,68 @@ export function Header() {
             </div>
           </Link>
 
+            <Link
+              href="/sozdanie-sajta"
+              className={cn(
+                "brand-glow hidden shrink-0 items-center rounded-full border border-[#00BFFF]/42 bg-[rgba(0,191,255,0.12)] px-2.5 py-1.5 text-[9px] font-bold uppercase tracking-[0.12em] text-[#D8FDFF] shadow-[0_0_28px_rgba(0,191,255,0.28)] transition hover:border-[#00BFFF]/65 hover:bg-[rgba(0,191,255,0.22)] md:inline-flex lg:px-3 lg:py-2 lg:text-[10px]"
+              )}
+            >
+              {t("websitesOffer")}
+            </Link>
+          </div>
+
           <nav
             className="hidden min-w-0 flex-1 justify-center px-3 xl:px-6 lg:flex"
             aria-label={tHero("internalNavAria")}
           >
             <div className="scrollbar-hide mx-auto flex max-w-full items-center justify-center gap-x-1 overflow-x-auto overscroll-x-contain py-0.5 [-webkit-overflow-scrolling:touch] lg:gap-x-1.5 xl:gap-x-2">
-              {items.map((i) => (
-                <Link key={i.href} href={i.href} className={navLinkClass(i.active)}>
+              <div className="group relative">
+                <Link
+                  href={homeSectionHref("services")}
+                  className={cn(
+                    navLinkClass(servicesActive),
+                    "inline-flex items-center gap-1 pr-1"
+                  )}
+                >
+                  {t("services")}
+                  <ChevronDown
+                    className="h-3.5 w-3.5 shrink-0 opacity-70 transition duration-300 group-hover:rotate-180"
+                    aria-hidden
+                  />
+                </Link>
+                <div
+                  className="pointer-events-none invisible absolute left-1/2 top-full z-[70] min-w-[min(18rem,calc(100vw-2rem))] -translate-x-1/2 pt-2 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100"
+                  role="presentation"
+                >
+                  <div
+                    className="glass overflow-hidden rounded-2xl border border-[#00BFFF]/40 bg-[rgba(6,12,28,0.96)] py-2 shadow-[0_24px_80px_rgba(0,0,0,0.65),0_0_48px_rgba(0,191,255,0.22)] backdrop-blur-xl"
+                    role="menu"
+                    aria-label={t("servicesMenuAria")}
+                  >
+                    <Link
+                      role="menuitem"
+                      href={homeSectionHref("services")}
+                      className="block px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
+                    >
+                      {t("servicesOverview")}
+                    </Link>
+                    <div className="mx-3 h-px bg-white/10" />
+                    {CONTACT_SERVICE_ORDER.map((svc: ContactServiceKey) => (
+                      <Link
+                        key={svc}
+                        role="menuitem"
+                        href={homeServiceAnchorHref(svc)}
+                        className="block px-4 py-2 text-sm text-white/82 transition hover:bg-white/[0.08] hover:text-white"
+                      >
+                        {t(`serviceDrop.${svc}`)}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {staticNavItems.map((i) => (
+                <Link key={i.key} href={i.href} className={navLinkClass(i.active)}>
                   {i.label}
                 </Link>
               ))}
@@ -365,7 +438,7 @@ export function Header() {
           initial={false}
           animate={open ? { y: 0, opacity: 1 } : { y: -14, opacity: 0.97 }}
           transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
-          className="container relative mt-[calc(4.375rem+env(safe-area-inset-top,0px))] pb-[max(1rem,env(safe-area-inset-bottom,0px))] sm:mt-[calc(5rem+env(safe-area-inset-top,0px))] lg:mt-[calc(5.75rem+env(safe-area-inset-top,0px))]"
+          className="site-container relative mt-[calc(4.375rem+env(safe-area-inset-top,0px))] pb-[max(1rem,env(safe-area-inset-bottom,0px))] sm:mt-[calc(5rem+env(safe-area-inset-top,0px))] lg:mt-[calc(5.75rem+env(safe-area-inset-top,0px))]"
         >
           <div className="glass-mobile-drawer rounded-[1.75rem] border border-[#00BFFF]/55 p-5 shadow-[0_32px_96px_rgba(0,0,0,0.82),0_0_80px_rgba(0,191,255,0.35)] sm:rounded-[2rem] sm:p-6">
             <div className="flex flex-col gap-5 border-b border-white/[0.14] pb-5 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between">
@@ -381,9 +454,51 @@ export function Header() {
             </div>
 
             <div className="mt-5 grid gap-2.5">
-              {items.map((i) => (
+              <Link
+                href="/sozdanie-sajta"
+                onClick={() => setOpen(false)}
+                className={cn(
+                  "drawer-nav-link px-4 py-3.5 text-[15px] font-semibold tracking-tight transition hover:bg-white/[0.12]",
+                  pathname === "/sozdanie-sajta" ? "drawer-nav-link--active" : ""
+                )}
+              >
+                {t("websitesOffer")}
+              </Link>
+
+              <div className="rounded-2xl border border-white/[0.12] bg-white/[0.04] p-1">
                 <Link
-                  key={i.href}
+                  href={homeSectionHref("services")}
+                  onClick={() => setOpen(false)}
+                  className={cn(
+                    "drawer-nav-link block rounded-xl px-3 py-3 text-[15px] font-semibold tracking-tight transition hover:bg-white/[0.12]",
+                    servicesActive ? "drawer-nav-link--active" : ""
+                  )}
+                >
+                  {t("servicesOverview")}
+                </Link>
+                <div className="mx-2 my-1 h-px bg-white/10" />
+                <div className="grid gap-0.5 pb-1">
+                  {CONTACT_SERVICE_ORDER.map((svc: ContactServiceKey) => (
+                    <Link
+                      key={svc}
+                      href={homeServiceAnchorHref(svc)}
+                      onClick={() => setOpen(false)}
+                      className={cn(
+                        "rounded-xl px-3 py-2.5 text-[14px] font-medium text-white/85 transition hover:bg-white/[0.1]",
+                        onHome && hash === `#service-${svc}`
+                          ? "bg-white/[0.08] text-white"
+                          : ""
+                      )}
+                    >
+                      {t(`serviceDrop.${svc}`)}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {staticNavItems.map((i) => (
+                <Link
+                  key={i.key}
                   href={i.href}
                   onClick={() => setOpen(false)}
                   className={cn(
@@ -436,7 +551,7 @@ export function Header() {
 
             <div className="mt-5 px-0.5">
               <Link
-                href="/#contact"
+                href={homeSectionHref("contact")}
                 onClick={() => setOpen(false)}
                 className="hover-lift inline-flex w-full items-center justify-center rounded-xl border border-white/[0.18] bg-white/[0.09] py-3.5 text-base font-semibold text-white transition hover:bg-white/[0.14] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
               >

@@ -6,6 +6,7 @@ import { ScrollRevealSection } from "@/components/ScrollRevealSection";
 import { useTranslations } from "next-intl";
 import { Link } from "@/navigation";
 import { CONTACTS } from "@/lib/contacts";
+import { homeSectionHref } from "@/lib/navHref";
 
 /** Футер: TG/WA — только иконки визуально; подписи только для скринридеров (sr-only). */
 export function Footer() {
@@ -14,11 +15,11 @@ export function Footer() {
   const tSeo = useTranslations("seo");
 
   const quickLinks = [
-    { href: "/#services", label: t("services") },
-    { href: "/#cases", label: t("cases") },
-    { href: "/#testimonials", label: t("testimonials") },
+    { href: homeSectionHref("services"), label: t("services") },
+    { href: homeSectionHref("cases"), label: t("cases") },
+    { href: homeSectionHref("testimonials"), label: t("testimonials") },
     { href: "/o-nas", label: t("about") },
-    { href: "/#contact", label: t("contact") }
+    { href: homeSectionHref("contact"), label: t("contact") }
   ];
 
   return (
@@ -26,7 +27,7 @@ export function Footer() {
       as="footer"
       className="tech-bg tech-bg--compact relative border-t border-white/10 pt-16 pb-[max(5rem,calc(3rem+env(safe-area-inset-bottom,0px)))] sm:py-20"
     >
-      <div className="container">
+      <div className="site-container">
         <div className="glass overflow-hidden rounded-[2rem] p-6 sm:p-10">
           <div className="grid gap-10 lg:grid-cols-12">
             <div className="lg:col-span-5">
@@ -91,7 +92,7 @@ export function Footer() {
               <div className="mt-4 grid gap-2 text-sm">
                 {quickLinks.map((l) => (
                   <Link
-                    key={l.href}
+                    key={l.label}
                     href={l.href}
                     className="rounded-xl px-3 py-2 text-white/70 transition hover:bg-white/5 hover:text-white hover-lift"
                   >

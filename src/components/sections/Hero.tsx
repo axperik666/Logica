@@ -10,6 +10,7 @@ import { Mail, MessageCircle, Send, TrendingUp } from "lucide-react";
 import { CONTACTS } from "@/lib/contacts";
 import { useNarrowViewport } from "@/lib/use-narrow-viewport";
 import { cn } from "@/lib/cn";
+import { homeSectionHref } from "@/lib/navHref";
 
 const easeOutExpo = [0.16, 1, 0.3, 1] as const;
 
@@ -246,7 +247,7 @@ export function Hero() {
         <div className="section-edge-vignette section-edge-vignette--hero" />
       </div>
 
-      <div className="container relative z-[1] w-full min-w-0 overflow-x-clip sm:overflow-x-visible">
+      <div className="site-container relative z-[1] w-full min-w-0 overflow-x-clip sm:overflow-x-visible">
           <div className="sr-only">
             <p>{tSec("hero.metaTitle")}</p>
             <p>{tSec("hero.metaDescription")}</p>
@@ -329,13 +330,13 @@ export function Hero() {
                   className="mt-9 flex w-full max-w-xl flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-start"
                 >
                   <Button
-                    href="/#contact"
+                    href={homeSectionHref("contact")}
                     className="btn-cta-premium w-full min-h-[3.35rem] px-8 text-base font-bold shadow-[0_18px_56px_rgba(0,191,255,0.42)] sm:w-auto hover-lift"
                   >
                     {t("ctaPrimary")}
                   </Button>
                   <Button
-                    href="/#cases"
+                    href={homeSectionHref("cases")}
                     variant="ghost"
                     className="w-full min-h-[3.35rem] border border-[#00BFFF]/48 bg-[rgba(6,14,32,0.92)] px-8 text-base font-bold text-white shadow-[inset_0_1px_0_rgba(0,191,255,0.18),0_12px_44px_rgba(0,191,255,0.2)] backdrop-blur-md sm:w-auto hover-lift hover:border-[#00BFFF]/62 hover:bg-[rgba(0,191,255,0.14)] hover:text-white"
                   >
@@ -476,7 +477,7 @@ export function Hero() {
                 ·
               </span>
               <Link
-                href="/#cases"
+                href={homeSectionHref("cases")}
                 className="shrink-0 whitespace-nowrap underline-offset-4 transition hover:text-white hover:underline"
               >
                 {t("internalNavCasesAnchor")}
@@ -485,7 +486,7 @@ export function Hero() {
                 ·
               </span>
               <Link
-                href="/#testimonials"
+                href={homeSectionHref("testimonials")}
                 className="shrink-0 whitespace-nowrap underline-offset-4 transition hover:text-white hover:underline"
               >
                 {t("internalNavTestimonials")}
@@ -503,7 +504,7 @@ export function Hero() {
                 ·
               </span>
               <Link
-                href="/#contact"
+                href={homeSectionHref("contact")}
                 className="shrink-0 whitespace-nowrap underline-offset-4 transition hover:text-white hover:underline"
               >
                 {t("internalNavContact")}

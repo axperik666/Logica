@@ -7,6 +7,8 @@ import { Sparkles } from "lucide-react";
 import { MotionDiv, MotionSection } from "@/components/motion";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/cn";
+import { Link } from "@/navigation";
+import { homeContactLink } from "@/lib/contactHref";
 
 type PlatformKey = "google" | "meta" | "tiktok" | "telegram";
 
@@ -187,7 +189,7 @@ export function Platforms() {
         }
       }}
     >
-      <div className="container">
+      <div className="site-container">
       <div className="sr-only">
         <p>{tSec("platforms.metaTitle")}</p>
         <p>{tSec("platforms.metaDescription")}</p>
@@ -243,6 +245,10 @@ export function Platforms() {
                   }}
                   className="platform-card group relative"
                 >
+                  <Link
+                    href={homeContactLink({ platform: key })}
+                    className="block rounded-2xl outline-none ring-offset-2 ring-offset-[rgba(5,9,24,0.96)] transition-shadow focus-visible:ring-2 focus-visible:ring-[#00BFFF]/70"
+                  >
                   <div
                     className={cn(
                       "platform-card-surface relative flex min-h-[9rem] flex-col items-center justify-start gap-3 rounded-2xl border border-white/[0.12] bg-[rgba(5,9,24,0.72)] px-3 pb-5 pt-6 backdrop-blur-xl transition-all duration-300 ease-out will-change-transform sm:min-h-[9.5rem]",
@@ -283,6 +289,7 @@ export function Platforms() {
                       ) : null}
                     </div>
                   </div>
+                  </Link>
                 </MotionDiv>
               );
             })}

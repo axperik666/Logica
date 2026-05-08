@@ -57,7 +57,18 @@
     "testimonials": "Testimonials",
     "about": "About",
     "contact": "Contact",
-    "cta": "Contact"
+    "cta": "Contact",
+    "websitesOffer": "Website creation",
+    "servicesOverview": "Services section",
+    "servicesMenuAria": "Service areas",
+    "serviceDrop": {
+      "performance": "Performance Marketing",
+      "seo": "SEO & content marketing",
+      "smm": "SMM & personal branding",
+      "web": "Web & landing pages",
+      "strategy": "Marketing strategy & audit",
+      "analytics": "Analytics & ROI optimization"
+    }
   },
   "header": {
     "tagline": "Sites · Ads · Creative",
@@ -101,6 +112,7 @@
     "cta": "Tailored plan for your niche",
     "moreLink": "Learn more →",
     "moreBtn": "Learn more",
+    "orderBtn": "Order",
     "seeAlso": "Also explore",
     "internalRelatedAria": "Related LOGICA Marketing sections",
     "internalAllServices": "All services",
@@ -596,7 +608,49 @@
     "successHint": "Message us directly for the fastest reply:",
     "ctaTelegram": "Message on Telegram",
     "ctaWhatsapp": "Message on WhatsApp",
-    "submitAgain": "Fill the form again"
+    "submitAgain": "Fill the form again",
+    "prefillPlatform": {
+      "google": "Platform: Google Ads — please contact me about launch or optimization.",
+      "meta": "Platform: Meta (Facebook / Instagram) — please contact me about strategy and launch.",
+      "tiktok": "Platform: TikTok Ads — please contact me about creative testing and scaling.",
+      "telegram": "Platform: Telegram — please contact me about promotion or media buying."
+    },
+    "prefillService": {
+      "performance": "Service: Performance Marketing — I’d like to discuss launch and bundle economics.",
+      "seo": "Service: SEO & content — I want to grow organic traffic and on‑page leads.",
+      "smm": "Service: SMM & personal brand — I want positioning and content strategy.",
+      "web": "Service: Web & landing pages — I want a Next.js site focused on conversion.",
+      "strategy": "Service: Strategy & audit — I want funnel review and a 2–4 week plan.",
+      "analytics": "Service: Analytics & ROI — I want events, goals and clear reporting."
+    }
+  },
+  "websitesPage": {
+    "metaTitle": "Website & landing page creation on Next.js — LOGICA Marketing",
+    "metaDescription": "Premium UX, speed, conversion and analytics: how we build sites and sample showcase screens.",
+    "title": "Websites built to convert",
+    "intro": "We connect narrative, structure and engineering: prototypes aligned with economics, UI tuned for mobile traffic, Next.js for speed and SEO hygiene, events for profit‑based optimization.",
+    "approachTitle": "How we work",
+    "approachBullets": [
+      "Discovery: goals, ICP, unit economics and competitive context — no cookie‑cutter templates.",
+      "Prototype & copy: user path, offers, trust triggers and conversion scenarios.",
+      "Build: Next.js, Tailwind, accessibility, Core Web Vitals; forms & integrations as needed.",
+      "Launch: events & goals, funnel checks, readiness for hypothesis testing."
+    ],
+    "casesTitle": "Showcase directions & screens",
+    "caseCaptions": [
+      "B2B services: offer packaging & lead capture",
+      "Healthcare landing: trust-first conversion",
+      "Fashion e‑commerce: catalog & PDP speed",
+      "EdTech: lead magnet & nurture entry",
+      "SaaS: pricing tiers & onboarding cues",
+      "Local business: calls & messengers above the fold",
+      "Expert brand: authority & proof blocks",
+      "Promo landing: structured launch narrative",
+      "Multi‑offer: clarity without losing focus",
+      "Analytics: events, goals & decision-ready reporting"
+    ],
+    "ctaLabel": "Discuss your site",
+    "ctaHint": "The contact form will include a web & landing pages intent prefill."
   },
   "footer": {
     "subtitle": "Marketing that compounds",

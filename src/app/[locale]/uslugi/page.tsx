@@ -2,6 +2,16 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { services } from "@/content/services";
 import { Card } from "@/components/ui/card";
+import { homeContactLink, type ContactServiceKey } from "@/lib/contactHref";
+
+/** Префилл заявки по slug страницы услуги */
+const SLUG_TO_SERVICE: Record<string, ContactServiceKey> = {
+  "sozdanie-lendinga": "web",
+  "nastrojka-reklamy-meta": "smm",
+  "nastrojka-reklamy-google": "performance",
+  "nastrojka-reklamy-tiktok": "performance",
+  "sozdanie-kreativov": "performance"
+};
 
 export async function generateMetadata({
   params
@@ -21,7 +31,7 @@ export default async function ServicesPage() {
   const tSvc = await getTranslations("services");
 
   return (
-    <section className="tech-bg relative container py-10 sm:py-14">
+    <section className="tech-bg relative site-container py-10 sm:py-14">
       <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
         {t("title")}
       </h1>
@@ -30,15 +40,20 @@ export default async function ServicesPage() {
       </p>
 
       <div className="mt-8 grid gap-4 md:grid-cols-2">
-        {services.map((s) => (
-          <Card
-            key={s.slug}
-            title={s.name}
-            text={s.short}
-            href={`/uslugi/${s.slug}`}
-            linkHint={tSvc("moreLink")}
-          />
-        ))}
+        {services.map((s) => {
+          const svc = SLUG_TO_SERVICE[s.slug];
+          return (
+            <Card
+              key={s.slug}
+              title={s.name}
+              text={s.short}
+              href={`/uslugi/${s.slug}`}
+              linkHint={tSvc("moreLink")}
+              orderHref={svc ? homeContactLink({ service: svc }) : homeContactLink()}
+              orderLabel={tSvc("orderBtn")}
+            />
+          );
+        })}
       </div>
     </section>
   );

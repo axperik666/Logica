@@ -15,6 +15,11 @@ import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import { Link } from "@/navigation";
 import { useNarrowViewport } from "@/lib/use-narrow-viewport";
+import { homeSectionHref } from "@/lib/navHref";
+import {
+  CONTACT_SERVICE_ORDER,
+  homeContactLink
+} from "@/lib/contactHref";
 
 type CardMsg = {
   title: string;
@@ -23,6 +28,16 @@ type CardMsg = {
 };
 
 const ICONS = [Megaphone, Search, BarChart3, Code2, Compass, LineChart];
+
+/** «Подробнее» → страница услуги в каталоге (порядок как у карточек) */
+const MORE_PATHS: string[] = [
+  "/uslugi/nastrojka-reklamy-google",
+  "/uslugi/sozdanie-lendinga",
+  "/uslugi/nastrojka-reklamy-meta",
+  "/uslugi/sozdanie-lendinga",
+  "/uslugi/nastrojka-reklamy-google",
+  "/uslugi/nastrojka-reklamy-google"
+];
 
 export function Services() {
   const t = useTranslations("services");
@@ -54,7 +69,7 @@ export function Services() {
         }
       }}
     >
-      <div className="container">
+      <div className="site-container">
       <MotionDiv
         variants={{
           hidden: { opacity: 0, y: 10 },
@@ -100,7 +115,7 @@ export function Services() {
               ·
             </span>
             <Link
-              href="/#cases"
+              href={homeSectionHref("cases")}
               className="font-medium text-primary underline-offset-4 transition hover:text-white hover:underline"
             >
               {t("internalCasesAnchor")}
@@ -117,7 +132,7 @@ export function Services() {
           </nav>
         </div>
 
-        <Button href="/#contact" variant="ghost" className="hover-lift shrink-0">
+        <Button href={homeSectionHref("contact")} variant="ghost" className="hover-lift shrink-0">
           {t("cta")}
         </Button>
       </MotionDiv>
@@ -125,9 +140,12 @@ export function Services() {
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {cards.map((c, idx) => {
           const Icon = ICONS[idx] ?? Megaphone;
+          const svc = CONTACT_SERVICE_ORDER[idx];
+          const moreHref = MORE_PATHS[idx] ?? "/uslugi";
           return (
             <MotionDiv
               key={c.title}
+              id={svc ? `service-${svc}` : undefined}
               variants={{
                 hidden: { opacity: 0, y: 14 },
                 show: {
@@ -136,7 +154,7 @@ export function Services() {
                   transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
                 }
               }}
-              className="glass hover-lift rounded-3xl p-6"
+              className="glass hover-lift rounded-3xl p-6 scroll-mt-[calc(5rem+env(safe-area-inset-top,0px))]"
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="flex items-center gap-3">
@@ -151,16 +169,22 @@ export function Services() {
 
               <p className="mt-4 text-sm leading-relaxed text-white/65">{c.desc}</p>
 
-              <div className="mt-6 flex items-center justify-between gap-3">
+              <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
                 <Link
-                  href="/#contact"
+                  href={moreHref}
                   className="text-sm font-semibold text-primary transition hover:opacity-90"
                 >
                   {t("moreLink")}
                 </Link>
-                <Button href="/#contact" className="hover-lift">
-                  {t("moreBtn")}
-                </Button>
+                {svc ? (
+                  <Button href={homeContactLink({ service: svc })} className="hover-lift">
+                    {t("orderBtn")}
+                  </Button>
+                ) : (
+                  <Button href={homeSectionHref("contact")} className="hover-lift">
+                    {t("orderBtn")}
+                  </Button>
+                )}
               </div>
             </MotionDiv>
           );

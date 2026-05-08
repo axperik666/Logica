@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useInView } from "framer-motion";
 import {
   CheckCircle2,
@@ -16,8 +17,39 @@ import { useTranslations } from "next-intl";
 import { formatPhoneMask, isPhonePlausible } from "@/lib/phoneMask";
 import { CONTACTS } from "@/lib/contacts";
 import { useNarrowViewport } from "@/lib/use-narrow-viewport";
+import {
+  CONTACT_SERVICE_ORDER,
+  type ContactPlatform,
+  type ContactServiceKey
+} from "@/lib/contactHref";
 
-export function CTA() {
+const PLATFORM_KEYS: ContactPlatform[] = ["google", "meta", "tiktok", "telegram"];
+
+function isContactPlatform(v: string | null): v is ContactPlatform {
+  return v !== null && PLATFORM_KEYS.includes(v as ContactPlatform);
+}
+
+function isContactServiceKey(v: string | null): v is ContactServiceKey {
+  return v !== null && CONTACT_SERVICE_ORDER.includes(v as ContactServiceKey);
+}
+
+function CTAFallback() {
+  return (
+    <section
+      id="contact"
+      className="full-bleed tech-bg relative overflow-x-clip py-24 lg:py-28"
+    >
+      <div className="site-container relative z-[2]">
+        <div
+          className="glass relative min-h-[28rem] animate-pulse rounded-[2rem] bg-white/[0.04] p-6 sm:p-10"
+          aria-hidden
+        />
+      </div>
+    </section>
+  );
+}
+
+function CTAInner() {
   const t = useTranslations("cta");
   const tSec = useTranslations("sectionsSeo");
   const narrow = useNarrowViewport();
@@ -29,6 +61,37 @@ export function CTA() {
   const [message, setMessage] = useState("");
   const [formSuccess, setFormSuccess] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
+
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const platform = searchParams.get("platform");
+    const service = searchParams.get("service");
+    const lines: string[] = [];
+    if (isContactPlatform(platform)) {
+      lines.push(t(`prefillPlatform.${platform}`));
+    }
+    if (isContactServiceKey(service)) {
+      lines.push(t(`prefillService.${service}`));
+    }
+    if (lines.length === 0) return;
+    const block = lines.join("\n\n");
+    setMessage((prev) => (prev.trim() ? prev : block));
+  }, [searchParams, t]);
+
+  useEffect(() => {
+    const scrollToContact = () => {
+      if (typeof window === "undefined") return;
+      if (window.location.hash !== "#contact") return;
+      document.getElementById("contact")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    };
+    scrollToContact();
+    window.addEventListener("hashchange", scrollToContact);
+    return () => window.removeEventListener("hashchange", scrollToContact);
+  }, []);
 
   const valuePointsRaw = t.raw("valuePoints");
   const valuePoints = Array.isArray(valuePointsRaw)
@@ -83,7 +146,7 @@ export function CTA() {
         <div className="section-edge-vignette" />
       </div>
 
-      <div className="container relative z-[2]">
+      <div className="site-container relative z-[2]">
       <div className="glass relative overflow-hidden rounded-[2rem] p-6 sm:p-10">
         <div className="sr-only">
           <p>{tSec("cta.metaTitle")}</p>
@@ -347,5 +410,13 @@ export function CTA() {
       </div>
       </div>
     </MotionSection>
+  );
+}
+
+export function CTA() {
+  return (
+    <Suspense fallback={<CTAFallback />}>
+      <CTAInner />
+    </Suspense>
   );
 }

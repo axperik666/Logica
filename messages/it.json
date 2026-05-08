@@ -57,7 +57,18 @@
     "testimonials": "Recensioni",
     "about": "Chi siamo",
     "contact": "Contatti",
-    "cta": "Contatti"
+    "cta": "Contatti",
+    "websitesOffer": "Creazione siti",
+    "servicesOverview": "Blocco servizi",
+    "servicesMenuAria": "Tipologie di servizio",
+    "serviceDrop": {
+      "performance": "Performance Marketing",
+      "seo": "SEO e content marketing",
+      "smm": "SMM e personal branding",
+      "web": "Web e landing page",
+      "strategy": "Strategia marketing e audit",
+      "analytics": "Analytics e ottimizzazione ROI"
+    }
   },
   "header": {
     "tagline": "Sites · Ads · Creative",
@@ -101,6 +112,7 @@
     "cta": "Piano su misura per la tua nicchia",
     "moreLink": "Scopri di più →",
     "moreBtn": "Scopri di più",
+    "orderBtn": "Ordina",
     "seeAlso": "Altro sul sito",
     "internalRelatedAria": "Sezioni correlate LOGICA Marketing",
     "internalAllServices": "Tutti i servizi",
@@ -596,7 +608,49 @@
     "successHint": "Scrivici direttamente per una risposta più veloce:",
     "ctaTelegram": "Scrivi su Telegram",
     "ctaWhatsapp": "Scrivi su WhatsApp",
-    "submitAgain": "Compila di nuovo il modulo"
+    "submitAgain": "Compila di nuovo il modulo",
+    "prefillPlatform": {
+      "google": "Piattaforma: Google Ads — vorrei essere ricontattato per lancio o ottimizzazione.",
+      "meta": "Piattaforma: Meta (Facebook / Instagram) — vorrei essere ricontattato per strategia e lancio.",
+      "tiktok": "Piattaforma: TikTok Ads — vorrei essere ricontattato per test creativi e scaling.",
+      "telegram": "Piattaforma: Telegram — vorrei essere ricontattato per promozione o media buying."
+    },
+    "prefillService": {
+      "performance": "Servizio: Performance Marketing — vorrei parlare di lancio ed economia delle combinazioni.",
+      "seo": "Servizio: SEO e content — voglio aumentare organico e lead dalle pagine.",
+      "smm": "Servizio: SMM e brand personale — voglio packaging e piano contenuti.",
+      "web": "Servizio: Web e landing — voglio un sito Next.js orientato alla conversione.",
+      "strategy": "Servizio: Strategia e audit — voglio revisione funnel e piano 2–4 settimane.",
+      "analytics": "Servizio: Analytics e ROI — voglio eventi, goal e reporting chiaro."
+    }
+  },
+  "websitesPage": {
+    "metaTitle": "Creazione siti e landing Next.js — LOGICA Marketing",
+    "metaDescription": "UX premium, velocità, conversione e analytics: approccio ed esempi di schermate.",
+    "title": "Siti pensati per convertire",
+    "intro": "Uniamo senso, struttura e ingegneria: prototipo legato all’economia, UI per traffico mobile, Next.js per velocità e base SEO, eventi per ottimizzare su profitto.",
+    "approachTitle": "Come lavoriamo",
+    "approachBullets": [
+      "Discovery: obiettivi, ICP, unit economics e contesto competitivo.",
+      "Prototipo e copy: percorso utente, offerte, fiducia e scenari di conversione.",
+      "Sviluppo: Next.js, Tailwind, accessibilità, Core Web Vitals; moduli e integrazioni.",
+      "Go‑live: eventi e goal, check funnel, pronti per test sulle ipotesi."
+    ],
+    "casesTitle": "Esempi di direzioni e schermate",
+    "caseCaptions": [
+      "B2B: packaging offerta e lead",
+      "Healthcare: landing orientata alla fiducia",
+      "Fashion e‑commerce: catalogo e PDP veloce",
+      "EdTech: lead magnet e ingresso nurture",
+      "SaaS: pricing e onboarding",
+      "Business locale: chiamate e messaggi in hero",
+      "Brand esperto: proof e autorità",
+      "Promo: narrativa di lancio strutturata",
+      "Multi‑offerta: chiarezza senza dispersione",
+      "Analytics: eventi e reporting decisionale"
+    ],
+    "ctaLabel": "Parliamo del sito",
+    "ctaHint": "Nel modulo comparirà l’intento «web e landing»."
   },
   "footer": {
     "subtitle": "Marketing che fa crescere",
