@@ -24,6 +24,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px));
+  scrollbar-gutter: stable;
 }
 
 @media (max-width: 767px) {
