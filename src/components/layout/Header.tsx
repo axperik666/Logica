@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { Mail, Menu, MessageCircle, Send, X } from "lucide-react";
+import { ChevronDown, Mail, Menu, MessageCircle, Send, X } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { MotionDiv, MotionHeader } from "@/components/motion";
 import { Link, usePathname } from "@/navigation";
@@ -30,6 +30,111 @@ const LANG_DISPLAY: Record<
   it: { label: "IT" }
 };
 
+function LocaleSwitcher({
+  onNavigate,
+  variant
+}: {
+  onNavigate?: () => void;
+  variant: "toolbar" | "drawer";
+}) {
+  const pathname = usePathname();
+  const locale = useLocale();
+  const tUi = useTranslations("header");
+  const [menuOpen, setMenuOpen] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname, locale]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const close = (e: MouseEvent) => {
+      if (wrapRef.current?.contains(e.target as Node)) return;
+      setMenuOpen(false);
+    };
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
+
+  const current = LANG_DISPLAY[locale as keyof typeof LANG_DISPLAY]?.label ?? locale;
+
+  return (
+    <div
+      ref={wrapRef}
+      className={cn("relative z-[60]", variant === "drawer" && "w-full sm:w-auto")}
+    >
+      <button
+        type="button"
+        aria-expanded={menuOpen}
+        aria-haspopup="listbox"
+        aria-label={tUi("switchTo")}
+        onClick={() => setMenuOpen((v) => !v)}
+        className={cn(
+          "lang-switcher-glass inline-flex items-center justify-between gap-2 rounded-xl px-3 py-2 text-left text-xs font-bold uppercase tracking-[0.14em] text-white transition hover:bg-white/[0.06]",
+          variant === "toolbar" && "h-10 min-w-[5.25rem] shrink-0 sm:min-w-[5.5rem]",
+          variant === "drawer" && "h-11 w-full sm:h-10 sm:min-w-[12rem]"
+        )}
+      >
+        <span className="tabular-nums">{current}</span>
+        <ChevronDown
+          className={cn(
+            "h-4 w-4 shrink-0 text-[#7AE0FF] transition-transform",
+            menuOpen && "rotate-180"
+          )}
+          aria-hidden
+        />
+      </button>
+
+      {menuOpen ? (
+        <ul
+          role="listbox"
+          className={cn(
+            "absolute z-[80] mt-1.5 overflow-hidden rounded-xl border border-[#00BFFF]/45 bg-[rgba(4,10,24,0.98)] py-1 shadow-[0_16px_48px_rgba(0,0,0,0.55),0_0_1px_rgba(0,191,255,0.5)] backdrop-blur-xl",
+            variant === "toolbar" && "right-0 min-w-[100%] sm:min-w-[10rem]",
+            variant === "drawer" && "left-0 right-0 sm:left-auto sm:right-0 sm:min-w-[12rem]"
+          )}
+        >
+          {routing.locales.map((loc) => {
+            const { label } = LANG_DISPLAY[loc];
+            const active = locale === loc;
+            return (
+              <li key={loc} role="option" aria-selected={active}>
+                <Link
+                  href={pathname}
+                  locale={loc}
+                  prefetch={false}
+                  className={cn(
+                    "flex items-center px-4 py-2.5 text-sm font-semibold tracking-wide transition",
+                    active
+                      ? "bg-[rgba(0,191,255,0.18)] text-[#D4FBFF]"
+                      : "text-white/88 hover:bg-white/[0.08]"
+                  )}
+                  onClick={() => {
+                    setMenuOpen(false);
+                    onNavigate?.();
+                  }}
+                >
+                  {label}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      ) : null}
+    </div>
+  );
+}
+
 const navLinkClass = (active: boolean) =>
   cn(
     "relative shrink-0 whitespace-nowrap rounded-xl px-2 py-2 text-[13px] font-medium transition-all duration-300 lg:px-2.5 lg:py-2 lg:text-sm xl:px-3",
@@ -40,17 +145,8 @@ const navLinkClass = (active: boolean) =>
       : "text-white/80"
   );
 
-const langLinkClass = (active: boolean) =>
-  cn(
-    "inline-flex h-9 min-w-[2.75rem] shrink-0 flex-nowrap items-center justify-center rounded-md px-2.5 text-[11px] font-bold uppercase tracking-[0.12em] transition-all duration-300 sm:h-10 sm:min-w-[3rem] sm:px-3 sm:text-[11px] sm:tracking-[0.14em]",
-    active
-      ? "bg-[rgba(0,191,255,0.22)] text-[#D4FBFF] ring-1 ring-inset ring-[#00BFFF]/75"
-      : "text-white/88 hover:bg-white/[0.08] hover:text-white"
-  );
-
 export function Header() {
   const pathname = usePathname();
-  const locale = useLocale();
   const t = useTranslations("nav");
   const tUi = useTranslations("header");
   const tHero = useTranslations("hero");
@@ -142,7 +238,7 @@ export function Header() {
             className="hidden min-h-0 min-w-0 justify-self-stretch lg:flex"
             aria-label={tHero("internalNavAria")}
           >
-            <div className="flex h-full w-full min-w-0 items-center justify-center overflow-x-auto overscroll-x-contain px-0.5 [-webkit-overflow-scrolling:touch]">
+            <div className="scrollbar-hide flex h-full w-full min-w-0 items-center justify-center overflow-x-auto overscroll-x-contain px-0.5 [-webkit-overflow-scrolling:touch]">
               <div className="flex w-max max-w-full flex-nowrap items-center gap-0.5 lg:gap-1">
                 {items.map((i) => (
                   <Link key={i.href} href={i.href} className={navLinkClass(i.active)}>
@@ -154,36 +250,7 @@ export function Header() {
           </nav>
 
           <div className="flex min-w-0 shrink-0 items-center justify-end gap-2 sm:gap-2.5 lg:justify-self-end lg:border-l lg:border-white/[0.12] lg:pl-5 xl:pl-6">
-            <nav
-              aria-label={tUi("switchTo")}
-              className="lang-switcher-glass inline-flex shrink-0 flex-nowrap items-stretch overflow-hidden rounded-xl p-1 sm:p-1.5"
-            >
-              {routing.locales.map((loc, idx) => {
-                const { label } = LANG_DISPLAY[loc];
-                const active = locale === loc;
-                return (
-                  <span key={loc} className="flex items-stretch">
-                    {idx > 0 ? (
-                      <span
-                        aria-hidden
-                        className="lang-switcher-sep flex shrink-0 items-center justify-center self-stretch border-0 border-l border-solid border-[#00BFFF]/35 px-1.5 text-[10px] font-light text-[#00BFFF]/45 sm:px-2"
-                      />
-                    ) : null}
-                    <Link
-                      href={pathname}
-                      locale={loc}
-                      prefetch={false}
-                      className={langLinkClass(active)}
-                      aria-current={active ? "true" : undefined}
-                      aria-label={label}
-                      title={label}
-                    >
-                      {label}
-                    </Link>
-                  </span>
-                );
-              })}
-            </nav>
+            <LocaleSwitcher variant="toolbar" />
 
             {/* Десктоп / планшет: «Связаться» + TG + WA в одной glass-пилюле */}
             <div className="header-contact-pill hidden flex-nowrap md:flex">
@@ -276,39 +343,8 @@ export function Header() {
                   logicamarketing.pro
                 </div>
               </div>
-              <nav
-                aria-label={tUi("switchTo")}
-                className="lang-switcher-glass flex flex-wrap items-center gap-0 p-1.5 sm:self-center"
-              >
-                {routing.locales.map((loc, idx) => {
-                  const { label } = LANG_DISPLAY[loc];
-                  const active = locale === loc;
-                  return (
-                    <span key={loc} className="flex items-center">
-                      {idx > 0 ? (
-                        <span
-                          aria-hidden
-                          className="lang-switcher-sep px-1 text-sm font-light sm:px-2"
-                        >
-                          |
-                        </span>
-                      ) : null}
-                      <Link
-                        href={pathname}
-                        locale={loc}
-                        prefetch={false}
-                        className={cn(langLinkClass(active), "py-2.5")}
-                        aria-current={active ? "true" : undefined}
-                        aria-label={label}
-                        title={label}
-                        onClick={() => setOpen(false)}
-                      >
-                        {label}
-                      </Link>
-                    </span>
-                  );
-                })}
-              </nav>
+              <LocaleSwitcher variant="drawer" onNavigate={() => setOpen(false)} />
+
             </div>
 
             <div className="mt-4 grid gap-2.5">
