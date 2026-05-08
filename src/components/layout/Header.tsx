@@ -219,8 +219,8 @@ export function Header() {
             <div className="min-w-0 leading-[1.05]">
               <div
                 className={cn(
-                  "brand-glow text-[0.82rem] font-extrabold uppercase tracking-[0.1em] text-white sm:text-lg sm:tracking-[0.12em]",
-                  "max-lg:truncate lg:whitespace-nowrap lg:text-[clamp(0.95rem,1.6vw,1.35rem)] lg:tracking-[0.12em] xl:text-2xl xl:tracking-[0.14em]"
+                  "brand-glow text-[0.72rem] font-extrabold uppercase tracking-[0.09em] text-white sm:text-[0.9rem] sm:tracking-[0.1em]",
+                  "max-lg:truncate lg:whitespace-nowrap lg:text-[clamp(0.8rem,1.2vw,1.05rem)] lg:tracking-[0.11em] xl:text-[clamp(0.95rem,1.35vw,1.2rem)] xl:tracking-[0.12em]"
                 )}
               >
                 LOGICA MARKETING

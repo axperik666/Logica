@@ -123,22 +123,14 @@ export function Cases() {
               }}
               className="glass hover-lift overflow-hidden rounded-3xl p-6"
             >
-              <div className="relative -mx-6 -mt-6 mb-4 h-40 overflow-hidden sm:h-44">
+              <div className="relative -mx-6 -mt-6 mb-4 h-36 overflow-hidden sm:h-40">
                 <CaseCoverImage
+                  Icon={Icon}
                   src={CASE_COVER_IMAGES[id]}
                   alt={`${niche} — ${client}`}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   priority={index < 3}
                 />
-                <div
-                  className="absolute inset-0 bg-gradient-to-t from-[#080a1a] via-[#080a1a]/70 to-transparent"
-                  aria-hidden
-                />
-                <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-2">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/20 bg-black/40 backdrop-blur-sm">
-                    <Icon className="h-5 w-5 text-primary" />
-                  </div>
-                </div>
               </div>
 
               <div className="flex items-start justify-between gap-4">
