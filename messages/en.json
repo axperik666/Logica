@@ -419,78 +419,72 @@
     ]
   },
   "whyUs": {
-    "badge": "Why us",
-    "title": "Why teams choose LOGICA Marketing",
-    "subtitle": "A growth system — not random tactics: strategy, creative, analytics and a partner who ships.",
-    "stats": [
-      { "value": "87+", "label": "launched projects" },
-      { "value": "340%", "label": "avg. lift on core KPIs" },
-      { "value": "4.9/5", "label": "client rating" },
-      { "value": "15", "label": "verticals on the homepage" }
-    ],
-    "benefits": [
+    "badge": "Advantages",
+    "title": "Why companies choose LOGICA Marketing",
+    "subtitle": "Proof and principles that make paid media controllable — without the noise.",
+    "cards": [
       {
-        "icon": "target",
-        "title": "Growth you can read in numbers",
-        "desc": "We connect funnels, paid media and CRM so you know what drives profit — and what to scale next."
+        "icon": "trend",
+        "headline": "+340% average lead growth",
+        "desc": "We focus on high‑intent demand and landings: fewer empty leads, more sales‑ready conversations."
       },
       {
-        "icon": "sparkles",
-        "title": "Premium UX + site speed",
-        "desc": "Next.js landings and sites that feel high-end, load fast and convert — not just “look nice”."
+        "icon": "roas",
+        "headline": "ROAS from 6.8",
+        "desc": "Bundle economics aligned with your margin — we scale what actually pays back."
       },
       {
-        "icon": "gauge",
-        "title": "Rigorous testing & buying",
-        "desc": "Creative and bundle tests on a plan — less waste, more controlled scale."
+        "icon": "zap",
+        "headline": "Strategy in 5 days",
+        "desc": "A fast framework: offer, funnel, hypotheses and launch priorities — without endless meetings."
       },
       {
-        "icon": "shield",
-        "title": "Transparent partnership",
-        "desc": "Clear KPIs, honest communication and ownership — without hand‑wavy upsells."
+        "icon": "report",
+        "headline": "Transparent reporting",
+        "desc": "Clear KPIs and recurring reviews: what works, what to cut and where to shift budgets."
       },
       {
-        "icon": "chart",
-        "title": "Analytics for decisions",
-        "desc": "Events, attribution and dashboards that optimize revenue impact — not vanity clicks."
+        "icon": "history",
+        "headline": "Operating since 2023",
+        "desc": "Cross‑industry experience — faster onboarding and fewer rookie mistakes at kickoff."
       },
       {
-        "icon": "support",
-        "title": "Humans, not tickets",
-        "desc": "Fast async comms in messengers and a clear roadmap — marketing as a partner."
+        "icon": "partner",
+        "headline": "Dedicated marketer",
+        "desc": "One accountable contact — no ping‑pong between departments or lost tasks."
       }
     ]
   },
   "process": {
     "badge": "Process",
     "title": "How we work",
-    "subtitle": "Five steps from diagnosis to scale — with tangible outputs at every milestone.",
+    "subtitle": "Five steps from first audit to consistent growth — concise and metric‑driven.",
     "stepLabel": "Step {n}",
     "steps": [
       {
         "icon": "search",
-        "title": "Discovery & audit",
-        "desc": "We review offer, landing pages, traffic sources and lead quality — then prioritize quick wins."
+        "title": "Free audit",
+        "desc": "We review your offer, site, acquisition channels and lead quality — and show where budget leaks and quick wins live."
       },
       {
         "icon": "pen",
-        "title": "Strategy & test map",
-        "desc": "Bundles, budgets and creative angles mapped to your economics — prioritized for the next 2–4 weeks."
+        "title": "Strategy development",
+        "desc": "Media plan, bundles and a prioritized test map aligned with your unit economics and horizon."
       },
       {
         "icon": "rocket",
-        "title": "Launch & tracking hygiene",
-        "desc": "Campaigns go live with events and goals wired correctly — optimization rests on clean data."
+        "title": "Launch ads & content",
+        "desc": "Campaigns and supporting content go live; events and goals are wired so optimization relies on clean signals."
       },
       {
         "icon": "chart",
-        "title": "Optimize with data",
-        "desc": "Cut weak segments, scale winners and tighten landing + speed where it moves conversion."
+        "title": "Optimization & scaling",
+        "desc": "Double down on winners, cut weak segments and improve landing pages where conversion actually moves."
       },
       {
-        "icon": "check",
-        "title": "Scale & quality control",
-        "desc": "Grow where unit economics work — keeping lead quality standards as budgets rise."
+        "icon": "report",
+        "title": "Monthly report + growth",
+        "desc": "Regular reporting and next‑month plan: what we scale, what we test and which KPIs stay in focus."
       }
     ]
   },

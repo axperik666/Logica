@@ -421,76 +421,70 @@
   "whyUs": {
     "badge": "Vantaggi",
     "title": "Perché scegliere LOGICA Marketing",
-    "subtitle": "Un sistema di crescita — non tattiche a caso: strategia, creatività, analytics e un team che consegna.",
-    "stats": [
-      { "value": "87+", "label": "progetti lanciati" },
-      { "value": "340%", "label": "crescita media sui KPI" },
-      { "value": "4.9/5", "label": "valutazione clienti" },
-      { "value": "15", "label": "verticali in homepage" }
-    ],
-    "benefits": [
+    "subtitle": "Numeri e principi che rendono la spesa media gestibile — senza rumore inutile.",
+    "cards": [
       {
-        "icon": "target",
-        "title": "Crescita nei numeri",
-        "desc": "Allineiamo funnel, media e CRM: capisci dove nasce il margine e cosa scalare dopo."
+        "icon": "trend",
+        "headline": "+340% crescita media dei lead",
+        "desc": "Focus su domanda qualificata e landing: meno richieste vuote, più conversazioni vicine alla vendita."
       },
       {
-        "icon": "sparkles",
-        "title": "UX premium e velocità",
-        "desc": "Siti e landing Next.js: fiducia, Core Web Vitals e conversione — non solo estetica."
+        "icon": "roas",
+        "headline": "ROAS da 6.8",
+        "desc": "Economia delle combinazioni allineata al margine — scaliamo ciò che ripaga davvero."
       },
       {
-        "icon": "gauge",
-        "title": "Test e disciplina media",
-        "desc": "Ipotesi e combinazioni su un piano — meno sprechi, più scale controllata."
+        "icon": "zap",
+        "headline": "Strategia in 5 giorni",
+        "desc": "Una roadmap rapida: offerta, funnel, ipotesi e priorità di go‑live senza meeting infiniti."
       },
       {
-        "icon": "shield",
-        "title": "Trasparenza",
-        "desc": "KPI chiari, review regolari e partnership onesta — senza clausole nascoste."
+        "icon": "report",
+        "headline": "Reporting trasparente",
+        "desc": "KPI chiari e review ricorrenti: cosa funziona, cosa tagliare e dove spostare il budget."
       },
       {
-        "icon": "chart",
-        "title": "Analytics per decidere",
-        "desc": "Eventi, attribuzione e dashboard: ottimizziamo l’impatto su ricavi, non i click vanitosi."
+        "icon": "history",
+        "headline": "Dal 2023 sul mercato",
+        "desc": "Know‑how trasversale alle verticali — kickoff più veloce e meno errori iniziali."
       },
       {
-        "icon": "support",
-        "title": "Team vicino",
-        "desc": "Risposte rapide sui messenger e roadmap chiara — marketing come partnership."
+        "icon": "partner",
+        "headline": "Marketer dedicato",
+        "desc": "Un referente responsabile — niente rimbalzi tra reparti o incarichi persi."
       }
     ]
   },
   "process": {
     "badge": "Processo",
     "title": "Come lavoriamo",
-    "subtitle": "Cinque passi dalla diagnosi allo scale — con output chiari ad ogni step.",
+    "subtitle": "Cinque step dall’audit alla crescita continua — sintetici e orientati ai numeri.",
     "stepLabel": "Passo {n}",
     "steps": [
       {
         "icon": "search",
-        "title": "Diagnosi e audit",
-        "desc": "Analizziamo offerta, landing, traffico e qualità lead — individuiamo colli di bottiglia e quick win."
+        "title": "Audit gratuito",
+        "desc": "Analizziamo offerta, sito, canali e qualità lead — dove si perdono budget e dove sono i quick win."
       },
       {
         "icon": "pen",
-        "title": "Strategia e piano test",
-        "desc": "Combinazioni, budget e angoli creativi coerenti con la tua economia — priorità sulle 2–4 settimane successive."
+        "title": "Sviluppo della strategia",
+        "desc": "Media plan, combinazioni e mappa dei test coerenti con economia e orizzonte."
       },
       {
         "icon": "rocket",
-        "title": "Go‑live e tracking",
-        "desc": "Campagne attive con eventi e goal corretti — l’ottimizzazione si appoggia su dati puliti."
+        "title": "Lancio ads e contenuti",
+        "desc": "Partono campagne e contenuti di supporto; eventi e goal puliti per ottimizzare su segnali solidi."
       },
       {
         "icon": "chart",
-        "title": "Ottimizzazione data‑driven",
-        "desc": "Tagliamo segmenti deboli, potenziamo i winner e miglioriamo landing e velocità dove conta."
+        "title": "Ottimizzazione e scaling",
+        "desc": "Potenziamo i winner, tagliamo segmenti deboli e miglioriamo le landing dove muove la conversione."
       },
       {
-        "icon": "check",
-        "title": "Scale e controllo qualità",
-        "desc": "Cresciamo dove tornano i numeri e manteniamo standard di lead alzando i budget."
+        "icon": "report",
+        "title": "Report mensile + crescita",
+        "desc": "Reporting periodico e piano del mese successivo: cosa scalare, cosa testare e quali KPI tenere nel mirino."
       }
     ]
   },
