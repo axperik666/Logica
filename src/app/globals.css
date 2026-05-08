@@ -204,7 +204,7 @@ header.site-header.glass-nav {
   z-index: 50;
   backdrop-filter: blur(40px) saturate(1.5);
   -webkit-backdrop-filter: blur(40px) saturate(1.5);
-  background: rgba(0, 0, 0, 0.7) !important;
+  background: rgba(0, 0, 0, 0.8) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow:
     inset 0 1px 0 rgba(0, 191, 255, 0.38),
@@ -1047,5 +1047,16 @@ header.site-header.glass-nav:hover::after {
 
   .hover-lift {
     will-change: auto !important;
+  }
+}
+
+/* Touch devices: не «прыгать» от hover эффектов */
+@media (hover: none) and (pointer: coarse) {
+  .hover-lift:hover {
+    transform: none !important;
+  }
+
+  .glass:hover {
+    transform: none;
   }
 }

@@ -63,7 +63,7 @@ function LocaleSegments({
       aria-label={tUi("switchTo")}
       className={cn(
         "locale-segments inline-flex items-stretch rounded-[13px] border border-[#00BFFF]/44 bg-[linear-gradient(160deg,rgba(6,14,34,0.96)_0%,rgba(4,10,26,0.9)_100%)] shadow-[inset_0_1px_0_rgba(0,191,255,0.22),0_10px_36px_rgba(0,0,0,0.55),0_0_44px_rgba(0,191,255,0.18)] backdrop-blur-2xl",
-        isDrawer ? "p-1" : "p-[3px] lg:p-1",
+        isDrawer ? "p-1" : "p-[2px] lg:p-[3px]",
         variant === "toolbar" && "shrink-0",
         variant === "drawer" && "w-full justify-stretch gap-0"
       )}
@@ -86,7 +86,7 @@ function LocaleSegments({
                 "locale-segments__btn flex flex-1 items-center justify-center font-bold uppercase tracking-[0.12em] transition-all duration-300",
                 isDrawer
                   ? "min-h-[2.65rem] rounded-xl px-3 py-2 text-[12px] sm:min-h-[2.75rem] sm:px-4 sm:text-[13px]"
-                  : "min-h-[2.5rem] rounded-[10px] px-2 py-1.5 text-[11px] sm:min-h-[2.65rem] sm:px-2.5 sm:text-[12px] lg:min-h-[3rem] lg:rounded-xl lg:px-3.5 lg:py-2.5 lg:text-[13px]",
+                  : "min-h-[2.35rem] rounded-[10px] px-2 py-1 text-[11px] sm:min-h-[2.5rem] sm:px-2.5 sm:text-[12px] lg:min-h-[2.75rem] lg:rounded-xl lg:px-3 lg:py-2 lg:text-[12px] lg:tracking-[0.11em]",
                 active
                   ? "bg-[rgba(0,191,255,0.3)] text-white shadow-[inset_0_1px_0_rgba(0,191,255,0.48),0_0_38px_rgba(0,191,255,0.45)]"
                   : "text-white/72 hover:bg-white/[0.08] hover:text-white hover:shadow-[0_0_28px_rgba(0,191,255,0.32)]"
@@ -107,9 +107,9 @@ const navLinkClass = (active: boolean) =>
     "relative shrink-0 whitespace-nowrap rounded-xl px-2.5 py-2 text-[12px] font-medium transition-all duration-300 sm:text-[13px] lg:px-3 lg:py-2.5 lg:text-sm xl:px-3.5",
     "hover:bg-white/[0.08] hover:text-[#00BFFF]",
     "hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_0_34px_rgba(0,191,255,0.5),0_0_1px_rgba(0,191,255,0.9)]",
-    "after:pointer-events-none after:absolute after:left-3 after:right-3 after:bottom-1.5 after:h-px after:rounded after:bg-[#00BFFF] after:opacity-0 after:transition-opacity after:duration-300 after:underline-offset-8 hover:after:opacity-100",
+    "after:pointer-events-none after:absolute after:left-3 after:right-3 after:bottom-1.5 after:h-px after:rounded after:bg-[#00BFFF] after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100",
     active
-      ? "bg-white/[0.09] text-white shadow-[inset_0_1px_0_rgba(0,191,255,0.35),0_0_30px_rgba(0,191,255,0.44)] after:opacity-100"
+      ? "bg-white/[0.09] text-white shadow-[inset_0_1px_0_rgba(0,191,255,0.35),0_0_30px_rgba(0,191,255,0.44)] after:scale-x-100"
       : "text-white/82"
   );
 
@@ -266,11 +266,11 @@ export function Header() {
             {/* Лого: меньше на мобилке, крупнее на desktop */}
             <div
               className={cn(
-                "relative shrink-0 overflow-hidden rounded-xl bg-white/[0.06] ring-[2.5px] ring-[#00BFFF]/44 shadow-[0_0_54px_rgba(0,191,255,0.42)] transition duration-300",
+                "relative shrink-0 overflow-hidden rounded-xl bg-white/[0.06] ring-[2.5px] ring-[#00BFFF]/50 shadow-[0_0_72px_rgba(0,191,255,0.52)] transition duration-300",
                 "h-10 w-10 sm:h-11 sm:w-11 sm:rounded-2xl sm:ring-[3px]",
                 "lg:h-[4.25rem] lg:w-[4.25rem] lg:rounded-[1.25rem]",
                 "xl:h-[4.75rem] xl:w-[4.75rem] xl:rounded-[1.45rem]",
-                "group-hover:ring-[#00BFFF]/68 group-hover:shadow-[0_0_72px_rgba(0,191,255,0.48)]"
+                "group-hover:ring-[#00BFFF]/78 group-hover:shadow-[0_0_98px_rgba(0,191,255,0.62)]"
               )}
             >
               <Image

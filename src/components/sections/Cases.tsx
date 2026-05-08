@@ -124,14 +124,20 @@ export function Cases() {
                   transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
                 }
               }}
-              className="glass hover-lift overflow-hidden rounded-3xl p-6 transition-[transform,box-shadow,border-color] duration-300 hover:border-[#00BFFF]/35 hover:shadow-[0_28px_84px_rgba(0,0,0,0.58),0_0_58px_rgba(0,191,255,0.18)] hover:scale-[1.01]"
+              className={cn(
+                "glass hover-lift overflow-hidden rounded-3xl p-6 transition-[transform,box-shadow,border-color] duration-300 hover:border-[#00BFFF]/35 hover:shadow-[0_28px_84px_rgba(0,0,0,0.58),0_0_58px_rgba(0,191,255,0.18)] hover:scale-[1.01]",
+                // Masonry: периодически делаем карточку шире на desktop
+                index % 9 === 0 ? "lg:col-span-2" : ""
+              )}
             >
               <div
                 className={cn(
                   "relative -mx-6 -mt-6 mb-4 overflow-hidden",
                   // Masonry feel: разные высоты обложек на lg+
-                  index % 6 === 0
-                    ? "h-44 sm:h-48 lg:h-60"
+                  index % 9 === 0
+                    ? "h-48 sm:h-52 lg:h-72"
+                    : index % 6 === 0
+                      ? "h-44 sm:h-48 lg:h-60"
                     : index % 6 === 1
                       ? "h-40 sm:h-44 lg:h-52"
                       : index % 6 === 2
