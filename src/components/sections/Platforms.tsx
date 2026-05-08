@@ -177,7 +177,7 @@ export function Platforms() {
     <MotionSection
       ref={ref}
       id="platforms"
-      className="full-bleed tech-bg relative overflow-x-clip border-y border-white/[0.06] py-14 sm:py-16"
+      className="full-bleed tech-bg relative overflow-x-clip border-y border-white/[0.06] py-24 sm:py-28 lg:py-28"
       initial="hidden"
       animate={isInView ? "show" : "hidden"}
       variants={{

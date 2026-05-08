@@ -62,7 +62,7 @@ export function Cases() {
     <MotionSection
       ref={sectionRef}
       id="cases"
-      className="tech-bg relative py-20 container"
+      className="full-bleed tech-bg relative overflow-x-clip py-24 lg:py-28"
       initial="hidden"
       animate={isInView ? "show" : "hidden"}
       variants={{
@@ -75,6 +75,7 @@ export function Cases() {
         }
       }}
     >
+      <div className="container">
       <div className="sr-only">
         <p>{tSec("cases.metaTitle")}</p>
         <p>{tSec("cases.metaDescription")}</p>
@@ -123,7 +124,7 @@ export function Cases() {
               }}
               className="glass hover-lift overflow-hidden rounded-3xl p-6"
             >
-              <div className="relative -mx-6 -mt-6 mb-4 h-36 overflow-hidden sm:h-40">
+              <div className="relative -mx-6 -mt-6 mb-4 h-40 overflow-hidden sm:h-44 lg:h-48">
                 <CaseCoverImage
                   Icon={Icon}
                   src={CASE_COVER_IMAGES[id]}
@@ -172,6 +173,7 @@ export function Cases() {
             </Button>
           </div>
         </div>
+      </div>
       </div>
     </MotionSection>
   );

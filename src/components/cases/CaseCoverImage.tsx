@@ -62,14 +62,10 @@ export function CaseCoverImage({ src, alt, sizes, priority, Icon }: Props) {
         sizes={sizes}
         priority={priority}
         loading={priority ? "eager" : "lazy"}
-        quality={85}
+        quality={88}
         onError={() => setFailed(true)}
       />
-      <div
-        className="absolute inset-0 bg-gradient-to-t from-[#080a1a] via-[#080a1a]/70 to-transparent"
-        aria-hidden
-      />
-      <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-2">
+      <div className="pointer-events-none absolute bottom-3 left-3 right-3 flex items-end justify-between gap-2">
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/20 bg-black/40 backdrop-blur-sm">
           <Icon className="h-5 w-5 text-primary" aria-hidden />
         </div>

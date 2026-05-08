@@ -26,7 +26,7 @@ export function FAQ() {
     <MotionSection
       ref={ref}
       id="faq"
-      className="tech-bg relative py-20 container"
+      className="full-bleed tech-bg relative overflow-x-clip py-24 lg:py-28"
       initial="hidden"
       animate={isInView ? "show" : "hidden"}
       variants={{
@@ -36,6 +36,7 @@ export function FAQ() {
         }
       }}
     >
+      <div className="container">
       <div className="sr-only">
         <p>{tSec("homeFaq.metaTitle")}</p>
         <p>{tSec("homeFaq.metaDescription")}</p>
@@ -106,6 +107,7 @@ export function FAQ() {
           );
         })}
       </MotionDiv>
+      </div>
     </MotionSection>
   );
 }

@@ -85,7 +85,7 @@ export function Testimonials() {
     <MotionSection
       ref={ref}
       id="testimonials"
-      className="tech-bg relative py-20 container"
+      className="full-bleed tech-bg relative overflow-x-clip py-24 lg:py-28"
       initial="hidden"
       animate={isInView ? "show" : "hidden"}
       variants={{
@@ -98,6 +98,7 @@ export function Testimonials() {
         }
       }}
     >
+      <div className="container">
       <div className="sr-only">
         <p>{tSec("testimonials.metaTitle")}</p>
         <p>{tSec("testimonials.metaDescription")}</p>
@@ -241,6 +242,7 @@ export function Testimonials() {
             {t("itemsUnavailable")}
           </p>
         )}
+      </div>
       </div>
     </MotionSection>
   );

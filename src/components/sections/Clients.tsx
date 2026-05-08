@@ -47,7 +47,7 @@ export function Clients() {
     <MotionSection
       ref={ref}
       id="clients"
-      className="full-bleed tech-bg relative overflow-x-clip py-20"
+      className="full-bleed tech-bg relative overflow-x-clip py-24 lg:py-28"
       initial="hidden"
       animate={isInView ? "show" : "hidden"}
       variants={{

@@ -85,7 +85,7 @@ function HeroRoiVisual({
     <div
       className={cn(
         "relative flex flex-col items-center justify-center",
-        compact ? "py-2" : "min-h-[280px] py-4 lg:min-h-[min(420px,52vh)] lg:py-8"
+        compact ? "py-2" : "min-h-[300px] py-5 lg:min-h-[min(460px,58vh)] lg:py-10"
       )}
     >
       {!compact ? <HeroParticles side="right" /> : null}
@@ -106,7 +106,7 @@ function HeroRoiVisual({
           {t("visualRoiPill")}
         </div>
 
-        <div className={cn("relative", compact ? "h-[120px]" : "h-[min(220px,32vw)] lg:h-[min(260px,28vh)] xl:h-[280px]")}>
+        <div className={cn("relative", compact ? "h-[120px]" : "h-[min(240px,38vw)] lg:h-[min(300px,34vh)] xl:h-[min(340px,32vh)]")}>
           <svg
             className="absolute inset-0 h-full w-full overflow-visible"
             viewBox="0 0 440 200"
@@ -135,13 +135,13 @@ function HeroRoiVisual({
             <path
               d="M 0 165 C 72 158 118 132 168 108 C 228 78 268 52 322 38 C 362 26 402 22 440 18 L 440 200 L 0 200 Z"
               fill={`url(#${fillId})`}
-              opacity={0.42}
+              opacity={0.5}
             />
             <path
               d="M 0 165 C 72 158 118 132 168 108 C 228 78 268 52 322 38 C 362 26 402 22 440 18"
               fill="none"
               stroke={`url(#${strokeId})`}
-              strokeWidth={compact ? 2.6 : 3.2}
+              strokeWidth={compact ? 2.6 : 4}
               strokeLinecap="round"
               filter={`url(#${glowId})`}
               opacity={0.98}
@@ -173,7 +173,7 @@ function HeroRoiVisual({
               "bg-gradient-to-br from-[#F0FEFF] via-[#7AE0FF] to-[#00BFFF] bg-clip-text",
               compact
                 ? "text-[clamp(3.25rem,18vw,4.5rem)] leading-[0.92]"
-                : "text-[clamp(3.75rem,11vw,7.25rem)] leading-[0.88]"
+                : "text-[clamp(4rem,14vw,9.5rem)] leading-[0.86]"
             )}
             style={{
               filter:
@@ -182,7 +182,7 @@ function HeroRoiVisual({
           >
             3–7×
           </p>
-          <p className="mt-2 max-w-[14rem] text-center text-[11px] font-medium leading-snug text-white/58 lg:text-left lg:text-xs">
+          <p className="mt-3 max-w-[18rem] text-center text-[11px] font-medium leading-snug text-white/58 lg:text-left lg:text-xs xl:max-w-[20rem]">
             {t("roiVisualCaption")}
           </p>
         </div>
@@ -209,7 +209,7 @@ export function Hero() {
   return (
     <MotionSection
       id="hero"
-      className="hero-section full-bleed tech-bg relative min-h-[100svh] overflow-x-clip py-12 pt-[calc(5.75rem+env(safe-area-inset-top,0px))] pb-[max(3.5rem,calc(1.35rem+env(safe-area-inset-bottom,0px)))] sm:min-h-screen sm:overflow-x-visible sm:py-20 sm:pt-28 sm:pb-24"
+      className="hero-section full-bleed tech-bg relative min-h-[100svh] overflow-x-clip py-16 pt-[calc(5.75rem+env(safe-area-inset-top,0px))] pb-[max(4rem,calc(1.5rem+env(safe-area-inset-bottom,0px)))] sm:min-h-screen sm:overflow-x-visible sm:py-20 sm:pt-28 sm:pb-20 lg:py-24 lg:pb-24 xl:py-28"
       initial="hidden"
       animate="show"
       variants={{
@@ -252,9 +252,9 @@ export function Hero() {
             <p>{tSec("hero.metaDescription")}</p>
           </div>
 
-          <div className="flex flex-col gap-10 lg:flex-row lg:items-stretch lg:gap-10 xl:gap-14 2xl:gap-16">
-            {/* Левая колонка — типографика и действия */}
-            <div className="w-full shrink-0 lg:w-[56%] lg:max-w-[56%] xl:w-[54%] xl:max-w-[54%]">
+          <div className="flex flex-col gap-12 lg:flex-row lg:items-stretch lg:gap-6 xl:gap-10 2xl:gap-12">
+            {/* Слева ~60%: типографика, асимметрия как у премиум-студий */}
+            <div className="w-full shrink-0 lg:w-[60%] lg:max-w-[60%] lg:pr-2 xl:pr-4">
               <div className="relative border-l-[3px] border-[#00BFFF]/40 bg-gradient-to-r from-[rgba(0,191,255,0.09)] via-[rgba(0,191,255,0.03)] to-transparent py-1 pl-5 sm:pl-7 lg:border-l-[4px] lg:pl-9 xl:pl-11">
                 <HeroParticles side="left" />
 
@@ -273,7 +273,7 @@ export function Hero() {
                     }
                   }}
                 >
-                  <h1 className="brand-glow text-left text-balance break-words text-[clamp(2.05rem,6vw,4.85rem)] font-black leading-[1.03] tracking-[-0.045em] text-white sm:tracking-[-0.04em] md:leading-[1.04] md:tracking-[-0.038em] drop-shadow-[0_16px_80px_rgba(0,191,255,0.45)] [text-shadow:0_2px_0_rgba(0,0,0,0.35),0_0_60px_rgba(0,191,255,0.38)]">
+                  <h1 className="brand-glow text-left text-balance break-words text-[clamp(2.35rem,6.8vw,5.75rem)] font-black leading-[1.02] tracking-[-0.045em] text-white sm:tracking-[-0.04em] md:leading-[1.03] md:tracking-[-0.038em] drop-shadow-[0_16px_80px_rgba(0,191,255,0.45)] [text-shadow:0_2px_0_rgba(0,0,0,0.35),0_0_60px_rgba(0,191,255,0.38)]">
                     {t.rich("title", {
                       br: () => <br />,
                       highlight: (chunks) => (
@@ -299,7 +299,7 @@ export function Hero() {
                     }
                   }}
                 >
-                  <p className="mt-7 max-w-xl text-left text-[1.05rem] font-semibold leading-relaxed text-white/92 sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed lg:max-w-lg xl:max-w-xl">
+                  <p className="mt-8 max-w-2xl text-left text-[1.08rem] font-semibold leading-relaxed text-white/92 sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed lg:mt-9 xl:max-w-[42rem]">
                     {t.rich("subtitle", {
                       roi: (chunks) => (
                         <span className="mx-0.5 inline font-extrabold text-[#D8FDFF] drop-shadow-[0_0_32px_rgba(0,191,255,0.85)]">
@@ -415,7 +415,7 @@ export function Hero() {
               </div>
             </div>
 
-            {/* Правая колонка — визуальный акцент (десктоп) */}
+            {/* Справа ~40%: крупный ROI-визуал */}
             <MotionDiv
               variants={{
                 hidden: { opacity: 0, y: 28, scale: 0.96 },
@@ -430,10 +430,10 @@ export function Hero() {
                   }
                 }
               }}
-              className="relative hidden min-h-0 flex-1 min-w-0 lg:flex lg:items-stretch lg:justify-center"
+              className="relative hidden min-h-0 w-full shrink-0 lg:flex lg:w-[40%] lg:max-w-[40%] lg:items-stretch lg:justify-stretch"
             >
-              <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-bl from-[rgba(0,191,255,0.08)] via-transparent to-[rgba(138,43,226,0.06)] blur-2xl" />
-              <div className="relative z-[1] flex h-full w-full min-h-[min(420px,52vh)] max-w-none flex-col justify-center rounded-[2rem] border border-white/[0.1] bg-[rgba(4,8,20,0.45)] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:p-6 xl:p-8">
+              <div className="pointer-events-none absolute -inset-[2px] rounded-[2.35rem] bg-gradient-to-br from-[#00BFFF]/25 via-transparent to-[#a855f740] opacity-90 blur-xl" />
+              <div className="hero-roi-stage relative z-[1] flex h-full min-h-[min(440px,58vh)] w-full flex-col justify-center rounded-[2.25rem] border border-white/[0.12] bg-[linear-gradient(165deg,rgba(6,12,32,0.72)_0%,rgba(4,8,22,0.55)_45%,rgba(5,8,28,0.62)_100%)] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-xl sm:p-7 xl:p-9">
                 <HeroRoiVisual reduceMotion={reduceMotion} />
               </div>
             </MotionDiv>
