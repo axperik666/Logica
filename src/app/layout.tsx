@@ -143,9 +143,6 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} className={inter.variable}>
-      <head>
-        <link rel="preload" href="/logo.png" as="image" type="image/png" />
-      </head>
       <body className={`${inter.className} tech-bg min-h-dvh font-sans relative`}>
         <SiteJsonLd />
         <Providers>{children}</Providers>
