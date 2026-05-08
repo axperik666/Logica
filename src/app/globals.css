@@ -847,6 +847,11 @@ header.site-header.glass-nav:hover::after {
     box-sizing: border-box;
   }
 
+  /* Чуть шире только там, где нужно (например, Header). */
+  .site-container--wide {
+    max-width: 1680px;
+  }
+
   /* Крупный акцентный блок ROI в Hero */
   .hero-roi-stage {
     box-shadow:

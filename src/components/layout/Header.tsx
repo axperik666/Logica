@@ -239,7 +239,7 @@ export function Header() {
         "site-header glass glass-nav fixed inset-x-0 top-0 z-50 w-full min-w-0 max-w-[100vw] overflow-visible"
       )}
     >
-      <div className="site-container">
+      <div className="site-container site-container--wide">
         {/*
           Mobile ~70px (min-h 4.375rem), desktop ~80px (min-h 5rem).
           Воздух: gap растёт от sm к xl.
