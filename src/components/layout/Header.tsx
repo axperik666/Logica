@@ -376,7 +376,10 @@ export function Header() {
               "lg:gap-3 lg:border-l lg:border-white/[0.14] lg:pl-5 xl:gap-4 xl:pl-7"
             )}
           >
-            <LocaleSegments variant="toolbar" />
+            {/* На мобильных языки доступны в drawer — иначе мешают лого/CTA. */}
+            <div className="hidden md:block">
+              <LocaleSegments variant="toolbar" />
+            </div>
 
             {/* Desktop / tablet: полная пилюля */}
             <div className="header-contact-pill hidden flex-nowrap md:flex">
@@ -459,7 +462,7 @@ export function Header() {
           initial={false}
           animate={open ? { y: 0, opacity: 1 } : { y: -14, opacity: 0.97 }}
           transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
-          className="site-container relative mt-[calc(var(--header-h)+env(safe-area-inset-top,0px))] pb-[max(1rem,env(safe-area-inset-bottom,0px))]"
+          className="site-container relative mt-[calc(var(--header-h)+env(safe-area-inset-top,0px))] max-h-[calc(100dvh-var(--header-h)-env(safe-area-inset-top,0px))] overflow-y-auto overscroll-contain pb-[max(1rem,env(safe-area-inset-bottom,0px))]"
         >
           <div className="glass-mobile-drawer rounded-[1.75rem] border border-[#00BFFF]/55 p-5 shadow-[0_32px_96px_rgba(0,0,0,0.82),0_0_80px_rgba(0,191,255,0.35)] sm:rounded-[2rem] sm:p-6">
             <div className="flex flex-col gap-5 border-b border-white/[0.14] pb-5 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between">
