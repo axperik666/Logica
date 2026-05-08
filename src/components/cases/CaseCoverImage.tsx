@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 
 type Props = {
   src: string;
+  fallbackSrc?: string;
   alt: string;
   sizes: string;
   priority?: boolean;
@@ -16,10 +17,18 @@ type Props = {
 /**
  * Обложка кейса. Remote URL может не загрузиться — показываем техно-плейсхолдер с иконкой (без пустого тёмного поля).
  */
-export function CaseCoverImage({ src, alt, sizes, priority, Icon }: Props) {
+export function CaseCoverImage({ src, fallbackSrc, alt, sizes, priority, Icon }: Props) {
+  const [useFallback, setUseFallback] = useState(false);
   const [failed, setFailed] = useState(false);
 
-  const showImage = Boolean(src?.trim()) && !failed;
+  const currentSrc = useMemo(() => {
+    const main = src?.trim();
+    const fb = fallbackSrc?.trim();
+    if (useFallback && fb) return fb;
+    return main;
+  }, [fallbackSrc, src, useFallback]);
+
+  const showImage = Boolean(currentSrc) && !failed;
 
   if (!showImage) {
     return (
@@ -55,7 +64,7 @@ export function CaseCoverImage({ src, alt, sizes, priority, Icon }: Props) {
   return (
     <>
       <Image
-        src={src}
+        src={currentSrc!}
         alt={alt}
         fill
         className="object-cover"
@@ -63,7 +72,14 @@ export function CaseCoverImage({ src, alt, sizes, priority, Icon }: Props) {
         priority={priority}
         loading={priority ? "eager" : "lazy"}
         quality={88}
-        onError={() => setFailed(true)}
+        onError={() => {
+          const fb = fallbackSrc?.trim();
+          if (!useFallback && fb) {
+            setUseFallback(true);
+            return;
+          }
+          setFailed(true);
+        }}
       />
       <div className="pointer-events-none absolute bottom-3 left-3 right-3 flex items-end justify-between gap-2">
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/20 bg-black/40 backdrop-blur-sm">

@@ -25,7 +25,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/navigation";
 import { homeSectionHref } from "@/lib/navHref";
 import { HOME_CASE_IDS, type HomeCaseId } from "@/content/homeCases";
-import { CASE_COVER_IMAGES } from "@/content/caseCovers";
+import { CASE_COVER_FALLBACKS, CASE_COVER_IMAGES } from "@/content/caseCovers";
 import { CaseCoverImage } from "@/components/cases/CaseCoverImage";
 import { useNarrowViewport } from "@/lib/use-narrow-viewport";
 
@@ -129,6 +129,7 @@ export function Cases() {
                 <CaseCoverImage
                   Icon={Icon}
                   src={CASE_COVER_IMAGES[id]}
+                  fallbackSrc={CASE_COVER_FALLBACKS[id]}
                   alt={`${niche} — ${client}`}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   priority={index < 3}
