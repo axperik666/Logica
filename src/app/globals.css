@@ -196,21 +196,21 @@ header.site-header.glass-nav::after {
   position: absolute;
   inset-inline: 0;
   bottom: 0;
-  height: 2px;
+  height: 3px;
   pointer-events: none;
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(0, 191, 255, 0.35) 15%,
+    rgba(0, 191, 255, 0.45) 12%,
     #00bfff 50%,
-    rgba(0, 191, 255, 0.35) 85%,
+    rgba(0, 191, 255, 0.45) 88%,
     transparent 100%
   );
   box-shadow:
-    0 0 22px #00bfff,
-    0 0 48px rgba(0, 191, 255, 0.55),
-    0 0 80px rgba(0, 191, 255, 0.28);
-  opacity: 0.98;
+    0 0 26px #00bfff,
+    0 0 56px rgba(0, 191, 255, 0.62),
+    0 0 100px rgba(0, 191, 255, 0.35);
+  opacity: 1;
 }
 
 .btn-burger-glass {
@@ -376,6 +376,17 @@ header.site-header.glass-nav:hover::after {
     transparent
   );
   opacity: 0.85;
+}
+
+.header-contact-pill__divider--sm {
+  min-height: 1.75rem;
+  margin-block: 0.35rem;
+}
+
+/* Компактная пилюля «Связаться» в мобильной шапке (~70px) */
+.header-contact-pill--toolbar-sm {
+  padding: 0.2rem 0.35rem;
+  border-radius: 0.875rem;
 }
 
 @layer utilities {
@@ -785,6 +796,23 @@ header.site-header.glass-nav:hover::after {
     @apply mx-auto w-full max-w-6xl;
     padding-left: max(1rem, env(safe-area-inset-left, 0px));
     padding-right: max(1rem, env(safe-area-inset-right, 0px));
+  }
+
+  /* Full-bleed секции */
+  .full-bleed {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  /* Обычный контент */
+  .container {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 
   .scrollbar-hide {

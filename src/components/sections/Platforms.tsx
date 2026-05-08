@@ -196,7 +196,7 @@ export function Platforms() {
     <MotionSection
       ref={ref}
       id="platforms"
-      className="tech-bg relative border-y border-white/[0.06] py-14 container-px sm:py-16"
+      className="full-bleed tech-bg relative overflow-x-clip border-y border-white/[0.06] py-14 sm:py-16"
       initial="hidden"
       animate={isInView ? "show" : "hidden"}
       variants={{
@@ -206,6 +206,7 @@ export function Platforms() {
         }
       }}
     >
+      <div className="container">
       <div className="sr-only">
         <p>{tSec("platforms.metaTitle")}</p>
         <p>{tSec("platforms.metaDescription")}</p>
@@ -307,6 +308,7 @@ export function Platforms() {
           </div>
         </div>
       </MotionDiv>
+      </div>
     </MotionSection>
   );
 }

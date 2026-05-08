@@ -47,7 +47,7 @@ export function Clients() {
     <MotionSection
       ref={ref}
       id="clients"
-      className="tech-bg relative py-20 container-px"
+      className="full-bleed tech-bg relative overflow-x-clip py-20"
       initial="hidden"
       animate={isInView ? "show" : "hidden"}
       variants={{
@@ -57,6 +57,7 @@ export function Clients() {
         }
       }}
     >
+      <div className="container">
       <div className="sr-only">
         <p>{tSec("clients.metaTitle")}</p>
         <p>{tSec("clients.metaDescription")}</p>
@@ -121,6 +122,7 @@ export function Clients() {
           </div>
         )}
       </MotionDiv>
+      </div>
     </MotionSection>
   );
 }

@@ -209,7 +209,7 @@ export function Hero() {
   return (
     <MotionSection
       id="hero"
-      className="hero-section tech-bg relative min-h-[100svh] overflow-x-clip py-12 pt-[calc(5.75rem+env(safe-area-inset-top,0px))] pb-[max(3.5rem,calc(1.35rem+env(safe-area-inset-bottom,0px)))] sm:min-h-screen sm:overflow-x-visible sm:py-20 sm:pt-28 sm:pb-24"
+      className="hero-section full-bleed tech-bg relative min-h-[100svh] overflow-x-clip py-12 pt-[calc(5.75rem+env(safe-area-inset-top,0px))] pb-[max(3.5rem,calc(1.35rem+env(safe-area-inset-bottom,0px)))] sm:min-h-screen sm:overflow-x-visible sm:py-20 sm:pt-28 sm:pb-24"
       initial="hidden"
       animate="show"
       variants={{
@@ -246,8 +246,7 @@ export function Hero() {
         <div className="section-edge-vignette section-edge-vignette--hero" />
       </div>
 
-      <div className="container-px relative z-[1] w-full min-w-0 overflow-x-clip sm:overflow-x-visible">
-        <div className="mx-auto w-full max-w-6xl">
+      <div className="container relative z-[1] w-full min-w-0 overflow-x-clip sm:overflow-x-visible">
           <div className="sr-only">
             <p>{tSec("hero.metaTitle")}</p>
             <p>{tSec("hero.metaDescription")}</p>
@@ -549,7 +548,6 @@ export function Hero() {
               ))}
             </MotionDiv>
           ) : null}
-        </div>
       </div>
     </MotionSection>
   );

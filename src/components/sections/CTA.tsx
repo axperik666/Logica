@@ -66,7 +66,7 @@ export function CTA() {
     <MotionSection
       ref={sectionRef}
       id="contact"
-      className="tech-bg relative py-20 container-px"
+      className="full-bleed tech-bg relative overflow-x-clip py-20"
       initial="hidden"
       animate={isInView ? "show" : "hidden"}
       variants={{
@@ -83,7 +83,8 @@ export function CTA() {
         <div className="section-edge-vignette" />
       </div>
 
-      <div className="glass relative z-[2] overflow-hidden rounded-[2rem] p-6 sm:p-10">
+      <div className="container relative z-[2]">
+      <div className="glass relative overflow-hidden rounded-[2rem] p-6 sm:p-10">
         <div className="sr-only">
           <p>{tSec("cta.metaTitle")}</p>
           <p>{tSec("cta.metaDescription")}</p>
@@ -343,6 +344,7 @@ export function CTA() {
             </div>
           </MotionDiv>
         </div>
+      </div>
       </div>
     </MotionSection>
   );
