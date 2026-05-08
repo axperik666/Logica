@@ -137,7 +137,7 @@ function LocaleSwitcher({
 
 const navLinkClass = (active: boolean) =>
   cn(
-    "relative shrink-0 whitespace-nowrap rounded-xl px-2 py-2 text-[13px] font-medium transition-all duration-300 lg:px-2.5 lg:py-2 lg:text-sm xl:px-3",
+    "relative shrink-0 whitespace-nowrap rounded-xl px-2 py-1.5 text-[12px] font-medium transition-all duration-300 sm:px-2.5 sm:py-2 sm:text-[13px] lg:px-2.5 lg:text-sm xl:px-3",
     "hover:bg-white/[0.09] hover:text-white",
     "hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_0_16px_rgba(0,191,255,0.22)]",
     active
@@ -199,11 +199,13 @@ export function Header() {
       )}
     >
       <div className="container-px">
-        <div className="flex min-h-[4rem] flex-wrap items-center justify-between gap-y-2 py-2 sm:min-h-[4.5rem] sm:gap-4 lg:grid lg:min-h-[5rem] lg:grid-cols-[minmax(0,min(100%,15rem))_minmax(12rem,1fr)_auto] lg:items-center lg:gap-x-3 lg:gap-y-0 xl:grid-cols-[minmax(0,auto)_minmax(14rem,1fr)_auto] xl:gap-x-8">
-          <Link
-            href="/"
-            className="group flex min-w-0 max-w-[calc(100%-8rem)] shrink items-center gap-2.5 sm:gap-4 lg:max-w-[min(100%,17rem)] lg:shrink xl:max-w-none xl:shrink-0"
-          >
+        {/* lg+: две строки — бренд/действия и полноширинная навигация с переносом (ничего не обрезается). */}
+        <div className="flex flex-col gap-2 py-2 sm:gap-2.5 sm:py-2.5 lg:gap-3 lg:pt-2 lg:pb-3">
+          <div className="flex min-h-[3.75rem] w-full min-w-0 items-center justify-between gap-2 sm:min-h-[4.25rem]">
+            <Link
+              href="/"
+              className="group flex min-w-0 max-w-[calc(100%-9rem)] shrink items-center gap-2.5 sm:max-w-[calc(100%-10rem)] sm:gap-4 md:max-w-none"
+            >
             <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-2xl bg-white/5 ring-[3px] ring-[#00BFFF]/35 shadow-[0_0_40px_rgba(0,191,255,0.35)] transition group-hover:ring-[#00BFFF]/55 group-hover:shadow-[0_0_52px_rgba(0,191,255,0.45)] sm:h-14 sm:w-14 md:h-16 md:w-16">
               <Image
                 src="/logo.png"
@@ -223,33 +225,18 @@ export function Header() {
               >
                 LOGICA MARKETING
               </div>
-              <div className="mt-0.5 hidden flex-wrap items-baseline gap-x-2 xl:flex lg:mt-1">
+              <div className="mt-0.5 hidden flex-wrap items-baseline gap-x-2 lg:flex lg:mt-1">
                 <span className="text-[10px] text-white/72 sm:text-[11px]">
                   {tUi("tagline")}
                 </span>
-                <span className="hidden font-mono text-[10px] tracking-wide text-[#00BFFF]/60 min-[1280px]:inline">
+                <span className="hidden font-mono text-[10px] tracking-wide text-[#00BFFF]/60 xl:inline">
                   logicamarketing.pro
                 </span>
               </div>
             </div>
           </Link>
 
-          <nav
-            className="hidden min-h-0 min-w-0 justify-self-stretch lg:flex"
-            aria-label={tHero("internalNavAria")}
-          >
-            <div className="scrollbar-hide flex h-full w-full min-w-0 items-center justify-start overflow-x-auto overscroll-x-contain py-0.5 pl-0.5 pr-1 [-webkit-overflow-scrolling:touch]">
-              <div className="flex w-max flex-nowrap items-center gap-0.5 lg:gap-1">
-                {items.map((i) => (
-                  <Link key={i.href} href={i.href} className={navLinkClass(i.active)}>
-                    {i.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </nav>
-
-          <div className="flex min-w-0 shrink-0 items-center justify-end gap-2 sm:gap-2.5 lg:justify-self-end lg:border-l lg:border-white/[0.12] lg:pl-5 xl:pl-6">
+          <div className="flex min-w-0 shrink-0 items-center justify-end gap-2 sm:gap-2.5 lg:border-l-0 lg:pl-0">
             <LocaleSwitcher variant="toolbar" />
 
             {/* Десктоп / планшет: «Связаться» + TG + WA в одной glass-пилюле */}
@@ -309,6 +296,20 @@ export function Header() {
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
+        </div>
+
+          <nav
+            className="hidden w-full min-w-0 border-t border-white/[0.1] pt-2.5 lg:block"
+            aria-label={tHero("internalNavAria")}
+          >
+            <div className="flex w-full flex-wrap items-center justify-center gap-x-0.5 gap-y-2 sm:gap-x-1 lg:gap-x-1.5">
+              {items.map((i) => (
+                <Link key={i.href} href={i.href} className={navLinkClass(i.active)}>
+                  {i.label}
+                </Link>
+              ))}
+            </div>
+          </nav>
         </div>
       </div>
 
