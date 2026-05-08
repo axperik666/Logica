@@ -26,7 +26,7 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       <Header />
-      <main className="relative z-10 min-h-screen overflow-x-clip pt-[calc(var(--header-h)+env(safe-area-inset-top,0px))]">
+      <main className="relative z-10 min-h-[calc(100dvh-var(--header-h)-env(safe-area-inset-top,0px))] overflow-x-clip pt-[calc(var(--header-h)+env(safe-area-inset-top,0px))]">
         {children}
       </main>
       <Footer />

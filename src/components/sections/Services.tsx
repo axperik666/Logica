@@ -56,7 +56,7 @@ export function Services() {
     <MotionSection
       ref={ref}
       id="services"
-      className="full-bleed tech-bg relative overflow-x-clip py-24 lg:py-28"
+      className="full-bleed tech-bg relative overflow-x-clip py-24 lg:py-28 scroll-mt-[calc(var(--header-h)+env(safe-area-inset-top,0px)+1rem)]"
       initial="hidden"
       animate={isInView ? "show" : "hidden"}
       variants={{
