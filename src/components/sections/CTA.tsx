@@ -1,7 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useRef, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
 import {
   CheckCircle2,
@@ -33,23 +32,7 @@ function isContactServiceKey(v: string | null): v is ContactServiceKey {
   return v !== null && CONTACT_SERVICE_ORDER.includes(v as ContactServiceKey);
 }
 
-function CTAFallback() {
-  return (
-    <section
-      id="contact"
-      className="full-bleed tech-bg relative overflow-x-clip py-24 lg:py-28"
-    >
-      <div className="site-container relative z-[2]">
-        <div
-          className="glass relative min-h-[28rem] animate-pulse rounded-[2rem] bg-white/[0.04] p-6 sm:p-10"
-          aria-hidden
-        />
-      </div>
-    </section>
-  );
-}
-
-function CTAInner() {
+export function CTA() {
   const t = useTranslations("cta");
   const tSec = useTranslations("sectionsSeo");
   const narrow = useNarrowViewport();
@@ -62,11 +45,11 @@ function CTAInner() {
   const [formSuccess, setFormSuccess] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
 
-  const searchParams = useSearchParams();
-
   useEffect(() => {
-    const platform = searchParams.get("platform");
-    const service = searchParams.get("service");
+    if (typeof window === "undefined") return;
+    const sp = new URLSearchParams(window.location.search);
+    const platform = sp.get("platform");
+    const service = sp.get("service");
     const lines: string[] = [];
     if (isContactPlatform(platform)) {
       lines.push(t(`prefillPlatform.${platform}`));
@@ -77,7 +60,7 @@ function CTAInner() {
     if (lines.length === 0) return;
     const block = lines.join("\n\n");
     setMessage((prev) => (prev.trim() ? prev : block));
-  }, [searchParams, t]);
+  }, [t]);
 
   useEffect(() => {
     const scrollToContact = () => {
@@ -410,13 +393,5 @@ function CTAInner() {
       </div>
       </div>
     </MotionSection>
-  );
-}
-
-export function CTA() {
-  return (
-    <Suspense fallback={<CTAFallback />}>
-      <CTAInner />
-    </Suspense>
   );
 }
