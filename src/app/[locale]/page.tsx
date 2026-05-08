@@ -7,6 +7,7 @@ import { Services } from "@/components/sections/Services";
 import { Cases } from "@/components/sections/Cases";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { CTA } from "@/components/sections/CTA";
+import { PostCtaSpacer } from "@/components/layout/PostCtaSpacer";
 import { HomePageJsonLd } from "@/components/seo/HomePageJsonLd";
 import { absoluteLocalizedUrl, languageAlternates } from "@/lib/hreflang";
 
@@ -39,6 +40,7 @@ export default function HomePage() {
         <Cases />
         <Testimonials />
         <CTA />
+        <PostCtaSpacer />
       </main>
       <Footer />
     </>

@@ -450,7 +450,8 @@
     "ariaTelegram": "Message on Telegram",
     "ariaWhatsapp": "Message on WhatsApp",
     "ariaEmail": "Send email",
-    "mobileContactsTitle": "Quick contact"
+    "mobileContactsTitle": "Quick contact",
+    "userAgreement": "Terms of use"
   },
   "notFound": {
     "badge": "404",

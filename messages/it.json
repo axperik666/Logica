@@ -450,7 +450,8 @@
     "ariaTelegram": "Scrivi su Telegram",
     "ariaWhatsapp": "Scrivi su WhatsApp",
     "ariaEmail": "Invia email",
-    "mobileContactsTitle": "Contatto rapido"
+    "mobileContactsTitle": "Contatto rapido",
+    "userAgreement": "Condizioni d'uso"
   },
   "notFound": {
     "badge": "404",

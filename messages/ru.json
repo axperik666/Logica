@@ -450,7 +450,8 @@
     "ariaTelegram": "Написать в Telegram",
     "ariaWhatsapp": "Написать в WhatsApp",
     "ariaEmail": "Написать на email",
-    "mobileContactsTitle": "Быстрая связь"
+    "mobileContactsTitle": "Быстрая связь",
+    "userAgreement": "Пользовательское соглашение"
   },
   "notFound": {
     "badge": "404",

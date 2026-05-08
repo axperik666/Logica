@@ -148,6 +148,15 @@ export function Footer() {
               {f("marquee")}
             </div>
           </div>
+
+          <div className="mt-6 text-center">
+            <Link
+              href="/terms"
+              className="text-xs text-white/50 underline-offset-4 transition hover:text-white/88 hover:underline"
+            >
+              {f("userAgreement")}
+            </Link>
+          </div>
         </div>
       </div>
     </ScrollRevealSection>
