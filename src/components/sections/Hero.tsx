@@ -1,11 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import {
-  useReducedMotion,
-  useScroll,
-  useTransform
-} from "framer-motion";
+import { useReducedMotion } from "framer-motion";
 import { MotionDiv, MotionSection } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
@@ -18,18 +13,7 @@ const easeOutExpo = [0.16, 1, 0.3, 1] as const;
 export function Hero() {
   const t = useTranslations("hero");
   const tSec = useTranslations("sectionsSeo");
-  const sectionRef = useRef<HTMLElement | null>(null);
   const reduceMotion = useReducedMotion();
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"]
-  });
-
-  const parallax = reduceMotion ? 0 : 1;
-  const yDots = useTransform(scrollYProgress, [0, 1], [0, 28 * parallax]);
-  const yLines = useTransform(scrollYProgress, [0, 1], [0, -18 * parallax]);
-  const ySparkle = useTransform(scrollYProgress, [0, 1], [0, 22 * parallax]);
 
   const statsRaw = t.raw("stats");
   const stats = Array.isArray(statsRaw)
@@ -41,7 +25,6 @@ export function Hero() {
 
   return (
     <MotionSection
-      ref={sectionRef}
       id="hero"
       className="tech-bg relative min-h-[100svh] overflow-x-clip py-12 pt-[calc(5.75rem+env(safe-area-inset-top,0px))] pb-14 sm:min-h-screen sm:overflow-x-visible sm:py-20 sm:pt-28 sm:pb-20"
       initial="hidden"
@@ -64,18 +47,9 @@ export function Hero() {
         <div className="hero-gradient-mesh" />
 
         <div className="tech-grid tech-grid--hero">
-          <MotionDiv
-            style={{ y: yDots }}
-            className="tech-grid__layer tech-grid__layer--dots tech-grid__layer--anim-dots"
-          />
-          <MotionDiv
-            style={{ y: yLines }}
-            className="tech-grid__layer tech-grid__layer--lines tech-grid__layer--anim-lines"
-          />
-          <MotionDiv
-            style={{ y: ySparkle }}
-            className="tech-grid--hero-sparkle"
-          />
+          <MotionDiv className="tech-grid__layer tech-grid__layer--dots tech-grid__layer--anim-dots" />
+          <MotionDiv className="tech-grid__layer tech-grid__layer--lines tech-grid__layer--anim-lines" />
+          <MotionDiv className="tech-grid--hero-sparkle" />
         </div>
 
         <div className="section-edge-vignette" />
