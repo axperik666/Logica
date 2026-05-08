@@ -5,7 +5,6 @@ import { useEffect, useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Mail, Menu, MessageCircle, Send, X } from "lucide-react";
 import { cn } from "@/lib/cn";
-import { Button } from "@/components/ui/button";
 import { MotionDiv, MotionHeader } from "@/components/motion";
 import { Link, usePathname } from "@/navigation";
 import { routing } from "@/i18n/routing";
@@ -22,7 +21,10 @@ const ROUTES: {
   { href: "/#contact", key: "contact" }
 ];
 
-const LANG_DISPLAY: Record<(typeof routing.locales)[number], { flag: string; label: string }> = {
+const LANG_DISPLAY: Record<
+  (typeof routing.locales)[number],
+  { flag: string; label: string }
+> = {
   ru: { flag: "🇷🇺", label: "RU" },
   en: { flag: "🇬🇧", label: "EN" },
   it: { flag: "🇮🇹", label: "IT" }
@@ -40,10 +42,10 @@ const navLinkClass = (active: boolean) =>
 
 const langLinkClass = (active: boolean) =>
   cn(
-    "inline-flex min-h-10 min-w-10 shrink-0 items-center justify-center gap-1 rounded-lg px-1.5 py-2 text-[10px] font-semibold uppercase tracking-[0.08em] transition-all duration-300 sm:min-h-0 sm:min-w-0 sm:gap-1.5 sm:px-2.5 sm:text-xs sm:tracking-[0.14em] md:px-3",
+    "inline-flex min-h-9 min-w-9 shrink-0 items-center justify-center gap-1.5 rounded-lg px-2 py-2 text-[10px] font-bold uppercase tracking-[0.1em] transition-all duration-300 sm:min-h-10 sm:gap-2 sm:px-3 sm:text-[11px] sm:tracking-[0.14em]",
     active
-      ? "border border-[#00BFFF]/60 bg-[rgba(0,191,255,0.16)] text-[#B8F0FF] shadow-[0_0_26px_rgba(0,191,255,0.45),inset_0_1px_0_rgba(255,255,255,0.12)]"
-      : "border border-transparent text-white/85 hover:border-[#00BFFF]/35 hover:bg-white/[0.08] hover:text-white hover:shadow-[0_0_22px_rgba(0,191,255,0.25)]"
+      ? "border border-[#00BFFF]/65 bg-[rgba(0,191,255,0.2)] text-[#D4FBFF] shadow-[0_0_28px_rgba(0,191,255,0.5),inset_0_1px_0_rgba(255,255,255,0.14)]"
+      : "border border-transparent text-white/88 hover:border-[#00BFFF]/42 hover:bg-white/[0.08] hover:text-white hover:shadow-[0_0_26px_rgba(0,191,255,0.28)]"
   );
 
 export function Header() {
@@ -97,36 +99,34 @@ export function Header() {
     <MotionHeader
       initial={false}
       className={cn(
-        "site-header glass glass-nav fixed inset-x-0 top-0 z-50 overflow-visible",
-        /* усиление контраста на tech-bg + нижнее свечение #00BFFF */
-        "border-b border-[#00BFFF]/55",
-        "shadow-[inset_0_1px_0_rgba(0,191,255,0.22),0_12px_48px_rgba(0,0,0,0.55),0_0_80px_rgba(0,191,255,0.22)]",
-        "after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-[2px] after:bg-gradient-to-r after:from-transparent after:via-[#00BFFF] after:to-transparent after:opacity-90 after:shadow-[0_0_24px_#00BFFF,0_0_48px_rgba(0,191,255,0.45)]"
+        "site-header glass glass-nav fixed inset-x-0 top-0 z-50 overflow-visible"
       )}
     >
       <div className="container-px">
-        <div className="flex min-h-[3.75rem] items-center justify-between gap-1.5 py-1.5 sm:min-h-[4.25rem] sm:gap-4 sm:py-2 lg:min-h-[4.5rem]">
+        <div className="flex min-h-[4rem] items-center justify-between gap-1 py-2 sm:min-h-[4.5rem] sm:gap-4 lg:min-h-[5rem]">
           <Link
             href="/"
             className="group flex min-w-0 shrink items-center gap-3 sm:gap-4"
           >
-            <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-2xl bg-white/5 ring-2 ring-[#00BFFF]/30 shadow-[0_0_32px_rgba(0,191,255,0.28)] transition group-hover:ring-[#00BFFF]/50 group-hover:shadow-[0_0_44px_rgba(0,191,255,0.38)] sm:h-14 sm:w-14">
+            <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-2xl bg-white/5 ring-[3px] ring-[#00BFFF]/35 shadow-[0_0_40px_rgba(0,191,255,0.35)] transition group-hover:ring-[#00BFFF]/55 group-hover:shadow-[0_0_52px_rgba(0,191,255,0.45)] sm:h-16 sm:w-16">
               <Image
                 src="/logo.png"
                 alt={tSeo("logoAlt")}
                 fill
-                sizes="56px"
+                sizes="64px"
                 className="object-cover"
                 priority
               />
             </div>
-            <div className="min-w-0 leading-tight">
-              <div className="brand-glow truncate text-sm font-bold uppercase tracking-[0.11em] text-white sm:text-xl sm:tracking-[0.14em] md:text-2xl">
+            <div className="min-w-0 leading-[1.05]">
+              <div className="brand-glow truncate text-[0.95rem] font-extrabold uppercase tracking-[0.12em] text-white sm:text-2xl sm:tracking-[0.14em] md:text-[1.75rem] md:tracking-[0.15em]">
                 LOGICA MARKETING
               </div>
-              <div className="mt-0.5 hidden flex-wrap items-baseline gap-x-2 gap-y-0.5 sm:flex">
-                <span className="text-[11px] text-white/65 sm:text-xs">{tUi("tagline")}</span>
-                <span className="font-mono text-[10px] tracking-wide text-[#00BFFF]/55">
+              <div className="mt-1 hidden flex-wrap items-baseline gap-x-2 sm:flex">
+                <span className="text-[11px] text-white/72 sm:text-xs">
+                  {tUi("tagline")}
+                </span>
+                <span className="font-mono text-[10px] tracking-wide text-[#00BFFF]/60">
                   logicamarketing.pro
                 </span>
               </div>
@@ -144,20 +144,23 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="flex min-w-0 shrink items-center justify-end gap-1 sm:gap-2.5">
+          <div className="flex min-w-0 shrink items-center justify-end gap-1.5 sm:gap-2">
             <nav
               aria-label={tUi("switchTo")}
-              className="flex max-w-[calc(100vw-10rem)] shrink items-center overflow-x-auto rounded-2xl border border-[#00BFFF]/38 bg-[rgba(3,8,22,0.88)] p-1 shadow-[inset_0_1px_0_rgba(0,191,255,0.18),0_4px_32px_rgba(0,191,255,0.14),0_0_1px_rgba(0,191,255,0.5)] backdrop-blur-xl scrollbar-hide [-webkit-overflow-scrolling:touch]"
+              className={cn(
+                "lang-switcher-glass flex max-w-[calc(100vw-11.5rem)] shrink items-center overflow-x-auto p-1 sm:max-w-none sm:p-1.5",
+                "scrollbar-hide [-webkit-overflow-scrolling:touch]"
+              )}
             >
               {routing.locales.map((loc, idx) => {
-                const { flag } = LANG_DISPLAY[loc];
+                const { flag, label } = LANG_DISPLAY[loc];
                 const active = locale === loc;
                 return (
                   <span key={loc} className="flex items-center">
                     {idx > 0 ? (
                       <span
                         aria-hidden
-                        className="shrink-0 select-none px-0.5 text-[11px] font-light text-[#00BFFF]/55 sm:px-1"
+                        className="lang-switcher-sep shrink-0 select-none px-0.5 text-sm font-light sm:px-1.5"
                       >
                         |
                       </span>
@@ -168,60 +171,63 @@ export function Header() {
                       prefetch={false}
                       className={langLinkClass(active)}
                       aria-current={active ? "true" : undefined}
-                      aria-label={LANG_DISPLAY[loc].label}
-                      title={LANG_DISPLAY[loc].label}
+                      aria-label={label}
+                      title={label}
                     >
-                      <span aria-hidden>{flag}</span>
-                      <span className="hidden min-[380px]:inline">{LANG_DISPLAY[loc].label}</span>
+                      <span aria-hidden className="text-[1.05rem] leading-none sm:text-[1.15rem]">
+                        {flag}
+                      </span>
+                      <span className="hidden min-[380px]:inline">{label}</span>
                     </Link>
                   </span>
                 );
               })}
             </nav>
 
-            <div className="hidden items-center gap-2 md:flex">
-              <div className="flex items-center gap-1 rounded-2xl border border-[#00BFFF]/42 bg-[rgba(4,10,26,0.92)] p-1 shadow-[inset_0_1px_0_rgba(0,191,255,0.18),0_6px_28px_rgba(0,191,255,0.14)] backdrop-blur-xl">
-                <span className="brand-glow hidden px-2 text-[10px] font-bold uppercase tracking-[0.14em] text-white md:inline">
-                  {tUi("ctaNow")}
-                </span>
-                <a
-                  href={CONTACTS.telegramHttps}
-                  aria-label={tf("telegramLabel")}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[#00BFFF]/35 bg-[rgba(0,191,255,0.08)] text-[#7AE0FF] shadow-[0_0_20px_rgba(0,191,255,0.2)] transition hover:border-[#00BFFF]/55 hover:bg-[rgba(0,191,255,0.14)] hover-lift"
-                >
-                  <Send className="h-5 w-5" />
-                </a>
-                <a
-                  href={CONTACTS.whatsappHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={tf("whatsappLabel")}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-emerald-400/35 bg-emerald-500/12 text-emerald-300 shadow-[0_0_18px_rgba(52,211,153,0.18)] transition hover:border-emerald-400/55 hover:bg-emerald-500/18 hover-lift"
-                >
-                  <MessageCircle className="h-5 w-5" />
-                </a>
-              </div>
-              <Button href="/#contact" variant="ghost" className="hidden hover-lift xl:inline-flex">
+            {/* Десктоп / планшет: «Связаться» + TG + WA в одной glass-пилюле */}
+            <div className="header-contact-pill hidden flex-nowrap md:flex">
+              <Link
+                href="/#contact"
+                className="shrink-0 rounded-xl px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] text-white transition hover:bg-white/12 sm:px-4 sm:text-sm sm:tracking-[0.14em]"
+              >
                 {t("cta")}
-              </Button>
-            </div>
-
-            <div className="flex items-center gap-1 md:hidden">
+              </Link>
+              <span className="header-contact-pill__divider mx-0.5 my-1.5 sm:mx-1" aria-hidden />
               <a
                 href={CONTACTS.telegramHttps}
                 aria-label={tf("telegramLabel")}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[#00BFFF]/38 bg-[rgba(6,12,28,0.85)] text-[#7AE0FF] shadow-[0_0_18px_rgba(0,191,255,0.22)] transition hover:border-[#00BFFF]/55 hover-lift"
+                className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#00BFFF]/38 bg-[rgba(0,191,255,0.1)] text-[#7AE0FF] shadow-[0_0_22px_rgba(0,191,255,0.25)] transition hover:border-[#00BFFF]/58 hover:bg-[rgba(0,191,255,0.18)] hover-lift"
               >
-                <Send className="h-5 w-5" />
+                <Send className="h-5 w-5" aria-hidden />
               </a>
               <a
                 href={CONTACTS.whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={tf("whatsappLabel")}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-emerald-400/35 bg-emerald-500/12 text-emerald-300 transition hover:border-emerald-400/55 hover-lift"
+                className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-emerald-400/38 bg-emerald-500/14 text-emerald-300 shadow-[0_0_18px_rgba(52,211,153,0.22)] transition hover:border-emerald-400/58 hover:bg-emerald-500/20 hover-lift"
               >
-                <MessageCircle className="h-5 w-5" />
+                <MessageCircle className="h-5 w-5" aria-hidden />
+              </a>
+            </div>
+
+            {/* Мобилка: только быстрые иконки TG/WA */}
+            <div className="flex items-center gap-1 md:hidden">
+              <a
+                href={CONTACTS.telegramHttps}
+                aria-label={tf("telegramLabel")}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[#00BFFF]/42 bg-[rgba(6,14,30,0.9)] text-[#7AE0FF] shadow-[0_0_22px_rgba(0,191,255,0.28)] transition hover:border-[#00BFFF]/60 hover-lift"
+              >
+                <Send className="h-5 w-5" aria-hidden />
+              </a>
+              <a
+                href={CONTACTS.whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={tf("whatsappLabel")}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-emerald-400/40 bg-emerald-500/14 text-emerald-300 shadow-[0_0_18px_rgba(52,211,153,0.2)] transition hover:border-emerald-400/55 hover-lift"
+              >
+                <MessageCircle className="h-5 w-5" aria-hidden />
               </a>
             </div>
 
@@ -244,44 +250,45 @@ export function Header() {
         animate={
           open ? { opacity: 1, pointerEvents: "auto" } : { opacity: 0, pointerEvents: "none" }
         }
+        transition={{ duration: 0.2 }}
         className="fixed inset-0 z-[60] lg:hidden"
       >
         <button
           type="button"
           aria-label={tUi("closeMenu")}
           onClick={() => setOpen(false)}
-          className="absolute inset-0 bg-black/88 backdrop-blur-[3px]"
+          className="absolute inset-0 bg-black/92 backdrop-blur-sm"
         />
         <MotionDiv
           initial={false}
-          animate={open ? { y: 0 } : { y: -10 }}
+          animate={open ? { y: 0, opacity: 1 } : { y: -12, opacity: 0.98 }}
           transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
           className="container-px relative mt-[calc(4.25rem+env(safe-area-inset-top,0px))] pb-[max(1rem,env(safe-area-inset-bottom,0px))] sm:mt-20"
         >
-          <div
-            className={cn(
-              "glass-mobile-drawer rounded-3xl p-4",
-              "border border-[#00BFFF]/50 shadow-[inset_0_1px_0_rgba(0,191,255,0.15),0_24px_64px_rgba(0,0,0,0.65),0_0_56px_rgba(0,191,255,0.22)]"
-            )}
-          >
-            <div className="flex flex-col gap-4 border-b border-white/10 pb-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+          <div className="glass-mobile-drawer rounded-3xl p-4 sm:p-5">
+            <div className="flex flex-col gap-4 border-b border-white/14 pb-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
               <div>
-                <div className="text-sm font-semibold uppercase tracking-[0.2em] text-white/90">
+                <div className="brand-glow text-sm font-bold uppercase tracking-[0.22em] text-white">
                   LOGICA MARKETING
                 </div>
-                <div className="mt-1 font-mono text-[11px] text-[#00BFFF]/70">logicamarketing.pro</div>
+                <div className="mt-1 font-mono text-[11px] text-[#00BFFF]/75">
+                  logicamarketing.pro
+                </div>
               </div>
               <nav
                 aria-label={tUi("switchTo")}
-                className="flex flex-wrap items-center rounded-2xl border border-[#00BFFF]/35 bg-[rgba(4,8,20,0.75)] p-1.5 shadow-[inset_0_1px_0_rgba(0,191,255,0.08)]"
+                className="lang-switcher-glass flex flex-wrap items-center gap-0 p-1.5 sm:self-center"
               >
                 {routing.locales.map((loc, idx) => {
-                  const { flag } = LANG_DISPLAY[loc];
+                  const { flag, label } = LANG_DISPLAY[loc];
                   const active = locale === loc;
                   return (
                     <span key={loc} className="flex items-center">
                       {idx > 0 ? (
-                        <span aria-hidden className="px-1 text-[#00BFFF]/45">
+                        <span
+                          aria-hidden
+                          className="lang-switcher-sep px-1 text-sm font-light sm:px-2"
+                        >
                           |
                         </span>
                       ) : null}
@@ -289,13 +296,16 @@ export function Header() {
                         href={pathname}
                         locale={loc}
                         prefetch={false}
-                        className={cn(langLinkClass(active), "py-2")}
+                        className={cn(langLinkClass(active), "py-2.5")}
                         aria-current={active ? "true" : undefined}
-                        aria-label={LANG_DISPLAY[loc].label}
-                        title={LANG_DISPLAY[loc].label}
+                        aria-label={label}
+                        title={label}
+                        onClick={() => setOpen(false)}
                       >
-                        <span aria-hidden>{flag}</span>
-                        <span className="hidden min-[380px]:inline">{LANG_DISPLAY[loc].label}</span>
+                        <span aria-hidden className="text-[1.15rem] leading-none">
+                          {flag}
+                        </span>
+                        <span>{label}</span>
                       </Link>
                     </span>
                   );
@@ -303,14 +313,15 @@ export function Header() {
               </nav>
             </div>
 
-            <div className="mt-4 grid gap-1">
+            <div className="mt-4 grid gap-2.5">
               {items.map((i) => (
                 <Link
                   key={i.href}
                   href={i.href}
+                  onClick={() => setOpen(false)}
                   className={cn(
-                    navLinkClass(i.active),
-                    "px-4 py-3.5 text-[15px] font-medium"
+                    "drawer-nav-link px-4 py-3.5 text-[15px] font-semibold tracking-tight transition hover:bg-white/10",
+                    i.active ? "drawer-nav-link--active" : ""
                   )}
                 >
                   {i.label}
@@ -318,15 +329,20 @@ export function Header() {
               ))}
             </div>
 
-            <div className="mt-5 rounded-2xl border border-[#00BFFF]/35 bg-[rgba(5,10,24,0.75)] px-4 py-3 text-center shadow-[inset_0_1px_0_rgba(0,191,255,0.1)]">
-              <div className="brand-glow text-xs font-bold uppercase tracking-[0.2em] text-white">
-                {tUi("ctaNow")}
-              </div>
-              <div className="mt-3 flex justify-center gap-4">
+            <div className="header-contact-pill mt-5 flex flex-wrap items-center justify-center gap-2 px-2 py-2 sm:justify-between sm:px-3">
+              <Link
+                href="/#contact"
+                onClick={() => setOpen(false)}
+                className="min-w-0 flex-1 rounded-xl px-3 py-2.5 text-center text-sm font-bold uppercase tracking-[0.16em] text-white transition hover:bg-white/12 sm:flex-none sm:px-5"
+              >
+                {t("cta")}
+              </Link>
+              <span className="header-contact-pill__divider hidden sm:mx-1 sm:block" aria-hidden />
+              <div className="flex justify-center gap-3 sm:gap-2">
                 <a
                   href={CONTACTS.telegramHttps}
                   aria-label={tf("telegramLabel")}
-                  className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-[#00BFFF]/40 bg-[rgba(0,191,255,0.1)] text-[#7AE0FF] shadow-[0_0_24px_rgba(0,191,255,0.2)] transition hover:bg-[rgba(0,191,255,0.18)] hover-lift"
+                  className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-[#00BFFF]/45 bg-[rgba(0,191,255,0.12)] text-[#7AE0FF] shadow-[0_0_28px_rgba(0,191,255,0.28)] transition hover:bg-[rgba(0,191,255,0.22)] hover-lift"
                 >
                   <Send className="h-7 w-7" aria-hidden />
                 </a>
@@ -335,27 +351,31 @@ export function Header() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={tf("whatsappLabel")}
-                  className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-emerald-400/45 bg-emerald-500/15 text-emerald-300 shadow-[0_0_20px_rgba(52,211,153,0.18)] transition hover:bg-emerald-500/22 hover-lift"
+                  className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-emerald-400/50 bg-emerald-500/18 text-emerald-300 shadow-[0_0_24px_rgba(52,211,153,0.25)] transition hover:bg-emerald-500/26 hover-lift"
                 >
                   <MessageCircle className="h-7 w-7" aria-hidden />
                 </a>
               </div>
             </div>
 
-            <div className="mt-4 flex justify-center border-t border-white/12 pt-4">
+            <div className="mt-4 flex justify-center border-t border-white/14 pt-4">
               <a
                 href={CONTACTS.mailto}
-                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-5 py-2.5 text-sm font-semibold text-white/95 transition hover:border-[#00BFFF]/35 hover:bg-white/10"
+                className="inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/[0.08] px-5 py-2.5 text-sm font-semibold text-white transition hover:border-[#00BFFF]/40 hover:bg-white/12"
               >
-                <Mail className="h-5 w-5 text-[#7AE0FF]" />
+                <Mail className="h-5 w-5 text-[#7AE0FF]" aria-hidden />
                 {tf("emailLabel")}
               </a>
             </div>
 
             <div className="mt-4 px-0.5">
-              <Button href="/#contact" variant="ghost" className="hover-lift w-full border border-white/15 bg-white/[0.06] py-3.5 text-base font-semibold text-white hover:bg-white/10">
+              <Link
+                href="/#contact"
+                onClick={() => setOpen(false)}
+                className="hover-lift inline-flex w-full items-center justify-center rounded-xl border border-white/16 bg-white/[0.08] py-3.5 text-base font-semibold text-white transition hover:bg-white/12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+              >
                 {t("cta")} — {tUi("ctaFormHint")}
-              </Button>
+              </Link>
             </div>
           </div>
         </MotionDiv>

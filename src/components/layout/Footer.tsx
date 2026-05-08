@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/navigation";
 import { CONTACTS } from "@/lib/contacts";
 
+/** Футер: TG/WA — только иконки визуально; подписи только для скринридеров (sr-only). */
 export function Footer() {
   const t = useTranslations("nav");
   const f = useTranslations("footer");
@@ -55,19 +56,23 @@ export function Footer() {
               <div className="mt-6 flex flex-wrap gap-3">
                 <a
                   href={CONTACTS.telegramHttps}
-                  className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-primary/35 bg-primary/10 shadow-[0_12px_40px_rgba(0,191,255,0.12)] transition hover:border-primary/55 hover:bg-primary/18 hover-lift"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={f("ariaTelegram")}
+                  className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-primary/35 bg-primary/10 shadow-[0_12px_40px_rgba(0,191,255,0.12)] transition hover:border-primary/55 hover:bg-primary/18 hover-lift"
                 >
-                  <Send className="h-7 w-7 text-primary" aria-hidden />
+                  <span className="sr-only">{f("telegramLabel")}</span>
+                  <Send className="h-7 w-7 text-primary pointer-events-none" aria-hidden />
                 </a>
                 <a
                   href={CONTACTS.whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-emerald-400/25 bg-emerald-500/12 shadow-[0_12px_40px_rgba(16,185,129,0.1)] transition hover:border-emerald-400/45 hover:bg-emerald-500/18 hover-lift"
                   aria-label={f("ariaWhatsapp")}
+                  className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-emerald-400/25 bg-emerald-500/12 shadow-[0_12px_40px_rgba(16,185,129,0.1)] transition hover:border-emerald-400/45 hover:bg-emerald-500/18 hover-lift"
                 >
-                  <MessageCircle className="h-7 w-7 text-emerald-400" aria-hidden />
+                  <span className="sr-only">{f("whatsappLabel")}</span>
+                  <MessageCircle className="h-7 w-7 text-emerald-400 pointer-events-none" aria-hidden />
                 </a>
               </div>
 
@@ -76,7 +81,7 @@ export function Footer() {
                 className="mt-4 inline-flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-white/85 transition hover:bg-white/10 hover-lift sm:inline-flex"
                 aria-label={f("ariaEmail")}
               >
-                <Mail className="h-5 w-5 shrink-0 text-primary" />
+                <Mail className="h-5 w-5 shrink-0 text-primary" aria-hidden />
                 <span className="truncate">{CONTACTS.email}</span>
               </a>
             </div>
@@ -101,19 +106,23 @@ export function Footer() {
               <div className="mt-4 flex flex-wrap gap-3">
                 <a
                   href={CONTACTS.telegramHttps}
-                  className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-primary/25 bg-primary/8 shadow-[0_8px_28px_rgba(0,191,255,0.1)] transition hover:border-primary/45 hover:bg-primary/14 hover-lift"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={f("ariaTelegram")}
+                  className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-primary/25 bg-primary/8 shadow-[0_8px_28px_rgba(0,191,255,0.1)] transition hover:border-primary/45 hover:bg-primary/14 hover-lift"
                 >
-                  <Send className="h-7 w-7 text-primary" aria-hidden />
+                  <span className="sr-only">{f("telegramLabel")}</span>
+                  <Send className="h-7 w-7 text-primary pointer-events-none" aria-hidden />
                 </a>
                 <a
                   href={CONTACTS.whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-emerald-400/22 bg-emerald-500/10 transition hover:border-emerald-400/40 hover:bg-emerald-500/16 hover-lift"
                   aria-label={f("ariaWhatsapp")}
+                  className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-emerald-400/22 bg-emerald-500/10 transition hover:border-emerald-400/40 hover:bg-emerald-500/16 hover-lift"
                 >
-                  <MessageCircle className="h-7 w-7 text-emerald-400" aria-hidden />
+                  <span className="sr-only">{f("whatsappLabel")}</span>
+                  <MessageCircle className="h-7 w-7 text-emerald-400 pointer-events-none" aria-hidden />
                 </a>
                 <a
                   href={CONTACTS.mailto}

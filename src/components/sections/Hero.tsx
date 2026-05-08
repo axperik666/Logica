@@ -13,6 +13,8 @@ import { Link } from "@/navigation";
 import { Mail, MessageCircle, Send } from "lucide-react";
 import { CONTACTS } from "@/lib/contacts";
 
+const easeOutExpo = [0.16, 1, 0.3, 1] as const;
+
 export function Hero() {
   const t = useTranslations("hero");
   const tSec = useTranslations("sectionsSeo");
@@ -34,18 +36,23 @@ export function Hero() {
     ? (statsRaw as { k: string; v: string }[])
     : [];
 
+  const stagger = reduceMotion ? 0 : 0.09;
+  const delayChild = reduceMotion ? 0 : 0.05;
+
   return (
     <MotionSection
       ref={sectionRef}
       id="hero"
       className="tech-bg relative min-h-[100svh] overflow-x-clip py-12 pt-[calc(5.75rem+env(safe-area-inset-top,0px))] pb-14 sm:min-h-screen sm:overflow-x-visible sm:py-20 sm:pt-28 sm:pb-20"
-      initial={false}
+      initial="hidden"
       animate="show"
       variants={{
+        hidden: {},
         show: {
           transition: {
-            staggerChildren: reduceMotion ? 0 : 0.06,
-            delayChildren: reduceMotion ? 0 : 0.02
+            staggerChildren: stagger,
+            delayChildren: delayChild,
+            when: "beforeChildren"
           }
         }
       }}
@@ -83,34 +90,23 @@ export function Hero() {
 
           <MotionDiv
             variants={{
-              hidden: { opacity: 0, y: -16 },
-              show: {
-                opacity: 1,
-                y: 0,
-                transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] }
-              }
-            }}
-            className="inline-flex items-center gap-2 rounded-full border border-[#00BFFF]/35 bg-[rgba(4,8,22,0.75)] px-4 py-1.5 text-xs font-medium text-white/95 shadow-[inset_0_1px_0_rgba(0,191,255,0.15),0_8px_32px_rgba(0,191,255,0.12)] backdrop-blur-md"
-          >
-            <span className="brand-glow">{t("badge")}</span>
-          </MotionDiv>
-
-          <MotionDiv
-            variants={{
-              hidden: { opacity: 0, y: 22, scale: 0.98 },
+              hidden: { opacity: 0, y: 36, scale: 0.96 },
               show: {
                 opacity: 1,
                 y: 0,
                 scale: 1,
-                transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] }
+                transition: {
+                  duration: reduceMotion ? 0.2 : 0.95,
+                  ease: easeOutExpo
+                }
               }
             }}
           >
-            <h1 className="brand-glow mt-6 text-balance break-words text-4xl font-extrabold tracking-[-0.03em] text-white drop-shadow-[0_8px_48px_rgba(0,191,255,0.42)] sm:text-5xl sm:tracking-tight md:text-6xl lg:text-7xl lg:leading-[1.05]">
+            <h1 className="brand-glow mt-6 text-balance break-words text-[clamp(2rem,6.5vw,5.45rem)] font-black leading-[1.02] tracking-[-0.045em] text-white sm:tracking-[-0.04em] md:leading-[1.03] md:tracking-[-0.038em] drop-shadow-[0_16px_80px_rgba(0,191,255,0.55)] [text-shadow:0_2px_0_rgba(0,0,0,0.35),0_0_60px_rgba(0,191,255,0.45)]">
               {t.rich("title", {
                 br: () => <br />,
                 highlight: (chunks) => (
-                  <span className="text-[#C9F9FF] drop-shadow-[0_0_36px_rgba(0,191,255,0.55)]">
+                  <span className="relative inline-block bg-gradient-to-r from-[#E8FDFF] via-[#7AE0FF] to-[#00BFFF] bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(0,191,255,0.75)]">
                     {chunks}
                   </span>
                 )
@@ -120,18 +116,22 @@ export function Hero() {
 
           <MotionDiv
             variants={{
-              hidden: { opacity: 0, y: 18 },
+              hidden: { opacity: 0, y: 22 },
               show: {
                 opacity: 1,
                 y: 0,
-                transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.05 }
+                transition: {
+                  duration: 0.78,
+                  ease: easeOutExpo,
+                  delay: reduceMotion ? 0 : 0.06
+                }
               }
             }}
           >
-            <p className="mt-6 max-w-3xl text-base font-medium leading-relaxed text-white/95 sm:text-lg sm:leading-relaxed">
+            <p className="mt-7 max-w-3xl text-[1.05rem] font-semibold leading-relaxed text-white sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed">
               {t.rich("subtitle", {
                 roi: (chunks) => (
-                  <span className="brand-glow mx-0.5 inline font-bold text-[#B8F6FF] drop-shadow-[0_0_28px_rgba(0,191,255,0.65)]">
+                  <span className="mx-0.5 inline font-extrabold text-[#D8FDFF] drop-shadow-[0_0_32px_rgba(0,191,255,0.85)]">
                     {chunks}
                   </span>
                 )
@@ -141,96 +141,75 @@ export function Hero() {
 
           <MotionDiv
             variants={{
-              hidden: { opacity: 0, y: 12 },
+              hidden: { opacity: 0, y: 18 },
               show: {
                 opacity: 1,
                 y: 0,
-                transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] }
+                transition: { duration: 0.65, ease: easeOutExpo }
               }
             }}
-          >
-            <nav
-              aria-label={t("internalNavAria")}
-              className="scrollbar-hide mt-8 flex flex-nowrap gap-x-3 overflow-x-auto overflow-y-hidden border-t border-white/18 pt-8 text-sm text-white/78 [-webkit-overflow-scrolling:touch]"
-            >
-              <Link
-                href="/uslugi"
-                className="shrink-0 whitespace-nowrap font-semibold text-[#9AE8FF] underline-offset-4 transition hover:text-white hover:underline"
-              >
-                {t("internalNavServices")}
-              </Link>
-              <span className="shrink-0 text-[#00BFFF]/40" aria-hidden>
-                ·
-              </span>
-              <Link
-                href="/kejsy"
-                className="shrink-0 whitespace-nowrap font-semibold text-[#9AE8FF] underline-offset-4 transition hover:text-white hover:underline"
-              >
-                {t("internalNavCasesPage")}
-              </Link>
-              <span className="shrink-0 text-[#00BFFF]/40" aria-hidden>
-                ·
-              </span>
-              <Link
-                href="/#cases"
-                className="shrink-0 whitespace-nowrap font-semibold text-[#9AE8FF] underline-offset-4 transition hover:text-white hover:underline"
-              >
-                {t("internalNavCasesAnchor")}
-              </Link>
-              <span className="shrink-0 text-[#00BFFF]/40" aria-hidden>
-                ·
-              </span>
-              <Link
-                href="/#testimonials"
-                className="shrink-0 whitespace-nowrap font-semibold text-[#9AE8FF] underline-offset-4 transition hover:text-white hover:underline"
-              >
-                {t("internalNavTestimonials")}
-              </Link>
-              <span className="shrink-0 text-[#00BFFF]/40" aria-hidden>
-                ·
-              </span>
-              <Link
-                href="/o-nas"
-                className="shrink-0 whitespace-nowrap font-semibold text-[#9AE8FF] underline-offset-4 transition hover:text-white hover:underline"
-              >
-                {t("internalNavAbout")}
-              </Link>
-              <span className="shrink-0 text-[#00BFFF]/40" aria-hidden>
-                ·
-              </span>
-              <Link
-                href="/#contact"
-                className="shrink-0 whitespace-nowrap font-semibold text-[#9AE8FF] underline-offset-4 transition hover:text-white hover:underline"
-              >
-                {t("internalNavContact")}
-              </Link>
-            </nav>
-          </MotionDiv>
-
-          <MotionDiv
-            variants={{
-              hidden: { opacity: 0, y: 16 },
-              show: {
-                opacity: 1,
-                y: 0,
-                transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] }
-              }
-            }}
-            className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
+            className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
           >
             <Button
               href="/#contact"
-              className="btn-cta-premium w-full min-h-[3.25rem] px-8 text-base shadow-[0_14px_48px_rgba(0,191,255,0.35)] sm:w-auto hover-lift"
+              className="btn-cta-premium w-full min-h-[3.35rem] px-8 text-base font-bold shadow-[0_18px_56px_rgba(0,191,255,0.42)] sm:w-auto hover-lift"
             >
               {t("ctaPrimary")}
             </Button>
             <Button
               href="/#cases"
               variant="ghost"
-              className="w-full min-h-[3.25rem] border border-[#00BFFF]/38 bg-[rgba(8,12,28,0.82)] px-8 text-base font-semibold text-white shadow-[inset_0_1px_0_rgba(0,191,255,0.14),0_10px_40px_rgba(0,191,255,0.14)] backdrop-blur-md sm:w-auto hover-lift hover:border-[#00BFFF]/55 hover:bg-[rgba(0,191,255,0.1)] hover:text-white"
+              className="w-full min-h-[3.35rem] border border-[#00BFFF]/48 bg-[rgba(6,14,32,0.92)] px-8 text-base font-bold text-white shadow-[inset_0_1px_0_rgba(0,191,255,0.18),0_12px_44px_rgba(0,191,255,0.2)] backdrop-blur-md sm:w-auto hover-lift hover:border-[#00BFFF]/62 hover:bg-[rgba(0,191,255,0.14)] hover:text-white"
             >
               {t("ctaSecondary")}
             </Button>
+          </MotionDiv>
+
+          {/* Быстрые мессенджеры сразу под основными CTA */}
+          <MotionDiv
+            variants={{
+              hidden: { opacity: 0, y: 16 },
+              show: {
+                opacity: 1,
+                y: 0,
+                transition: {
+                  duration: 0.62,
+                  ease: easeOutExpo,
+                  delay: reduceMotion ? 0 : 0.04
+                }
+              }
+            }}
+            className="mt-5"
+          >
+            <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.26em] text-[#B8E8FF] sm:text-xs">
+              {t("quickMessengersLabel")}
+            </p>
+            <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-row sm:gap-4">
+              <a
+                href={CONTACTS.telegramHttps}
+                aria-label={t("contactTelegram")}
+                className="group inline-flex min-h-[3.25rem] items-center justify-center gap-2.5 rounded-2xl border border-[#00BFFF]/52 bg-[rgba(0,191,255,0.14)] px-4 py-3 text-sm font-bold text-white shadow-[0_0_36px_rgba(0,191,255,0.35),inset_0_1px_0_rgba(255,255,255,0.12)] transition hover:border-[#00BFFF]/75 hover:bg-[rgba(0,191,255,0.24)] hover:shadow-[0_0_48px_rgba(0,191,255,0.45)] hover-lift sm:min-w-[11rem] sm:px-6"
+              >
+                <Send
+                  className="h-6 w-6 shrink-0 text-[#9AE8FF] transition group-hover:scale-110"
+                  aria-hidden
+                />
+                <span className="truncate">{t("contactTelegram")}</span>
+              </a>
+              <a
+                href={CONTACTS.whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t("contactWhatsapp")}
+                className="group inline-flex min-h-[3.25rem] items-center justify-center gap-2.5 rounded-2xl border border-emerald-400/48 bg-emerald-500/18 px-4 py-3 text-sm font-bold text-white shadow-[0_0_32px_rgba(52,211,153,0.28),inset_0_1px_0_rgba(255,255,255,0.08)] transition hover:border-emerald-400/68 hover:bg-emerald-500/28 hover:shadow-[0_0_44px_rgba(52,211,153,0.38)] hover-lift sm:min-w-[11rem] sm:px-6"
+              >
+                <MessageCircle
+                  className="h-6 w-6 shrink-0 text-emerald-200 transition group-hover:scale-110"
+                  aria-hidden
+                />
+                <span className="truncate">{t("contactWhatsapp")}</span>
+              </a>
+            </div>
           </MotionDiv>
 
           <MotionDiv
@@ -239,32 +218,18 @@ export function Hero() {
               show: {
                 opacity: 1,
                 y: 0,
-                transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.06 }
+                transition: { duration: 0.58, ease: easeOutExpo }
               }
             }}
-            className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3"
+            className="mt-7 flex justify-center sm:justify-start"
           >
-            <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/80">
-              {t("quickMessengersLabel")}
-            </span>
-            <div className="flex items-center gap-3">
-              <a
-                href={CONTACTS.telegramHttps}
-                aria-label={t("contactTelegram")}
-                className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[#00BFFF]/45 bg-[rgba(0,191,255,0.12)] text-[#B8F6FF] shadow-[0_0_32px_rgba(0,191,255,0.35)] transition hover:scale-105 hover:border-[#00BFFF]/65 hover:bg-[rgba(0,191,255,0.2)] hover-lift"
-              >
-                <Send className="h-6 w-6" aria-hidden />
-              </a>
-              <a
-                href={CONTACTS.whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={t("contactWhatsapp")}
-                className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-emerald-400/45 bg-emerald-500/15 text-emerald-300 shadow-[0_0_26px_rgba(52,211,153,0.28)] transition hover:scale-105 hover:border-emerald-400/65 hover:bg-emerald-500/22 hover-lift"
-              >
-                <MessageCircle className="h-6 w-6" aria-hidden />
-              </a>
-            </div>
+            <a
+              href={CONTACTS.mailto}
+              className="inline-flex items-center gap-2 rounded-full border border-white/28 bg-white/[0.11] px-5 py-2.5 text-sm font-bold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.14)] transition hover:border-[#00BFFF]/48 hover:bg-white/18 hover-lift"
+            >
+              <Mail className="h-5 w-5 shrink-0 text-[#9AE8FF]" aria-hidden />
+              {t("contactEmail")}
+            </a>
           </MotionDiv>
 
           <MotionDiv
@@ -273,18 +238,66 @@ export function Hero() {
               show: {
                 opacity: 1,
                 y: 0,
-                transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }
+                transition: { duration: 0.62, ease: easeOutExpo }
               }
             }}
-            className="mt-6 flex justify-center sm:justify-start"
           >
-            <a
-              href={CONTACTS.mailto}
-              className="inline-flex items-center gap-2 rounded-full border border-white/22 bg-white/[0.09] px-5 py-2.5 text-sm font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] transition hover:border-[#00BFFF]/40 hover:bg-white/14 hover-lift"
+            <nav
+              aria-label={t("internalNavAria")}
+              className="scrollbar-hide mt-10 flex flex-nowrap gap-x-3 overflow-x-auto overflow-y-hidden border-t border-white/22 pt-10 text-sm font-semibold text-[#C8F6FF] [-webkit-overflow-scrolling:touch]"
             >
-              <Mail className="h-5 w-5 shrink-0 text-[#7AE0FF]" aria-hidden />
-              {t("contactEmail")}
-            </a>
+              <Link
+                href="/uslugi"
+                className="shrink-0 whitespace-nowrap underline-offset-4 transition hover:text-white hover:underline"
+              >
+                {t("internalNavServices")}
+              </Link>
+              <span className="shrink-0 text-[#00BFFF]/55" aria-hidden>
+                ·
+              </span>
+              <Link
+                href="/kejsy"
+                className="shrink-0 whitespace-nowrap underline-offset-4 transition hover:text-white hover:underline"
+              >
+                {t("internalNavCasesPage")}
+              </Link>
+              <span className="shrink-0 text-[#00BFFF]/55" aria-hidden>
+                ·
+              </span>
+              <Link
+                href="/#cases"
+                className="shrink-0 whitespace-nowrap underline-offset-4 transition hover:text-white hover:underline"
+              >
+                {t("internalNavCasesAnchor")}
+              </Link>
+              <span className="shrink-0 text-[#00BFFF]/55" aria-hidden>
+                ·
+              </span>
+              <Link
+                href="/#testimonials"
+                className="shrink-0 whitespace-nowrap underline-offset-4 transition hover:text-white hover:underline"
+              >
+                {t("internalNavTestimonials")}
+              </Link>
+              <span className="shrink-0 text-[#00BFFF]/55" aria-hidden>
+                ·
+              </span>
+              <Link
+                href="/o-nas"
+                className="shrink-0 whitespace-nowrap underline-offset-4 transition hover:text-white hover:underline"
+              >
+                {t("internalNavAbout")}
+              </Link>
+              <span className="shrink-0 text-[#00BFFF]/55" aria-hidden>
+                ·
+              </span>
+              <Link
+                href="/#contact"
+                className="shrink-0 whitespace-nowrap underline-offset-4 transition hover:text-white hover:underline"
+              >
+                {t("internalNavContact")}
+              </Link>
+            </nav>
           </MotionDiv>
 
           {stats.length > 0 ? (
@@ -292,7 +305,10 @@ export function Hero() {
               variants={{
                 hidden: {},
                 show: {
-                  transition: { staggerChildren: 0.07, delayChildren: 0.08 }
+                  transition: {
+                    staggerChildren: reduceMotion ? 0 : 0.08,
+                    delayChildren: reduceMotion ? 0 : 0.06
+                  }
                 }
               }}
               className="mt-12 grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3"
@@ -301,17 +317,22 @@ export function Hero() {
                 <MotionDiv
                   key={x.k}
                   variants={{
-                    hidden: { opacity: 0, y: 14 },
+                    hidden: { opacity: 0, y: 18 },
                     show: {
                       opacity: 1,
                       y: 0,
-                      transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] }
+                      transition: {
+                        duration: 0.58,
+                        ease: easeOutExpo
+                      }
                     }
                   }}
-                  className="glass hover-lift rounded-2xl border border-white/12 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] sm:p-4"
+                  className="glass hover-lift rounded-2xl border border-white/16 bg-white/[0.04] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] sm:p-4"
                 >
-                  <p className="text-sm font-semibold text-white">{x.k}</p>
-                  <div className="mt-1 text-xs font-medium text-white/78">{x.v}</div>
+                  <p className="text-sm font-bold text-white">{x.k}</p>
+                  <div className="mt-1 text-xs font-semibold text-[#D2F5FF]/95">
+                    {x.v}
+                  </div>
                 </MotionDiv>
               ))}
             </MotionDiv>

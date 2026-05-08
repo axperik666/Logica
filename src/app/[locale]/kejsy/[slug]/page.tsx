@@ -7,12 +7,13 @@ export function generateStaticParams() {
   return cases.map((c) => ({ slug: c.slug }));
 }
 
-export function generateMetadata({
+export async function generateMetadata({
   params
 }: {
-  params: { slug: string };
-}): Metadata {
-  const c = getCase(params.slug);
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const c = getCase(slug);
   if (!c) return {};
   return {
     title: c.title,

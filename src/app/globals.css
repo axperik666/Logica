@@ -139,19 +139,47 @@ main {
   text-shadow: 0 0 25px rgba(0, 191, 255, 0.6);
 }
 
-/* Шапка: усиленный glass + явное свечение #00BFFF */
+/* Шапка: максимально плотный glass + линия свечения #00BFFF снизу */
 header.site-header.glass-nav {
-  backdrop-filter: blur(32px) saturate(1.35);
-  -webkit-backdrop-filter: blur(32px) saturate(1.35);
-  background: rgba(3, 6, 18, 0.92) !important;
-  border-bottom: 1px solid rgba(0, 191, 255, 0.62);
+  position: relative;
+  backdrop-filter: blur(40px) saturate(1.45);
+  -webkit-backdrop-filter: blur(40px) saturate(1.45);
+  background: linear-gradient(
+      180deg,
+      rgba(5, 9, 22, 0.94) 0%,
+      rgba(3, 6, 16, 0.9) 100%
+    )
+    !important;
+  border-bottom: 1px solid rgba(0, 191, 255, 0.68);
   box-shadow:
-    inset 0 1px 0 rgba(0, 191, 255, 0.22),
-    0 1px 0 rgba(0, 191, 255, 0.52),
-    0 12px 44px rgba(0, 0, 0, 0.58),
-    0 0 72px rgba(0, 191, 255, 0.34),
-    0 0 1px rgba(0, 191, 255, 0.72),
-    0 14px 56px rgba(0, 191, 255, 0.14);
+    inset 0 1px 0 rgba(0, 191, 255, 0.26),
+    0 1px 0 rgba(0, 191, 255, 0.58),
+    0 14px 52px rgba(0, 0, 0, 0.62),
+    0 0 88px rgba(0, 191, 255, 0.38),
+    0 0 1px rgba(0, 191, 255, 0.78),
+    0 16px 60px rgba(0, 191, 255, 0.16);
+}
+
+header.site-header.glass-nav::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 2px;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 191, 255, 0.35) 15%,
+    #00bfff 50%,
+    rgba(0, 191, 255, 0.35) 85%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 22px #00bfff,
+    0 0 48px rgba(0, 191, 255, 0.55),
+    0 0 80px rgba(0, 191, 255, 0.28);
+  opacity: 0.98;
 }
 
 .btn-burger-glass {
@@ -162,17 +190,38 @@ header.site-header.glass-nav {
   box-shadow: 0 4px 22px rgba(0, 191, 255, 0.12);
 }
 
-/* Мобильное меню — плотнее фон и контур, чтобы читалось на tech-bg */
+/* Мобильное меню — максимальный контраст на tech-bg */
 .glass-mobile-drawer {
-  background: rgba(4, 6, 16, 0.98);
-  backdrop-filter: blur(32px) saturate(1.25);
-  -webkit-backdrop-filter: blur(32px) saturate(1.25);
-  border: 1px solid rgba(0, 191, 255, 0.55);
+  background: linear-gradient(
+    165deg,
+    rgba(2, 4, 12, 0.99) 0%,
+    rgba(5, 8, 20, 0.98) 100%
+  );
+  backdrop-filter: blur(36px) saturate(1.35);
+  -webkit-backdrop-filter: blur(36px) saturate(1.35);
+  border: 1px solid rgba(0, 191, 255, 0.62);
   box-shadow:
-    0 24px 64px rgba(0, 0, 0, 0.72),
-    0 0 0 1px rgba(0, 191, 255, 0.2),
-    0 0 56px rgba(0, 191, 255, 0.32),
-    inset 0 1px 0 rgba(0, 191, 255, 0.12);
+    0 28px 72px rgba(0, 0, 0, 0.78),
+    0 0 0 1px rgba(0, 191, 255, 0.25),
+    0 0 64px rgba(0, 191, 255, 0.38),
+    inset 0 1px 0 rgba(0, 191, 255, 0.18);
+}
+
+.drawer-nav-link {
+  display: block;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.96) !important;
+}
+
+.drawer-nav-link--active {
+  border-color: rgba(0, 191, 255, 0.55);
+  background: rgba(0, 191, 255, 0.14);
+  color: #fff !important;
+  box-shadow:
+    inset 0 1px 0 rgba(0, 191, 255, 0.22),
+    0 0 28px rgba(0, 191, 255, 0.28);
 }
 
 /* Vignette по краям секции (Hero + CTA) */
@@ -201,13 +250,74 @@ header.site-header.glass-nav {
 /* Header без «подпрыгивания» при hover (карточный .glass:hover) */
 header.site-header.glass-nav:hover {
   transform: none !important;
-  border-color: rgba(0, 191, 255, 0.72);
+  border-color: rgba(0, 191, 255, 0.82);
   box-shadow:
-    inset 0 1px 0 rgba(0, 191, 255, 0.28),
-    0 1px 0 rgba(0, 191, 255, 0.55),
-    0 14px 48px rgba(0, 191, 255, 0.22),
-    0 10px 40px rgba(0, 0, 0, 0.55),
-    0 0 72px rgba(0, 191, 255, 0.35);
+    inset 0 1px 0 rgba(0, 191, 255, 0.32),
+    0 1px 0 rgba(0, 191, 255, 0.62),
+    0 16px 52px rgba(0, 191, 255, 0.26),
+    0 12px 44px rgba(0, 0, 0, 0.58),
+    0 0 92px rgba(0, 191, 255, 0.42);
+}
+
+header.site-header.glass-nav:hover::after {
+  opacity: 1;
+  box-shadow:
+    0 0 28px #00bfff,
+    0 0 56px rgba(0, 191, 255, 0.62),
+    0 0 96px rgba(0, 191, 255, 0.35);
+}
+
+/* Переключатель языков — отдельный glass-блок */
+.lang-switcher-glass {
+  border-radius: 1rem;
+  border: 1px solid rgba(0, 191, 255, 0.48);
+  background: linear-gradient(
+    155deg,
+    rgba(10, 18, 38, 0.94) 0%,
+    rgba(4, 10, 26, 0.88) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(0, 191, 255, 0.22),
+    0 6px 32px rgba(0, 0, 0, 0.48),
+    0 0 40px rgba(0, 191, 255, 0.2);
+  backdrop-filter: blur(28px) saturate(1.45);
+  -webkit-backdrop-filter: blur(28px) saturate(1.45);
+}
+
+.lang-switcher-sep {
+  color: rgba(0, 191, 255, 0.65);
+  text-shadow: 0 0 12px rgba(0, 191, 255, 0.65);
+}
+
+/* Пилюля «Связаться» + мессенджеры */
+.header-contact-pill {
+  align-items: center;
+  border-radius: 1rem;
+  border: 1px solid rgba(0, 191, 255, 0.48);
+  background: linear-gradient(
+    165deg,
+    rgba(6, 14, 32, 0.94),
+    rgba(3, 8, 22, 0.9)
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(0, 191, 255, 0.2),
+    0 8px 36px rgba(0, 191, 255, 0.14),
+    0 6px 28px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(22px) saturate(1.35);
+  -webkit-backdrop-filter: blur(22px) saturate(1.35);
+}
+
+.header-contact-pill__divider {
+  align-self: stretch;
+  width: 1px;
+  min-height: 2.25rem;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(0, 191, 255, 0.45),
+    transparent
+  );
+  opacity: 0.85;
 }
 
 @layer utilities {
