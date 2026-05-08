@@ -14,6 +14,10 @@
       "metaTitle": "Performance marketing & revenue growth — LOGICA Marketing",
       "metaDescription": "Strategy, websites and landing pages, Meta / Google / TikTok ads and analytics — turning traffic into pipeline and measurable ROI for B2B and B2C."
     },
+    "platforms": {
+      "metaTitle": "Ad platforms — Google Ads, Meta, TikTok, Yandex, VK, Telegram",
+      "metaDescription": "Campaign execution across major channels: search, social, video and performance — unified attribution and scalable optimization."
+    },
     "services": {
       "metaTitle": "LOGICA Marketing services — performance, SEO, SMM & web",
       "metaDescription": "Paid social & search, SEO and content, SMM, premium Next.js landing pages and funnel optimization tailored to your niche."
@@ -417,6 +421,19 @@
         "faceIdx": 85
       }
     ]
+  },
+  "platforms": {
+    "badge": "Major ad platforms",
+    "title": "We launch campaigns across every key channel",
+    "subtitle": "Targeting • Search • Video • Performance",
+    "items": {
+      "google": "Google Ads",
+      "meta": "Meta (Facebook + Instagram)",
+      "tiktok": "TikTok Ads",
+      "yandex": "Yandex Direct",
+      "vk": "VK Ads",
+      "telegram": "Telegram Ads"
+    }
   },
   "whyUs": {
     "badge": "Advantages",

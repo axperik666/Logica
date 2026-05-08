@@ -22,6 +22,7 @@ export async function HomePageJsonLd() {
 
   const sectionAnchors: { key: string; hash: string }[] = [
     { key: "hero", hash: "#hero" },
+    { key: "platforms", hash: "#platforms" },
     { key: "whyUs", hash: "#why-us" },
     { key: "process", hash: "#process" },
     { key: "services", hash: "#services" },

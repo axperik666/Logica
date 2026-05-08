@@ -14,6 +14,10 @@
       "metaTitle": "Performance-маркетинг и рост продаж — LOGICA Marketing",
       "metaDescription": "Стратегия, сайты и лендинги, реклама Meta / Google / TikTok и аналитика: превращаем трафик в заявки и измеримый ROI для B2B и B2C."
     },
+    "platforms": {
+      "metaTitle": "Рекламные платформы — Google Ads, Meta, TikTok, Яндекс, VK, Telegram",
+      "metaDescription": "Запуск и оптимизация кампаний на ключевых площадках: контекст, таргет, видео и performance — единая логика атрибуции и масштабирования."
+    },
     "services": {
       "metaTitle": "Услуги LOGICA Marketing — performance, SEO, SMM и разработка",
       "metaDescription": "Таргет и контекст, SEO и контент, SMM, премиальные лендинги на Next.js и оптимизация воронки под вашу нишу."
@@ -417,6 +421,19 @@
         "faceIdx": 85
       }
     ]
+  },
+  "platforms": {
+    "badge": "Работаем с ведущими платформами",
+    "title": "Запускаем рекламу на всех ключевых площадках",
+    "subtitle": "Таргет • Контекст • Видео • Performance",
+    "items": {
+      "google": "Google Ads",
+      "meta": "Meta (Facebook + Instagram)",
+      "tiktok": "TikTok Ads",
+      "yandex": "Яндекс Директ",
+      "vk": "VK Ads",
+      "telegram": "Telegram Ads"
+    }
   },
   "whyUs": {
     "badge": "Преимущества",
