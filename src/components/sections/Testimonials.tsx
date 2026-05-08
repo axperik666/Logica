@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import {
   AnimatePresence,
@@ -12,6 +11,7 @@ import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
 import { MotionDiv, MotionSection } from "@/components/motion";
 import { useLocale, useTranslations } from "next-intl";
 import { useNarrowViewport } from "@/lib/use-narrow-viewport";
+import { cn } from "@/lib/cn";
 
 const AUTO_MS_DESKTOP = 7200;
 const AUTO_MS_NARROW = 5200;
@@ -25,9 +25,18 @@ type Item = {
   faceIdx: number;
 };
 
+function initials(name: string) {
+  const parts = name
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+  const a = parts[0]?.[0] ?? "";
+  const b = (parts[1]?.[0] ?? parts[0]?.[1] ?? "").toString();
+  return (a + b).toUpperCase();
+}
+
 export function Testimonials() {
   const t = useTranslations("testimonials");
-  const tAvatar = useTranslations("seo");
   const tSec = useTranslations("sectionsSeo");
   const locale = useLocale();
   const rawItems = t.raw("items");
@@ -181,15 +190,17 @@ export function Testimonials() {
                 className="glass-hover-glow glass rounded-[2rem] p-6 sm:p-8"
               >
                 <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
-                  <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-2xl ring-2 ring-[rgba(0,191,255,0.25)]">
-                    <Image
-                      src={`https://randomuser.me/api/portraits/${testimonial.face}/${testimonial.faceIdx}.jpg`}
-                      alt={tAvatar("avatarAlt", { name: testimonial.name })}
-                      fill
-                      sizes="64px"
-                      className="object-cover"
-                      loading="lazy"
-                    />
+                  <div
+                    aria-hidden="true"
+                    className={cn(
+                      "relative grid h-16 w-16 shrink-0 place-items-center overflow-hidden rounded-2xl ring-2 ring-[rgba(0,191,255,0.22)]",
+                      "bg-[radial-gradient(circle_at_30%_25%,rgba(0,191,255,0.25)_0%,transparent_55%),radial-gradient(circle_at_70%_70%,rgba(138,43,226,0.18)_0%,transparent_60%),linear-gradient(160deg,rgba(8,12,28,0.92)_0%,rgba(4,8,20,0.86)_100%)]",
+                      "shadow-[0_0_26px_rgba(0,191,255,0.18)]"
+                    )}
+                  >
+                    <span className="font-semibold tracking-[0.08em] text-white/85">
+                      {initials(testimonial.name)}
+                    </span>
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-start justify-between gap-3">
