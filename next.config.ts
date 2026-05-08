@@ -5,11 +5,6 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const nextConfig: NextConfig = {
   output: "standalone",
-  async rewrites() {
-    return {
-      beforeFiles: [{ source: "/", destination: "/ru" }]
-    };
-  },
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
