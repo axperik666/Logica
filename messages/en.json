@@ -29,6 +29,22 @@
     "cta": {
       "metaTitle": "Contact LOGICA Marketing — audit & growth strategy",
       "metaDescription": "Contact form and fast replies on Telegram or WhatsApp — our team responds within 15 minutes. Clear language, no ROI jargon."
+    },
+    "whyUs": {
+      "metaTitle": "Why LOGICA Marketing — agency strengths",
+      "metaDescription": "Performance-first delivery, transparent economics and premium UX: projects, metric lifts and a calm execution rhythm."
+    },
+    "process": {
+      "metaTitle": "How LOGICA Marketing works — from audit to scale",
+      "metaDescription": "Five steps: diagnosis, strategy, launch, data-led optimization and scaling of winning bundles."
+    },
+    "clients": {
+      "metaTitle": "Trusted by brands — LOGICA Marketing clients",
+      "metaDescription": "Healthcare, e‑commerce, B2B and EdTech brands partnering with measurable KPIs and accountable growth."
+    },
+    "homeFaq": {
+      "metaTitle": "FAQ — LOGICA Marketing",
+      "metaDescription": "Answers about performance marketing timelines, budgets, reporting and how we collaborate as a team."
     }
   },
   "nav": {
@@ -118,7 +134,7 @@
   },
   "cases": {
     "titleBrand": "LOGICA Marketing cases — outcomes that speak for themselves",
-    "subtitle": "15+ clients have already scaled with LOGICA",
+    "subtitle": "15 case studies across industries — leads, ROAS and revenue, explained clearly",
     "ctaTop": "I want the same results",
     "more": "Details",
     "bannerTitle": "Want the same results?",
@@ -399,6 +415,122 @@
         "result": "Deals +35% YoY",
         "face": "men",
         "faceIdx": 85
+      }
+    ]
+  },
+  "whyUs": {
+    "badge": "Why us",
+    "title": "Why teams choose LOGICA Marketing",
+    "subtitle": "A growth system — not random tactics: strategy, creative, analytics and a partner who ships.",
+    "stats": [
+      { "value": "87+", "label": "launched projects" },
+      { "value": "340%", "label": "avg. lift on core KPIs" },
+      { "value": "4.9/5", "label": "client rating" },
+      { "value": "15", "label": "verticals on the homepage" }
+    ],
+    "benefits": [
+      {
+        "icon": "target",
+        "title": "Growth you can read in numbers",
+        "desc": "We connect funnels, paid media and CRM so you know what drives profit — and what to scale next."
+      },
+      {
+        "icon": "sparkles",
+        "title": "Premium UX + site speed",
+        "desc": "Next.js landings and sites that feel high-end, load fast and convert — not just “look nice”."
+      },
+      {
+        "icon": "gauge",
+        "title": "Rigorous testing & buying",
+        "desc": "Creative and bundle tests on a plan — less waste, more controlled scale."
+      },
+      {
+        "icon": "shield",
+        "title": "Transparent partnership",
+        "desc": "Clear KPIs, honest communication and ownership — without hand‑wavy upsells."
+      },
+      {
+        "icon": "chart",
+        "title": "Analytics for decisions",
+        "desc": "Events, attribution and dashboards that optimize revenue impact — not vanity clicks."
+      },
+      {
+        "icon": "support",
+        "title": "Humans, not tickets",
+        "desc": "Fast async comms in messengers and a clear roadmap — marketing as a partner."
+      }
+    ]
+  },
+  "process": {
+    "badge": "Process",
+    "title": "How we work",
+    "subtitle": "Five steps from diagnosis to scale — with tangible outputs at every milestone.",
+    "stepLabel": "Step {n}",
+    "steps": [
+      {
+        "icon": "search",
+        "title": "Discovery & audit",
+        "desc": "We review offer, landing pages, traffic sources and lead quality — then prioritize quick wins."
+      },
+      {
+        "icon": "pen",
+        "title": "Strategy & test map",
+        "desc": "Bundles, budgets and creative angles mapped to your economics — prioritized for the next 2–4 weeks."
+      },
+      {
+        "icon": "rocket",
+        "title": "Launch & tracking hygiene",
+        "desc": "Campaigns go live with events and goals wired correctly — optimization rests on clean data."
+      },
+      {
+        "icon": "chart",
+        "title": "Optimize with data",
+        "desc": "Cut weak segments, scale winners and tighten landing + speed where it moves conversion."
+      },
+      {
+        "icon": "check",
+        "title": "Scale & quality control",
+        "desc": "Grow where unit economics work — keeping lead quality standards as budgets rise."
+      }
+    ]
+  },
+  "clients": {
+    "badge": "Trust",
+    "title": "Trusted by teams like yours",
+    "subtitle": "Retail, healthcare, e‑commerce, B2B and EdTech — measurable KPIs and calm reporting for leadership."
+  },
+  "homeFaq": {
+    "badge": "FAQ",
+    "title": "Frequently asked questions",
+    "subtitle": "Short answers about budgets, timelines and what performance partnership looks like.",
+    "items": [
+      {
+        "q": "What budgets do you work with?",
+        "a": "We optimize around unit economics first — disciplined tests matter more than a flashy starting budget. On a strategy call we’ll align an acceptable range for your niche and goals."
+      },
+      {
+        "q": "How fast can we see results?",
+        "a": "Early directional signals often appear within 2–4 weeks after launch with reliable tracking. Stable conclusions usually need a few creative/bundle iterations and enough volume."
+      },
+      {
+        "q": "Do you handle strategy and execution end‑to‑end?",
+        "a": "Yes — we can own strategy → production → media → analytics. If you have an in‑house team, we integrate and plug gaps surgically."
+      },
+      {
+        "q": "How does reporting work?",
+        "a": "We align on KPIs (leads, CPL, ROAS, revenue — whatever fits your model) and run recurring reviews with actionable conclusions — not spreadsheet theater."
+      },
+      {
+        "q": "Do you support international markets?",
+        "a": "Yes — multi‑geo launches and scaling, localized landings and consistent attribution for comparable metrics across regions."
+      },
+      {
+        "q": "What do you need from us to start?",
+        "a": "Access to ad accounts and analytics (or a plan to wire them), clarity on offer and target economics — we help secure the rest during onboarding."
+      },
+      {
+        "q": "How are you different from a typical agency?",
+        "a": "We obsess over ROI and iteration velocity — premium UX, transparent hypotheses and accountability across ads → site → revenue, not vanity reporting."
       }
     ]
   },

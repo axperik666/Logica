@@ -29,6 +29,22 @@
     "cta": {
       "metaTitle": "Contatta LOGICA Marketing — audit e strategia di crescita",
       "metaDescription": "Modulo di contatto e risposta rapida su Telegram o WhatsApp — il team risponde entro 15 minuti. Linguaggio chiaro, senza gergo ROI."
+    },
+    "whyUs": {
+      "metaTitle": "Perché LOGICA Marketing — vantaggi dell’agenzia",
+      "metaDescription": "Approccio performance, economia trasparente e UX premium: progetti, crescita di metriche e processo senza caos."
+    },
+    "process": {
+      "metaTitle": "Processo di lavoro LOGICA Marketing — da audit a scale",
+      "metaDescription": "Cinque fasi: diagnosi, strategia, go‑live, ottimizzazione data‑driven e scale delle combinazioni vincenti."
+    },
+    "clients": {
+      "metaTitle": "Clienti LOGICA Marketing — brand che si fidano",
+      "metaDescription": "Sanità, e‑commerce, B2B e EdTech — partnership con KPI misurabili e crescita controllata."
+    },
+    "homeFaq": {
+      "metaTitle": "FAQ — LOGICA Marketing",
+      "metaDescription": "Risposte su tempi, budget, reporting e modalità di collaborazione in performance marketing."
     }
   },
   "nav": {
@@ -118,7 +134,7 @@
   },
   "cases": {
     "titleBrand": "Casi LOGICA Marketing — risultati che parlano chiaro",
-    "subtitle": "Oltre 15 clienti hanno già scalato con LOGICA",
+    "subtitle": "15 casi in diversi vertical — lead, ROAS e ricavi con logica chiara",
     "ctaTop": "Voglio gli stessi risultati",
     "more": "Dettagli",
     "bannerTitle": "Vuoi gli stessi risultati?",
@@ -399,6 +415,122 @@
         "result": "Deal +35% YoY",
         "face": "men",
         "faceIdx": 85
+      }
+    ]
+  },
+  "whyUs": {
+    "badge": "Vantaggi",
+    "title": "Perché scegliere LOGICA Marketing",
+    "subtitle": "Un sistema di crescita — non tattiche a caso: strategia, creatività, analytics e un team che consegna.",
+    "stats": [
+      { "value": "87+", "label": "progetti lanciati" },
+      { "value": "340%", "label": "crescita media sui KPI" },
+      { "value": "4.9/5", "label": "valutazione clienti" },
+      { "value": "15", "label": "verticali in homepage" }
+    ],
+    "benefits": [
+      {
+        "icon": "target",
+        "title": "Crescita nei numeri",
+        "desc": "Allineiamo funnel, media e CRM: capisci dove nasce il margine e cosa scalare dopo."
+      },
+      {
+        "icon": "sparkles",
+        "title": "UX premium e velocità",
+        "desc": "Siti e landing Next.js: fiducia, Core Web Vitals e conversione — non solo estetica."
+      },
+      {
+        "icon": "gauge",
+        "title": "Test e disciplina media",
+        "desc": "Ipotesi e combinazioni su un piano — meno sprechi, più scale controllata."
+      },
+      {
+        "icon": "shield",
+        "title": "Trasparenza",
+        "desc": "KPI chiari, review regolari e partnership onesta — senza clausole nascoste."
+      },
+      {
+        "icon": "chart",
+        "title": "Analytics per decidere",
+        "desc": "Eventi, attribuzione e dashboard: ottimizziamo l’impatto su ricavi, non i click vanitosi."
+      },
+      {
+        "icon": "support",
+        "title": "Team vicino",
+        "desc": "Risposte rapide sui messenger e roadmap chiara — marketing come partnership."
+      }
+    ]
+  },
+  "process": {
+    "badge": "Processo",
+    "title": "Come lavoriamo",
+    "subtitle": "Cinque passi dalla diagnosi allo scale — con output chiari ad ogni step.",
+    "stepLabel": "Passo {n}",
+    "steps": [
+      {
+        "icon": "search",
+        "title": "Diagnosi e audit",
+        "desc": "Analizziamo offerta, landing, traffico e qualità lead — individuiamo colli di bottiglia e quick win."
+      },
+      {
+        "icon": "pen",
+        "title": "Strategia e piano test",
+        "desc": "Combinazioni, budget e angoli creativi coerenti con la tua economia — priorità sulle 2–4 settimane successive."
+      },
+      {
+        "icon": "rocket",
+        "title": "Go‑live e tracking",
+        "desc": "Campagne attive con eventi e goal corretti — l’ottimizzazione si appoggia su dati puliti."
+      },
+      {
+        "icon": "chart",
+        "title": "Ottimizzazione data‑driven",
+        "desc": "Tagliamo segmenti deboli, potenziamo i winner e miglioriamo landing e velocità dove conta."
+      },
+      {
+        "icon": "check",
+        "title": "Scale e controllo qualità",
+        "desc": "Cresciamo dove tornano i numeri e manteniamo standard di lead alzando i budget."
+      }
+    ]
+  },
+  "clients": {
+    "badge": "Affidabilità",
+    "title": "Si fidano di noi",
+    "subtitle": "Retail, sanità, e‑commerce, B2B e EdTech — KPI misurabili e reporting sereno per il team."
+  },
+  "homeFaq": {
+    "badge": "FAQ",
+    "title": "Domande frequenti",
+    "subtitle": "Budget, tempistiche e cosa aspettarsi da una partnership performance.",
+    "items": [
+      {
+        "q": "Con quali budget lavorate?",
+        "a": "Partiamo dall’economia per unità: contano test disciplinati più di un budget “rumoroso”. In call definiamo un range realistico per nicchia e obiettivi."
+      },
+      {
+        "q": "Quando arrivano i primi risultati?",
+        "a": "Segnali iniziali spesso in 2–4 settimane dopo il go‑live con tracking affidabile. Conclusioni stabili dopo alcune iterazioni e volume sufficiente."
+      },
+      {
+        "q": "Gestite strategia ed esecuzione end‑to‑end?",
+        "a": "Sì: strategia → produzione → media → analytics. Se avete team interno, integriamo e interveniamo dove serve."
+      },
+      {
+        "q": "Come funziona il reporting?",
+        "a": "Allineiamo KPI (lead, CPL, ROAS, ricavi — secondo il modello) e facciamo review con conclusioni operative, non solo tabelle."
+      },
+      {
+        "q": "Lavorate su mercati internazionali?",
+        "a": "Sì: multi‑geo, landing localizzate e attribuzione coerente per metriche comparabili."
+      },
+      {
+        "q": "Cosa serve da parte nostra all’inizio?",
+        "a": "Accesso ad account ads e analytics (o piano per collegarli), chiarezza su offerta ed economia target — il resto lo strutturiamo insieme."
+      },
+      {
+        "q": "Cosa vi distingue da un’agenzia classica?",
+        "a": "Focus su ROI e velocità di iterazione: UX premium, ipotesi trasparenti e responsabilità su ads → sito → ricavi, non metriche di facciata."
       }
     ]
   },

@@ -20,12 +20,16 @@ export async function HomePageJsonLd() {
   const tSec = await getTranslations("sectionsSeo");
   const cards = tServices.raw("cards") as ServiceCard[];
 
-  const sectionAnchors = [
-    { key: "hero" as const, hash: "#hero" },
-    { key: "services" as const, hash: "#services" },
-    { key: "cases" as const, hash: "#cases" },
-    { key: "testimonials" as const, hash: "#testimonials" },
-    { key: "cta" as const, hash: "#contact" }
+  const sectionAnchors: { key: string; hash: string }[] = [
+    { key: "hero", hash: "#hero" },
+    { key: "services", hash: "#services" },
+    { key: "whyUs", hash: "#why-us" },
+    { key: "process", hash: "#process" },
+    { key: "cases", hash: "#cases" },
+    { key: "clients", hash: "#clients" },
+    { key: "testimonials", hash: "#testimonials" },
+    { key: "homeFaq", hash: "#faq" },
+    { key: "cta", hash: "#contact" }
   ];
 
   const hasPart = sectionAnchors.map((s) => ({
