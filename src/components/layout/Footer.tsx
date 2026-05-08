@@ -24,7 +24,7 @@ export function Footer() {
   return (
     <ScrollRevealSection
       as="footer"
-      className="tech-bg relative py-20 border-t border-white/10"
+      className="tech-bg relative border-t border-white/10 pt-16 pb-[max(5rem,calc(3rem+env(safe-area-inset-bottom,0px)))] sm:py-20"
     >
       <div className="container-px">
         <div className="glass overflow-hidden rounded-[2rem] p-6 sm:p-10">

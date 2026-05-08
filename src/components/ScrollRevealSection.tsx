@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import type { ReactNode } from "react";
 
 type Props = {
   id?: string;
@@ -12,7 +12,7 @@ type Props = {
 };
 
 /**
- * Плавное появление секции при скролле (useInView + Framer Motion).
+ * Плавное появление секции при скролле (whileInView — меньше лишних подписок, чем ручной useInView).
  */
 export function ScrollRevealSection({
   id,
@@ -20,27 +20,26 @@ export function ScrollRevealSection({
   children,
   as = "section"
 }: Props) {
-  const ref = useRef<HTMLElement | null>(null);
-  const isInView = useInView(ref, {
-    once: true,
-    amount: 0.08,
-    /** Срабатывает раньше — меньше «пустого» футера на мобилке при скролле */
-    margin: "0px 0px 140px 0px"
-  });
-
+  const reduced = useReducedMotion();
   const Tag = as === "footer" ? motion.footer : motion.section;
+
+  if (reduced) {
+    return (
+      <Tag id={id} className={className}>
+        {children}
+      </Tag>
+    );
+  }
 
   return (
     <Tag
-      ref={ref}
       id={id}
       className={className}
-      initial={{ opacity: 0, y: 16 }}
-      animate={
-        isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }
-      }
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1, margin: "0px 0px 100px 0px" }}
       transition={{
-        duration: 0.42,
+        duration: 0.26,
         ease: [0.22, 1, 0.36, 1]
       }}
     >

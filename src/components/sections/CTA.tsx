@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { useLocale, useTranslations } from "next-intl";
 import { formatPhoneMask, isPhonePlausible } from "@/lib/phoneMask";
 import { CONTACTS } from "@/lib/contacts";
+import { useNarrowViewport } from "@/lib/use-narrow-viewport";
 
 function clamp(n: number, min: number, max: number) {
   return Math.min(max, Math.max(min, n));
@@ -25,6 +26,7 @@ type NicheOption = { value: string; label: string };
 export function CTA() {
   const t = useTranslations("cta");
   const tSec = useTranslations("sectionsSeo");
+  const narrow = useNarrowViewport();
   const locale = useLocale();
   const nfLocale =
     locale === "ru" ? "ru-RU" : locale === "it" ? "it-IT" : "en-US";
@@ -102,7 +104,12 @@ export function CTA() {
       animate={isInView ? "show" : "hidden"}
       variants={{
         hidden: {},
-        show: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } }
+        show: {
+          transition: {
+            staggerChildren: narrow ? 0.03 : 0.08,
+            delayChildren: narrow ? 0.02 : 0.05
+          }
+        }
       }}
     >
       <div aria-hidden className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">

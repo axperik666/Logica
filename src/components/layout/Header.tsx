@@ -199,10 +199,10 @@ export function Header() {
       )}
     >
       <div className="container-px">
-        <div className="flex min-h-[4rem] flex-wrap items-center justify-between gap-y-2 py-2 sm:min-h-[4.5rem] sm:gap-4 lg:grid lg:min-h-[5rem] lg:grid-cols-[minmax(0,auto)_minmax(0,1fr)_auto] lg:items-center lg:gap-x-4 lg:gap-y-0 xl:gap-x-8">
+        <div className="flex min-h-[4rem] flex-wrap items-center justify-between gap-y-2 py-2 sm:min-h-[4.5rem] sm:gap-4 lg:grid lg:min-h-[5rem] lg:grid-cols-[minmax(0,min(100%,15rem))_minmax(12rem,1fr)_auto] lg:items-center lg:gap-x-3 lg:gap-y-0 xl:grid-cols-[minmax(0,auto)_minmax(14rem,1fr)_auto] xl:gap-x-8">
           <Link
             href="/"
-            className="group flex min-w-0 max-w-[calc(100%-8rem)] shrink items-center gap-2.5 sm:gap-4 lg:max-w-none lg:shrink-0"
+            className="group flex min-w-0 max-w-[calc(100%-8rem)] shrink items-center gap-2.5 sm:gap-4 lg:max-w-[min(100%,17rem)] lg:shrink xl:max-w-none xl:shrink-0"
           >
             <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-2xl bg-white/5 ring-[3px] ring-[#00BFFF]/35 shadow-[0_0_40px_rgba(0,191,255,0.35)] transition group-hover:ring-[#00BFFF]/55 group-hover:shadow-[0_0_52px_rgba(0,191,255,0.45)] sm:h-14 sm:w-14 md:h-16 md:w-16">
               <Image
@@ -223,11 +223,11 @@ export function Header() {
               >
                 LOGICA MARKETING
               </div>
-              <div className="mt-0.5 hidden flex-wrap items-baseline gap-x-2 md:flex lg:mt-1">
+              <div className="mt-0.5 hidden flex-wrap items-baseline gap-x-2 xl:flex lg:mt-1">
                 <span className="text-[10px] text-white/72 sm:text-[11px]">
                   {tUi("tagline")}
                 </span>
-                <span className="hidden font-mono text-[10px] tracking-wide text-[#00BFFF]/60 xl:inline">
+                <span className="hidden font-mono text-[10px] tracking-wide text-[#00BFFF]/60 min-[1280px]:inline">
                   logicamarketing.pro
                 </span>
               </div>
@@ -238,8 +238,8 @@ export function Header() {
             className="hidden min-h-0 min-w-0 justify-self-stretch lg:flex"
             aria-label={tHero("internalNavAria")}
           >
-            <div className="scrollbar-hide flex h-full w-full min-w-0 items-center justify-center overflow-x-auto overscroll-x-contain px-0.5 [-webkit-overflow-scrolling:touch]">
-              <div className="flex w-max max-w-full flex-nowrap items-center gap-0.5 lg:gap-1">
+            <div className="scrollbar-hide flex h-full w-full min-w-0 items-center justify-start overflow-x-auto overscroll-x-contain py-0.5 pl-0.5 pr-1 [-webkit-overflow-scrolling:touch]">
+              <div className="flex w-max flex-nowrap items-center gap-0.5 lg:gap-1">
                 {items.map((i) => (
                   <Link key={i.href} href={i.href} className={navLinkClass(i.active)}>
                     {i.label}

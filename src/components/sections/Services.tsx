@@ -14,6 +14,7 @@ import { MotionDiv, MotionSection } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import { Link } from "@/navigation";
+import { useNarrowViewport } from "@/lib/use-narrow-viewport";
 
 type CardMsg = {
   title: string;
@@ -27,7 +28,9 @@ const ICONS = [Megaphone, Search, BarChart3, Code2, Compass, LineChart];
 export function Services() {
   const t = useTranslations("services");
   const tSec = useTranslations("sectionsSeo");
-  const cards = t.raw("cards") as CardMsg[];
+  const cardsRaw = t.raw("cards");
+  const cards = Array.isArray(cardsRaw) ? (cardsRaw as CardMsg[]) : [];
+  const narrow = useNarrowViewport();
   const ref = useRef(null);
   const isInView = useInView(ref, {
     once: true,
@@ -44,7 +47,12 @@ export function Services() {
       animate={isInView ? "show" : "hidden"}
       variants={{
         hidden: {},
-        show: { transition: { staggerChildren: 0.08, delayChildren: 0.04 } }
+        show: {
+          transition: {
+            staggerChildren: narrow ? 0.03 : 0.08,
+            delayChildren: narrow ? 0.02 : 0.04
+          }
+        }
       }}
     >
       <MotionDiv

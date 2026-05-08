@@ -26,6 +26,7 @@ import { Link } from "@/navigation";
 import { HOME_CASE_IDS, type HomeCaseId } from "@/content/homeCases";
 import { CASE_COVER_IMAGES } from "@/content/caseCovers";
 import { CaseCoverImage } from "@/components/cases/CaseCoverImage";
+import { useNarrowViewport } from "@/lib/use-narrow-viewport";
 
 const ICONS: Record<HomeCaseId, LucideIcon> = {
   "med-center": HeartPulse,
@@ -48,6 +49,7 @@ const ICONS: Record<HomeCaseId, LucideIcon> = {
 export function Cases() {
   const t = useTranslations("cases");
   const tSec = useTranslations("sectionsSeo");
+  const narrow = useNarrowViewport();
 
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, {
@@ -65,7 +67,12 @@ export function Cases() {
       animate={isInView ? "show" : "hidden"}
       variants={{
         hidden: {},
-        show: { transition: { staggerChildren: 0.06, delayChildren: 0.05 } }
+        show: {
+          transition: {
+            staggerChildren: narrow ? 0.025 : 0.06,
+            delayChildren: narrow ? 0.02 : 0.05
+          }
+        }
       }}
     >
       <div className="sr-only">

@@ -10,10 +10,10 @@
   --primary: #00bfff;
   --tech-cyan: #00bfff;
   --tech-violet: #8a2be2;
-  --tech-line-cyan: color-mix(in srgb, var(--tech-cyan) 11%, transparent);
-  --tech-line-violet: color-mix(in srgb, var(--tech-violet) 9%, transparent);
-  --tech-dot-cyan: color-mix(in srgb, var(--tech-cyan) 28%, transparent);
-  --tech-dot-violet: color-mix(in srgb, var(--tech-violet) 22%, transparent);
+  --tech-line-cyan: color-mix(in srgb, var(--tech-cyan) 26%, transparent);
+  --tech-line-violet: color-mix(in srgb, var(--tech-violet) 19%, transparent);
+  --tech-dot-cyan: color-mix(in srgb, var(--tech-cyan) 56%, transparent);
+  --tech-dot-violet: color-mix(in srgb, var(--tech-violet) 42%, transparent);
   --header-surface: rgba(8, 12, 28, 0.78);
   --text-muted: rgba(255, 255, 255, 0.94);
   --text-subtle: rgba(255, 255, 255, 0.78);
@@ -21,6 +21,12 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+@media (max-width: 767px) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 img {
@@ -53,11 +59,22 @@ body:not(.tech-bg) {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(0, 191, 255, 0.09) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 191, 255, 0.09) 1px, transparent 1px);
-  background-size: 75px 75px;
+    linear-gradient(rgba(0, 191, 255, 0.2) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 191, 255, 0.16) 1px, transparent 1px),
+    linear-gradient(
+      104deg,
+      transparent 0,
+      transparent 48px,
+      rgba(138, 43, 226, 0.075) 48px,
+      rgba(138, 43, 226, 0.075) 49px,
+      transparent 49px
+    );
+  background-size:
+    48px 48px,
+    48px 48px,
+    64px 64px;
   animation: gridMove 90s linear infinite;
-  opacity: 0.65;
+  opacity: 1;
   z-index: -1;
 }
 
@@ -65,10 +82,10 @@ body:not(.tech-bg) {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.035) 1.5px, transparent 2px);
-  background-size: 110px 110px;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.075) 1.5px, transparent 2px);
+  background-size: 84px 84px;
   animation: dotsDrift 65s linear infinite;
-  opacity: 0.45;
+  opacity: 0.78;
   z-index: -1;
 }
 
@@ -237,6 +254,15 @@ header.site-header.glass-nav::after {
   );
 }
 
+/* Hero: мягче затемнение по краям — сетка читается до краёв контейнера */
+.section-edge-vignette--hero {
+  background: radial-gradient(
+    ellipse 118% 96% at 50% 44%,
+    transparent 52%,
+    rgba(4, 6, 16, 0.38) 100%
+  );
+}
+
 @media (prefers-reduced-motion: reduce) {
   .section-edge-vignette {
     background: radial-gradient(
@@ -244,6 +270,24 @@ header.site-header.glass-nav::after {
       transparent 50%,
       rgba(5, 6, 18, 0.35) 100%
     );
+  }
+
+  .section-edge-vignette--hero {
+    background: radial-gradient(
+      ellipse 118% 96% at 50% 44%,
+      transparent 58%,
+      rgba(4, 6, 16, 0.28) 100%
+    );
+  }
+
+  .tech-bg::before,
+  .tech-bg::after {
+    animation: none !important;
+  }
+
+  .tech-grid__layer--anim-dots,
+  .tech-grid__layer--anim-lines {
+    animation: none !important;
   }
 }
 
@@ -336,14 +380,14 @@ header.site-header.glass-nav:hover::after {
   }
 
   .tech-grid__layer--dots {
-    opacity: 0.48;
+    opacity: 0.68;
     background-image:
-      radial-gradient(circle at 1px 1px, var(--tech-dot-cyan) 1.1px, transparent 1.1px),
-      radial-gradient(circle at 1px 1px, var(--tech-dot-violet) 1px, transparent 1px);
-    background-size: 46px 46px, 46px 46px;
+      radial-gradient(circle at 1px 1px, var(--tech-dot-cyan) 1.2px, transparent 1.2px),
+      radial-gradient(circle at 1px 1px, var(--tech-dot-violet) 1.05px, transparent 1.05px);
+    background-size: 44px 44px, 44px 44px;
     background-position:
       0 0,
-      23px 23px;
+      22px 22px;
     -webkit-mask-image: radial-gradient(
       ellipse 85% 75% at 50% 35%,
       #000 18%,
@@ -359,7 +403,7 @@ header.site-header.glass-nav:hover::after {
   }
 
   .tech-grid__layer--lines {
-    opacity: 0.38;
+    opacity: 0.58;
     background-image:
       linear-gradient(var(--tech-line-cyan) 1px, transparent 1px),
       linear-gradient(90deg, var(--tech-line-violet) 1px, transparent 1px),
@@ -367,15 +411,15 @@ header.site-header.glass-nav:hover::after {
         -26deg,
         transparent 0,
         transparent 74px,
-        color-mix(in srgb, var(--tech-cyan) 6%, transparent) 74px,
-        color-mix(in srgb, var(--tech-cyan) 6%, transparent) 75px
+        color-mix(in srgb, var(--tech-cyan) 14%, transparent) 74px,
+        color-mix(in srgb, var(--tech-cyan) 14%, transparent) 75px
       ),
       repeating-linear-gradient(
         48deg,
         transparent 0,
         transparent 96px,
-        color-mix(in srgb, var(--tech-violet) 5%, transparent) 96px,
-        color-mix(in srgb, var(--tech-violet) 5%, transparent) 97px
+        color-mix(in srgb, var(--tech-violet) 11%, transparent) 96px,
+        color-mix(in srgb, var(--tech-violet) 11%, transparent) 97px
       );
     background-size:
       100% 52px,
@@ -407,21 +451,48 @@ header.site-header.glass-nav:hover::after {
     will-change: opacity;
   }
 
-  @keyframes tech-grid-dots-glow {
+  /* Hero: пульсация в диапазоне высокой видимости (не «глушит» сетку до 0.5) */
+  .tech-grid--hero .tech-grid__layer--anim-dots {
+    animation: tech-grid-hero-dots-pulse 22s ease-in-out infinite alternate;
+  }
+
+  .tech-grid--hero .tech-grid__layer--anim-lines {
+    animation: tech-grid-hero-lines-pulse 28s ease-in-out infinite alternate;
+  }
+
+  @keyframes tech-grid-hero-dots-pulse {
     from {
-      opacity: 0.4;
+      opacity: 0.88;
     }
     to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes tech-grid-hero-lines-pulse {
+    from {
+      opacity: 0.76;
+    }
+    to {
+      opacity: 0.94;
+    }
+  }
+
+  @keyframes tech-grid-dots-glow {
+    from {
       opacity: 0.58;
+    }
+    to {
+      opacity: 0.88;
     }
   }
 
   @keyframes tech-grid-lines-opacity {
     from {
-      opacity: 0.32;
+      opacity: 0.48;
     }
     to {
-      opacity: 0.46;
+      opacity: 0.76;
     }
   }
 
@@ -431,77 +502,139 @@ header.site-header.glass-nav:hover::after {
     pointer-events: none;
     background:
       radial-gradient(
+        ellipse 72% 48% at 50% 38%,
+        color-mix(in srgb, var(--tech-cyan) 9%, transparent),
+        transparent 62%
+      ),
+      radial-gradient(
         ellipse 82% 58% at 68% 12%,
-        color-mix(in srgb, var(--tech-cyan) 14%, transparent),
+        color-mix(in srgb, var(--tech-cyan) 18%, transparent),
         transparent 56%
       ),
       radial-gradient(
         ellipse 52% 44% at 14% 58%,
-        color-mix(in srgb, var(--tech-violet) 12%, transparent),
+        color-mix(in srgb, var(--tech-violet) 14%, transparent),
         transparent 58%
       ),
       radial-gradient(
         ellipse 68% 52% at 82% 78%,
-        color-mix(in srgb, var(--tech-violet) 8%, transparent),
+        color-mix(in srgb, var(--tech-violet) 10%, transparent),
         transparent 56%
       );
   }
 
-  .tech-grid--hero .tech-grid__layer--dots {
-    inset: -14%;
+  /* Лёгкое «заполнение» пустот по углам — без анимации, дёшево для GPU */
+  .hero-corner-glow {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        ellipse min(52vw, 420px) min(38vh, 280px) at 0 0,
+        rgba(0, 191, 255, 0.14),
+        transparent 68%
+      ),
+      radial-gradient(
+        ellipse min(48vw, 380px) min(36vh, 260px) at 100% 0,
+        rgba(138, 43, 226, 0.11),
+        transparent 68%
+      ),
+      radial-gradient(
+        ellipse min(56vw, 440px) min(42vh, 300px) at 0 100%,
+        rgba(138, 43, 226, 0.09),
+        transparent 70%
+      ),
+      radial-gradient(
+        ellipse min(50vw, 400px) min(40vh, 280px) at 100% 100%,
+        rgba(0, 191, 255, 0.1),
+        transparent 70%
+      );
+  }
+
+  /* Второй слой — мелкая сетка «data density» поверх крупной */
+  .tech-grid--hero-fine {
+    position: absolute;
+    inset: 0;
     opacity: 0.56;
+    background-image:
+      linear-gradient(rgba(0, 191, 255, 0.14) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 191, 255, 0.1) 1px, transparent 1px);
+    background-size: 12px 12px;
     -webkit-mask-image: radial-gradient(
-      ellipse 96% 88% at 50% 38%,
-      #000 14%,
-      rgba(0, 0, 0, 0.45) 52%,
-      transparent 78%
+      ellipse 96% 88% at 50% 40%,
+      #000 24%,
+      rgba(0, 0, 0, 0.35) 58%,
+      transparent 86%
     );
     mask-image: radial-gradient(
-      ellipse 96% 88% at 50% 38%,
-      #000 14%,
-      rgba(0, 0, 0, 0.45) 52%,
-      transparent 78%
+      ellipse 96% 88% at 50% 40%,
+      #000 24%,
+      rgba(0, 0, 0, 0.35) 58%,
+      transparent 86%
+    );
+  }
+
+  .tech-grid--hero .tech-grid__layer--dots {
+    inset: -14%;
+    opacity: 0.98;
+    -webkit-mask-image: radial-gradient(
+      ellipse 98% 92% at 50% 38%,
+      #000 26%,
+      rgba(0, 0, 0, 0.42) 58%,
+      transparent 84%
+    );
+    mask-image: radial-gradient(
+      ellipse 98% 92% at 50% 38%,
+      #000 26%,
+      rgba(0, 0, 0, 0.42) 58%,
+      transparent 84%
     );
   }
 
   .tech-grid--hero .tech-grid__layer--lines {
     inset: -12%;
-    opacity: 0.44;
+    opacity: 0.88;
+    background-size:
+      100% 44px,
+      44px 100%,
+      108px 108px,
+      132px 132px;
     -webkit-mask-image: radial-gradient(
-      ellipse 98% 90% at 48% 36%,
-      #000 10%,
-      rgba(0, 0, 0, 0.38) 50%,
-      transparent 80%
+      ellipse 100% 94% at 48% 36%,
+      #000 22%,
+      rgba(0, 0, 0, 0.36) 56%,
+      transparent 86%
     );
     mask-image: radial-gradient(
-      ellipse 98% 90% at 48% 36%,
-      #000 10%,
-      rgba(0, 0, 0, 0.38) 50%,
-      transparent 80%
+      ellipse 100% 94% at 48% 36%,
+      #000 22%,
+      rgba(0, 0, 0, 0.36) 56%,
+      transparent 86%
     );
   }
 
   .tech-grid--hero-sparkle {
     position: absolute;
     inset: -8%;
-    opacity: 0.22;
+    opacity: 0.54;
     background-image: radial-gradient(
       circle at 2px 2px,
-      color-mix(in srgb, var(--tech-cyan) 45%, transparent) 0.6px,
-      transparent 0.6px
+      color-mix(in srgb, var(--tech-cyan) 68%, transparent) 0.65px,
+      transparent 0.65px
     );
-    background-size: 18px 18px;
+    background-size: 17px 17px;
     mix-blend-mode: screen;
     will-change: transform, opacity;
     -webkit-mask-image: radial-gradient(
-      ellipse 90% 85% at 50% 40%,
-      #000 20%,
-      transparent 72%
+      ellipse 92% 88% at 50% 40%,
+      #000 26%,
+      transparent 76%
     );
     mask-image: radial-gradient(
-      ellipse 90% 85% at 50% 40%,
-      #000 20%,
-      transparent 72%
+      ellipse 92% 88% at 50% 40%,
+      #000 26%,
+      transparent 76%
     );
   }
 
@@ -583,5 +716,131 @@ header.site-header.glass-nav:hover::after {
 
   .text-subtle {
     color: var(--text-subtle);
+  }
+}
+
+/* Узкие экраны: меньше blur и движения фона — стабильнее скролл; сетка чуть ярче через модификаторы выше + блок ниже */
+@media (max-width: 767px) {
+  .glass {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  header.site-header.glass-nav {
+    backdrop-filter: blur(14px) saturate(1.22);
+    -webkit-backdrop-filter: blur(14px) saturate(1.22);
+  }
+
+  .btn-burger-glass {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .glass-mobile-drawer {
+    backdrop-filter: blur(18px) saturate(1.22);
+    -webkit-backdrop-filter: blur(18px) saturate(1.22);
+  }
+
+  .lang-switcher-glass {
+    backdrop-filter: blur(14px) saturate(1.28);
+    -webkit-backdrop-filter: blur(14px) saturate(1.28);
+  }
+
+  .header-contact-pill {
+    backdrop-filter: blur(12px) saturate(1.28);
+    -webkit-backdrop-filter: blur(12px) saturate(1.28);
+  }
+
+  .tech-bg::before,
+  .tech-bg::after {
+    animation: none !important;
+  }
+
+  .tech-grid__layer {
+    will-change: auto !important;
+  }
+
+  .tech-grid__layer--anim-dots,
+  .tech-grid__layer--anim-lines {
+    animation: none !important;
+  }
+
+  .section-edge-vignette--hero {
+    background: radial-gradient(
+      ellipse 128% 108% at 50% 50%,
+      transparent 40%,
+      rgba(3, 5, 14, 0.26) 100%
+    );
+  }
+
+  .tech-grid--hero .tech-grid__layer--dots {
+    opacity: 0.98;
+    -webkit-mask-image: radial-gradient(
+      ellipse 110% 110% at 50% 50%,
+      #000 18%,
+      rgba(0, 0, 0, 0.32) 52%,
+      transparent 90%
+    );
+    mask-image: radial-gradient(
+      ellipse 110% 110% at 50% 50%,
+      #000 18%,
+      rgba(0, 0, 0, 0.32) 52%,
+      transparent 90%
+    );
+  }
+
+  .tech-grid--hero .tech-grid__layer--lines {
+    opacity: 0.9;
+    -webkit-mask-image: radial-gradient(
+      ellipse 110% 110% at 50% 50%,
+      #000 16%,
+      rgba(0, 0, 0, 0.3) 52%,
+      transparent 90%
+    );
+    mask-image: radial-gradient(
+      ellipse 110% 110% at 50% 50%,
+      #000 16%,
+      rgba(0, 0, 0, 0.3) 52%,
+      transparent 90%
+    );
+  }
+
+  .tech-grid--hero-sparkle {
+    opacity: 0.58;
+    will-change: auto !important;
+    -webkit-mask-image: radial-gradient(
+      ellipse 102% 102% at 50% 50%,
+      #000 20%,
+      transparent 84%
+    );
+    mask-image: radial-gradient(
+      ellipse 102% 102% at 50% 50%,
+      #000 20%,
+      transparent 84%
+    );
+  }
+
+  .tech-grid--hero-fine {
+    opacity: 0.52;
+    -webkit-mask-image: radial-gradient(
+      ellipse 112% 112% at 50% 50%,
+      #000 18%,
+      rgba(0, 0, 0, 0.3) 50%,
+      transparent 90%
+    );
+    mask-image: radial-gradient(
+      ellipse 112% 112% at 50% 50%,
+      #000 18%,
+      rgba(0, 0, 0, 0.3) 50%,
+      transparent 90%
+    );
+  }
+
+  .hero-corner-glow {
+    opacity: 0.58;
+  }
+
+  .hover-lift {
+    will-change: auto !important;
   }
 }

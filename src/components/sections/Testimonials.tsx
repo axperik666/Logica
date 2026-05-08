@@ -11,8 +11,10 @@ import {
 import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
 import { MotionDiv, MotionSection } from "@/components/motion";
 import { useLocale, useTranslations } from "next-intl";
+import { useNarrowViewport } from "@/lib/use-narrow-viewport";
 
-const AUTO_MS = 7200;
+const AUTO_MS_DESKTOP = 7200;
+const AUTO_MS_NARROW = 5200;
 
 type Item = {
   name: string;
@@ -30,6 +32,7 @@ export function Testimonials() {
   const rawItems = t.raw("items");
   const items = Array.isArray(rawItems) ? (rawItems as Item[]) : [];
   const reduceMotion = useReducedMotion();
+  const narrow = useNarrowViewport();
   const ref = useRef(null);
   const isInView = useInView(ref, {
     once: true,
@@ -62,13 +65,20 @@ export function Testimonials() {
     const id = window.setInterval(() => {
       dirRef.current = 1;
       setIndex((i) => (i + 1) % len);
-    }, AUTO_MS);
+    }, narrow ? AUTO_MS_NARROW : AUTO_MS_DESKTOP);
     return () => window.clearInterval(id);
-  }, [len, reduceMotion, locale]);
+  }, [len, narrow, reduceMotion, locale]);
 
   const safeIndex = len ? Math.min(Math.max(0, index), len - 1) : 0;
   const testimonial = len ? items[safeIndex] : undefined;
-  const xEnter = dirRef.current >= 0 ? 36 : -36;
+  const xEnter =
+    narrow && !reduceMotion
+      ? dirRef.current >= 0
+        ? 14
+        : -14
+      : dirRef.current >= 0
+        ? 36
+        : -36;
 
   return (
     <MotionSection
@@ -79,7 +89,12 @@ export function Testimonials() {
       animate={isInView ? "show" : "hidden"}
       variants={{
         hidden: {},
-        show: { transition: { staggerChildren: 0.06, delayChildren: 0.05 } }
+        show: {
+          transition: {
+            staggerChildren: narrow ? 0.025 : 0.06,
+            delayChildren: narrow ? 0.02 : 0.05
+          }
+        }
       }}
     >
       <div className="sr-only">
@@ -139,15 +154,28 @@ export function Testimonials() {
                 initial={
                   reduceMotion
                     ? { opacity: 1 }
-                    : { opacity: 0, x: xEnter, filter: "blur(6px)" }
+                    : narrow
+                      ? { opacity: 0, x: xEnter }
+                      : { opacity: 0, x: xEnter, filter: "blur(6px)" }
                 }
-                animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                animate={
+                  reduceMotion
+                    ? { opacity: 1, x: 0 }
+                    : narrow
+                      ? { opacity: 1, x: 0 }
+                      : { opacity: 1, x: 0, filter: "blur(0px)" }
+                }
                 exit={
                   reduceMotion
                     ? { opacity: 0 }
-                    : { opacity: 0, x: -xEnter * 0.8, filter: "blur(6px)" }
+                    : narrow
+                      ? { opacity: 0, x: -xEnter * 0.8 }
+                      : { opacity: 0, x: -xEnter * 0.8, filter: "blur(6px)" }
                 }
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                transition={{
+                  duration: narrow ? 0.28 : 0.45,
+                  ease: [0.22, 1, 0.36, 1]
+                }}
                 className="glass-hover-glow glass rounded-[2rem] p-6 sm:p-8"
               >
                 <div className="flex flex-col gap-5 sm:flex-row sm:items-start">

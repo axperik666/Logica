@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/navigation";
 import { Mail, MessageCircle, Send } from "lucide-react";
 import { CONTACTS } from "@/lib/contacts";
+import { useNarrowViewport } from "@/lib/use-narrow-viewport";
 
 const easeOutExpo = [0.16, 1, 0.3, 1] as const;
 
@@ -14,19 +15,21 @@ export function Hero() {
   const t = useTranslations("hero");
   const tSec = useTranslations("sectionsSeo");
   const reduceMotion = useReducedMotion();
+  const narrow = useNarrowViewport();
 
   const statsRaw = t.raw("stats");
   const stats = Array.isArray(statsRaw)
     ? (statsRaw as { k: string; v: string }[])
     : [];
 
-  const stagger = reduceMotion ? 0 : 0.09;
-  const delayChild = reduceMotion ? 0 : 0.05;
+  const stagger = reduceMotion ? 0 : narrow ? 0.045 : 0.09;
+  const delayChild = reduceMotion ? 0 : narrow ? 0.02 : 0.05;
+  const fast = reduceMotion || narrow;
 
   return (
     <MotionSection
       id="hero"
-      className="tech-bg relative min-h-[100svh] overflow-x-clip py-12 pt-[calc(5.75rem+env(safe-area-inset-top,0px))] pb-14 sm:min-h-screen sm:overflow-x-visible sm:py-20 sm:pt-28 sm:pb-20"
+      className="tech-bg relative min-h-[100svh] overflow-x-clip py-12 pt-[calc(5.75rem+env(safe-area-inset-top,0px))] pb-[max(3.5rem,calc(1.35rem+env(safe-area-inset-bottom,0px)))] sm:min-h-screen sm:overflow-x-visible sm:py-20 sm:pt-28 sm:pb-20"
       initial="hidden"
       animate="show"
       variants={{
@@ -47,12 +50,16 @@ export function Hero() {
         <div className="hero-gradient-mesh" />
 
         <div className="tech-grid tech-grid--hero">
-          <MotionDiv className="tech-grid__layer tech-grid__layer--dots tech-grid__layer--anim-dots" />
-          <MotionDiv className="tech-grid__layer tech-grid__layer--lines tech-grid__layer--anim-lines" />
-          <MotionDiv className="tech-grid--hero-sparkle" />
+          <div className="tech-grid__layer tech-grid__layer--dots tech-grid__layer--anim-dots" />
+          <div className="tech-grid__layer tech-grid__layer--lines tech-grid__layer--anim-lines" />
+          <div className="tech-grid--hero-sparkle" />
         </div>
 
-        <div className="section-edge-vignette" />
+        <div className="tech-grid--hero-fine" />
+
+        <div className="hero-corner-glow" />
+
+        <div className="section-edge-vignette section-edge-vignette--hero" />
       </div>
 
       <div className="container-px relative z-[1] w-full min-w-0 overflow-x-clip sm:overflow-x-visible">
@@ -70,7 +77,7 @@ export function Hero() {
                 y: 0,
                 scale: 1,
                 transition: {
-                  duration: reduceMotion ? 0.2 : 0.95,
+                  duration: fast ? 0.22 : 0.95,
                   ease: easeOutExpo
                 }
               }
@@ -95,9 +102,9 @@ export function Hero() {
                 opacity: 1,
                 y: 0,
                 transition: {
-                  duration: 0.78,
+                  duration: fast ? 0.42 : 0.78,
                   ease: easeOutExpo,
-                  delay: reduceMotion ? 0 : 0.06
+                  delay: fast ? 0 : 0.06
                 }
               }
             }}
@@ -119,7 +126,10 @@ export function Hero() {
               show: {
                 opacity: 1,
                 y: 0,
-                transition: { duration: 0.65, ease: easeOutExpo }
+                transition: {
+                  duration: fast ? 0.38 : 0.65,
+                  ease: easeOutExpo
+                }
               }
             }}
             className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
@@ -147,9 +157,9 @@ export function Hero() {
                 opacity: 1,
                 y: 0,
                 transition: {
-                  duration: 0.62,
+                  duration: fast ? 0.36 : 0.62,
                   ease: easeOutExpo,
-                  delay: reduceMotion ? 0 : 0.04
+                  delay: fast ? 0 : 0.04
                 }
               }
             }}
@@ -192,7 +202,10 @@ export function Hero() {
               show: {
                 opacity: 1,
                 y: 0,
-                transition: { duration: 0.58, ease: easeOutExpo }
+                transition: {
+                  duration: fast ? 0.34 : 0.58,
+                  ease: easeOutExpo
+                }
               }
             }}
             className="mt-7 flex justify-center sm:justify-start"
@@ -212,7 +225,10 @@ export function Hero() {
               show: {
                 opacity: 1,
                 y: 0,
-                transition: { duration: 0.62, ease: easeOutExpo }
+                transition: {
+                  duration: fast ? 0.34 : 0.62,
+                  ease: easeOutExpo
+                }
               }
             }}
           >
@@ -280,8 +296,8 @@ export function Hero() {
                 hidden: {},
                 show: {
                   transition: {
-                    staggerChildren: reduceMotion ? 0 : 0.08,
-                    delayChildren: reduceMotion ? 0 : 0.06
+                    staggerChildren: fast ? 0 : narrow ? 0.04 : 0.08,
+                    delayChildren: fast ? 0 : narrow ? 0.03 : 0.06
                   }
                 }
               }}
@@ -296,7 +312,7 @@ export function Hero() {
                       opacity: 1,
                       y: 0,
                       transition: {
-                        duration: 0.58,
+                        duration: fast ? 0.34 : 0.58,
                         ease: easeOutExpo
                       }
                     }
