@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { services } from "@/content/services";
+import { listServices } from "@/content/services";
 import { Card } from "@/components/ui/card";
 import { homeContactLink, type ContactServiceKey } from "@/lib/contactHref";
 
@@ -26,9 +26,15 @@ export async function generateMetadata({
   };
 }
 
-export default async function ServicesPage() {
-  const t = await getTranslations("servicesPage");
-  const tSvc = await getTranslations("services");
+export default async function ServicesPage({
+  params
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "servicesPage" });
+  const tSvc = await getTranslations({ locale, namespace: "services" });
+  const services = listServices(locale);
 
   return (
     <section className="tech-bg relative site-container py-10 sm:py-14">

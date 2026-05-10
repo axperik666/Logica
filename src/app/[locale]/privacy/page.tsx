@@ -1,30 +1,42 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { CONTACTS } from "@/lib/contacts";
 
-export const metadata: Metadata = {
-  title: "Политика конфиденциальности",
-  description: "Политика конфиденциальности Logica Marketing."
-};
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "privacyPage" });
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription")
+  };
+}
 
-export default function PrivacyPage() {
+export default async function PrivacyPage({
+  params
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "privacyPage" });
+
   return (
     <section className="tech-bg relative site-container py-10 sm:py-14">
       <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-        Политика конфиденциальности
+        {t("title")}
       </h1>
       <div className="mt-6 max-w-3xl space-y-3 text-sm text-white/70">
+        <p>{t("p1")}</p>
+        <p>{t("p2")}</p>
         <p>
-          Этот текст — шаблон. Перед публикацией замените на вашу реальную политику
-          (юрист/шаблон под вашу юрисдикцию).
-        </p>
-        <p>
-          Мы можем собирать данные, которые вы добровольно отправляете через форму
-          на сайте (имя, контакт, сообщение), чтобы ответить на запрос и оказать
-          услуги.
-        </p>
-        <p>
-          По вопросам обработки данных:{" "}
-          <a href={CONTACTS.mailto} className="text-white underline-offset-2 hover:underline">
+          {t("p3prefix")}{" "}
+          <a
+            href={CONTACTS.mailto}
+            className="text-white underline-offset-2 hover:underline"
+          >
             {CONTACTS.email}
           </a>
         </p>
@@ -32,4 +44,3 @@ export default function PrivacyPage() {
     </section>
   );
 }
-

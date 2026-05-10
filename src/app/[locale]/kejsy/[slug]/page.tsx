@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { cases, getCase } from "@/content/cases";
+import { getTranslations } from "next-intl/server";
+import { getCase, CASE_SLUGS } from "@/content/cases";
 import { Button } from "@/components/ui/button";
 
 export function generateStaticParams() {
-  return cases.map((c) => ({ slug: c.slug }));
+  return CASE_SLUGS.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
   params
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
-  const c = getCase(slug);
+  const { locale, slug } = await params;
+  const c = getCase(locale, slug);
   if (!c) return {};
   return {
     title: c.title,
@@ -28,11 +29,13 @@ export async function generateMetadata({
 export default async function CasePage({
   params
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }) {
-  const { slug } = await params;
-  const c = getCase(slug);
+  const { locale, slug } = await params;
+  const c = getCase(locale, slug);
   if (!c) return notFound();
+
+  const t = await getTranslations({ locale, namespace: "caseDetailPage" });
 
   return (
     <section className="tech-bg relative site-container py-10 sm:py-14">
@@ -44,7 +47,7 @@ export default async function CasePage({
         <p className="mt-3 text-sm text-white/65 sm:text-base">{c.result}</p>
 
         <div className="mt-8 glass rounded-3xl p-6">
-          <div className="text-sm font-semibold">Что сделали</div>
+          <div className="text-sm font-semibold">{t("whatWeDid")}</div>
           <ul className="mt-4 space-y-2 text-sm text-white/70">
             {c.bullets.map((b) => (
               <li key={b} className="flex gap-3">
@@ -57,14 +60,13 @@ export default async function CasePage({
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Button href="/kontakty" className="w-full sm:w-auto">
-            Хочу такой же результат
+            {t("ctaPrimary")}
           </Button>
           <Button href="/kejsy" variant="ghost" className="w-full sm:w-auto">
-            Назад к кейсам
+            {t("ctaSecondary")}
           </Button>
         </div>
       </div>
     </section>
   );
 }
-

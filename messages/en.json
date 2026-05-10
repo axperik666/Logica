@@ -106,6 +106,73 @@
     "ctaPlan": "Get a plan",
     "ctaServices": "Services"
   },
+  "contactsPage": {
+    "metaTitle": "Contact",
+    "metaDescription": "Get in touch with Logica Marketing — audit, growth plan, and execution for sites, ads, and creatives.",
+    "title": "Contact",
+    "intro": "Tell us what you need: site/landing, Meta/Google/TikTok ads, creatives — we'll suggest a plan and estimate.",
+    "emailLabel": "Email",
+    "telegramLabel": "Telegram",
+    "telegramHandle": "@logica_marketing",
+    "quickRequest": "Quick request",
+    "formNote": "This form is a placeholder without a backend. On Vercel we can wire Telegram/Email via Server Actions — next step.",
+    "fieldName": "Name",
+    "fieldContact": "Contact",
+    "fieldMessage": "What do you need?",
+    "placeholderName": "How should we address you?",
+    "placeholderContact": "Telegram / WhatsApp / Email",
+    "placeholderMessage": "Briefly: task, niche, and goal",
+    "submit": "Send (server wiring next)",
+    "consent": "By clicking Send, you agree to data processing."
+  },
+  "termsPage": {
+    "metaTitle": "Terms",
+    "metaDescription": "Terms of use for the Logica Marketing website.",
+    "title": "Terms",
+    "p1": "This text is a placeholder. Replace it with your actual terms before going live.",
+    "p2": "Site materials are for information only and are not a public offer unless stated otherwise."
+  },
+  "privacyPage": {
+    "metaTitle": "Privacy policy",
+    "metaDescription": "Privacy policy for Logica Marketing.",
+    "title": "Privacy policy",
+    "p1": "This text is a placeholder. Replace it with your real policy (legal review for your jurisdiction).",
+    "p2": "We may collect data you voluntarily submit through the site form (name, contact, message) to respond and deliver services.",
+    "p3prefix": "For data questions:"
+  },
+  "faqPage": {
+    "metaTitle": "FAQ",
+    "metaDescription": "Frequently asked questions about how LOGICA Marketing works."
+  },
+  "testimonialsPage": {
+    "metaTitle": "Testimonials",
+    "metaDescription": "LOGICA Marketing client testimonials — growth, ROI, and transparent collaboration."
+  },
+  "serviceDetailPage": {
+    "outcome": "Outcome",
+    "forWhom": "Good fit",
+    "includes": "What's included",
+    "process": "Process",
+    "stepLabel": "Step {step}",
+    "faq": "FAQ",
+    "quickStart": "Quick start",
+    "quickStartBody": "Answer 5 questions — we'll suggest a plan: site / funnel / ads / creatives.",
+    "ctaContact": "Message us for a plan",
+    "ctaBack": "Back to services",
+    "asideNote": "We usually reply within one business day."
+  },
+  "caseDetailPage": {
+    "whatWeDid": "What we did",
+    "ctaPrimary": "I want similar results",
+    "ctaSecondary": "Back to cases"
+  },
+  "errorPage": {
+    "brand": "LOGICA Marketing",
+    "title": "Something went wrong",
+    "body": "Try refreshing the page. If it keeps happening, reach out via Telegram or WhatsApp from the homepage.",
+    "retry": "Try again",
+    "home": "Home"
+  },
   "hero": {
     "title": "Marketing built to<br></br><highlight>compound revenue</highlight>",
     "subtitle": "We don’t buy traffic — we buy profit. Systems that pay back <roi>3–7×</roi> on average through testing and clear unit economics.",

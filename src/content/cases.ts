@@ -1,38 +1,29 @@
-export type CaseStudy = {
-  slug: string;
-  title: string;
-  niche: string;
-  result: string;
-  bullets: string[];
-};
+import type { CaseStudy } from "./caseTypes";
+export type { CaseStudy, CaseStudyContent } from "./caseTypes";
+import { routing } from "@/i18n/routing";
+import { casePack as packRu } from "./locales/cases.ru";
+import { casePack as packEn } from "./locales/cases.en";
+import { casePack as packIt } from "./locales/cases.it";
 
-export const cases: CaseStudy[] = [
-  {
-    slug: "b2b-leadgen",
-    title: "B2B лидогенерация: структура + поиск",
-    niche: "B2B услуги",
-    result: "Стабилизировали поток лидов и снизили стоимость заявки",
-    bullets: [
-      "Перепаковали оффер и страницу услуги",
-      "Разметили события и цели",
-      "Запустили поиск Google по горячей семантике",
-      "Добавили ретаргет на прогрев"
-    ]
-  },
-  {
-    slug: "meta-performance",
-    title: "Meta: системные креативы + тесты",
-    niche: "Сервис/услуги",
-    result: "Улучшили качество лидов и масштабировали бюджет",
-    bullets: [
-      "Собрали матрицу креативных углов",
-      "Поставили цикл тестов 2 раза в неделю",
-      "Отсекли нерелевантные плейсменты/аудитории"
-    ]
-  }
-];
+const packs = { ru: packRu, en: packEn, it: packIt } as const;
+type PackLocale = keyof typeof packs;
 
-export function getCase(slug: string) {
-  return cases.find((c) => c.slug === slug) ?? null;
+function normalizeLocale(locale: string): PackLocale {
+  return locale in packs ? (locale as PackLocale) : (routing.defaultLocale as PackLocale);
 }
 
+export const CASE_SLUGS = ["b2b-leadgen", "meta-performance"] as const;
+
+export type CaseSlug = (typeof CASE_SLUGS)[number];
+
+export function getCase(locale: string, slug: string): CaseStudy | null {
+  const body = packs[normalizeLocale(locale)][slug];
+  if (!body) return null;
+  return { slug, ...body };
+}
+
+export function listCases(locale: string): CaseStudy[] {
+  return CASE_SLUGS.map((slug) => getCase(locale, slug)).filter(
+    (c): c is CaseStudy => c !== null
+  );
+}

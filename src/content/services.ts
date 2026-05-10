@@ -1,130 +1,35 @@
-export type Service = {
-  slug: string;
-  name: string;
-  short: string;
-  outcome: string;
-  forWhom: string[];
-  includes: string[];
-  process: Array<{ title: string; text: string }>;
-  faqs: Array<{ q: string; a: string }>;
-};
+import type { Service } from "./serviceTypes";
+export type { Service, ServiceContent } from "./serviceTypes";
+import { routing } from "@/i18n/routing";
+import { servicePack as packRu } from "./locales/services.ru";
+import { servicePack as packEn } from "./locales/services.en";
+import { servicePack as packIt } from "./locales/services.it";
 
-export const services: Service[] = [
-  {
-    slug: "sozdanie-lendinga",
-    name: "Создание лендинга",
-    short: "Премиальный лендинг под конверсию, аналитика и скорость — без “красоты ради красоты”.",
-    outcome: "Рост заявок за счёт структуры, смысла и UX, а не “магии дизайна”.",
-    forWhom: ["Услуги", "Эксперты", "E-commerce (1 продукт)", "Локальный бизнес"],
-    includes: [
-      "Прототип (структура + офферы + триггеры доверия)",
-      "UI-дизайн (mobile-first) + адаптив",
-      "Разработка на Next.js 15 + Tailwind",
-      "Форма/лидогенерация + интеграции (по запросу)",
-      "SEO-база + быстрые Core Web Vitals",
-      "А/Б готовность (варианты блоков и офферов)"
-    ],
-    process: [
-      { title: "Диагностика", text: "Цель, ЦА, оффер, конкурентное поле, метрики успеха." },
-      { title: "Структура", text: "Прототип: путь пользователя, блоки, аргументы, CTA." },
-      { title: "Дизайн+копирайт", text: "Премиальный UI и тексты, которые читаются и продают." },
-      { title: "Разработка", text: "Next.js, анимации, скорость, формы, аналитика." },
-      { title: "Запуск", text: "Проверки, события, цели, корректировки по данным." }
-    ],
-    faqs: [
-      { q: "Сколько времени занимает?", a: "Обычно 7–14 дней, зависит от материалов и согласований." },
-      { q: "Можно ли сделать несколько экранов/услуг?", a: "Да. Делается как многостраничный сайт с отдельными страницами услуг." }
-    ]
-  },
-  {
-    slug: "nastrojka-reklamy-meta",
-    name: "Настройка рекламы Meta (FB/Instagram)",
-    short: "Стратегия, структура аккаунта, креативы, оптимизация — чтобы цена лида была прогнозируемой.",
-    outcome: "Снижение CPL и рост качества лидов через тесты и воронку.",
-    forWhom: ["Услуги", "Инфо/эксперты", "E-commerce", "Лидогенерация"],
-    includes: [
-      "Аудит текущих кампаний (если есть)",
-      "Структура: цели, события, пиксель/CAPI (по возможности)",
-      "Плейбук тестов: креативы/аудитории/офферы",
-      "Оптимизация: бюджеты, ставки, отсев мусора",
-      "Еженедельные отчёты: выводы + следующий шаг"
-    ],
-    process: [
-      { title: "Подготовка", text: "Цели, события, пиксель, корректная атрибуция." },
-      { title: "Запуск", text: "Тестируем гипотезы: креативы, офферы, аудитории." },
-      { title: "Скалирование", text: "Усиливаем то, что работает, и режем лишнее." }
-    ],
-    faqs: [
-      { q: "Нужны ли креативы от вас?", a: "Желательно. Но мы можем делать креативы полностью под ключ." },
-      { q: "Какие бюджеты?", a: "Зависит от ниши. Минимально — чтобы был статистический смысл тестов." }
-    ]
-  },
-  {
-    slug: "nastrojka-reklamy-google",
-    name: "Настройка Google Ads",
-    short: "Поисковые кампании, Performance Max, ретаргет — с правильной аналитикой и экономикой.",
-    outcome: "Заявки из “горячего спроса” и рост ROAS/ROMI.",
-    forWhom: ["Услуги", "E-commerce", "B2B"],
-    includes: [
-      "Семантика и структура кампаний",
-      "Минус-слова, объявления, расширения",
-      "Конверсии и импорт целей (GA4)",
-      "Оптимизация по данным, а не по ощущениям"
-    ],
-    process: [
-      { title: "Сбор спроса", text: "Семантика, приоритеты, посадочные страницы." },
-      { title: "Запуск", text: "Структура, объявления, конверсии, ставки." },
-      { title: "Оптимизация", text: "Запросы, качество трафика, экономика." }
-    ],
-    faqs: [
-      { q: "Что лучше: поиск или PMax?", a: "Часто начинаем с поиска, затем подключаем PMax по данным." }
-    ]
-  },
-  {
-    slug: "nastrojka-reklamy-tiktok",
-    name: "Настройка TikTok Ads",
-    short: "Креативная платформа: тесты, UGC-углы, быстрые итерации и ретаргет.",
-    outcome: "Быстрый объём лидов через сильные креативы и чёткий плейбук тестов.",
-    forWhom: ["E-commerce", "Услуги", "Приложения"],
-    includes: [
-      "Пиксель/события и базовая аналитика",
-      "Стратегия тестов креативов",
-      "Запуск кампаний и оптимизация",
-      "Ретаргет и прогрев"
-    ],
-    process: [
-      { title: "Креативная стратегия", text: "Углы, хуки, форматы, сценарии." },
-      { title: "Тесты", text: "Быстрые итерации, отсев, победители." },
-      { title: "Рост", text: "Системно масштабируем и обновляем креативы." }
-    ],
-    faqs: [
-      { q: "TikTok работает не для всех?", a: "Работает там, где сильные креативы и понятная воронка." }
-    ]
-  },
-  {
-    slug: "sozdanie-kreativov",
-    name: "Создание креативов",
-    short: "Баннеры, видео, UGC-скрипты — под гипотезы, а не “просто красиво”.",
-    outcome: "Выше CTR, ниже CPM/CPL и стабильнее результаты на дистанции.",
-    forWhom: ["Meta", "TikTok", "Google (дисплей/YouTube)"],
-    includes: [
-      "Креативная стратегия (углы + офферы)",
-      "Пакеты креативов для тестов (5–20+)",
-      "Сценарии UGC/видео",
-      "Ротация и обновление победителей"
-    ],
-    process: [
-      { title: "Анализ", text: "Ниша, боли, триггеры, конкуренты, референсы." },
-      { title: "Производство", text: "Сценарии → дизайн/монтаж → варианты под тест." },
-      { title: "Цикл", text: "Собрали данные → выводы → следующий пакет." }
-    ],
-    faqs: [
-      { q: "Сможете адаптировать под разные площадки?", a: "Да, делаем адаптации под форматы и плейсменты." }
-    ]
-  }
-];
+const packs = { ru: packRu, en: packEn, it: packIt } as const;
+type PackLocale = keyof typeof packs;
 
-export function getService(slug: string) {
-  return services.find((s) => s.slug === slug) ?? null;
+function normalizeLocale(locale: string): PackLocale {
+  return locale in packs ? (locale as PackLocale) : (routing.defaultLocale as PackLocale);
 }
 
+export const SERVICE_SLUGS = [
+  "sozdanie-lendinga",
+  "nastrojka-reklamy-meta",
+  "nastrojka-reklamy-google",
+  "nastrojka-reklamy-tiktok",
+  "sozdanie-kreativov"
+] as const;
+
+export type ServiceSlug = (typeof SERVICE_SLUGS)[number];
+
+export function getService(locale: string, slug: string): Service | null {
+  const body = packs[normalizeLocale(locale)][slug];
+  if (!body) return null;
+  return { slug, ...body };
+}
+
+export function listServices(locale: string): Service[] {
+  return SERVICE_SLUGS.map((slug) => getService(locale, slug)).filter(
+    (s): s is Service => s !== null
+  );
+}

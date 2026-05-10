@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
-import { cases } from "@/content/cases";
-import { services } from "@/content/services";
+import { CASE_SLUGS } from "@/content/cases";
+import { SERVICE_SLUGS } from "@/content/services";
 import { routing } from "@/i18n/routing";
 import { languageAlternates } from "@/lib/hreflang";
 import { getSiteUrl } from "@/lib/site";
@@ -42,8 +42,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  for (const s of services) {
-    const path = `/uslugi/${s.slug}`;
+  for (const slug of SERVICE_SLUGS) {
+    const path = `/uslugi/${slug}`;
     for (const locale of routing.locales) {
       const suffix = localizedPath(locale, path);
       const url = `${base}${suffix}`;
@@ -59,8 +59,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  for (const c of cases) {
-    const path = `/kejsy/${c.slug}`;
+  for (const slug of CASE_SLUGS) {
+    const path = `/kejsy/${slug}`;
     for (const locale of routing.locales) {
       const suffix = localizedPath(locale, path);
       const url = `${base}${suffix}`;

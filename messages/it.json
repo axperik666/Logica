@@ -106,6 +106,73 @@
     "ctaPlan": "Ricevi un piano",
     "ctaServices": "Servizi"
   },
+  "contactsPage": {
+    "metaTitle": "Contatti",
+    "metaDescription": "Contatta Logica Marketing — audit, piano di crescita e avvio di sito, ads e creatività.",
+    "title": "Contatti",
+    "intro": "Scrivi cosa ti serve: sito/landing, ads Meta/Google/TikTok, creatività — ti proponiamo piano e stima.",
+    "emailLabel": "Email",
+    "telegramLabel": "Telegram",
+    "telegramHandle": "@logica_marketing",
+    "quickRequest": "Richiesta rapida",
+    "formNote": "Questo modulo è un placeholder senza backend. Su Vercel possiamo collegare Telegram/Email con Server Actions — prossimo passo.",
+    "fieldName": "Nome",
+    "fieldContact": "Contatto",
+    "fieldMessage": "Di cosa hai bisogno?",
+    "placeholderName": "Come possiamo chiamarti?",
+    "placeholderContact": "Telegram / WhatsApp / Email",
+    "placeholderMessage": "In breve: task, nicchia e obiettivo",
+    "submit": "Invia (collegheremo il server)",
+    "consent": "Cliccando Invia accetti il trattamento dei dati."
+  },
+  "termsPage": {
+    "metaTitle": "Termini",
+    "metaDescription": "Termini di utilizzo del sito Logica Marketing.",
+    "title": "Termini",
+    "p1": "Testo segnaposto. Sostituiscilo con i termini reali prima della pubblicazione.",
+    "p2": "I materiali sono informativi e non costituiscono offerta al pubblico salvo diversa indicazione."
+  },
+  "privacyPage": {
+    "metaTitle": "Privacy policy",
+    "metaDescription": "Informativa privacy di Logica Marketing.",
+    "title": "Privacy policy",
+    "p1": "Testo segnaposto. Sostituiscilo con l’informativa reale (revisione legale per la tua giurisdizione).",
+    "p2": "Possiamo trattare i dati che invii volontariamente dal modulo (nome, contatto, messaggio) per rispondere e fornire i servizi.",
+    "p3prefix": "Per domande sul trattamento dati:"
+  },
+  "faqPage": {
+    "metaTitle": "FAQ",
+    "metaDescription": "Risposte alle domande frequenti sul modo di lavorare di LOGICA Marketing."
+  },
+  "testimonialsPage": {
+    "metaTitle": "Recensioni",
+    "metaDescription": "Recensioni clienti LOGICA Marketing — crescita, ROI e collaborazione trasparente."
+  },
+  "serviceDetailPage": {
+    "outcome": "Risultato",
+    "forWhom": "A chi è adatto",
+    "includes": "Cosa include",
+    "process": "Processo",
+    "stepLabel": "Passo {step}",
+    "faq": "FAQ",
+    "quickStart": "Avvio rapido",
+    "quickStartBody": "Rispondi a 5 domande — ti proponiamo un piano: sito / funnel / ads / creatività.",
+    "ctaContact": "Scrivici per un piano",
+    "ctaBack": "Torna ai servizi",
+    "asideNote": "Di solito rispondiamo entro un giorno lavorativo."
+  },
+  "caseDetailPage": {
+    "whatWeDid": "Cosa abbiamo fatto",
+    "ctaPrimary": "Voglio un risultato simile",
+    "ctaSecondary": "Torna ai casi"
+  },
+  "errorPage": {
+    "brand": "LOGICA Marketing",
+    "title": "Qualcosa è andato storto",
+    "body": "Prova ad aggiornare la pagina. Se si ripete, contattaci da Telegram o WhatsApp dalla home.",
+    "retry": "Riprova",
+    "home": "Home"
+  },
   "hero": {
     "title": "Marketing che<br></br><highlight>moltiplica i ricavi</highlight>",
     "subtitle": "Non compriamo traffico: compriamo profitto. Sistemi che rendono <roi>3–7×</roi> in media, con test e numeri chiari.",

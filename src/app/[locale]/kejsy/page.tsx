@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/navigation";
-import { cases } from "@/content/cases";
+import { listCases } from "@/content/cases";
 
 export async function generateMetadata({
   params
@@ -16,8 +16,14 @@ export async function generateMetadata({
   };
 }
 
-export default async function CasesListingPage() {
-  const t = await getTranslations("casesPage");
+export default async function CasesListingPage({
+  params
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "casesPage" });
+  const cases = listCases(locale);
 
   return (
     <section className="tech-bg relative site-container py-10 sm:py-14">

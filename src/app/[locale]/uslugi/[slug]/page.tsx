@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getService, services } from "@/content/services";
+import { getTranslations } from "next-intl/server";
+import { getService, SERVICE_SLUGS } from "@/content/services";
 import { Button } from "@/components/ui/button";
 
 export function generateStaticParams() {
-  return services.map((s) => ({ slug: s.slug }));
+  return SERVICE_SLUGS.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
   params
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
-  const service = getService(slug);
+  const { locale, slug } = await params;
+  const service = getService(locale, slug);
   if (!service) return {};
   return {
     title: service.name,
@@ -28,11 +29,13 @@ export async function generateMetadata({
 export default async function ServicePage({
   params
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }) {
-  const { slug } = await params;
-  const service = getService(slug);
+  const { locale, slug } = await params;
+  const service = getService(locale, slug);
   if (!service) return notFound();
+
+  const t = await getTranslations({ locale, namespace: "serviceDetailPage" });
 
   return (
     <section className="tech-bg relative site-container py-10 sm:py-14">
@@ -47,11 +50,11 @@ export default async function ServicePage({
 
           <div className="mt-7 grid gap-4 sm:grid-cols-2">
             <div className="glass rounded-2xl p-5">
-              <div className="text-sm font-semibold">Результат</div>
+              <div className="text-sm font-semibold">{t("outcome")}</div>
               <p className="mt-2 text-sm text-white/65">{service.outcome}</p>
             </div>
             <div className="glass rounded-2xl p-5">
-              <div className="text-sm font-semibold">Кому подходит</div>
+              <div className="text-sm font-semibold">{t("forWhom")}</div>
               <ul className="mt-2 space-y-1 text-sm text-white/65">
                 {service.forWhom.map((x) => (
                   <li key={x}>— {x}</li>
@@ -62,7 +65,7 @@ export default async function ServicePage({
 
           <div className="mt-10">
             <h2 className="text-xl font-semibold tracking-tight">
-              Что входит
+              {t("includes")}
             </h2>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               {service.includes.map((x) => (
@@ -77,12 +80,12 @@ export default async function ServicePage({
           </div>
 
           <div className="mt-10">
-            <h2 className="text-xl font-semibold tracking-tight">Процесс</h2>
+            <h2 className="text-xl font-semibold tracking-tight">{t("process")}</h2>
             <ol className="mt-4 space-y-3">
               {service.process.map((p, idx) => (
                 <li key={p.title} className="glass rounded-2xl p-5">
                   <div className="text-xs font-semibold text-brand-300">
-                    Шаг {idx + 1}
+                    {t("stepLabel", { step: idx + 1 })}
                   </div>
                   <div className="mt-1 text-sm font-semibold">{p.title}</div>
                   <p className="mt-2 text-sm text-white/65">{p.text}</p>
@@ -92,7 +95,7 @@ export default async function ServicePage({
           </div>
 
           <div className="mt-10">
-            <h2 className="text-xl font-semibold tracking-tight">FAQ</h2>
+            <h2 className="text-xl font-semibold tracking-tight">{t("faq")}</h2>
             <div className="mt-4 space-y-3">
               {service.faqs.map((f) => (
                 <div key={f.q} className="rounded-2xl border border-white/10 bg-white/5 p-5">
@@ -106,25 +109,20 @@ export default async function ServicePage({
 
         <aside className="lg:col-span-4">
           <div className="glass sticky top-24 rounded-3xl p-6">
-            <div className="text-sm font-semibold">Быстрый старт</div>
-            <p className="mt-2 text-sm text-white/65">
-              Ответьте на 5 вопросов — и я предложу план: сайт/воронка/реклама/креативы.
-            </p>
+            <div className="text-sm font-semibold">{t("quickStart")}</div>
+            <p className="mt-2 text-sm text-white/65">{t("quickStartBody")}</p>
             <div className="mt-5 flex flex-col gap-3">
               <Button href="/kontakty" className="w-full">
-                Написать и получить план
+                {t("ctaContact")}
               </Button>
               <Button href="/uslugi" variant="ghost" className="w-full">
-                Назад к услугам
+                {t("ctaBack")}
               </Button>
             </div>
-            <div className="mt-5 text-xs text-white/55">
-              Обычно отвечаем в течение рабочего дня.
-            </div>
+            <div className="mt-5 text-xs text-white/55">{t("asideNote")}</div>
           </div>
         </aside>
       </div>
     </section>
   );
 }
-
