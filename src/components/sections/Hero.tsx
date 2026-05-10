@@ -274,7 +274,7 @@ export function Hero() {
                     }
                   }}
                 >
-                  <h1 className="brand-glow text-left text-balance break-words text-[clamp(2.6rem,7.2vw,6.25rem)] font-black leading-[1.02] tracking-[-0.045em] text-white sm:tracking-[-0.04em] md:leading-[1.03] md:tracking-[-0.038em] drop-shadow-[0_16px_80px_rgba(0,191,255,0.45)] [text-shadow:0_2px_0_rgba(0,0,0,0.35),0_0_60px_rgba(0,191,255,0.38)]">
+                  <h1 className="brand-glow text-left text-balance break-words text-[clamp(2.85rem,7.8vw,6.75rem)] font-black leading-[1.02] tracking-[-0.048em] text-white sm:tracking-[-0.042em] md:leading-[1.03] md:tracking-[-0.04em] drop-shadow-[0_16px_92px_rgba(0,191,255,0.5)] [text-shadow:0_2px_0_rgba(0,0,0,0.35),0_0_72px_rgba(0,191,255,0.42)]">
                     {t.rich("title", {
                       br: () => <br />,
                       highlight: (chunks) => (
@@ -300,7 +300,7 @@ export function Hero() {
                     }
                   }}
                 >
-                  <p className="mt-8 max-w-2xl text-left text-[1.08rem] font-semibold leading-relaxed text-white/92 sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed lg:mt-9 xl:max-w-[42rem]">
+                  <p className="mt-7 max-w-2xl text-left text-[1.05rem] font-semibold leading-relaxed text-white/92 sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed lg:mt-8 xl:max-w-[42rem]">
                     {t.rich("subtitle", {
                       roi: (chunks) => (
                         <span className="mx-0.5 inline font-extrabold text-[#D8FDFF] drop-shadow-[0_0_32px_rgba(0,191,255,0.85)]">
@@ -433,6 +433,13 @@ export function Hero() {
               }}
               className="relative hidden min-h-0 w-full shrink-0 lg:flex lg:w-[30%] lg:max-w-[30%] lg:items-stretch lg:justify-stretch"
             >
+              <div
+                aria-hidden
+                className="pointer-events-none absolute -inset-10 opacity-90"
+              >
+                <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[conic-gradient(from_180deg,rgba(0,191,255,0.26),rgba(138,43,226,0.18),rgba(0,191,255,0.26))] blur-3xl" />
+                <div className="absolute left-1/2 top-1/2 h-[340px] w-[340px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(0,191,255,0.22),transparent_62%)] blur-2xl" />
+              </div>
               <div className="pointer-events-none absolute -inset-[2px] rounded-[2.35rem] bg-gradient-to-br from-[#00BFFF]/25 via-transparent to-[#a855f740] opacity-90 blur-xl" />
               <div className="hero-roi-stage relative z-[1] flex h-full min-h-[min(440px,58vh)] w-full flex-col justify-center rounded-[2.25rem] border border-white/[0.12] bg-[linear-gradient(165deg,rgba(6,12,32,0.72)_0%,rgba(4,8,22,0.55)_45%,rgba(5,8,28,0.62)_100%)] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-xl sm:p-7 xl:p-9">
                 <HeroRoiVisual reduceMotion={reduceMotion} />

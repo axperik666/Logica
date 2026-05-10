@@ -107,7 +107,7 @@ const navLinkClass = (active: boolean) =>
     "relative shrink-0 whitespace-nowrap rounded-xl px-2.5 py-2 text-[12px] font-medium transition-all duration-300 sm:text-[13px] lg:px-3 lg:py-2.5 lg:text-sm xl:px-3.5",
     "hover:bg-white/[0.08] hover:text-[#00BFFF]",
     "hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_0_34px_rgba(0,191,255,0.5),0_0_1px_rgba(0,191,255,0.9)]",
-    "after:pointer-events-none after:absolute after:left-3 after:right-3 after:bottom-1.5 after:h-px after:rounded after:bg-[#00BFFF] after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100",
+    "after:pointer-events-none after:absolute after:left-3 after:right-3 after:bottom-1 after:h-px after:rounded after:bg-[#00BFFF] after:shadow-[0_0_18px_rgba(0,191,255,0.65)] after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100",
     active
       ? "bg-white/[0.09] text-white shadow-[inset_0_1px_0_rgba(0,191,255,0.35),0_0_30px_rgba(0,191,255,0.44)] after:scale-x-100"
       : "text-white/82"
@@ -130,8 +130,8 @@ function HeaderCtaLink({
       className={cn(
         "header-cta-link shrink-0 rounded-lg px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-white",
         "border border-[#00BFFF]/40 bg-[rgba(0,191,255,0.12)]",
-        "shadow-[inset_0_1px_0_rgba(255,255,255,0.14),0_0_52px_rgba(0,191,255,0.38),0_0_18px_rgba(0,191,255,0.32)]",
-        "transition-all duration-300 hover:bg-[rgba(0,191,255,0.22)] hover:border-[#00BFFF]/70 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_0_86px_rgba(0,191,255,0.62),0_0_26px_rgba(0,191,255,0.45)] hover-lift hover:scale-[1.05]",
+        "shadow-[inset_0_1px_0_rgba(255,255,255,0.14),0_0_64px_rgba(0,191,255,0.42),0_0_22px_rgba(0,191,255,0.38)]",
+        "transition-all duration-300 hover:bg-[rgba(0,191,255,0.24)] hover:border-[#00BFFF]/78 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_0_112px_rgba(0,191,255,0.7),0_0_34px_rgba(0,191,255,0.55)] hover-lift hover:scale-[1.05]",
         "sm:px-4 sm:text-xs sm:tracking-[0.15em]",
         className
       )}
@@ -268,8 +268,8 @@ export function Header() {
               className={cn(
                 "relative shrink-0 overflow-hidden rounded-xl bg-white/[0.06] ring-[2.5px] ring-[#00BFFF]/50 shadow-[0_0_72px_rgba(0,191,255,0.52)] transition duration-300",
                 "h-10 w-10 sm:h-11 sm:w-11 sm:rounded-2xl sm:ring-[3px]",
-                "lg:h-[4.25rem] lg:w-[4.25rem] lg:rounded-[1.25rem]",
-                "xl:h-[4.75rem] xl:w-[4.75rem] xl:rounded-[1.45rem]",
+                "lg:h-[4.5rem] lg:w-[4.5rem] lg:rounded-[1.35rem]",
+                "xl:h-[5rem] xl:w-[5rem] xl:rounded-[1.55rem]",
                 "group-hover:ring-[#00BFFF]/78 group-hover:shadow-[0_0_98px_rgba(0,191,255,0.62)]"
               )}
             >
