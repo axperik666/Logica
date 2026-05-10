@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Hero } from "@/components/sections/Hero";
+
+/** Свежие кейсы и переводы без устаревшего статического снимка страницы. */
+export const dynamic = "force-dynamic";
 import { Platforms } from "@/components/sections/Platforms";
 import { Services } from "@/components/sections/Services";
 import { Cases } from "@/components/sections/Cases";

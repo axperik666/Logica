@@ -107,7 +107,7 @@ export function CaseCard({ caseId, className, priority }: Props) {
             muted
             loop
             playsInline
-            preload="none"
+            preload="metadata"
             onError={() => setHasError(true)}
             className="absolute inset-0 h-full w-full scale-105 object-cover transition-transform duration-700 group-hover/card:scale-100"
             aria-hidden
