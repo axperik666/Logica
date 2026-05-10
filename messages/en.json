@@ -78,6 +78,34 @@
     "closeMenu": "Close menu",
     "switchTo": "Switch language"
   },
+  "aboutPage": {
+    "metaTitle": "About us",
+    "metaDescription": "LOGICA Marketing — our approach, process, principles, and how we make growth predictable.",
+    "title": "About us",
+    "intro": "We combine UX, narrative, speed, and performance marketing. Many can make things look good — our goal is measurable outcomes from your site and ads.",
+    "principles": [
+      {
+        "title": "Economics first",
+        "desc": "We model unit economics, target CPL/CPA, and payback."
+      },
+      {
+        "title": "Structured testing",
+        "desc": "We plan hypotheses: creatives, offers, audiences, landing pages."
+      },
+      {
+        "title": "Speed & UX",
+        "desc": "Mobile-first, Core Web Vitals, a clear user journey."
+      }
+    ],
+    "sidebarTitle": "How we start",
+    "steps": [
+      "1) 10–15 minute brief",
+      "2) Audit of site, funnel, and ads",
+      "3) Action plan for the next 2–4 weeks"
+    ],
+    "ctaPlan": "Get a plan",
+    "ctaServices": "Services"
+  },
   "hero": {
     "title": "Marketing built to<br></br><highlight>compound revenue</highlight>",
     "subtitle": "We don’t buy traffic — we buy profit. Systems that pay back <roi>3–7×</roi> on average through testing and clear unit economics.",

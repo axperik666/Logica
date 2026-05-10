@@ -78,6 +78,34 @@
     "closeMenu": "Chiudi menu",
     "switchTo": "Cambia lingua"
   },
+  "aboutPage": {
+    "metaTitle": "Chi siamo",
+    "metaDescription": "LOGICA Marketing: approccio, processo, principi e come rendiamo la crescita più prevedibile.",
+    "title": "Chi siamo",
+    "intro": "Uniamo UX, senso, velocità e performance marketing. Rendere tutto «bello» sanno in molti. Il nostro obiettivo è che sito e advertising diano risultati misurabili.",
+    "principles": [
+      {
+        "title": "Prima l’economia",
+        "desc": "Contiamo unit economics, CPL/CPA target e payback."
+      },
+      {
+        "title": "Test strutturati",
+        "desc": "Pianifichiamo ipotesi: creatività, offerte, audience, landing."
+      },
+      {
+        "title": "Velocità e UX",
+        "desc": "Mobile-first, Core Web Vitals, percorso utente chiaro."
+      }
+    ],
+    "sidebarTitle": "Come iniziamo",
+    "steps": [
+      "1) Brief di 10–15 minuti",
+      "2) Audit di sito, funnel e ads",
+      "3) Piano d’azione per 2–4 settimane"
+    ],
+    "ctaPlan": "Ricevi un piano",
+    "ctaServices": "Servizi"
+  },
   "hero": {
     "title": "Marketing che<br></br><highlight>moltiplica i ricavi</highlight>",
     "subtitle": "Non compriamo traffico: compriamo profitto. Sistemi che rendono <roi>3–7×</roi> in media, con test e numeri chiari.",
