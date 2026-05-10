@@ -84,6 +84,7 @@ export function WhyUs() {
         <p className="mt-3 text-sm text-white/72 sm:text-base">{t("subtitle")}</p>
       </MotionDiv>
 
+      <ParallaxFloat>
       <MotionDiv
         variants={{
           hidden: {},
