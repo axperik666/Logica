@@ -1,9 +1,10 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/navigation";
 import { Button } from "@/components/ui/button";
 
 export default async function NotFound() {
-  const t = await getTranslations("notFound");
+  const locale = await getLocale();
+  const t = await getTranslations({ locale, namespace: "notFound" });
 
   return (
     <section className="tech-bg relative site-container py-16">

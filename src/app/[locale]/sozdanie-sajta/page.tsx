@@ -36,8 +36,8 @@ export default async function SozdanieSajtaPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  await params;
-  const t = await getTranslations("websitesPage");
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "websitesPage" });
   const bulletsRaw = t.raw("approachBullets");
   const captionsRaw = t.raw("caseCaptions");
   const bullets = Array.isArray(bulletsRaw) ? (bulletsRaw as string[]) : [];

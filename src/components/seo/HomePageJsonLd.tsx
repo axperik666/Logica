@@ -15,9 +15,9 @@ export async function HomePageJsonLd() {
   const base = getSiteUrl().replace(/\/+$/, "");
   const pageUrl = `${base}${localizedPath(locale, "")}`;
 
-  const tServices = await getTranslations("services");
-  const tCases = await getTranslations("cases");
-  const tSec = await getTranslations("sectionsSeo");
+  const tServices = await getTranslations({ locale, namespace: "services" });
+  const tCases = await getTranslations({ locale, namespace: "cases" });
+  const tSec = await getTranslations({ locale, namespace: "sectionsSeo" });
   const cards = tServices.raw("cards") as ServiceCard[];
 
   const sectionAnchors: { key: string; hash: string }[] = [

@@ -6,16 +6,26 @@ import { Process } from "@/components/sections/Process";
 
 type Principle = { title: string; desc: string };
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations({ namespace: "aboutPage" });
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "aboutPage" });
   return {
     title: t("metaTitle"),
     description: t("metaDescription")
   };
 }
 
-export default async function AboutPage() {
-  const t = await getTranslations({ namespace: "aboutPage" });
+export default async function AboutPage({
+  params
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "aboutPage" });
   const principlesRaw = t.raw("principles");
   const principles = Array.isArray(principlesRaw)
     ? (principlesRaw as Principle[])
