@@ -3,8 +3,9 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
+/** На Vercel задана переменная `VERCEL` — там свой рантайм; `standalone` оставляем для Docker/своего сервера. */
 const nextConfig: NextConfig = {
-  output: "standalone",
+  ...(!process.env.VERCEL ? { output: "standalone" as const } : {}),
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
