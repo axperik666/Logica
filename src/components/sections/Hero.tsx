@@ -243,16 +243,17 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 overflow-hidden"
       >
         <video
-          className="absolute inset-0 h-full w-full object-cover opacity-[0.34]"
+          className="absolute inset-0 h-full w-full object-cover opacity-[0.55] sm:opacity-[0.5]"
           autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
         >
+          <source src="/hero-bg.mp4" type="video/mp4" />
           <source src="/videos/hero-growth.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-[#070b12]/80 to-[#060b18]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/70 to-[#060b18]" />
         <div className="hero-gradient-mesh" />
 
         <div className="tech-grid tech-grid--hero">
