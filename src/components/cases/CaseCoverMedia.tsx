@@ -2,8 +2,9 @@
 
 import type { LucideIcon } from "lucide-react";
 import { useInView, useReducedMotion } from "framer-motion";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { CaseCoverImage } from "@/components/cases/CaseCoverImage";
+import { useTouchPrimary } from "@/lib/use-touch-primary";
 
 type Props = {
   videoSrc?: string | null;
@@ -14,21 +15,6 @@ type Props = {
   priority?: boolean;
   Icon: LucideIcon;
 };
-
-/** Устройства без hover (сенсор): автозапуск при скролле к карточке. */
-function useTouchPrimary() {
-  const [touchPrimary, setTouchPrimary] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(hover: none)");
-    const sync = () => setTouchPrimary(mq.matches);
-    sync();
-    mq.addEventListener("change", sync);
-    return () => mq.removeEventListener("change", sync);
-  }, []);
-
-  return touchPrimary;
-}
 
 /**
  * Обложка кейса: видео не грузится до hover (десктоп) или пока карточка не в зоне видимости (сенсор).
