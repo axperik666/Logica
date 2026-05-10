@@ -248,7 +248,7 @@ export function Hero() {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
         >
           <source src="/hero-bg.mp4" type="video/mp4" />
           <source src="/videos/hero-growth.mp4" type="video/mp4" />

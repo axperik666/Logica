@@ -79,32 +79,32 @@ export function Cases() {
       }}
     >
       <div className="site-container">
-      <div className="sr-only">
-        <p>{tSec("cases.metaTitle")}</p>
-        <p>{tSec("cases.metaDescription")}</p>
-      </div>
-      <MotionDiv
-        variants={{
-          hidden: { opacity: 0, y: 10 },
-          show: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-        }}
-        className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end"
-      >
-        <div>
-          <h2 className="brand-glow text-balance text-2xl font-semibold tracking-tight sm:text-3xl">
-            {t("titleBrand")}
-          </h2>
-          <p className="mt-3 max-w-2xl text-sm text-white/90 sm:text-base">
-            {t("subtitle")}
-          </p>
+        <div className="sr-only">
+          <p>{tSec("cases.metaTitle")}</p>
+          <p>{tSec("cases.metaDescription")}</p>
         </div>
+        <MotionDiv
+          variants={{
+            hidden: { opacity: 0, y: 10 },
+            show: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+          }}
+          className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end"
+        >
+          <div>
+            <h2 className="brand-glow text-balance text-2xl font-semibold tracking-tight sm:text-3xl">
+              {t("titleBrand")}
+            </h2>
+            <p className="mt-3 max-w-2xl text-sm text-white/90 sm:text-base">
+              {t("subtitle")}
+            </p>
+          </div>
 
-        <Button href={homeSectionHref("contact")} variant="ghost" className="hover-lift">
-          {t("ctaTop")}
-        </Button>
-      </MotionDiv>
+          <Button href={homeSectionHref("contact")} variant="ghost" className="hover-lift">
+            {t("ctaTop")}
+          </Button>
+        </MotionDiv>
 
-      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:grid-flow-dense">
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:grid-flow-dense">
         {HOME_CASE_IDS.map((id, index) => {
           const Icon = ICONS[id];
           const niche = t(`items.${id}.niche`);
@@ -127,27 +127,25 @@ export function Cases() {
               }}
               className={cn(
                 "glass hover-lift overflow-hidden rounded-3xl p-6 transition-[transform,box-shadow,border-color] duration-300 hover:border-[#00BFFF]/35 hover:shadow-[0_28px_84px_rgba(0,0,0,0.58),0_0_58px_rgba(0,191,255,0.18)] hover:scale-[1.01]",
-                // Masonry: периодически делаем карточку шире на desktop
                 index % 9 === 0 ? "lg:col-span-2" : ""
               )}
             >
               <div
                 className={cn(
                   "relative -mx-6 -mt-6 mb-4 overflow-hidden",
-                  // Masonry feel: разные высоты обложек на lg+
                   index % 9 === 0
                     ? "h-48 sm:h-52 lg:h-72"
                     : index % 6 === 0
                       ? "h-44 sm:h-48 lg:h-60"
-                    : index % 6 === 1
-                      ? "h-40 sm:h-44 lg:h-52"
-                      : index % 6 === 2
-                        ? "h-48 sm:h-52 lg:h-64"
-                        : index % 6 === 3
-                          ? "h-40 sm:h-44 lg:h-56"
-                          : index % 6 === 4
-                            ? "h-44 sm:h-48 lg:h-58"
-                            : "h-40 sm:h-44 lg:h-50"
+                      : index % 6 === 1
+                        ? "h-40 sm:h-44 lg:h-52"
+                        : index % 6 === 2
+                          ? "h-48 sm:h-52 lg:h-64"
+                          : index % 6 === 3
+                            ? "h-40 sm:h-44 lg:h-56"
+                            : index % 6 === 4
+                              ? "h-44 sm:h-48 lg:h-58"
+                              : "h-40 sm:h-44 lg:h-50"
                 )}
               >
                 <CaseCoverMedia
@@ -186,21 +184,21 @@ export function Cases() {
             </MotionDiv>
           );
         })}
-      </div>
+        </div>
 
-      <div className="mt-10">
-        <div className="glass hover-lift rounded-3xl p-6 sm:p-8">
-          <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-            <div>
-              <h3 className="text-sm font-semibold">{t("bannerTitle")}</h3>
-              <p className="mt-2 text-sm text-white/85">{t("bannerSub")}</p>
+        <div className="mt-10">
+          <div className="glass hover-lift rounded-3xl p-6 sm:p-8">
+            <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+              <div>
+                <h3 className="text-sm font-semibold">{t("bannerTitle")}</h3>
+                <p className="mt-2 text-sm text-white/85">{t("bannerSub")}</p>
+              </div>
+              <Button href={homeSectionHref("contact")} className="hover-lift w-full sm:w-auto">
+                {t("bannerCta")}
+              </Button>
             </div>
-            <Button href={homeSectionHref("contact")} className="hover-lift w-full sm:w-auto">
-              {t("bannerCta")}
-            </Button>
           </div>
         </div>
-      </div>
       </div>
     </MotionSection>
   );

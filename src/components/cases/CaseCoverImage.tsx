@@ -12,6 +12,8 @@ type Props = {
   priority?: boolean;
   /** Иконка ниши: при ошибке загрузки или пустом src — крупный центрированный плейсхолдер вместо «пустой ямы». */
   Icon: LucideIcon;
+  /** Нижний бейдж с иконкой (например, выкл. если иконку рисует `CaseCoverMedia` поверх видео). */
+  showFooter?: boolean;
 };
 
 /**
@@ -81,11 +83,13 @@ export function CaseCoverImage({ src, fallbackSrc, alt, sizes, priority, Icon }:
           setFailed(true);
         }}
       />
-      <div className="pointer-events-none absolute bottom-3 left-3 right-3 flex items-end justify-between gap-2">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/20 bg-black/40 backdrop-blur-sm">
-          <Icon className="h-5 w-5 text-primary" aria-hidden />
+      {showFooter ? (
+        <div className="pointer-events-none absolute bottom-3 left-3 right-3 flex items-end justify-between gap-2">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/20 bg-black/40 backdrop-blur-sm">
+            <Icon className="h-5 w-5 text-primary" aria-hidden />
+          </div>
         </div>
-      </div>
+      ) : null}
     </>
   );
 }

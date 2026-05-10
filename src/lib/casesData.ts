@@ -19,7 +19,8 @@ export const casesData: Case[] = [
     niche: "Медицина",
     result: "+340% лидов",
     description: "Пересобрали оффер, посадочную и рекламные связки.",
-    video: "/videos/cases/vitamed.mp4"
+    /** до появления `vitamed.mp4` — тот же ролик, что у смежного медкейса */
+    video: "/videos/cases/smileline.mp4"
   },
   {
     id: 2,
@@ -109,7 +110,8 @@ export const casesData: Case[] = [
     niche: "Производство",
     result: "+670% заявок",
     description: "Новая структура услуг и кейсы «до/после».",
-    video: "/videos/cases/atelier-mebel.mp4"
+    /** до `atelier-mebel.mp4` — мебельный ролик из каталога */
+    video: "/videos/cases/nordmebel.mp4"
   },
   {
     id: 12,
