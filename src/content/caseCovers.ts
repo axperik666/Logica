@@ -1,4 +1,5 @@
 import type { HomeCaseId } from "./homeCases";
+import { casesData } from "@/lib/casesData";
 
 /** Основные обложки (как было раньше, remote). */
 export const CASE_COVER_IMAGES: Record<HomeCaseId, string> = {
@@ -53,24 +54,7 @@ export const CASE_COVER_FALLBACKS: Record<HomeCaseId, string> = {
   "custom-furniture": "/case-covers/office.jpg"
 };
 
-/**
- * Локальные mp4 для hover-обложек (`public/videos/cases/…`).
- * Источник клипов: Mixkit (mixkit.co) — бесплатная лицензия на использование.
- */
-export const CASE_COVER_VIDEOS: Partial<Record<HomeCaseId, string>> = {
-  "med-center": "/videos/cases/case-soft.mp4",
-  dentistry: "/videos/cases/case-soft.mp4",
-  "edu-center": "/videos/cases/case-soft.mp4",
-  "beauty-premium": "/videos/cases/case-soft.mp4",
-  "food-delivery": "/videos/cases/case-soft.mp4",
-  saas: "/videos/cases/case-tech.mp4",
-  "trading-courses": "/videos/cases/case-tech.mp4",
-  electronics: "/videos/cases/case-tech.mp4",
-  "law-firm": "/videos/cases/case-tech.mp4",
-  "furniture-store": "/videos/cases/case-lights.mp4",
-  construction: "/videos/cases/case-lights.mp4",
-  "custom-furniture": "/videos/cases/case-lights.mp4",
-  autoservice: "/videos/cases/case-lights.mp4",
-  "real-estate": "/videos/cases/case-lights.mp4",
-  fitness: "/videos/cases/case-lights.mp4"
-};
+/** Локальные mp4 для hover-обложек — пути из `src/lib/casesData.ts` → `public/videos/cases/…`. */
+export const CASE_COVER_VIDEOS: Record<HomeCaseId, string> = Object.fromEntries(
+  casesData.map((c) => [c.homeCaseId, c.video])
+) as Record<HomeCaseId, string>;
