@@ -44,6 +44,10 @@ export function CTA() {
   const [message, setMessage] = useState("");
   const [formSuccess, setFormSuccess] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
+  const [submitPending, setSubmitPending] = useState(false);
+  const [submitErr, setSubmitErr] = useState<
+    "delivery" | "notConfigured" | null
+  >(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -88,14 +92,38 @@ export function CTA() {
     margin: "0px 0px 120px 0px"
   });
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setSubmitErr(null);
     if (!isPhonePlausible(phone)) {
       setPhoneError(true);
       return;
     }
     setPhoneError(false);
-    setFormSuccess(true);
+    setSubmitPending(true);
+    const fd = new FormData();
+    fd.set("source", "cta");
+    fd.set("name", name);
+    fd.set("phone", phone);
+    fd.set("email", email);
+    fd.set("niche", niche);
+    fd.set("message", message);
+    fd.set("company", "");
+    try {
+      const res = await fetch("/api/lead", { method: "POST", body: fd });
+      const data = (await res.json()) as { ok?: boolean; error?: string };
+      if (res.ok && data.ok) {
+        setFormSuccess(true);
+      } else if (data.error === "NOT_CONFIGURED") {
+        setSubmitErr("notConfigured");
+      } else {
+        setSubmitErr("delivery");
+      }
+    } catch {
+      setSubmitErr("delivery");
+    } finally {
+      setSubmitPending(false);
+    }
   }
 
   function handleReset() {
@@ -106,6 +134,7 @@ export function CTA() {
     setNiche("");
     setMessage("");
     setPhoneError(false);
+    setSubmitErr(null);
   }
 
   return (
@@ -351,11 +380,22 @@ export function CTA() {
                   </label>
 
                   <div className="pt-2">
+                    {submitErr === "delivery" ? (
+                      <p className="mb-3 text-sm text-amber-200/90" role="alert">
+                        {t("submitFail")}
+                      </p>
+                    ) : null}
+                    {submitErr === "notConfigured" ? (
+                      <p className="mb-3 text-sm text-amber-200/90" role="alert">
+                        {t("submitNotConfigured")}
+                      </p>
+                    ) : null}
                     <Button
                       type="submit"
+                      disabled={submitPending}
                       className="btn-cta-premium w-full py-4 text-base font-semibold hover-lift"
                     >
-                      {t("submitApplication")}
+                      {submitPending ? t("submitSending") : t("submitApplication")}
                     </Button>
                     <p className="mt-3 text-xs leading-relaxed text-white/55">
                       {t("consent")}

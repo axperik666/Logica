@@ -12,6 +12,8 @@ const STATIC_PATHS = [
   "/kejsy",
   "/o-nas",
   "/kontakty",
+  "/faq",
+  "/otzyvy",
   "/privacy",
   "/terms"
 ];

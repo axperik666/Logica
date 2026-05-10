@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { Button } from "@/components/ui/button";
 import { CONTACTS } from "@/lib/contacts";
+import { KontaktyForm } from "@/components/contacts/KontaktyForm";
 
 export async function generateMetadata({
   params
@@ -50,39 +50,7 @@ export default async function ContactsPage({
             <div className="text-sm font-semibold">{t("quickRequest")}</div>
             <p className="mt-2 text-sm text-white/65">{t("formNote")}</p>
 
-            <form className="mt-6 grid gap-3">
-              <label className="grid gap-2">
-                <span className="text-xs text-white/70">{t("fieldName")}</span>
-                <input
-                  className="h-11 rounded-xl border border-white/10 bg-[#070B12]/40 px-4 text-sm outline-none focus:ring-2 focus:ring-brand-400/70"
-                  placeholder={t("placeholderName")}
-                  name="name"
-                />
-              </label>
-              <label className="grid gap-2">
-                <span className="text-xs text-white/70">{t("fieldContact")}</span>
-                <input
-                  className="h-11 rounded-xl border border-white/10 bg-[#070B12]/40 px-4 text-sm outline-none focus:ring-2 focus:ring-brand-400/70"
-                  placeholder={t("placeholderContact")}
-                  name="contact"
-                />
-              </label>
-              <label className="grid gap-2">
-                <span className="text-xs text-white/70">{t("fieldMessage")}</span>
-                <textarea
-                  className="min-h-28 rounded-xl border border-white/10 bg-[#070B12]/40 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-brand-400/70"
-                  placeholder={t("placeholderMessage")}
-                  name="message"
-                />
-              </label>
-
-              <div className="pt-2">
-                <Button type="submit" className="w-full">
-                  {t("submit")}
-                </Button>
-                <p className="mt-3 text-xs text-white/55">{t("consent")}</p>
-              </div>
-            </form>
+            <KontaktyForm />
           </div>
         </div>
       </div>
