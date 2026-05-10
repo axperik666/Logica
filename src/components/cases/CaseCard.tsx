@@ -1,17 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import { motion, useInView, useReducedMotion } from "framer-motion";
-import { useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/navigation";
 import { homeSectionHref } from "@/lib/navHref";
 import type { HomeCaseId } from "@/content/homeCases";
-import {
-  CASE_COVER_FALLBACKS,
-  CASE_COVER_IMAGES,
-  CASE_COVER_VIDEOS
-} from "@/content/caseCovers";
+import { CASE_COVER_VIDEOS } from "@/content/caseCovers";
 import { cn } from "@/lib/cn";
 
 type Props = {
@@ -21,8 +16,7 @@ type Props = {
 };
 
 /**
- * Видео после входа в viewport (`margin: -150px`).
- * Статичные постеры (Unsplash / JPG) только если у кейса нет своего mp4 — иначе только ролик + нейтральный фон.
+ * Только видео (без статичных постеров/Unsplash). До viewport и при ошибке — нейтральный фон.
  */
 export function CaseCard({ caseId, className, priority }: Props) {
   const t = useTranslations("cases");
@@ -36,34 +30,13 @@ export function CaseCard({ caseId, className, priority }: Props) {
   const summary = t(`items.${caseId}.summary`);
 
   const videoSrc = CASE_COVER_VIDEOS[caseId]?.trim() ?? "";
-  const mainPoster = CASE_COVER_IMAGES[caseId];
-  const fbPoster = CASE_COVER_FALLBACKS[caseId];
-
-  const [imgUseFallback, setImgUseFallback] = useState(false);
-  const [imgFailed, setImgFailed] = useState(false);
   const [hasError, setHasError] = useState(false);
-
-  const posterSrc = useMemo(() => {
-    if (imgUseFallback && fbPoster) return fbPoster;
-    return mainPoster;
-  }, [fbPoster, imgUseFallback, mainPoster]);
 
   const canPlayVideo =
     isInView && Boolean(videoSrc) && !reduceMotion && !hasError;
 
-  const hasVideo = Boolean(videoSrc);
-
-  const showPoster =
-    !hasVideo &&
-    isInView &&
-    !canPlayVideo &&
-    Boolean(posterSrc) &&
-    !imgFailed;
-
-  const showZincPlaceholder =
-    !isInView || (isInView && !canPlayVideo && !showPoster);
-
-  const alt = `${niche} — ${client}`;
+  const showVideoUnavailable =
+    isInView && Boolean(videoSrc) && hasError && !reduceMotion;
 
   return (
     <Link
@@ -79,25 +52,8 @@ export function CaseCard({ caseId, className, priority }: Props) {
         transition={{ type: "spring", stiffness: 420, damping: 28 }}
         className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-white/5 bg-zinc-950"
       >
-        {showZincPlaceholder && !showPoster ? (
+        {!canPlayVideo ? (
           <div className="absolute inset-0 bg-zinc-900" aria-hidden />
-        ) : null}
-
-        {showPoster ? (
-          <Image
-            src={posterSrc!}
-            alt={alt}
-            fill
-            className="object-cover"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
-            priority={priority}
-            loading={priority ? "eager" : "lazy"}
-            quality={85}
-            onError={() => {
-              if (!imgUseFallback && fbPoster) setImgUseFallback(true);
-              else setImgFailed(true);
-            }}
-          />
         ) : null}
 
         {canPlayVideo ? (
@@ -107,14 +63,14 @@ export function CaseCard({ caseId, className, priority }: Props) {
             muted
             loop
             playsInline
-            preload="metadata"
+            preload={priority ? "auto" : "metadata"}
             onError={() => setHasError(true)}
             className="absolute inset-0 h-full w-full scale-105 object-cover transition-transform duration-700 group-hover/card:scale-100"
             aria-hidden
           />
         ) : null}
 
-        {hasError ? (
+        {showVideoUnavailable ? (
           <div
             className="absolute inset-0 z-20 flex items-center justify-center bg-zinc-900"
             aria-live="polite"

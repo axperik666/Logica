@@ -257,7 +257,7 @@
     "subtitle": "{count, plural, one {# caso} other {# casi}} in diversi vertical — lead, ROAS e ricavi con logica chiara",
     "ctaTop": "Voglio gli stessi risultati",
     "more": "Dettagli",
-    "caseVideoUnavailable": "Video non disponibile — mostriamo la copertina.",
+    "caseVideoUnavailable": "Impossibile caricare il video.",
     "resultsHeadline": "Risultati reali",
     "resultsSub": "Numeri — non promesse",
     "gridPill": "I nostri casi",

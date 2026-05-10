@@ -257,7 +257,7 @@
     "subtitle": "{count, plural, one {# case study} other {# case studies}} across industries — leads, ROAS and revenue, explained clearly",
     "ctaTop": "I want the same results",
     "more": "Details",
-    "caseVideoUnavailable": "Video unavailable — showing cover image.",
+    "caseVideoUnavailable": "Video could not be loaded.",
     "resultsHeadline": "Real results",
     "resultsSub": "Numbers — not promises",
     "gridPill": "Our cases",
