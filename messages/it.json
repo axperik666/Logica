@@ -277,7 +277,6 @@
       "construction": "Edilizia",
       "realestate": "Immobiliare",
       "fitness": "Fitness",
-      "manufacturing": "Manifattura",
       "auto": "Auto",
       "horeca": "HoReCa",
       "saas": "IT / SaaS"
@@ -290,18 +289,6 @@
     "modalCta1": "Anch’io",
     "modalCta2": "Vedi servizi",
     "items": {
-      "med-center": {
-        "niche": "Sanità",
-        "client": "VitaMed",
-        "result": "+340% lead",
-        "period": "in 4 mesi",
-        "summary": "Rifatto offerta, landing e combinazioni ads. Meno lead spazzatura, retargeting più forte.",
-        "details": [
-          "Audit funnel + nuova struttura landing (mobile‑first).",
-          "Meta + Google: test creatività e segmenti, scale dei vincenti.",
-          "Eventi e goal: ottimizzazione sulla qualità dei lead."
-        ]
-      },
       "furniture-store": {
         "niche": "E‑commerce",
         "client": "NordMebel",
@@ -408,18 +395,6 @@
           "Offerta: prova a tempo limitato.",
           "Meta: video/UGC e audience locali.",
           "Ottimizzazione costo per iscrizione confermata."
-        ]
-      },
-      "custom-furniture": {
-        "niche": "Manifattura",
-        "client": "Atelier Mebel",
-        "result": "+670% richieste",
-        "period": "in 5 mesi",
-        "summary": "Nuova struttura servizi, casi prima/dopo e ads per tipi di progetto.",
-        "details": [
-          "Sito multi‑pagina: cucine/guardaroba/commerciale.",
-          "Search + Meta: test per segmenti e materiali.",
-          "Gestione lead e qualifica."
         ]
       },
       "autoservice": {

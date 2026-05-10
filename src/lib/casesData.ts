@@ -1,4 +1,4 @@
-import { HOME_CASE_IDS_WITH_VIDEO, type HomeCaseId } from "@/content/homeCases";
+import type { HomeCaseId } from "@/content/homeCases";
 
 /** Тег фильтра сетки кейсов (языконезависимый). */
 export type CaseFilterTag =
@@ -10,7 +10,6 @@ export type CaseFilterTag =
   | "construction"
   | "realestate"
   | "fitness"
-  | "manufacturing"
   | "auto"
   | "horeca"
   | "saas";
@@ -44,17 +43,6 @@ export interface Case {
 export const casesData: Case[] = [
   {
     id: 1,
-    homeCaseId: "med-center",
-    filterTag: "medicine",
-    client: "VitaMed",
-    niche: "Медицина",
-    result: "+340% лидов",
-    description: "Пересобрали оффер, посадочную и рекламные связки.",
-    /** до появления `vitamed.mp4` — тот же ролик, что у смежного медкейса */
-    video: "/videos/cases/smileline.mp4"
-  },
-  {
-    id: 2,
     homeCaseId: "furniture-store",
     filterTag: "ecommerce",
     client: "NordMebel",
@@ -64,7 +52,7 @@ export const casesData: Case[] = [
     video: "/videos/cases/nordmebel.mp4"
   },
   {
-    id: 3,
+    id: 2,
     homeCaseId: "law-firm",
     filterTag: "legal",
     client: "LexPro",
@@ -74,7 +62,7 @@ export const casesData: Case[] = [
     video: "/videos/cases/lexpro.mp4"
   },
   {
-    id: 4,
+    id: 3,
     homeCaseId: "edu-center",
     filterTag: "edtech",
     client: "SkillNova",
@@ -84,7 +72,7 @@ export const casesData: Case[] = [
     video: "/videos/cases/skillnova.mp4"
   },
   {
-    id: 5,
+    id: 4,
     homeCaseId: "beauty-premium",
     filterTag: "beauty",
     client: "Éclat Studio",
@@ -94,7 +82,7 @@ export const casesData: Case[] = [
     video: "/videos/cases/eclat.mp4"
   },
   {
-    id: 6,
+    id: 5,
     homeCaseId: "construction",
     filterTag: "construction",
     client: "BuildCraft",
@@ -104,7 +92,7 @@ export const casesData: Case[] = [
     video: "/videos/cases/buildcraft.mp4"
   },
   {
-    id: 7,
+    id: 6,
     homeCaseId: "electronics",
     filterTag: "ecommerce",
     client: "TechPoint",
@@ -114,7 +102,7 @@ export const casesData: Case[] = [
     video: "/videos/cases/techpoint.mp4"
   },
   {
-    id: 8,
+    id: 7,
     homeCaseId: "dentistry",
     filterTag: "medicine",
     client: "SmileLine",
@@ -124,7 +112,7 @@ export const casesData: Case[] = [
     video: "/videos/cases/smileline.mp4"
   },
   {
-    id: 9,
+    id: 8,
     homeCaseId: "real-estate",
     filterTag: "realestate",
     client: "PrimeEstate",
@@ -134,7 +122,7 @@ export const casesData: Case[] = [
     video: "/videos/cases/primeestate.mp4"
   },
   {
-    id: 10,
+    id: 9,
     homeCaseId: "fitness",
     filterTag: "fitness",
     client: "Pulse Gym",
@@ -144,18 +132,7 @@ export const casesData: Case[] = [
     video: "/videos/cases/pulsegym.mp4"
   },
   {
-    id: 11,
-    homeCaseId: "custom-furniture",
-    filterTag: "manufacturing",
-    client: "Atelier Mebel",
-    niche: "Производство",
-    result: "+670% заявок",
-    description: "Новая структура услуг и кейсы «до/после».",
-    /** до `atelier-mebel.mp4` — мебельный ролик из каталога */
-    video: "/videos/cases/nordmebel.mp4"
-  },
-  {
-    id: 12,
+    id: 10,
     homeCaseId: "autoservice",
     filterTag: "auto",
     client: "AutoHub",
@@ -165,7 +142,7 @@ export const casesData: Case[] = [
     video: "/videos/cases/autohub.mp4"
   },
   {
-    id: 13,
+    id: 11,
     homeCaseId: "trading-courses",
     filterTag: "edtech",
     client: "TradeMind",
@@ -175,7 +152,7 @@ export const casesData: Case[] = [
     video: "/videos/cases/trademind.mp4"
   },
   {
-    id: 14,
+    id: 12,
     homeCaseId: "food-delivery",
     filterTag: "horeca",
     client: "UrbanKitchen",
@@ -185,7 +162,7 @@ export const casesData: Case[] = [
     video: "/videos/cases/urbankitchen.mp4"
   },
   {
-    id: 15,
+    id: 13,
     homeCaseId: "saas",
     filterTag: "saas",
     client: "CloudDesk",
@@ -195,12 +172,3 @@ export const casesData: Case[] = [
     video: "/videos/cases/clouddesk.mp4"
   }
 ];
-
-const onHomeVideo = new Set<string>(
-  HOME_CASE_IDS_WITH_VIDEO as unknown as string[]
-);
-
-/** Кейсы для сетки на главной (есть свой mp4 в `public/videos/cases`). */
-export const casesDataOnHome = casesData.filter((c) =>
-  onHomeVideo.has(c.homeCaseId)
-);

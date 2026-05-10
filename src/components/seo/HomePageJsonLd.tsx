@@ -1,5 +1,5 @@
 import { getLocale, getTranslations } from "next-intl/server";
-import { HOME_CASE_IDS_WITH_VIDEO } from "@/content/homeCases";
+import { HOME_CASE_IDS } from "@/content/homeCases";
 import { getSiteUrl } from "@/lib/site";
 import { localizedPath } from "@/lib/localePath";
 
@@ -54,7 +54,7 @@ export async function HomePageJsonLd() {
     }
   }));
 
-  const caseItems = HOME_CASE_IDS_WITH_VIDEO.map((id, i) => {
+  const caseItems = HOME_CASE_IDS.map((id, i) => {
     const frag = `#case-${id}`;
     return {
       "@type": "ListItem",

@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { Building2 } from "lucide-react";
 import { MotionDiv, MotionSection } from "@/components/motion";
 import { useTranslations } from "next-intl";
-import { HOME_CASE_IDS_WITH_VIDEO } from "@/content/homeCases";
+import { HOME_CASE_IDS } from "@/content/homeCases";
 import { cn } from "@/lib/cn";
 
 const LOGO_COUNT = 12;
@@ -40,7 +40,7 @@ export function Clients() {
     margin: "0px 0px 100px 0px"
   });
 
-  const ids = HOME_CASE_IDS_WITH_VIDEO.slice(0, LOGO_COUNT);
+  const ids = HOME_CASE_IDS.slice(0, LOGO_COUNT);
   const doubled = [...ids, ...ids];
 
   return (
