@@ -67,6 +67,7 @@ export const casesData: Case[] = [
   {
     id: 3,
     homeCaseId: "law-firm",
+    filterTag: "legal",
     client: "LexPro",
     niche: "Юриспруденция",
     result: "+180% заявок",
@@ -86,6 +87,7 @@ export const casesData: Case[] = [
   {
     id: 5,
     homeCaseId: "beauty-premium",
+    filterTag: "beauty",
     client: "Éclat Studio",
     niche: "Beauty",
     result: "+290% записей",
@@ -115,6 +117,7 @@ export const casesData: Case[] = [
   {
     id: 8,
     homeCaseId: "dentistry",
+    filterTag: "medicine",
     client: "SmileLine",
     niche: "Медицина",
     result: "380 пациентов/мес",
@@ -134,6 +137,7 @@ export const casesData: Case[] = [
   {
     id: 10,
     homeCaseId: "fitness",
+    filterTag: "fitness",
     client: "Pulse Gym",
     niche: "Фитнес",
     result: "+410% продаж",
