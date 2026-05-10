@@ -11,6 +11,7 @@ import {
   casesData,
   type CaseFilterTag
 } from "@/lib/casesData";
+import { HOME_CASE_IDS } from "@/content/homeCases";
 import { cn } from "@/lib/cn";
 
 type CaseFilter = "all" | CaseFilterTag;
@@ -50,6 +51,9 @@ export default function CasesGrid() {
           <br />
           {t("gridTitleLine2")}
         </h2>
+        <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-white/65 sm:text-base">
+          {t("subtitle", { count: HOME_CASE_IDS.length })}
+        </p>
       </div>
 
       <div
