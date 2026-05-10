@@ -21,7 +21,8 @@ type Props = {
 };
 
 /**
- * Видео после входа в viewport (`margin: -150px`). Постер — если нет видео, reduced motion или ошибка ролика.
+ * Видео после входа в viewport (`margin: -150px`).
+ * Статичные постеры (Unsplash / JPG) только если у кейса нет своего mp4 — иначе только ролик + нейтральный фон.
  */
 export function CaseCard({ caseId, className, priority }: Props) {
   const t = useTranslations("cases");
@@ -50,12 +51,17 @@ export function CaseCard({ caseId, className, priority }: Props) {
   const canPlayVideo =
     isInView && Boolean(videoSrc) && !reduceMotion && !hasError;
 
-  const showFallbackImage =
-    isInView && !canPlayVideo && Boolean(posterSrc) && !imgFailed;
+  const hasVideo = Boolean(videoSrc);
+
+  const showPoster =
+    !hasVideo &&
+    isInView &&
+    !canPlayVideo &&
+    Boolean(posterSrc) &&
+    !imgFailed;
 
   const showZincPlaceholder =
-    !isInView ||
-    (isInView && !canPlayVideo && (!posterSrc || imgFailed));
+    !isInView || (isInView && !canPlayVideo && !showPoster);
 
   const alt = `${niche} — ${client}`;
 
@@ -73,11 +79,11 @@ export function CaseCard({ caseId, className, priority }: Props) {
         transition={{ type: "spring", stiffness: 420, damping: 28 }}
         className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-white/5 bg-zinc-950"
       >
-        {showZincPlaceholder && !showFallbackImage ? (
+        {showZincPlaceholder && !showPoster ? (
           <div className="absolute inset-0 bg-zinc-900" aria-hidden />
         ) : null}
 
-        {showFallbackImage ? (
+        {showPoster ? (
           <Image
             src={posterSrc!}
             alt={alt}
