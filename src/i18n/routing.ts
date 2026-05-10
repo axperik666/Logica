@@ -1,8 +1,11 @@
 import { defineRouting } from "next-intl/routing";
 
-/** Локали и дефолт: английская версия без префикса для `/` при `localePrefix: "as-needed"` + `localeDetection: false` в middleware. */
+/**
+ * Все языки с префиксом в URL — удобно шарить ссылки:
+ * `/en/...`, `/ru/...`, `/it/...` (корень `/` редиректит на `/en`).
+ */
 export const routing = defineRouting({
   locales: ["ru", "en", "it"],
   defaultLocale: "en",
-  localePrefix: "as-needed"
+  localePrefix: "always"
 });
