@@ -1,10 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useInView, useReducedMotion } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { MotionDiv } from "@/components/motion";
 import { Link } from "@/navigation";
 import { homeSectionHref } from "@/lib/navHref";
 import type { HomeCaseId } from "@/content/homeCases";
@@ -22,14 +21,13 @@ type Props = {
 };
 
 /**
- * Карточка кейса: видео монтируется только после входа в viewport (экономия трафика).
- * Тексты — next-intl; постер — remote / fallback.
+ * Видео после входа в viewport (`margin: -150px`). Постер — если нет видео, reduced motion или ошибка ролика.
  */
 export function CaseCard({ caseId, className, priority }: Props) {
   const t = useTranslations("cases");
   const reduceMotion = useReducedMotion();
   const rootRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(rootRef, { once: true, margin: "-100px" });
+  const isInView = useInView(rootRef, { once: true, margin: "-150px" });
 
   const niche = t(`items.${caseId}.niche`);
   const client = t(`items.${caseId}.client`);
@@ -42,18 +40,22 @@ export function CaseCard({ caseId, className, priority }: Props) {
 
   const [imgUseFallback, setImgUseFallback] = useState(false);
   const [imgFailed, setImgFailed] = useState(false);
-  const [videoError, setVideoError] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   const posterSrc = useMemo(() => {
     if (imgUseFallback && fbPoster) return fbPoster;
     return mainPoster;
   }, [fbPoster, imgUseFallback, mainPoster]);
 
-  const showVideo =
-    Boolean(videoSrc) &&
-    !reduceMotion &&
-    isInView &&
-    !videoError;
+  const canPlayVideo =
+    isInView && Boolean(videoSrc) && !reduceMotion && !hasError;
+
+  const showFallbackImage =
+    isInView && !canPlayVideo && Boolean(posterSrc) && !imgFailed;
+
+  const showZincPlaceholder =
+    !isInView ||
+    (isInView && !canPlayVideo && (!posterSrc || imgFailed));
 
   const alt = `${niche} — ${client}`;
 
@@ -65,22 +67,22 @@ export function CaseCard({ caseId, className, priority }: Props) {
         className
       )}
     >
-      <MotionDiv
+      <motion.div
         ref={rootRef}
         whileHover={reduceMotion ? undefined : { y: -12 }}
         transition={{ type: "spring", stiffness: 420, damping: 28 }}
-        className="relative aspect-[16/9.5] overflow-hidden rounded-3xl border border-white/10 bg-zinc-950 shadow-[0_28px_84px_rgba(0,0,0,0.45)] transition-[box-shadow,border-color] duration-300 hover:border-[#00BFFF]/35 hover:shadow-[0_28px_84px_rgba(0,0,0,0.58),0_0_48px_rgba(0,191,255,0.16)]"
+        className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-white/5 bg-zinc-950"
       >
-        {!imgFailed && posterSrc ? (
+        {showZincPlaceholder && !showFallbackImage ? (
+          <div className="absolute inset-0 bg-zinc-900" aria-hidden />
+        ) : null}
+
+        {showFallbackImage ? (
           <Image
-            src={posterSrc}
+            src={posterSrc!}
             alt={alt}
             fill
-            className={cn(
-              "object-cover transition-opacity duration-500",
-              showVideo ? "opacity-0" : "opacity-100",
-              !isInView && "opacity-95"
-            )}
+            className="object-cover"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
             priority={priority}
             loading={priority ? "eager" : "lazy"}
@@ -90,16 +92,9 @@ export function CaseCard({ caseId, className, priority }: Props) {
               else setImgFailed(true);
             }}
           />
-        ) : !isInView ? (
-          <div
-            className="absolute inset-0 animate-pulse bg-zinc-900"
-            aria-hidden
-          />
-        ) : (
-          <div className="absolute inset-0 bg-zinc-900" aria-hidden />
-        )}
+        ) : null}
 
-        {showVideo ? (
+        {canPlayVideo ? (
           <video
             src={videoSrc}
             autoPlay
@@ -107,15 +102,15 @@ export function CaseCard({ caseId, className, priority }: Props) {
             loop
             playsInline
             preload="none"
-            onError={() => setVideoError(true)}
+            onError={() => setHasError(true)}
             className="absolute inset-0 h-full w-full scale-105 object-cover transition-transform duration-700 group-hover/card:scale-100"
             aria-hidden
           />
         ) : null}
 
-        {videoError ? (
+        {hasError ? (
           <div
-            className="absolute inset-0 z-[1] flex items-center justify-center bg-zinc-900/95"
+            className="absolute inset-0 z-20 flex items-center justify-center bg-zinc-900"
             aria-live="polite"
           >
             <p className="px-4 text-center text-sm text-white/40">
@@ -125,31 +120,31 @@ export function CaseCard({ caseId, className, priority }: Props) {
         ) : null}
 
         <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent"
+          className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-black via-black/70 to-transparent"
           aria-hidden
         />
 
-        <div className="absolute bottom-0 left-0 z-10 w-full p-6 sm:p-8">
-          <div className="mb-2 flex min-w-0 items-center gap-2 font-mono text-xs text-[#00b4ff] sm:text-sm">
-            <span className="truncate">{niche}</span>
-            <span className="shrink-0 text-white/40">•</span>
-            <span className="truncate font-semibold text-[#7AE0FF]">{result}</span>
-          </div>
-          <h3 className="mb-2 text-xl font-semibold tracking-tight text-white sm:text-2xl md:text-3xl">
+        <div className="absolute bottom-0 left-0 z-10 w-full p-8">
+          <p className="mb-3 font-mono text-sm text-[#00b4ff]">
+            {niche} • {result}
+          </p>
+          <h3 className="mb-3 text-2xl font-semibold tracking-tight text-white">
             {client}
           </h3>
-          <p className="line-clamp-3 text-[14px] leading-relaxed text-gray-400 sm:text-[15px]">
+          <p className="line-clamp-3 text-[15px] leading-relaxed text-gray-400">
             {summary}
           </p>
         </div>
 
-        <div className="absolute right-4 top-4 z-10 opacity-0 transition-opacity duration-300 group-hover/card:opacity-100 sm:right-6 sm:top-6">
-          <div className="rounded-2xl border border-white/20 bg-white/10 px-4 py-2.5 text-sm text-white backdrop-blur-md sm:px-5">
+        <div className="absolute right-6 top-6 z-10 opacity-0 transition-all duration-300 group-hover/card:opacity-100">
+          <div className="rounded-2xl border border-white/20 bg-white/10 px-5 py-2.5 text-sm text-white backdrop-blur-md">
             {t("more")}
             <span aria-hidden> →</span>
           </div>
         </div>
-      </MotionDiv>
+      </motion.div>
     </Link>
   );
 }
+
+export default CaseCard;
