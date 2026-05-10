@@ -52,3 +52,6 @@ export const CASE_COVER_FALLBACKS: Record<HomeCaseId, string> = {
   "furniture-store": "/case-covers/office.jpg",
   "custom-furniture": "/case-covers/office.jpg"
 };
+
+/** Опционально: mp4 в `public/videos/cases/…` — при hover масштабируется как обложка. */
+export const CASE_COVER_VIDEOS: Partial<Record<HomeCaseId, string>> = {};

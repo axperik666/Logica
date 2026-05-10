@@ -13,6 +13,7 @@ import {
   type LucideIcon
 } from "lucide-react";
 import { MotionDiv, MotionSection } from "@/components/motion";
+import { ParallaxFloat } from "@/components/ParallaxFloat";
 import { useTranslations } from "next-intl";
 
 const CARD_ICONS: Record<string, LucideIcon> = {
@@ -125,7 +126,8 @@ export function WhyUs() {
             </MotionDiv>
           );
         })}
-      </MotionDiv>
+        </MotionDiv>
+      </ParallaxFloat>
       </div>
     </MotionSection>
   );

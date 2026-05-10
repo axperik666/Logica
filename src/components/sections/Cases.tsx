@@ -26,7 +26,8 @@ import { Link } from "@/navigation";
 import { homeSectionHref } from "@/lib/navHref";
 import { HOME_CASE_IDS, type HomeCaseId } from "@/content/homeCases";
 import { CASE_COVER_FALLBACKS, CASE_COVER_IMAGES } from "@/content/caseCovers";
-import { CaseCoverImage } from "@/components/cases/CaseCoverImage";
+import { CaseCoverMedia } from "@/components/cases/CaseCoverMedia";
+import { CASE_COVER_VIDEOS } from "@/content/caseCovers";
 import { useNarrowViewport } from "@/lib/use-narrow-viewport";
 import { cn } from "@/lib/cn";
 
@@ -149,8 +150,9 @@ export function Cases() {
                             : "h-40 sm:h-44 lg:h-50"
                 )}
               >
-                <CaseCoverImage
+                <CaseCoverMedia
                   Icon={Icon}
+                  videoSrc={CASE_COVER_VIDEOS[id]}
                   src={CASE_COVER_IMAGES[id]}
                   fallbackSrc={CASE_COVER_FALLBACKS[id]}
                   alt={`${niche} — ${client}`}

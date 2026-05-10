@@ -1,8 +1,10 @@
 "use client";
 
 import { useId } from "react";
+import Image from "next/image";
 import { useReducedMotion } from "framer-motion";
 import { MotionDiv, MotionSection } from "@/components/motion";
+import { GrowthLottie } from "@/components/motion/GrowthLottie";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import { Link } from "@/navigation";
@@ -159,6 +161,17 @@ function HeroRoiVisual({
           </div>
         </div>
 
+        {!compact && !reduceMotion ? (
+          <div className="pointer-events-none -mt-1 mb-1 flex justify-center lg:-mt-2 lg:justify-start lg:pl-1">
+            <div
+              className="h-14 w-36 opacity-[0.92] sm:h-16 sm:w-44 lg:h-[4.5rem] lg:w-52 [filter:drop-shadow(0_0_20px_rgba(0,191,255,0.4))]"
+              aria-hidden
+            >
+              <GrowthLottie src="/lottie/growth-pulse.json" className="h-full w-full" />
+            </div>
+          </div>
+        ) : null}
+
         <div
           className={cn(
             "relative z-[2] mt-2 flex flex-col items-center lg:items-start",
@@ -195,6 +208,7 @@ function HeroRoiVisual({
 export function Hero() {
   const t = useTranslations("hero");
   const tSec = useTranslations("sectionsSeo");
+  const tSeo = useTranslations("seo");
   const reduceMotion = useReducedMotion();
   const narrow = useNarrowViewport();
 
@@ -228,6 +242,17 @@ export function Hero() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 overflow-hidden"
       >
+        <video
+          className="absolute inset-0 h-full w-full object-cover opacity-[0.34]"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+        >
+          <source src="/videos/hero-growth.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-[#070b12]/80 to-[#060b18]" />
         <div className="hero-gradient-mesh" />
 
         <div className="tech-grid tech-grid--hero">
@@ -262,6 +287,30 @@ export function Hero() {
                 <div className="relative z-[1]">
                 <MotionDiv
                   variants={{
+                    hidden: { opacity: 0, y: 30 },
+                    show: {
+                      opacity: 1,
+                      y: 0,
+                      transition: {
+                        duration: fast ? 0.2 : 0.72,
+                        ease: easeOutExpo
+                      }
+                    }
+                  }}
+                  className="mb-5 inline-flex items-center gap-3 lg:mb-6"
+                >
+                  <Image
+                    src="/logo.png"
+                    alt={tSeo("logoAlt")}
+                    width={160}
+                    height={48}
+                    className="h-10 w-auto sm:h-12"
+                    priority
+                  />
+                </MotionDiv>
+
+                <MotionDiv
+                  variants={{
                     hidden: { opacity: 0, y: 36, scale: 0.97 },
                     show: {
                       opacity: 1,
@@ -274,7 +323,7 @@ export function Hero() {
                     }
                   }}
                 >
-                  <h1 className="brand-glow text-left text-balance break-words text-[clamp(2.85rem,7.8vw,6.75rem)] font-black leading-[1.02] tracking-[-0.048em] text-white sm:tracking-[-0.042em] md:leading-[1.03] md:tracking-[-0.04em] drop-shadow-[0_16px_92px_rgba(0,191,255,0.5)] [text-shadow:0_2px_0_rgba(0,0,0,0.35),0_0_72px_rgba(0,191,255,0.42)]">
+                  <h1 className="brand-glow text-left text-balance break-words text-[clamp(2.85rem,7.8vw,6.75rem)] font-black leading-[1.02] tracking-[-0.048em] text-white sm:tracking-[-0.042em] md:leading-[1.03] md:tracking-[-0.04em] lg:text-[clamp(3rem,7.2vw,5.5rem)] xl:text-[clamp(3.25rem,7.8vw,6.75rem)] drop-shadow-[0_16px_92px_rgba(0,191,255,0.5)] [text-shadow:0_2px_0_rgba(0,0,0,0.35),0_0_72px_rgba(0,191,255,0.42)]">
                     {t.rich("title", {
                       br: () => <br />,
                       highlight: (chunks) => (
@@ -331,7 +380,7 @@ export function Hero() {
                 >
                   <Button
                     href={homeSectionHref("contact")}
-                    className="btn-cta-premium w-full min-h-[3.35rem] px-8 text-base font-bold shadow-[0_18px_56px_rgba(0,191,255,0.42)] sm:w-auto hover-lift"
+                    className="btn-cta-premium w-full min-h-[3.35rem] px-8 text-base font-bold shadow-[0_0_42px_rgba(0,191,255,0.55),0_22px_64px_rgba(0,191,255,0.38)] ring-1 ring-[#00BFFF]/35 sm:w-auto hover-lift"
                   >
                     {t("ctaPrimary")}
                   </Button>

@@ -393,7 +393,7 @@ export function CTA() {
                     <Button
                       type="submit"
                       disabled={submitPending}
-                      className="btn-cta-premium w-full py-4 text-base font-semibold hover-lift"
+                      className="btn-cta-premium w-full py-4 text-base font-semibold shadow-[0_0_40px_rgba(0,191,255,0.5),0_18px_48px_rgba(0,191,255,0.28)] ring-1 ring-[#00BFFF]/40 backdrop-blur-sm hover-lift"
                     >
                       {submitPending ? t("submitSending") : t("submitApplication")}
                     </Button>
