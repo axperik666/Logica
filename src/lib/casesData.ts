@@ -1,4 +1,4 @@
-import type { HomeCaseId } from "@/content/homeCases";
+import { HOME_CASE_IDS_WITH_VIDEO, type HomeCaseId } from "@/content/homeCases";
 
 /** Тег фильтра сетки кейсов (языконезависимый). */
 export type CaseFilterTag =
@@ -24,7 +24,6 @@ export const CASE_FILTER_ORDER: CaseFilterTag[] = [
   "construction",
   "realestate",
   "fitness",
-  "manufacturing",
   "auto",
   "horeca",
   "saas"
@@ -168,6 +167,7 @@ export const casesData: Case[] = [
   {
     id: 13,
     homeCaseId: "trading-courses",
+    filterTag: "edtech",
     client: "TradeMind",
     niche: "EdTech",
     result: "1 840 студентов",
@@ -195,3 +195,12 @@ export const casesData: Case[] = [
     video: "/videos/cases/clouddesk.mp4"
   }
 ];
+
+const onHomeVideo = new Set<string>(
+  HOME_CASE_IDS_WITH_VIDEO as unknown as string[]
+);
+
+/** Кейсы для сетки на главной (есть свой mp4 в `public/videos/cases`). */
+export const casesDataOnHome = casesData.filter((c) =>
+  onHomeVideo.has(c.homeCaseId)
+);

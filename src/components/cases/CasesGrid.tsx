@@ -8,7 +8,7 @@ import { homeSectionHref } from "@/lib/navHref";
 import { CaseCard } from "@/components/cases/CaseCard";
 import {
   CASE_FILTER_ORDER,
-  casesData,
+  casesDataOnHome,
   type CaseFilterTag
 } from "@/lib/casesData";
 import { cn } from "@/lib/cn";
@@ -23,8 +23,8 @@ export default function CasesGrid() {
   const filtered = useMemo(
     () =>
       filter === "all"
-        ? casesData
-        : casesData.filter((c) => c.filterTag === filter),
+        ? casesDataOnHome
+        : casesDataOnHome.filter((c) => c.filterTag === filter),
     [filter]
   );
 
