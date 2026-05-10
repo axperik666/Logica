@@ -1,9 +1,40 @@
 import type { HomeCaseId } from "@/content/homeCases";
 
+/** Тег фильтра сетки кейсов (языконезависимый). */
+export type CaseFilterTag =
+  | "medicine"
+  | "ecommerce"
+  | "legal"
+  | "edtech"
+  | "beauty"
+  | "construction"
+  | "realestate"
+  | "fitness"
+  | "manufacturing"
+  | "auto"
+  | "horeca"
+  | "saas";
+
+export const CASE_FILTER_ORDER: CaseFilterTag[] = [
+  "medicine",
+  "ecommerce",
+  "legal",
+  "edtech",
+  "beauty",
+  "construction",
+  "realestate",
+  "fitness",
+  "manufacturing",
+  "auto",
+  "horeca",
+  "saas"
+];
+
 /** Данные кейса: видео и эталонные подписи (карточки на сайте берут тексты из messages → cases.items). */
 export interface Case {
   id: number;
   homeCaseId: HomeCaseId;
+  filterTag: CaseFilterTag;
   client: string;
   niche: string;
   result: string;
@@ -15,6 +46,7 @@ export const casesData: Case[] = [
   {
     id: 1,
     homeCaseId: "med-center",
+    filterTag: "medicine",
     client: "VitaMed",
     niche: "Медицина",
     result: "+340% лидов",
@@ -25,6 +57,7 @@ export const casesData: Case[] = [
   {
     id: 2,
     homeCaseId: "furniture-store",
+    filterTag: "ecommerce",
     client: "NordMebel",
     niche: "E-commerce",
     result: "ROAS 8.4",
@@ -43,6 +76,7 @@ export const casesData: Case[] = [
   {
     id: 4,
     homeCaseId: "edu-center",
+    filterTag: "edtech",
     client: "SkillNova",
     niche: "EdTech",
     result: "12 400 студентов",
@@ -61,6 +95,7 @@ export const casesData: Case[] = [
   {
     id: 6,
     homeCaseId: "construction",
+    filterTag: "construction",
     client: "BuildCraft",
     niche: "Строительство",
     result: "47 новых объектов",
@@ -70,6 +105,7 @@ export const casesData: Case[] = [
   {
     id: 7,
     homeCaseId: "electronics",
+    filterTag: "ecommerce",
     client: "TechPoint",
     niche: "E-commerce",
     result: "+520% продаж",
@@ -88,6 +124,7 @@ export const casesData: Case[] = [
   {
     id: 9,
     homeCaseId: "real-estate",
+    filterTag: "realestate",
     client: "PrimeEstate",
     niche: "Недвижимость",
     result: "2.8 млн ₽ с лида",
@@ -106,6 +143,7 @@ export const casesData: Case[] = [
   {
     id: 11,
     homeCaseId: "custom-furniture",
+    filterTag: "manufacturing",
     client: "Atelier Mebel",
     niche: "Производство",
     result: "+670% заявок",
@@ -116,6 +154,7 @@ export const casesData: Case[] = [
   {
     id: 12,
     homeCaseId: "autoservice",
+    filterTag: "auto",
     client: "AutoHub",
     niche: "Авто",
     result: "940 клиентов",
@@ -134,6 +173,7 @@ export const casesData: Case[] = [
   {
     id: 14,
     homeCaseId: "food-delivery",
+    filterTag: "horeca",
     client: "UrbanKitchen",
     niche: "HoReCa",
     result: "+380% среднего чека",
@@ -143,6 +183,7 @@ export const casesData: Case[] = [
   {
     id: 15,
     homeCaseId: "saas",
+    filterTag: "saas",
     client: "CloudDesk",
     niche: "IT / SaaS",
     result: "+12 000 MRR",

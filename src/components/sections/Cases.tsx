@@ -6,10 +6,8 @@ import { MotionDiv, MotionSection } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import { homeSectionHref } from "@/lib/navHref";
-import { HOME_CASE_IDS } from "@/content/homeCases";
-import { CaseCard } from "@/components/cases/CaseCard";
+import { CasesGrid } from "@/components/cases/CasesGrid";
 import { useNarrowViewport } from "@/lib/use-narrow-viewport";
-import { cn } from "@/lib/cn";
 
 export function Cases() {
   const t = useTranslations("cases");
@@ -44,49 +42,44 @@ export function Cases() {
         <div className="sr-only">
           <p>{tSec("cases.metaTitle")}</p>
           <p>{tSec("cases.metaDescription")}</p>
+          <p>{t("titleBrand")}</p>
+          <p>{t("subtitle")}</p>
         </div>
+
         <MotionDiv
           variants={{
             hidden: { opacity: 0, y: 10 },
             show: { opacity: 1, y: 0, transition: { duration: 0.6 } }
           }}
-          className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end"
+          className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between"
         >
           <div>
-            <h2 className="brand-glow text-balance text-2xl font-semibold tracking-tight sm:text-3xl">
-              {t("titleBrand")}
+            <h2 className="brand-glow text-balance text-4xl font-bold tracking-tighter sm:text-5xl">
+              {t("resultsHeadline")}
             </h2>
-            <p className="mt-3 max-w-2xl text-sm text-white/90 sm:text-base">
-              {t("subtitle")}
+            <p className="mt-3 max-w-2xl text-lg text-white/65 sm:text-xl md:text-2xl">
+              {t("resultsSub")}
             </p>
           </div>
 
-          <Button href={homeSectionHref("contact")} variant="ghost" className="hover-lift">
+          <Button
+            href={homeSectionHref("contact")}
+            variant="ghost"
+            className="hover-lift w-full shrink-0 lg:w-auto"
+          >
             {t("ctaTop")}
           </Button>
         </MotionDiv>
 
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:grid-flow-dense">
-          {HOME_CASE_IDS.map((id, index) => (
-            <MotionDiv
-              key={id}
-              id={`case-${id}`}
-              variants={{
-                hidden: { opacity: 0, y: 14 },
-                show: {
-                  opacity: 1,
-                  y: 0,
-                  transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
-                }
-              }}
-              className={cn(index % 9 === 0 ? "lg:col-span-2" : "")}
-            >
-              <CaseCard caseId={id} priority={index < 3} />
-            </MotionDiv>
-          ))}
-        </div>
+        <CasesGrid />
 
-        <div className="mt-10">
+        <MotionDiv
+          variants={{
+            hidden: { opacity: 0, y: 10 },
+            show: { opacity: 1, y: 0, transition: { duration: 0.55 } }
+          }}
+          className="mt-10"
+        >
           <div className="glass hover-lift rounded-3xl p-6 sm:p-8">
             <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
               <div>
@@ -98,7 +91,7 @@ export function Cases() {
               </Button>
             </div>
           </div>
-        </div>
+        </MotionDiv>
       </div>
     </MotionSection>
   );
