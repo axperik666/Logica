@@ -260,6 +260,11 @@
     "caseVideoUnavailable": "Video unavailable — showing cover image.",
     "resultsHeadline": "Real results",
     "resultsSub": "Numbers — not promises",
+    "gridPill": "Our cases",
+    "gridTitleLine1": "Real results,",
+    "gridTitleLine2": "not pretty reports",
+    "gridBottomLead": "Want the same results for your business?",
+    "gridBottomCta": "Discuss your project →",
     "filtersAria": "Filter cases by industry",
     "filterEmpty": "No cases in this category.",
     "filterLabels": {

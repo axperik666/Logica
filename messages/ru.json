@@ -260,6 +260,11 @@
     "caseVideoUnavailable": "Видео недоступно — показываем обложку.",
     "resultsHeadline": "Реальные результаты",
     "resultsSub": "Не обещания — цифры",
+    "gridPill": "Наши кейсы",
+    "gridTitleLine1": "Реальные результаты,",
+    "gridTitleLine2": "а не красивые отчёты",
+    "gridBottomLead": "Хотите такие же результаты для своего бизнеса?",
+    "gridBottomCta": "Обсудить ваш проект →",
     "filtersAria": "Фильтр кейсов по нише",
     "filterEmpty": "В этой категории пока нет кейсов.",
     "filterLabels": {

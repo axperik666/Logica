@@ -260,6 +260,11 @@
     "caseVideoUnavailable": "Video non disponibile — mostriamo la copertina.",
     "resultsHeadline": "Risultati reali",
     "resultsSub": "Numeri — non promesse",
+    "gridPill": "I nostri casi",
+    "gridTitleLine1": "Risultati reali,",
+    "gridTitleLine2": "non report «belli»",
+    "gridBottomLead": "Vuoi gli stessi risultati per la tua attività?",
+    "gridBottomCta": "Parliamo del tuo progetto →",
     "filtersAria": "Filtra i casi per settore",
     "filterEmpty": "Nessun caso in questa categoria.",
     "filterLabels": {
