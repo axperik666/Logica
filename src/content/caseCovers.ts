@@ -53,5 +53,24 @@ export const CASE_COVER_FALLBACKS: Record<HomeCaseId, string> = {
   "custom-furniture": "/case-covers/office.jpg"
 };
 
-/** Опционально: mp4 в `public/videos/cases/…` — при hover масштабируется как обложка. */
-export const CASE_COVER_VIDEOS: Partial<Record<HomeCaseId, string>> = {};
+/**
+ * Локальные mp4 для hover-обложек (`public/videos/cases/…`).
+ * Источник клипов: Mixkit (mixkit.co) — бесплатная лицензия на использование.
+ */
+export const CASE_COVER_VIDEOS: Partial<Record<HomeCaseId, string>> = {
+  "med-center": "/videos/cases/case-soft.mp4",
+  dentistry: "/videos/cases/case-soft.mp4",
+  "edu-center": "/videos/cases/case-soft.mp4",
+  "beauty-premium": "/videos/cases/case-soft.mp4",
+  "food-delivery": "/videos/cases/case-soft.mp4",
+  saas: "/videos/cases/case-tech.mp4",
+  "trading-courses": "/videos/cases/case-tech.mp4",
+  electronics: "/videos/cases/case-tech.mp4",
+  "law-firm": "/videos/cases/case-tech.mp4",
+  "furniture-store": "/videos/cases/case-lights.mp4",
+  construction: "/videos/cases/case-lights.mp4",
+  "custom-furniture": "/videos/cases/case-lights.mp4",
+  autoservice: "/videos/cases/case-lights.mp4",
+  "real-estate": "/videos/cases/case-lights.mp4",
+  fitness: "/videos/cases/case-lights.mp4"
+};
