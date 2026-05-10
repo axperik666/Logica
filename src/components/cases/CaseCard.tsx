@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useInView, useReducedMotion } from "framer-motion";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { MotionDiv } from "@/components/motion";
 import { Link } from "@/navigation";
@@ -13,7 +13,6 @@ import {
   CASE_COVER_IMAGES,
   CASE_COVER_VIDEOS
 } from "@/content/caseCovers";
-import { useTouchPrimary } from "@/lib/use-touch-primary";
 import { cn } from "@/lib/cn";
 
 type Props = {
@@ -23,14 +22,14 @@ type Props = {
 };
 
 /**
- * Карточка кейса: видео по hover / в зоне видимости на сенсоре, тексты из next-intl.
+ * Карточка кейса: видео монтируется только после входа в viewport (экономия трафика).
+ * Тексты — next-intl; постер — remote / fallback.
  */
 export function CaseCard({ caseId, className, priority }: Props) {
   const t = useTranslations("cases");
   const reduceMotion = useReducedMotion();
-  const touchPrimary = useTouchPrimary();
   const rootRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(rootRef, { amount: 0.2, margin: "0px 0px -10% 0px" });
+  const isInView = useInView(rootRef, { once: true, margin: "-100px" });
 
   const niche = t(`items.${caseId}.niche`);
   const client = t(`items.${caseId}.client`);
@@ -44,25 +43,17 @@ export function CaseCard({ caseId, className, priority }: Props) {
   const [imgUseFallback, setImgUseFallback] = useState(false);
   const [imgFailed, setImgFailed] = useState(false);
   const [videoError, setVideoError] = useState(false);
-  const [hovered, setHovered] = useState(false);
 
   const posterSrc = useMemo(() => {
     if (imgUseFallback && fbPoster) return fbPoster;
     return mainPoster;
   }, [fbPoster, imgUseFallback, mainPoster]);
 
-  const onEnter = useCallback(() => {
-    if (videoSrc && !reduceMotion) setHovered(true);
-  }, [reduceMotion, videoSrc]);
-
-  const onLeave = useCallback(() => {
-    setHovered(false);
-    setVideoError(false);
-  }, []);
-
-  const playVideo = Boolean(
-    videoSrc && !reduceMotion && !videoError && (touchPrimary ? inView : hovered)
-  );
+  const showVideo =
+    Boolean(videoSrc) &&
+    !reduceMotion &&
+    isInView &&
+    !videoError;
 
   const alt = `${niche} — ${client}`;
 
@@ -78,8 +69,6 @@ export function CaseCard({ caseId, className, priority }: Props) {
         ref={rootRef}
         whileHover={reduceMotion ? undefined : { y: -12 }}
         transition={{ type: "spring", stiffness: 420, damping: 28 }}
-        onPointerEnter={onEnter}
-        onPointerLeave={onLeave}
         className="relative aspect-[16/9.5] overflow-hidden rounded-3xl border border-white/10 bg-zinc-950 shadow-[0_28px_84px_rgba(0,0,0,0.45)] transition-[box-shadow,border-color] duration-300 hover:border-[#00BFFF]/35 hover:shadow-[0_28px_84px_rgba(0,0,0,0.58),0_0_48px_rgba(0,191,255,0.16)]"
       >
         {!imgFailed && posterSrc ? (
@@ -89,7 +78,8 @@ export function CaseCard({ caseId, className, priority }: Props) {
             fill
             className={cn(
               "object-cover transition-opacity duration-500",
-              playVideo && !videoError ? "opacity-0" : "opacity-100"
+              showVideo ? "opacity-0" : "opacity-100",
+              !isInView && "opacity-95"
             )}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
             priority={priority}
@@ -100,11 +90,16 @@ export function CaseCard({ caseId, className, priority }: Props) {
               else setImgFailed(true);
             }}
           />
+        ) : !isInView ? (
+          <div
+            className="absolute inset-0 animate-pulse bg-zinc-900"
+            aria-hidden
+          />
         ) : (
           <div className="absolute inset-0 bg-zinc-900" aria-hidden />
         )}
 
-        {playVideo && videoSrc ? (
+        {showVideo ? (
           <video
             src={videoSrc}
             autoPlay
@@ -116,6 +111,17 @@ export function CaseCard({ caseId, className, priority }: Props) {
             className="absolute inset-0 h-full w-full scale-105 object-cover transition-transform duration-700 group-hover/card:scale-100"
             aria-hidden
           />
+        ) : null}
+
+        {videoError ? (
+          <div
+            className="absolute inset-0 z-[1] flex items-center justify-center bg-zinc-900/95"
+            aria-live="polite"
+          >
+            <p className="px-4 text-center text-sm text-white/40">
+              {t("caseVideoUnavailable")}
+            </p>
+          </div>
         ) : null}
 
         <div
@@ -135,9 +141,6 @@ export function CaseCard({ caseId, className, priority }: Props) {
           <p className="line-clamp-3 text-[14px] leading-relaxed text-gray-400 sm:text-[15px]">
             {summary}
           </p>
-          {videoError && !imgFailed ? (
-            <p className="mt-2 text-xs text-white/45">{t("caseVideoUnavailable")}</p>
-          ) : null}
         </div>
 
         <div className="absolute right-4 top-4 z-10 opacity-0 transition-opacity duration-300 group-hover/card:opacity-100 sm:right-6 sm:top-6">
