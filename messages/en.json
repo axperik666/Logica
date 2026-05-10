@@ -254,7 +254,7 @@
   },
   "cases": {
     "titleBrand": "LOGICA Marketing cases — outcomes that speak for themselves",
-    "subtitle": "{count} case studies across industries — leads, ROAS and revenue, explained clearly",
+    "subtitle": "{count, plural, one {# case study} other {# case studies}} across industries — leads, ROAS and revenue, explained clearly",
     "ctaTop": "I want the same results",
     "more": "Details",
     "caseVideoUnavailable": "Video unavailable — showing cover image.",
