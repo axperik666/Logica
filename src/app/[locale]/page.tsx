@@ -7,6 +7,7 @@ export const dynamic = "force-dynamic";
 import { Platforms } from "@/components/sections/Platforms";
 import { Services } from "@/components/sections/Services";
 import { Cases } from "@/components/sections/Cases";
+import { BlogSection } from "@/components/sections/BlogSection";
 import { CTA } from "@/components/sections/CTA";
 import { HomePageJsonLd } from "@/components/seo/HomePageJsonLd";
 import { absoluteLocalizedUrl, languageAlternates } from "@/lib/hreflang";
@@ -37,6 +38,7 @@ export default function HomePage() {
       <Platforms />
       <Services />
       <Cases />
+      <BlogSection />
       <CTA />
     </>
   );

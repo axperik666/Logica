@@ -54,10 +54,23 @@
   "nav": {
     "services": "Услуги",
     "cases": "Кейсы",
+    "blog": "Блог",
+    "blogSectionTitle": "Блог",
+    "blogSectionLead": "Разборы и заметки по performance-маркетингу — раздел скоро пополнится материалами.",
     "testimonials": "Отзывы",
     "about": "О нас",
     "contact": "Контакты",
     "cta": "Связаться",
+    "ctaStrategy": "Получить стратегию",
+    "ctaStrategyLong": "Получить стратегию бесплатно",
+    "servicesDropdownAria": "Подменю услуг",
+    "navbarServiceLinks": {
+      "performance": "Performance Marketing",
+      "strategyAudit": "Стратегия и аудит",
+      "creativeOffers": "Креативы и офферы",
+      "turnkeyWebsite": "Создать сайт под ключ",
+      "fullFunnel": "Full-Funnel маркетинг"
+    },
     "websitesOffer": "Создание сайтов",
     "servicesOverview": "Блок услуг на главной",
     "servicesMenuAria": "Направления услуг",

@@ -6,3 +6,8 @@ export function homeSectionHref(
 ): { pathname: "/"; hash: string } {
   return { pathname: "/", hash: section };
 }
+
+/** Произвольный hash на главной (например `blog`). */
+export function homeHashHref(hash: string): { pathname: "/"; hash: string } {
+  return { pathname: "/", hash };
+}

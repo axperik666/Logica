@@ -54,10 +54,23 @@
   "nav": {
     "services": "Services",
     "cases": "Cases",
+    "blog": "Blog",
+    "blogSectionTitle": "Blog",
+    "blogSectionLead": "Guides and breakdowns on performance marketing — this section is coming soon.",
     "testimonials": "Testimonials",
     "about": "About",
     "contact": "Contact",
     "cta": "Contact",
+    "ctaStrategy": "Get strategy",
+    "ctaStrategyLong": "Get a free strategy",
+    "servicesDropdownAria": "Services submenu",
+    "navbarServiceLinks": {
+      "performance": "Performance Marketing",
+      "strategyAudit": "Strategy & audit",
+      "creativeOffers": "Creatives & offers",
+      "turnkeyWebsite": "Full website build",
+      "fullFunnel": "Full-funnel marketing"
+    },
     "websitesOffer": "Website creation",
     "servicesOverview": "Services section",
     "servicesMenuAria": "Service areas",

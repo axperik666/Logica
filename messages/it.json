@@ -54,10 +54,23 @@
   "nav": {
     "services": "Servizi",
     "cases": "Casi",
+    "blog": "Blog",
+    "blogSectionTitle": "Blog",
+    "blogSectionLead": "Guide e approfondimenti sul performance marketing — sezione in arrivo.",
     "testimonials": "Recensioni",
     "about": "Chi siamo",
     "contact": "Contatti",
     "cta": "Contatti",
+    "ctaStrategy": "Richiedi strategia",
+    "ctaStrategyLong": "Richiedi una strategia gratuita",
+    "servicesDropdownAria": "Sottomenu servizi",
+    "navbarServiceLinks": {
+      "performance": "Performance Marketing",
+      "strategyAudit": "Strategia & audit",
+      "creativeOffers": "Creative & offerte",
+      "turnkeyWebsite": "Sito chiavi in mano",
+      "fullFunnel": "Marketing full-funnel"
+    },
     "websitesOffer": "Creazione siti",
     "servicesOverview": "Blocco servizi",
     "servicesMenuAria": "Tipologie di servizio",

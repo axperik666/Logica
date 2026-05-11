@@ -3,12 +3,12 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname } from "@/navigation";
 import { routing } from "@/i18n/routing";
 import { cn } from "@/lib/cn";
-import { homeSectionHref } from "@/lib/navHref";
+import { homeHashHref, homeSectionHref } from "@/lib/navHref";
 
 const LOCALE_LABELS: Record<string, string> = {
   ru: "RU",
@@ -16,93 +16,28 @@ const LOCALE_LABELS: Record<string, string> = {
   it: "IT"
 };
 
-const navLinkClass = (active: boolean) =>
-  cn(
-    "relative shrink-0 whitespace-nowrap rounded-xl px-3 py-2 text-[13px] font-medium transition-all duration-300 lg:text-sm",
-    "hover:bg-white/[0.08] hover:text-[#00BFFF]",
-    "hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_0_34px_rgba(0,191,255,0.5),0_0_1px_rgba(0,191,255,0.9)]",
-    "after:pointer-events-none after:absolute after:left-3 after:right-3 after:bottom-1 after:h-px after:rounded after:bg-[#00BFFF] after:shadow-[0_0_18px_rgba(0,191,255,0.65)] after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100",
-    active
-      ? "bg-white/[0.09] text-white shadow-[inset_0_1px_0_rgba(0,191,255,0.35),0_0_30px_rgba(0,191,255,0.44)] after:scale-x-100"
-      : "text-white/82"
-  );
+const NAVBAR_SERVICE_KEYS = [
+  "performance",
+  "strategyAudit",
+  "creativeOffers",
+  "turnkeyWebsite",
+  "fullFunnel"
+] as const;
 
-function LocaleSegments({
-  onNavigate,
-  className
-}: {
-  onNavigate?: () => void;
-  className?: string;
-}) {
-  const pathname = usePathname();
-  const locale = useLocale();
-  const tUi = useTranslations("header");
-
-  return (
-    <div
-      role="group"
-      aria-label={tUi("switchTo")}
-      className={cn(
-        "flex w-full items-stretch rounded-[13px] border border-[#00BFFF]/44 bg-[linear-gradient(160deg,rgba(6,14,34,0.96)_0%,rgba(4,10,26,0.9)_100%)] p-[3px] shadow-[inset_0_1px_0_rgba(0,191,255,0.22),0_10px_36px_rgba(0,0,0,0.55),0_0_44px_rgba(0,191,255,0.18)] backdrop-blur-2xl md:w-auto",
-        className
-      )}
-    >
-      {routing.locales.map((loc, idx) => {
-        const active = locale === loc;
-        return (
-          <div key={loc} className="flex min-w-0 flex-1 items-stretch">
-            {idx > 0 ? (
-              <span
-                className="my-1 w-px shrink-0 bg-[linear-gradient(180deg,transparent,rgba(0,191,255,0.5),transparent)] opacity-90"
-                aria-hidden
-              />
-            ) : null}
-            <Link
-              href={pathname}
-              locale={loc}
-              prefetch={false}
-              onClick={() => onNavigate?.()}
-              className={cn(
-                "flex flex-1 items-center justify-center font-bold uppercase tracking-[0.12em] transition-all duration-300",
-                "min-h-[2.35rem] rounded-[10px] px-2.5 text-[11px] sm:min-h-[2.5rem] sm:px-3 sm:text-[12px]",
-                active
-                  ? "bg-[rgba(0,191,255,0.3)] text-white shadow-[inset_0_1px_0_rgba(0,191,255,0.48),0_0_38px_rgba(0,191,255,0.45)]"
-                  : "text-white/72 hover:bg-white/[0.08] hover:text-white hover:shadow-[0_0_28px_rgba(0,191,255,0.32)]"
-              )}
-            >
-              <span className="tabular-nums">{LOCALE_LABELS[loc] ?? loc.toUpperCase()}</span>
-            </Link>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
-function NavbarCta({ onClick, className }: { onClick?: () => void; className?: string }) {
-  const tNav = useTranslations("nav");
-  return (
-    <Link
-      href={homeSectionHref("contact")}
-      onClick={onClick}
-      className={cn(
-        "shrink-0 rounded-xl border border-[#00BFFF]/40 bg-[rgba(0,191,255,0.12)] px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.14em] text-white",
-        "shadow-[inset_0_1px_0_rgba(255,255,255,0.14),0_0_64px_rgba(0,191,255,0.42),0_0_22px_rgba(0,191,255,0.38)]",
-        "transition-all duration-300 hover:scale-[1.03] hover:bg-[rgba(0,191,255,0.24)] hover:border-[#00BFFF]/78 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_0_112px_rgba(0,191,255,0.7),0_0_34px_rgba(0,191,255,0.55)]",
-        "hidden sm:inline-flex sm:items-center sm:justify-center",
-        className
-      )}
-    >
-      {tNav("cta")}
-    </Link>
+function navTextClass(active: boolean) {
+  return cn(
+    "text-sm font-medium transition-colors",
+    active ? "text-[#00b4ff]" : "text-white/90 hover:text-[#00b4ff]"
   );
 }
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const tNav = useTranslations("nav");
   const tHeader = useTranslations("header");
   const pathname = usePathname();
+  const locale = useLocale();
   const [hash, setHash] = useState("");
 
   useEffect(() => {
@@ -118,6 +53,7 @@ export default function Navbar() {
 
   useEffect(() => {
     setIsOpen(false);
+    setServicesOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -134,52 +70,114 @@ export default function Navbar() {
   const casesActive = useMemo(() => onHome && hash === "#cases", [onHome, hash]);
   const servicesActive = useMemo(() => onHome && hash === "#services", [onHome, hash]);
   const aboutActive = useMemo(() => pathname === "/o-nas", [pathname]);
+  const blogActive = useMemo(() => onHome && hash === "#blog", [onHome, hash]);
   const contactActive = useMemo(() => onHome && hash === "#contact", [onHome, hash]);
 
+  const servicesHref = homeSectionHref("services");
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-[color-mix(in_srgb,var(--header-surface)_88%,transparent)] shadow-[0_12px_48px_rgba(0,0,0,0.45)] backdrop-blur-2xl">
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/95 shadow-[0_8px_40px_rgba(0,0,0,0.5)] backdrop-blur-2xl">
+      <div className="mx-auto max-w-7xl px-6">
         <div className="flex h-[var(--header-h)] min-h-[4.375rem] items-center justify-between gap-3 lg:min-h-[5.75rem]">
-          <Link href="/" className="relative z-10 flex shrink-0 items-center gap-3">
+          <Link href="/" className="flex shrink-0 items-center gap-3">
             <Image
               src="/logo.png"
               alt="LOGICA Marketing"
               width={144}
               height={36}
-              className="h-8 w-auto sm:h-9"
+              className="h-9 w-auto"
               priority
             />
           </Link>
 
-          {/* Центр: десктоп-навигация */}
-          <div className="pointer-events-none absolute inset-0 hidden items-center justify-center md:flex">
-            <div className="pointer-events-auto flex items-center gap-0.5 rounded-2xl border border-white/10 bg-white/[0.04] p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-xl">
-              <Link href={homeSectionHref("cases")} className={navLinkClass(casesActive)}>
-                {tNav("cases")}
-              </Link>
-              <Link href={homeSectionHref("services")} className={navLinkClass(servicesActive)}>
+          <div className="hidden items-center gap-9 md:flex">
+            <Link href={homeSectionHref("cases")} className={navTextClass(casesActive)}>
+              {tNav("cases")}
+            </Link>
+
+            <div className="group relative">
+              <button
+                type="button"
+                className={cn(
+                  "flex items-center gap-1 outline-none",
+                  navTextClass(servicesActive)
+                )}
+                aria-haspopup="menu"
+                aria-label={tNav("servicesDropdownAria")}
+              >
                 {tNav("services")}
-              </Link>
-              <Link href="/o-nas" className={navLinkClass(aboutActive)}>
-                {tNav("about")}
-              </Link>
-              <Link href={homeSectionHref("contact")} className={navLinkClass(contactActive)}>
-                {tNav("contact")}
-              </Link>
+                <ChevronDown className="h-3.5 w-3.5 opacity-70 transition duration-300 group-hover:rotate-180" />
+              </button>
+              <div
+                className="invisible absolute left-1/2 top-full z-50 min-w-[18rem] -translate-x-1/2 pt-4 opacity-0 transition duration-200 group-hover:visible group-hover:opacity-100"
+                role="menu"
+              >
+                <div className="rounded-3xl border border-white/10 bg-zinc-900/98 p-4 shadow-2xl backdrop-blur-xl">
+                  {NAVBAR_SERVICE_KEYS.map((key) => (
+                    <Link
+                      key={key}
+                      href={servicesHref}
+                      role="menuitem"
+                      className="block rounded-2xl px-4 py-3 text-sm text-white/90 transition hover:bg-white/5 hover:text-[#00b4ff]"
+                    >
+                      {tNav(`navbarServiceLinks.${key}`)}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
+
+            <Link href="/o-nas" className={navTextClass(aboutActive)}>
+              {tNav("about")}
+            </Link>
+            <Link href={homeHashHref("blog")} className={navTextClass(blogActive)}>
+              {tNav("blog")}
+            </Link>
+            <Link href={homeSectionHref("contact")} className={navTextClass(contactActive)}>
+              {tNav("contact")}
+            </Link>
           </div>
 
-          <div className="relative z-10 flex items-center gap-2 sm:gap-3">
-            <LocaleSegments className="hidden md:inline-flex shrink-0" />
-            <NavbarCta />
+          <div className="flex items-center gap-3">
+            <div
+              className="hidden items-center rounded-full bg-white/5 p-1 text-sm md:flex"
+              role="group"
+              aria-label={tHeader("switchTo")}
+            >
+              {routing.locales.map((loc) => {
+                const active = locale === loc;
+                return (
+                  <Link
+                    key={loc}
+                    href={pathname}
+                    locale={loc}
+                    prefetch={false}
+                    className={cn(
+                      "rounded-full px-4 py-2 font-medium transition sm:px-5",
+                      active ? "bg-white text-black" : "text-white/80 hover:bg-white/10"
+                    )}
+                  >
+                    {LOCALE_LABELS[loc] ?? loc.toUpperCase()}
+                  </Link>
+                );
+              })}
+            </div>
+
+            <Link
+              href={homeSectionHref("contact")}
+              className="inline-flex max-w-[10.5rem] truncate rounded-2xl bg-white px-4 py-2.5 text-xs font-semibold text-black shadow-lg transition hover:bg-[#00b4ff] hover:text-white sm:max-w-none sm:px-8 sm:py-3.5 sm:text-sm"
+            >
+              {tNav("ctaStrategy")}
+            </Link>
+
             <button
               type="button"
               onClick={() => setIsOpen((v) => !v)}
-              className="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-white/15 bg-white/[0.06] text-white transition hover:bg-white/[0.1] md:hidden"
+              className="flex min-h-11 min-w-11 items-center justify-center text-2xl text-white md:hidden"
               aria-expanded={isOpen}
               aria-label={isOpen ? tHeader("closeMenu") : tHeader("openMenu")}
             >
-              {isOpen ? <X className="h-5 w-5" strokeWidth={2} /> : <Menu className="h-5 w-5" strokeWidth={2} />}
+              {isOpen ? <X className="h-6 w-6" strokeWidth={2} /> : <Menu className="h-6 w-6" strokeWidth={2} />}
             </button>
           </div>
         </div>
@@ -187,51 +185,79 @@ export default function Navbar() {
 
       {isOpen ? (
         <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          className="border-t border-white/10 bg-[color-mix(in_srgb,#050814_92%,transparent)] backdrop-blur-2xl md:hidden"
+          initial={{ opacity: 0, y: -12 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="border-t border-white/10 bg-black py-8 md:hidden"
         >
-          <div className="flex max-h-[min(70vh,calc(100dvh-var(--header-h)-1rem))] flex-col gap-2 overflow-y-auto px-4 py-6">
-            <Link
-              href={homeSectionHref("cases")}
-              onClick={() => setIsOpen(false)}
-              className={cn(navLinkClass(casesActive), "w-full text-center")}
-            >
+          <div className="flex max-h-[min(75vh,calc(100dvh-var(--header-h)))] flex-col gap-6 overflow-y-auto px-8 text-lg text-white/95">
+            <Link href={homeSectionHref("cases")} onClick={() => setIsOpen(false)}>
               {tNav("cases")}
             </Link>
-            <Link
-              href={homeSectionHref("services")}
-              onClick={() => setIsOpen(false)}
-              className={cn(navLinkClass(servicesActive), "w-full text-center")}
-            >
-              {tNav("services")}
-            </Link>
-            <Link
-              href="/o-nas"
-              onClick={() => setIsOpen(false)}
-              className={cn(navLinkClass(aboutActive), "w-full text-center")}
-            >
+
+            <div>
+              <button
+                type="button"
+                onClick={() => setServicesOpen((v) => !v)}
+                className="flex w-full items-center justify-between py-1 text-left font-medium"
+              >
+                {tNav("services")}
+                <ChevronDown
+                  className={cn("h-5 w-5 transition", servicesOpen ? "rotate-180" : "")}
+                />
+              </button>
+              {servicesOpen ? (
+                <div className="mt-3 space-y-1 border-l border-white/10 pl-4">
+                  {NAVBAR_SERVICE_KEYS.map((key) => (
+                    <Link
+                      key={key}
+                      href={servicesHref}
+                      className="block py-2 text-base text-white/75 hover:text-[#00b4ff]"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {tNav(`navbarServiceLinks.${key}`)}
+                    </Link>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+
+            <Link href="/o-nas" onClick={() => setIsOpen(false)}>
               {tNav("about")}
             </Link>
-            <Link
-              href={homeSectionHref("contact")}
-              onClick={() => setIsOpen(false)}
-              className={cn(navLinkClass(contactActive), "w-full text-center")}
-            >
+            <Link href={homeHashHref("blog")} onClick={() => setIsOpen(false)}>
+              {tNav("blog")}
+            </Link>
+            <Link href={homeSectionHref("contact")} onClick={() => setIsOpen(false)}>
               {tNav("contact")}
             </Link>
 
-            <div className="pt-4">
-              <LocaleSegments onNavigate={() => setIsOpen(false)} className="w-full justify-stretch" />
+            <div className="flex flex-wrap gap-2 border-t border-white/10 pt-4">
+              {routing.locales.map((loc) => {
+                const active = locale === loc;
+                return (
+                  <Link
+                    key={loc}
+                    href={pathname}
+                    locale={loc}
+                    prefetch={false}
+                    onClick={() => setIsOpen(false)}
+                    className={cn(
+                      "rounded-full px-4 py-2 text-sm font-medium",
+                      active ? "bg-white text-black" : "bg-white/10 text-white"
+                    )}
+                  >
+                    {LOCALE_LABELS[loc] ?? loc.toUpperCase()}
+                  </Link>
+                );
+              })}
             </div>
 
             <Link
               href={homeSectionHref("contact")}
               onClick={() => setIsOpen(false)}
-              className="mt-2 w-full rounded-2xl border border-[#00BFFF]/40 bg-[rgba(0,191,255,0.15)] py-4 text-center text-sm font-bold uppercase tracking-[0.12em] text-white shadow-[0_0_40px_rgba(0,191,255,0.35)]"
+              className="mt-2 rounded-2xl bg-white py-5 text-center text-lg font-semibold text-black"
             >
-              {tNav("cta")}
+              {tNav("ctaStrategyLong")}
             </Link>
           </div>
         </motion.div>
