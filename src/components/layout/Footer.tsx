@@ -1,6 +1,12 @@
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/navigation";
+import { homeSectionHref } from "@/lib/navHref";
 
-export default function Footer() {
+export default async function Footer() {
+  const tNav = await getTranslations("nav");
+  const tFooter = await getTranslations("footer");
+
   return (
     <footer className="bg-black border-t border-white/10 py-16">
       <div className="max-w-7xl mx-auto px-6">
@@ -13,32 +19,39 @@ export default function Footer() {
               height={40}
               className="h-10 w-auto mb-6"
             />
-            <p className="text-gray-400 max-w-md">
-              Performance-маркетинг, который реально приносит прибыль. Специализируемся на ROI от
-              3×.
-            </p>
-            <p className="text-sm text-gray-500 mt-8">
-              © 2026 Logica Marketing. All rights reserved.
-            </p>
+            <p className="text-gray-400 max-w-md">{tFooter("about")}</p>
+            <p className="text-sm text-gray-500 mt-8">{tFooter("copyright")}</p>
           </div>
 
           <div className="md:col-span-3">
-            <h4 className="font-semibold text-white mb-6">Навигация</h4>
+            <h4 className="font-semibold text-white mb-6">{tFooter("quickLinks")}</h4>
             <div className="space-y-3 text-gray-400">
-              <a href="#cases" className="block hover:text-white transition-colors">
-                Кейсы
-              </a>
-              <a href="#services" className="block hover:text-white transition-colors">
-                Услуги
-              </a>
-              <a href="#contact" className="block hover:text-white transition-colors">
-                Контакты
-              </a>
+              <Link
+                href={homeSectionHref("cases")}
+                className="block hover:text-white transition-colors"
+              >
+                {tNav("cases")}
+              </Link>
+              <Link
+                href={homeSectionHref("services")}
+                className="block hover:text-white transition-colors"
+              >
+                {tNav("services")}
+              </Link>
+              <Link href="/o-nas" className="block hover:text-white transition-colors">
+                {tNav("about")}
+              </Link>
+              <Link
+                href={homeSectionHref("contact")}
+                className="block hover:text-white transition-colors"
+              >
+                {tNav("contact")}
+              </Link>
             </div>
           </div>
 
           <div className="md:col-span-4">
-            <h4 className="font-semibold text-white mb-6">Связаться с нами</h4>
+            <h4 className="font-semibold text-white mb-6">{tFooter("contactsTitle")}</h4>
             <div className="space-y-4 text-gray-400">
               <a
                 href="https://t.me/logicamarketing"
@@ -46,7 +59,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 hover:text-white transition-colors"
               >
-                Telegram
+                {tFooter("telegramLabel")}
               </a>
               <a
                 href="mailto:hello@logicamarketing.pro"

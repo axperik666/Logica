@@ -219,6 +219,30 @@
     "internalCasesPage": "Pagina casi",
     "internalAbout": "Il team",
     "internalCasesAnchor": "Casi in homepage",
+    "homeSectionTitle": "Cosa facciamo meglio",
+    "homeSectionSubtitle": "Strumenti che generano crescita reale",
+    "homeTiles": {
+      "perf": {
+        "icon": "📈",
+        "title": "Performance Marketing",
+        "desc": "Meta, Google, TikTok e Performance Max. Scaliamo solo ciò che supera 3× di ROI."
+      },
+      "strategy": {
+        "icon": "🎯",
+        "title": "Strategia & Audit",
+        "desc": "Analisi completa del funnel e roadmap 90 giorni con stime di profitto."
+      },
+      "creative": {
+        "icon": "✨",
+        "title": "Creative & Offer",
+        "desc": "Creative e offerte che vendono. Test rapidi, poi scala i vincenti."
+      },
+      "funnel": {
+        "icon": "🔄",
+        "title": "Marketing full‑funnel",
+        "desc": "Dal lead magnet ai riacquisti: automazioni, warm‑up, retargeting e loyalty."
+      }
+    },
     "cards": [
       {
         "title": "Performance marketing",
@@ -267,6 +291,69 @@
     "gridBottomCta": "Parliamo del tuo progetto →",
     "filtersAria": "Filtra i casi per settore",
     "filterEmpty": "Nessun caso in questa categoria.",
+    "gridViewCase": "Vedi caso →",
+    "gridCards": {
+      "1": {
+        "result": "+340% lead",
+        "description": "Rifatti offerta, landing e strutture ads. Meno lead spazzatura, retargeting più forte."
+      },
+      "2": {
+        "result": "ROAS 8.4",
+        "description": "Allineati catalogo, feed e Performance Max / Meta."
+      },
+      "3": {
+        "result": "+180% richieste",
+        "description": "Più focus su domanda calda e fiducia."
+      },
+      "4": {
+        "result": "12.400 studenti",
+        "description": "Packaging prodotto e funnel automatizzato."
+      },
+      "5": {
+        "result": "+290% prenotazioni",
+        "description": "Posizionamento premium e ads su prima/dopo."
+      },
+      "6": {
+        "result": "47 nuovi cantieri",
+        "description": "Sito multi‑pagina e remarketing search."
+      },
+      "7": {
+        "result": "+520% vendite",
+        "description": "Feed e creatività più solidi."
+      },
+      "8": {
+        "result": "380 pazienti/mese",
+        "description": "Funnel: diagnostica → piano di cura."
+      },
+      "9": {
+        "result": "2,8M ₽ da un lead",
+        "description": "Qualifica lead e nurturing."
+      },
+      "10": {
+        "result": "+410% vendite",
+        "description": "Benefit chiari e offerta prima sessione."
+      },
+      "11": {
+        "result": "+670% richieste",
+        "description": "Nuova struttura servizi e prove prima/dopo."
+      },
+      "12": {
+        "result": "940 clienti",
+        "description": "Funnel e domanda locale."
+      },
+      "13": {
+        "result": "1.840 studenti",
+        "description": "Segmentazione e pipeline creativa."
+      },
+      "14": {
+        "result": "+380% scontrino medio",
+        "description": "Upsell e bundle convenienti."
+      },
+      "15": {
+        "result": "+12k MRR",
+        "description": "Packaging SaaS e funnel più chiaro."
+      }
+    },
     "filterLabels": {
       "all": "Tutti",
       "medicine": "Sanità",
@@ -277,6 +364,7 @@
       "construction": "Edilizia",
       "realestate": "Immobiliare",
       "fitness": "Fitness",
+      "manufacturing": "Manifattura",
       "auto": "Auto",
       "horeca": "HoReCa",
       "saas": "IT / SaaS"

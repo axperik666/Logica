@@ -219,6 +219,30 @@
     "internalCasesPage": "Cases page",
     "internalAbout": "About the team",
     "internalCasesAnchor": "Cases block",
+    "homeSectionTitle": "What we do best",
+    "homeSectionSubtitle": "Tools that drive real growth",
+    "homeTiles": {
+      "perf": {
+        "icon": "📈",
+        "title": "Performance Marketing",
+        "desc": "Meta, Google, TikTok and Performance Max. We scale only bundles that clear 3×+ ROI."
+      },
+      "strategy": {
+        "icon": "🎯",
+        "title": "Strategy & Audit",
+        "desc": "Full funnel teardown plus a 90‑day roadmap with profit projections."
+      },
+      "creative": {
+        "icon": "✨",
+        "title": "Creative & Offer",
+        "desc": "Creatives and offers that sell. Rapid tests, then scale what wins."
+      },
+      "funnel": {
+        "icon": "🔄",
+        "title": "Full‑Funnel Marketing",
+        "desc": "From lead magnet to repeat purchases: automation, warm‑up, retargeting and loyalty."
+      }
+    },
     "cards": [
       {
         "title": "Performance Marketing",
@@ -267,6 +291,69 @@
     "gridBottomCta": "Discuss your project →",
     "filtersAria": "Filter cases by industry",
     "filterEmpty": "No cases in this category.",
+    "gridViewCase": "View case →",
+    "gridCards": {
+      "1": {
+        "result": "+340% leads",
+        "description": "Rebuilt offer, landing and ad stacks. Cut junk leads and strengthened retargeting."
+      },
+      "2": {
+        "result": "ROAS 8.4",
+        "description": "Connected catalog, feeds and Performance Max / Meta."
+      },
+      "3": {
+        "result": "+180% inquiries",
+        "description": "Shifted focus to high‑intent demand and trust."
+      },
+      "4": {
+        "result": "12,400 students",
+        "description": "Product packaging plus automated funnel."
+      },
+      "5": {
+        "result": "+290% bookings",
+        "description": "Premium positioning and before/after focused ads."
+      },
+      "6": {
+        "result": "47 new projects",
+        "description": "Multi‑page site plus search remarketing."
+      },
+      "7": {
+        "result": "+520% sales",
+        "description": "Stronger feed and creative iteration."
+      },
+      "8": {
+        "result": "380 patients / mo",
+        "description": "Funnel: diagnostics → treatment plan."
+      },
+      "9": {
+        "result": "₽2.8M from one lead",
+        "description": "Lead qualification flow and nurture."
+      },
+      "10": {
+        "result": "+410% sales",
+        "description": "Packaged benefits and first‑session offer."
+      },
+      "11": {
+        "result": "+670% inquiries",
+        "description": "New service structure and before/after proof."
+      },
+      "12": {
+        "result": "940 clients",
+        "description": "Funnel plus local demand capture."
+      },
+      "13": {
+        "result": "1,840 students",
+        "description": "Segmentation and creative pipeline."
+      },
+      "14": {
+        "result": "+380% average check",
+        "description": "Upsell mechanics and bundle offers."
+      },
+      "15": {
+        "result": "+$12k MRR",
+        "description": "SaaS packaging and funnel clarity."
+      }
+    },
     "filterLabels": {
       "all": "All",
       "medicine": "Healthcare",
@@ -277,6 +364,7 @@
       "construction": "Construction",
       "realestate": "Real estate",
       "fitness": "Fitness",
+      "manufacturing": "Manufacturing",
       "auto": "Automotive",
       "horeca": "HoReCa",
       "saas": "IT / SaaS"

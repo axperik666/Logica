@@ -1,6 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Link } from "@/navigation";
+import { homeSectionHref } from "@/lib/navHref";
+
+const MotionLink = motion(Link);
 
 export function Hero() {
   return (
@@ -40,14 +44,14 @@ export function Hero() {
           3–7× ROI. Real profit, not reports.
         </p>
 
-        <motion.a
-          href="#contact"
+        <MotionLink
+          href={homeSectionHref("contact")}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           className="block sm:inline-block w-full sm:w-auto bg-white text-black font-semibold text-xl py-6 px-12 rounded-2xl hover:bg-[#00b4ff] hover:text-white transition-all shadow-2xl shadow-cyan-500/30"
         >
           Get Free Growth Strategy →
-        </motion.a>
+        </MotionLink>
       </div>
     </section>
   );

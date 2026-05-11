@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface CaseCardProps {
   client: string;
@@ -19,6 +20,7 @@ export default function CaseCard({
   description,
   video
 }: CaseCardProps) {
+  const t = useTranslations("cases");
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [hasError, setHasError] = useState(false);
@@ -56,7 +58,7 @@ export default function CaseCard({
 
       <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300">
         <div className="bg-white/10 backdrop-blur-xl px-6 py-3 rounded-2xl text-sm border border-white/20 hover:bg-white/20">
-          Смотреть кейс →
+          {t("gridViewCase")}
         </div>
       </div>
     </motion.div>

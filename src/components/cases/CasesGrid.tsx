@@ -1,81 +1,98 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import CaseCard from "./CaseCard";
-import { casesData } from "@/lib/casesData";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
+import CaseCard from "./CaseCard";
+import {
+  CASE_NICHE_FILTER_ORDER,
+  casesData,
+  type CaseNicheKey
+} from "@/lib/casesData";
 
-const niches = [
-  "Все",
-  "Медицина",
-  "E-commerce",
-  "EdTech",
-  "Beauty",
-  "Строительство",
-  "Недвижимость",
-  "Фитнес",
-  "Производство",
-  "Авто",
-  "HoReCa",
-  "IT / SaaS"
-];
+type FilterValue = "all" | CaseNicheKey;
 
 export default function CasesGrid() {
-  const [activeFilter, setActiveFilter] = useState("Все");
+  const t = useTranslations("cases");
+  const [activeFilter, setActiveFilter] = useState<FilterValue>("all");
 
   const filteredCases = useMemo(() => {
-    if (activeFilter === "Все") return casesData;
-    return casesData.filter((c) => c.niche === activeFilter);
+    if (activeFilter === "all") return casesData;
+    return casesData.filter((c) => c.nicheKey === activeFilter);
   }, [activeFilter]);
 
   return (
-    <section id="cases" className="py-20 md:py-28 bg-[#0a0a0a]">
+    <div className="py-20 md:py-28 bg-[#0a0a0a]">
       <div className="max-w-7xl mx-auto px-5 md:px-6">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-white mb-4">
-            Real Results
+            {t("resultsHeadline")}
           </h2>
-          <p className="text-xl md:text-2xl text-gray-400">15 proven cases with video proof</p>
+          <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto">
+            {t("subtitle", { count: casesData.length })}
+          </p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3 mb-10 md:mb-14">
-          {niches.map((niche) => (
+        <div
+          className="flex flex-wrap justify-center gap-3 mb-10 md:mb-14"
+          role="toolbar"
+          aria-label={t("filtersAria")}
+        >
+          <motion.button
+            type="button"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setActiveFilter("all")}
+            className={`px-6 py-3 rounded-2xl text-sm font-medium transition-all whitespace-nowrap ${
+              activeFilter === "all"
+                ? "bg-white text-black shadow-lg"
+                : "bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10"
+            }`}
+          >
+            {t("filterLabels.all")}
+          </motion.button>
+          {CASE_NICHE_FILTER_ORDER.map((key) => (
             <motion.button
-              key={niche}
+              type="button"
+              key={key}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => setActiveFilter(niche)}
+              onClick={() => setActiveFilter(key)}
               className={`px-6 py-3 rounded-2xl text-sm font-medium transition-all whitespace-nowrap ${
-                activeFilter === niche
+                activeFilter === key
                   ? "bg-white text-black shadow-lg"
                   : "bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10"
               }`}
             >
-              {niche}
+              {t(`filterLabels.${key}` as "filterLabels.medicine")}
             </motion.button>
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 px-5 md:px-6">
-          {filteredCases.map((item, index) => (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.04 }}
-              viewport={{ once: true }}
-            >
-              <CaseCard
-                client={item.client}
-                niche={item.niche}
-                result={item.result}
-                description={item.description}
-                video={item.video}
-              />
-            </motion.div>
-          ))}
-        </div>
+        {filteredCases.length === 0 ? (
+          <p className="text-center text-gray-400">{t("filterEmpty")}</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 px-5 md:px-6">
+            {filteredCases.map((item, index) => (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.04 }}
+                viewport={{ once: true }}
+              >
+                <CaseCard
+                  client={item.client}
+                  niche={t(`filterLabels.${item.nicheKey}` as "filterLabels.medicine")}
+                  result={t(`gridCards.${item.id}.result` as "gridCards.1.result")}
+                  description={t(`gridCards.${item.id}.description` as "gridCards.1.description")}
+                  video={item.video}
+                />
+              </motion.div>
+            ))}
+          </div>
+        )}
       </div>
-    </section>
+    </div>
   );
 }
