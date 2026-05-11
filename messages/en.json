@@ -5,6 +5,20 @@
     "keywords": "LOGICA Marketing, performance marketing, SEO promotion, targeted advertising, SMM, sales growth, digital marketing agency, paid media, PPC, ROAS, leads",
     "titleTemplate": "%s | LOGICA Marketing"
   },
+  "trustStrip": {
+    "kicker": "Why teams choose us",
+    "items": [
+      "ROI-led testing — we scale only bundles that pay back",
+      "Fast replies in messengers — no jargon, clear next steps",
+      "Premium delivery: sites, paid media, and creative in one loop"
+    ]
+  },
+  "cookieBanner": {
+    "ariaLabel": "Cookie notice",
+    "message": "We use essential cookies and optional analytics to improve the site. Details in our",
+    "privacy": "Privacy policy",
+    "accept": "Accept"
+  },
   "seo": {
     "logoAlt": "LOGICA Marketing logo — performance marketing and revenue growth",
     "avatarAlt": "Avatar photo: {name}"
@@ -64,6 +78,9 @@
     "guidesCardContactTitle": "Contact",
     "guidesCardContactDesc": "Form, messengers, or email — we reply quickly.",
     "guidesCardCta": "Open",
+    "guidesCardFaqInsight": "Budgets, reporting cadence, and how we run tests — so you know what you’re buying before the first call.",
+    "guidesCardCasesInsight": "Short video breakdowns with niche filters — see funnels and numbers, not mockups labeled “results”.",
+    "guidesCardContactInsight": "Leave a request or write in Telegram/WhatsApp — we typically respond within minutes on business days.",
     "testimonials": "Testimonials",
     "about": "About",
     "contact": "Contact",
@@ -139,6 +156,7 @@
     "telegramHandle": "@logica_marketing",
     "quickRequest": "Quick request",
     "formNote": "Submit the form — we receive it via Telegram or your webhook if configured in the project environment.",
+    "formWhatHappens": "After you send the form, we read your task and reply with clarifying questions or a short plan — no spam, no obligation.",
     "fieldName": "Name",
     "fieldContact": "Contact",
     "fieldMessage": "What do you need?",
@@ -203,6 +221,7 @@
     "quickStartBody": "Answer 5 questions — we'll suggest a plan: site / funnel / ads / creatives.",
     "ctaContact": "Message us for a plan",
     "ctaBack": "Back to services",
+    "ctaCases": "Case studies with numbers",
     "asideNote": "We usually reply within one business day."
   },
   "caseDetailPage": {
@@ -873,6 +892,7 @@
     "valueFootnote": "We explain cost per lead, payback and next steps in simple terms. No pressure to buy on the spot — clarity first.",
     "formTitle": "Request a strategy",
     "formSub": "Fill in the form — then message us on Telegram or WhatsApp. We reply within 15 minutes.",
+    "formWhatHappens": "We review your niche and goal, then reply with priorities and next steps. You can always reach us faster via messengers below.",
     "name": "Name",
     "phone": "Phone",
     "email": "Email",
@@ -963,6 +983,7 @@
     "description": "The link may be outdated or the page is still in progress.",
     "home": "Back to home",
     "services": "Services",
+    "cases": "Case studies",
     "contactHint": "Need help? Reach us via",
     "contactLink": "contacts"
   },

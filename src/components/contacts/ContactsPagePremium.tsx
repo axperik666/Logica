@@ -148,6 +148,7 @@ export function ContactsPagePremium() {
                   <span className="text-sm font-semibold">{t("formKicker")}</span>
                 </div>
                 <p className="mt-2 text-sm text-white/60">{t("formNote")}</p>
+                <p className="mt-2 text-xs leading-relaxed text-white/50">{t("formWhatHappens")}</p>
                 <KontaktyForm />
               </div>
             </div>

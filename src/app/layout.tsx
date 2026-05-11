@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { Inter, Manrope } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { SiteJsonLd } from "@/components/seo/SiteJsonLd";
 import { getSiteUrl } from "@/lib/site";
 
@@ -21,34 +22,20 @@ const manrope = Manrope({
   preload: true
 });
 
-const defaultTitle = "LOGICA Marketing | Performance Marketing with Real ROI";
-const defaultDescription =
-  "3–7× ROI. Мы помогаем бизнесу расти через Performance Marketing. Кейсы с видео.";
-
 export async function generateMetadata(): Promise<Metadata> {
   const metadataBase = new URL(getSiteUrl());
 
   return {
     metadataBase,
-    title: {
-      default: defaultTitle,
-      template: "%s | LOGICA Marketing"
-    },
-    description: defaultDescription,
     icons: {
       icon: "/logo.png"
     },
     openGraph: {
       type: "website",
-      siteName: "LOGICA Marketing",
-      locale: "ru_RU",
-      title: defaultTitle,
-      description: defaultDescription
+      siteName: "LOGICA Marketing"
     },
     twitter: {
-      card: "summary_large_image",
-      title: defaultTitle,
-      description: defaultDescription
+      card: "summary_large_image"
     }
   };
 }
@@ -70,8 +57,9 @@ export default async function RootLayout({
   children: ReactNode;
 }) {
   return (
-    <html lang="ru" className={`${inter.variable} ${manrope.variable}`}>
+    <html lang="en" className={`${inter.variable} ${manrope.variable}`}>
       <body className={`${inter.className} tech-bg min-h-dvh font-sans antialiased relative`}>
+        <GoogleAnalytics />
         <SiteJsonLd />
         <Providers>{children}</Providers>
       </body>

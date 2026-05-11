@@ -115,6 +115,9 @@ export default async function ServicePage({
               <Button href="/kontakty" className="w-full">
                 {t("ctaContact")}
               </Button>
+              <Button href="/kejsy" variant="ghost" className="w-full">
+                {t("ctaCases")}
+              </Button>
               <Button href="/uslugi" variant="ghost" className="w-full">
                 {t("ctaBack")}
               </Button>

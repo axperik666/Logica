@@ -43,6 +43,21 @@ export async function SiteJsonLd() {
       },
       description: jd.description,
       email: CONTACTS.email,
+      sameAs: [CONTACTS.telegramHttps, CONTACTS.whatsappHref],
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          contactType: "customer support",
+          email: CONTACTS.email,
+          availableLanguage: ["Russian", "English", "Italian"]
+        },
+        {
+          "@type": "ContactPoint",
+          contactType: "customer support",
+          url: CONTACTS.telegramHttps,
+          availableLanguage: ["Russian", "English", "Italian"]
+        }
+      ],
       areaServed: {
         "@type": "Country",
         name: jd.country

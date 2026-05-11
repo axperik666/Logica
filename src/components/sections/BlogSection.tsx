@@ -9,17 +9,20 @@ export async function BlogSection() {
     {
       href: "/faq",
       title: t("guidesCardFaqTitle"),
-      desc: t("guidesCardFaqDesc")
+      desc: t("guidesCardFaqDesc"),
+      insight: t("guidesCardFaqInsight")
     },
     {
       href: "/kejsy",
       title: t("guidesCardCasesTitle"),
-      desc: t("guidesCardCasesDesc")
+      desc: t("guidesCardCasesDesc"),
+      insight: t("guidesCardCasesInsight")
     },
     {
       href: "/kontakty",
       title: t("guidesCardContactTitle"),
-      desc: t("guidesCardContactDesc")
+      desc: t("guidesCardContactDesc"),
+      insight: t("guidesCardContactInsight")
     }
   ] as const;
 
@@ -44,8 +47,11 @@ export async function BlogSection() {
               className="group relative flex flex-col rounded-2xl border border-white/[0.08] bg-[linear-gradient(165deg,rgba(255,255,255,0.06)_0%,rgba(255,255,255,0.02)_100%)] p-6 shadow-[0_16px_48px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:border-cyan-400/30 hover:shadow-[0_24px_56px_rgba(0,180,255,0.12)] md:p-7"
             >
               <h3 className="text-lg font-semibold text-white md:text-xl">{card.title}</h3>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-white/60 md:text-base">
+              <p className="mt-3 text-sm leading-relaxed text-white/60 md:text-base">
                 {card.desc}
+              </p>
+              <p className="mt-2 flex-1 text-xs leading-relaxed text-white/45 md:text-sm">
+                {card.insight}
               </p>
               <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-cyan-300 transition group-hover:gap-2">
                 {t("guidesCardCta")}

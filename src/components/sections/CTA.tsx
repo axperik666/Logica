@@ -22,6 +22,7 @@ import {
   type ContactServiceKey
 } from "@/lib/contactHref";
 import { sectionInViewOptions } from "@/lib/sectionReveal";
+import { track } from "@/lib/analytics";
 
 const PLATFORM_KEYS: ContactPlatform[] = ["google", "meta", "tiktok", "telegram"];
 
@@ -114,6 +115,7 @@ export function CTA() {
       const data = (await res.json()) as { ok?: boolean; error?: string };
       if (res.ok && data.ok) {
         setFormSuccess(true);
+        track("lead_submit", { source: "cta" });
       } else if (data.error === "NOT_CONFIGURED") {
         setSubmitErr("notConfigured");
       } else {
@@ -254,6 +256,7 @@ export function CTA() {
                 <h3 className="text-sm font-semibold">{t("formTitle")}</h3>
               </div>
               <p className="mt-2 text-sm text-white/60">{t("formSub")}</p>
+              <p className="mt-2 text-xs leading-relaxed text-white/50">{t("formWhatHappens")}</p>
 
               {formSuccess ? (
                 <MotionDiv

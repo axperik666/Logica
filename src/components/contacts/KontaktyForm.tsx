@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
+import { track } from "@/lib/analytics";
 
 type Err = "VALIDATION" | "DELIVERY" | "NOT_CONFIGURED" | null;
 
@@ -25,6 +26,7 @@ export function KontaktyForm() {
       if (res.ok && data.ok) {
         setOk(true);
         form.reset();
+        track("lead_submit", { source: "kontakty" });
       } else if (data.error === "VALIDATION") {
         setErr("VALIDATION");
       } else if (data.error === "DELIVERY") {

@@ -15,7 +15,8 @@ const STATIC_PATHS = [
   "/faq",
   "/otzyvy",
   "/privacy",
-  "/terms"
+  "/terms",
+  "/sozdanie-sajta"
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

@@ -35,6 +35,7 @@ export function Hero() {
           videoActive ? "opacity-[0.68]" : "opacity-0"
         )}
       >
+        <source src="/hero-bg.webm" type="video/webm" />
         <source src="/hero-bg.mp4" type="video/mp4" />
       </video>
 
