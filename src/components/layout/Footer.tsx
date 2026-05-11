@@ -2,6 +2,7 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/navigation";
 import { homeHashHref } from "@/lib/navHref";
+import { CONTACTS } from "@/lib/contacts";
 
 export default async function Footer() {
   const tNav = await getTranslations("nav");
@@ -62,7 +63,7 @@ export default async function Footer() {
             </h4>
             <div className="space-y-4 text-gray-400">
               <a
-                href="https://t.me/logicamarketing"
+                href={CONTACTS.telegramHttps}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 rounded-lg transition hover:text-cyan-300"
@@ -70,10 +71,10 @@ export default async function Footer() {
                 {tFooter("telegramLabel")}
               </a>
               <a
-                href="mailto:hello@logicamarketing.pro"
+                href={CONTACTS.mailto}
                 className="flex items-center gap-3 rounded-lg transition hover:text-cyan-300"
               >
-                hello@logicamarketing.pro
+                {CONTACTS.email}
               </a>
             </div>
           </div>
