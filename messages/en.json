@@ -247,7 +247,8 @@
     "homeVideoLine1": "Marketing that",
     "homeVideoHighlight": "actually grows",
     "homeVideoSub": "3–7× ROI. Real profit, not reports.",
-    "homeVideoCta": "Get free growth strategy →"
+    "homeVideoCta": "Get free growth strategy →",
+    "homeHeroKicker": "Paid media · Funnels · Creative systems"
   },
   "services": {
     "title": "LOGICA Marketing services",
@@ -262,6 +263,7 @@
     "internalCasesPage": "Cases page",
     "internalAbout": "About the team",
     "internalCasesAnchor": "Cases block",
+    "homeSectionEyebrow": "Capabilities",
     "homeSectionTitle": "What we do best",
     "homeSectionSubtitle": "Tools that drive real growth",
     "homeTiles": {

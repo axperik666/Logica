@@ -23,13 +23,24 @@ export function Services() {
   const t = useTranslations("services");
 
   return (
-    <section id="services" className="bg-[#0a0a0a] py-24">
-      <div className="mx-auto max-w-7xl px-6">
+    <section
+      id="services"
+      className="relative isolate overflow-hidden bg-[#06070e] py-24"
+    >
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent"
+        aria-hidden
+      />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-20%,rgba(0,180,255,0.07),transparent_55%)]" />
+      <div className="relative mx-auto max-w-7xl px-6">
         <div className="mb-16 text-center">
-          <h2 className="mb-4 text-4xl font-bold tracking-tighter text-white sm:text-5xl">
+          <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.28em] text-cyan-300/75">
+            {t("homeSectionEyebrow")}
+          </p>
+          <h2 className="mb-4 text-4xl font-semibold tracking-[-0.04em] text-white sm:text-5xl md:text-[3.25rem]">
             {t("homeSectionTitle")}
           </h2>
-          <p className="mx-auto max-w-2xl text-lg text-white/55 sm:text-xl">
+          <p className="mx-auto max-w-2xl text-lg font-medium text-white/58 sm:text-xl">
             {t("homeSectionSubtitle")}
           </p>
         </div>

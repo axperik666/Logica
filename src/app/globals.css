@@ -80,6 +80,20 @@ body:not(.tech-bg) {
   background-color: #0a0a1f;
 }
 
+::selection {
+  background: color-mix(in srgb, var(--tech-cyan) 38%, transparent);
+  color: #fff;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-manrope), var(--font-inter), system-ui, sans-serif;
+    letter-spacing: -0.035em;
+  }
+}
+
 @layer base {
   .rounded-3xl {
     border-radius: 24px;
@@ -109,15 +123,16 @@ body:not(.tech-bg) {
   }
 }
 
-/* Анимированный фон в стиле лого */
+/* Анимированный фон — глубже и спокойнее (премиум landing) */
 .tech-bg {
   position: relative;
   min-height: 100vh;
   z-index: 0;
   background:
-    radial-gradient(circle at 35% 25%, rgba(0, 191, 255, 0.18) 0%, transparent 60%),
-    radial-gradient(circle at 75% 65%, rgba(138, 43, 226, 0.16) 0%, transparent 60%),
-    linear-gradient(135deg, #0a0a1f 0%, #1a0b2e 45%, #2a0a3a 100%);
+    radial-gradient(ellipse 90% 70% at 15% -15%, rgba(0, 191, 255, 0.14) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 60% at 90% 20%, rgba(138, 43, 226, 0.11) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 50% at 50% 110%, rgba(0, 120, 180, 0.08) 0%, transparent 45%),
+    linear-gradient(152deg, #050810 0%, #0a0e1c 42%, #0e0a18 100%);
 }
 
 /* Без полноэкранной высоты (футер, узкие прослойки) — иначе «пустота» под контентом на десктопе */
@@ -145,7 +160,7 @@ body:not(.tech-bg) {
     48px 48px,
     64px 64px;
   animation: gridMove 90s linear infinite;
-  opacity: 1;
+  opacity: 0.72;
   z-index: -1;
 }
 
@@ -156,7 +171,7 @@ body:not(.tech-bg) {
   background-image: radial-gradient(circle, rgba(255, 255, 255, 0.075) 1.5px, transparent 2px);
   background-size: 84px 84px;
   animation: dotsDrift 65s linear infinite;
-  opacity: 0.78;
+  opacity: 0.62;
   z-index: -1;
 }
 
@@ -1142,4 +1157,42 @@ header.site-header.glass-nav:hover::after {
     animation: none;
     transform: none;
   }
+}
+
+/* Премиум-слой: мягкое «сияние» + лёгкая зернистость (как у топовых агентств) */
+.premium-aurora {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(ellipse 85% 60% at 15% -5%, rgba(0, 200, 255, 0.14), transparent 52%),
+    radial-gradient(ellipse 55% 50% at 92% 8%, rgba(167, 139, 250, 0.1), transparent 48%),
+    radial-gradient(ellipse 70% 45% at 50% 105%, rgba(0, 191, 255, 0.06), transparent 50%);
+}
+
+.premium-grain {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.055;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .premium-grain {
+    opacity: 0.03;
+  }
+}
+
+.hero-vignette-ring {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  box-shadow:
+    inset 0 0 120px rgba(0, 0, 0, 0.55),
+    inset 0 0 280px rgba(0, 0, 0, 0.35);
 }

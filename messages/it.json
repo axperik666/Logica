@@ -247,7 +247,8 @@
     "homeVideoLine1": "Marketing che",
     "homeVideoHighlight": "cresce sul serio",
     "homeVideoSub": "ROI 3–7×. Profitto reale, non solo report.",
-    "homeVideoCta": "Strategia di crescita gratuita →"
+    "homeVideoCta": "Strategia di crescita gratuita →",
+    "homeHeroKicker": "Paid media · Funnel · Sistemi creativi"
   },
   "services": {
     "title": "Servizi LOGICA Marketing",
@@ -262,6 +263,7 @@
     "internalCasesPage": "Pagina casi",
     "internalAbout": "Il team",
     "internalCasesAnchor": "Casi in homepage",
+    "homeSectionEyebrow": "Competenze",
     "homeSectionTitle": "Cosa facciamo meglio",
     "homeSectionSubtitle": "Strumenti che generano crescita reale",
     "homeTiles": {

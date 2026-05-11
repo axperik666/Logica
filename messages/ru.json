@@ -247,7 +247,8 @@
     "homeVideoLine1": "Маркетинг,",
     "homeVideoHighlight": "который растёт",
     "homeVideoSub": "ROI 3–7×. Реальная прибыль, а не отчёты для шоу.",
-    "homeVideoCta": "Получить стратегию роста →"
+    "homeVideoCta": "Получить стратегию роста →",
+    "homeHeroKicker": "Таргет · Воронки · Креативные системы"
   },
   "services": {
     "title": "Услуги LOGICA Marketing",
@@ -262,6 +263,7 @@
     "internalCasesPage": "Страница кейсов",
     "internalAbout": "О команде",
     "internalCasesAnchor": "Блок кейсов на главной",
+    "homeSectionEyebrow": "Компетенции",
     "homeSectionTitle": "В чём мы сильны",
     "homeSectionSubtitle": "Инструменты, которые приносят измеримый рост",
     "homeTiles": {
