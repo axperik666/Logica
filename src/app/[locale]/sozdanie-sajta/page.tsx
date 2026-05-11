@@ -50,7 +50,10 @@ export default async function SozdanieSajtaPage({
           </h1>
           <p className="mt-4 max-w-3xl text-sm text-white/75 sm:text-base">{t("intro")}</p>
 
-          <div className="mt-10">
+          <div
+            id="landing"
+            className="mt-10 scroll-mt-[calc(var(--header-h)+1rem)]"
+          >
             <h2 className="text-lg font-semibold">{t("approachTitle")}</h2>
             <ul className="mt-4 grid gap-3 sm:grid-cols-2">
               {bullets.map((b, i) => (
@@ -61,7 +64,10 @@ export default async function SozdanieSajtaPage({
             </ul>
           </div>
 
-          <div className="mt-14">
+          <div
+            id="multipage"
+            className="mt-14 scroll-mt-[calc(var(--header-h)+1rem)]"
+          >
             <h2 className="text-lg font-semibold">{t("casesTitle")}</h2>
             <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {SHOWCASE_IMAGES.map((src, i) => (
@@ -83,7 +89,10 @@ export default async function SozdanieSajtaPage({
             </div>
           </div>
 
-          <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:items-center">
+          <div
+            id="corporate"
+            className="mt-12 flex scroll-mt-[calc(var(--header-h)+1rem)] flex-col gap-4 sm:flex-row sm:items-center"
+          >
             <Button href={homeContactLink({ service: "web" })} className="hover-lift px-8 py-3">
               {t("ctaLabel")}
             </Button>
