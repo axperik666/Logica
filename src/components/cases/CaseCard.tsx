@@ -46,56 +46,54 @@ export function CaseCard({ caseId, className, priority }: Props) {
     >
       <motion.div
         ref={rootRef}
-        whileHover={{ y: -12 }}
+        whileHover={{ y: -10 }}
         transition={{ type: "spring", stiffness: 420, damping: 28 }}
-        className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-white/5 bg-zinc-950"
+        className="overflow-hidden rounded-3xl border border-white/5 bg-zinc-950"
       >
-        {!canPlay || hasError ? (
-          <div className="absolute inset-0 bg-zinc-900" aria-hidden />
-        ) : null}
+        <div className="relative aspect-[16/10] bg-zinc-950">
+          {!canPlay || hasError ? (
+            <div className="absolute inset-0 bg-zinc-900" aria-hidden />
+          ) : null}
 
-        {isInView && hasVideo && !hasError ? (
-          <video
-            src={videoSrc}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload={priority ? "auto" : "metadata"}
-            onError={() => setHasError(true)}
-            onCanPlay={() => setCanPlay(true)}
-            className="absolute inset-0 h-full w-full scale-105 object-cover transition-transform duration-700 group-hover/card:scale-100"
-            aria-hidden
-          />
-        ) : null}
+          {isInView && hasVideo && !hasError ? (
+            <video
+              src={videoSrc}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload={priority ? "auto" : "metadata"}
+              onError={() => setHasError(true)}
+              onCanPlay={() => setCanPlay(true)}
+              className="absolute inset-0 h-full w-full scale-105 object-cover transition-transform duration-700 group-hover/card:scale-100"
+              aria-hidden
+            />
+          ) : null}
 
-        {showVideoUnavailable ? (
-          <div
-            className="absolute inset-0 z-20 flex items-center justify-center bg-zinc-900"
-            aria-live="polite"
-          >
-            <p className="px-4 text-center text-sm text-white/40">
-              {t("caseVideoUnavailable")}
-            </p>
-          </div>
-        ) : null}
-
-        <div className="absolute bottom-0 left-0 z-10 w-full p-6 sm:p-7 lg:p-8">
-          <div className="inline-block max-w-[min(44rem,100%)] rounded-2xl bg-black/25 p-4 sm:p-5 md:bg-black/30 md:backdrop-blur-[2px]">
-            <p className="mb-3 font-mono text-sm text-[#00b4ff]">
-              {niche} • {result}
-            </p>
-            <h3 className="mb-3 text-2xl font-semibold tracking-tight text-white">
-              {client}
-            </h3>
-            <p className="line-clamp-3 text-[15px] leading-relaxed text-gray-200/80">
-              {summary}
-            </p>
-          </div>
+          {showVideoUnavailable ? (
+            <div
+              className="absolute inset-0 z-20 flex items-center justify-center bg-zinc-900"
+              aria-live="polite"
+            >
+              <p className="px-4 text-center text-sm text-white/40">
+                {t("caseVideoUnavailable")}
+              </p>
+            </div>
+          ) : null}
         </div>
 
-        <div className="absolute right-6 top-6 z-10 opacity-0 transition-all duration-300 group-hover/card:opacity-100">
-          <div className="rounded-2xl border border-white/20 bg-white/10 px-5 py-2.5 text-sm text-white backdrop-blur-md">
+        <div className="p-6 sm:p-7">
+          <p className="mb-2 font-mono text-xs text-[#00b4ff] sm:text-sm">
+            {niche} • {result}
+          </p>
+          <h3 className="text-xl font-semibold tracking-tight text-white sm:text-2xl">
+            {client}
+          </h3>
+          <p className="mt-2 line-clamp-3 text-[14px] leading-relaxed text-white/70 sm:text-[15px]">
+            {summary}
+          </p>
+
+          <div className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-white/80 transition group-hover/card:text-white">
             {t("more")}
             <span aria-hidden> →</span>
           </div>
