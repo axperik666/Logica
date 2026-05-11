@@ -37,7 +37,7 @@ function prefersReducedMotion(): boolean {
 const videoBase =
   process.env.NEXT_PUBLIC_INTRO_SPLASH_VIDEO?.trim() ||
   process.env.NEXT_PUBLIC_MOBILE_INTRO_VIDEO?.trim() ||
-  "/mobile-intro.mp4";
+  "/ava.mp4";
 const posterUrl =
   process.env.NEXT_PUBLIC_INTRO_SPLASH_POSTER?.trim() ||
   process.env.NEXT_PUBLIC_MOBILE_INTRO_POSTER?.trim() ||
@@ -47,11 +47,11 @@ const disabled =
   process.env.NEXT_PUBLIC_MOBILE_INTRO_DISABLED === "1";
 
 const webmSrc =
-  process.env.NEXT_PUBLIC_INTRO_SPLASH_WEBM?.trim() || "/mobile-intro.webm";
+  process.env.NEXT_PUBLIC_INTRO_SPLASH_WEBM?.trim() || "/ava.webm";
 
 /**
  * Полноэкранный короткий ролик при первом заходе в этой вкладке (мобильный и десктоп).
- * Файлы: `public/mobile-intro.mp4`, опционально `public/mobile-intro.webm`.
+ * Файлы по умолчанию: `public/ava.mp4`, опционально `public/ava.webm`.
  * Env: NEXT_PUBLIC_INTRO_SPLASH_VIDEO, NEXT_PUBLIC_INTRO_SPLASH_WEBM, NEXT_PUBLIC_INTRO_SPLASH_POSTER, NEXT_PUBLIC_INTRO_SPLASH_DISABLED=1
  * (старые имена NEXT_PUBLIC_MOBILE_INTRO_* тоже работают)
  */
