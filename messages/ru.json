@@ -74,6 +74,26 @@
       "metaTitle": "Калькулятор ROI — оценка прироста",
       "metaDescription": "Смоделируйте прирост выручки от роста эффективности медиа — запросите персональный разбор у команды."
     },
+    "team": {
+      "metaTitle": "Команда — эксперты performance-маркетинга",
+      "metaDescription": "Performance, креатив и стратегия: ответственность за цифры, а не за слайды."
+    },
+    "industries": {
+      "metaTitle": "Ниши — 15 отраслей, которые мы масштабируем",
+      "metaDescription": "Медицина, e‑commerce, юр.услуги, EdTech, beauty, стройка, недвижимость, фитнес, производство, авто, HoReCa, SaaS и др."
+    },
+    "videoCases": {
+      "metaTitle": "Видео-кейсы — как делаем 3–7× ROI",
+      "metaDescription": "Короткие видеоразборы: ROAS, лиды и выручка с понятным контекстом до/после."
+    },
+    "certifications": {
+      "metaTitle": "Официальные партнёры и сертификаты — LOGICA Marketing",
+      "metaDescription": "Google Partners, Meta Business Partner, TikTok Ads, Яндекс, VK Ads, Telegram Ads и другие статусы платформ."
+    },
+    "latestInsights": {
+      "metaTitle": "Свежие гайды и инсайты",
+      "metaDescription": "Материалы о performance, воронках, креативных тестах и метриках роста."
+    },
     "homeFaq": {
       "metaTitle": "Частые вопросы — LOGICA Marketing",
       "metaDescription": "Ответы о performance-маркетинге, сроках, рекламных бюджетах, отчётности и формате работы с командой."
@@ -845,38 +865,38 @@
   },
   "whyUs": {
     "badge": "Преимущества",
-    "title": "Почему выбирают LOGICA Marketing",
-    "subtitle": "Цифры и принципы, которые превращают закупку в управляемый рост — без лишнего шума.",
+    "title": "Почему выбирают Logica Marketing",
+    "subtitle": "Прибыльные тесты, скорость запуска и полный цикл — от стратегии до отчётов.",
     "cards": [
       {
-        "icon": "trend",
-        "headline": "+340% средний рост лидов",
-        "desc": "Фокус на качественном спросе и посадочных: меньше «пустых» заявок, больше конверсий в продажи."
+        "icon": "profit",
+        "headline": "Тестируем только под прибыль",
+        "desc": "Гипотезы и масштабирование завязаны на юнит-экономику — не на «красивые» метрики."
       },
       {
-        "icon": "roas",
-        "headline": "ROAS от 6.8",
-        "desc": "Экономика связок под вашу маржу — масштабируем то, что реально окупается."
+        "icon": "nextjs",
+        "headline": "Сайты на Next.js за ~7 дней",
+        "desc": "Быстрые лендинги и воронки с упором на скорость и конверсию под платный трафик."
       },
       {
-        "icon": "zap",
-        "headline": "Стратегия за 5 дней",
-        "desc": "Быстрый каркас: оффер, воронка, гипотезы и приоритеты запуска без бесконечных созвонов."
+        "icon": "messenger",
+        "headline": "Ответ в мессенджере за ~15 минут",
+        "desc": "Telegram / WhatsApp в рабочие дни — быстро и по делу, без пропаданий."
       },
       {
-        "icon": "report",
-        "headline": "Прозрачная отчётность",
-        "desc": "Понятные KPI и регулярные разборы: видно, что работает, что отключить и куда перелить бюджет."
+        "icon": "roigrowth",
+        "headline": "Рост вокруг ROI",
+        "desc": "Итерируем креативы, страницы и аудитории, пока эффективность реально двигается."
       },
       {
-        "icon": "history",
-        "headline": "Работаем с 2023 года",
-        "desc": "Накопленная экспертиза по разным нишам и вертикалям — быстрее старт и меньше ошибок на входе."
+        "icon": "fullcycle",
+        "headline": "Полный цикл: от стратегии до отчётов",
+        "desc": "Стратегия, продакшн, медиа и аналитика в одном контуре — меньше передач между людьми."
       },
       {
-        "icon": "partner",
-        "headline": "Персональный маркетолог",
-        "desc": "Один ответственный контакт по проекту: без «перекидывания» между отделами и потерянных задач."
+        "icon": "transparency",
+        "headline": "Отчётность, по которой можно решать",
+        "desc": "Согласованные KPI, регулярные разборы и конкретные решения — не «таблички ради табличек»."
       }
     ]
   },
@@ -998,6 +1018,151 @@
     "badge": "Партнёры",
     "title": "Нам доверяют лидеры рынка",
     "subtitle": "Компании, которые уже выросли с LOGICA Marketing"
+  },
+  "homeTeam": {
+    "badge": "Команда",
+    "title": "Команда, которая делает 3–7× ROI",
+    "subtitle": "Performance, креатив и стратегия в одной команде — ответственность за метрики, не за презентации.",
+    "linkedinCompanyUrl": "https://www.linkedin.com/company/logica-marketing",
+    "members": [
+      {
+        "name": "Алексей Морозов",
+        "role": "Head of Performance",
+        "bio": "Медиа-экономика, масштаб и атрибуция — от первых тестов до стабильного ROAS.",
+        "initials": "АМ",
+        "photo": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&auto=format"
+      },
+      {
+        "name": "Дарья Волкова",
+        "role": "Creative Director",
+        "bio": "Креативные системы против усталости креативов и рост конверсии по воронке.",
+        "initials": "ДВ",
+        "photo": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&auto=format"
+      },
+      {
+        "name": "Илья Петров",
+        "role": "Strategy Lead",
+        "bio": "Контекст рынка в тезис роста: оффер, углы и микс каналов.",
+        "initials": "ИП",
+        "photo": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&auto=format"
+      },
+      {
+        "name": "Мария Соколова",
+        "role": "Senior Media Buyer",
+        "bio": "Закупка и оптимизация трафика по каналам — дисциплина тестов и чистые выводы.",
+        "initials": "МС",
+        "photo": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop&auto=format"
+      },
+      {
+        "name": "Константин Орлов",
+        "role": "Head of Client Success",
+        "bio": "Сроки, коммуникация и качество сдачи — всегда ясно, что делаем дальше.",
+        "initials": "КО",
+        "photo": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&auto=format"
+      },
+      {
+        "name": "Елена Кузнецова",
+        "role": "Paid Social Lead",
+        "bio": "Масштаб Meta/TikTok с циклами креативов и дисциплиной learning-бюджета.",
+        "initials": "ЕК",
+        "photo": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&auto=format"
+      }
+    ]
+  },
+  "homeIndustries": {
+    "badge": "Ниши",
+    "title": "Мы доминируем в 15 нишах",
+    "subtitle": "Отдельные сценарии по вертикали — не «универсальные» кампании.",
+    "items": [
+      { "key": "medicine", "caseId": "dentistry" },
+      { "key": "ecommerce", "caseId": "electronics" },
+      { "key": "legal", "caseId": "law-firm" },
+      { "key": "edtech", "caseId": "edu-center" },
+      { "key": "beauty", "caseId": "beauty-premium" },
+      { "key": "construction", "caseId": "construction" },
+      { "key": "realestate", "caseId": "real-estate" },
+      { "key": "fitness", "caseId": "fitness" },
+      { "key": "manufacturing", "caseId": "buildcraft" },
+      { "key": "auto", "caseId": "autoservice" },
+      { "key": "horeca", "caseId": "food-delivery" },
+      { "key": "saas", "caseId": "saas" },
+      { "key": "retail", "caseId": "furniture-store" },
+      { "key": "finance", "caseId": "law-firm" },
+      { "key": "services", "caseId": "beauty-premium" }
+    ],
+    "labels": {
+      "medicine": "Медицина и клиники",
+      "ecommerce": "E‑commerce",
+      "legal": "Юридические услуги",
+      "edtech": "EdTech",
+      "beauty": "Beauty и премиум",
+      "construction": "Строительство",
+      "realestate": "Недвижимость",
+      "fitness": "Фитнес",
+      "manufacturing": "Производство",
+      "auto": "Авто",
+      "horeca": "HoReCa и доставка",
+      "saas": "IT / SaaS",
+      "retail": "Ритейл и мебель",
+      "finance": "Финансы и B2B",
+      "services": "Профессиональные услуги"
+    }
+  },
+  "videoCasesTeaser": {
+    "badge": "Видео-кейсы",
+    "title": "Видео-кейсы: как мы делаем 3–7× ROI",
+    "subtitle": "Разборы с креативом, медиа и цифрами в одном месте.",
+    "scrollHint": "Листайте дальше",
+    "playAria": "Воспроизвести видео-кейс"
+  },
+  "certifications": {
+    "badge": "Партнёры",
+    "title": "Официальные партнёры и сертификаты",
+    "subtitle": "Программы платформ и статусы, которые мы поддерживаем — актуальная экспертиза по каналам.",
+    "partners": [
+      { "key": "google", "abbr": "G", "label": "Google Partners" },
+      { "key": "meta", "abbr": "M", "label": "Meta Business Partner" },
+      { "key": "tiktok", "abbr": "TT", "label": "TikTok Ads Partner" },
+      { "key": "yandex", "abbr": "Я", "label": "Яндекс. Сертифицированный" },
+      { "key": "vk", "abbr": "VK", "label": "VK Реклама" },
+      { "key": "telegram", "abbr": "TG", "label": "Telegram Ads" }
+    ]
+  },
+  "latestInsights": {
+    "badge": "Инсайты",
+    "title": "Свежие гайды и insights",
+    "subtitle": "Практика по воронкам, креативным тестам и экономике performance.",
+    "readMore": "Читать →",
+    "items": [
+      {
+        "href": "/faq",
+        "title": "FAQ по performance — бюджеты, сроки, отчётность",
+        "desc": "Что ждать в первые недели, как меряем успех и как отчёт остаётся полезным.",
+        "date": "2026-04-28",
+        "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop&auto=format"
+      },
+      {
+        "href": "/kejsy",
+        "title": "Библиотека кейсов — ниши, воронки и паттерны ROAS",
+        "desc": "Как строим тесты по вертикали и масштабируем то, что двигает выручку.",
+        "date": "2026-04-12",
+        "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=500&fit=crop&auto=format"
+      },
+      {
+        "href": "/uslugi",
+        "title": "Карта услуг — стратегия, креатив, медиа, аналитика",
+        "desc": "Где берём процесс целиком и как стыкуемся с in-house.",
+        "date": "2026-03-30",
+        "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=500&fit=crop&auto=format"
+      },
+      {
+        "href": "/kontakty",
+        "title": "Запись на стратсессию — KPI и следующие шаги",
+        "desc": "Фокус на юнит-экономике, миксе каналов и реалистичном плане роста.",
+        "date": "2026-03-15",
+        "image": "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=500&fit=crop&auto=format"
+      }
+    ]
   },
   "homeFaq": {
     "badge": "FAQ",

@@ -74,6 +74,26 @@
       "metaTitle": "ROI calculator — estimate incremental revenue",
       "metaDescription": "Model incremental revenue from media efficiency gains — request a personalized breakdown from the team."
     },
+    "team": {
+      "metaTitle": "Team — performance marketing experts",
+      "metaDescription": "Heads of performance, creative and strategy who run disciplined growth programs and measurable ROI."
+    },
+    "industries": {
+      "metaTitle": "Industries — 15 niches we scale",
+      "metaDescription": "Healthcare, e‑commerce, legal, EdTech, beauty, construction, real estate, fitness, manufacturing, auto, HoReCa, SaaS and more."
+    },
+    "videoCases": {
+      "metaTitle": "Video case studies — how we deliver 3–7× ROI",
+      "metaDescription": "Short video breakdowns of client wins: ROAS, leads and revenue impact with clear before/after context."
+    },
+    "certifications": {
+      "metaTitle": "Official partners & certifications — LOGICA Marketing",
+      "metaDescription": "Google Partners, Meta Business Partner, TikTok Ads, Yandex, VK Ads, Telegram Ads and other platform credentials."
+    },
+    "latestInsights": {
+      "metaTitle": "Latest guides and insights",
+      "metaDescription": "Fresh playbooks on performance marketing, funnels, creative testing and growth metrics."
+    },
     "homeFaq": {
       "metaTitle": "FAQ — LOGICA Marketing",
       "metaDescription": "Answers about performance marketing timelines, budgets, reporting and how we collaborate as a team."
@@ -844,38 +864,38 @@
   },
   "whyUs": {
     "badge": "Advantages",
-    "title": "Why companies choose LOGICA Marketing",
-    "subtitle": "Proof and principles that make paid media controllable — without the noise.",
+    "title": "Why choose Logica Marketing",
+    "subtitle": "How we ship premium performance: profit‑first tests, speed, and full‑stack accountability.",
     "cards": [
       {
-        "icon": "trend",
-        "headline": "+340% average lead growth",
-        "desc": "We focus on high‑intent demand and landings: fewer empty leads, more sales‑ready conversations."
+        "icon": "profit",
+        "headline": "We test only for profit",
+        "desc": "Hypotheses, bundles and scale decisions are tied to unit economics — not vanity metrics."
       },
       {
-        "icon": "roas",
-        "headline": "ROAS from 6.8",
-        "desc": "Bundle economics aligned with your margin — we scale what actually pays back."
+        "icon": "nextjs",
+        "headline": "Next.js sites in ~7 days",
+        "desc": "Fast landings and funnels with Core Web Vitals in mind — ready for paid traffic."
       },
       {
-        "icon": "zap",
-        "headline": "Strategy in 5 days",
-        "desc": "A fast framework: offer, funnel, hypotheses and launch priorities — without endless meetings."
+        "icon": "messenger",
+        "headline": "Messenger replies in ~15 minutes",
+        "desc": "Quick answers on Telegram / WhatsApp on business days — clear next steps, no ghosting."
       },
       {
-        "icon": "report",
-        "headline": "Transparent reporting",
-        "desc": "Clear KPIs and recurring reviews: what works, what to cut and where to shift budgets."
+        "icon": "roigrowth",
+        "headline": "Growth engineered around ROI",
+        "desc": "We iterate creative, pages and audiences until efficiency moves — disciplined learning budgets."
       },
       {
-        "icon": "history",
-        "headline": "Operating since 2023",
-        "desc": "Cross‑industry experience — faster onboarding and fewer rookie mistakes at kickoff."
+        "icon": "fullcycle",
+        "headline": "Full cycle: strategy to reports",
+        "desc": "Strategy, production, media and analytics in one loop — fewer handoffs, faster learning."
       },
       {
-        "icon": "partner",
-        "headline": "Dedicated marketer",
-        "desc": "One accountable contact — no ping‑pong between departments or lost tasks."
+        "icon": "transparency",
+        "headline": "Reporting you can act on",
+        "desc": "KPIs you agree on, recurring reviews and concrete decisions — not dashboard theater."
       }
     ]
   },
@@ -997,6 +1017,151 @@
     "badge": "Partners",
     "title": "Market leaders trust us",
     "subtitle": "Companies that have already grown with LOGICA Marketing"
+  },
+  "homeTeam": {
+    "badge": "Team",
+    "title": "The team that delivers 3–7× ROI",
+    "subtitle": "Performance, creative and strategy under one roof — accountable to numbers, not slides.",
+    "linkedinCompanyUrl": "https://www.linkedin.com/company/logica-marketing",
+    "members": [
+      {
+        "name": "Alexei Morozov",
+        "role": "Head of Performance",
+        "bio": "Owns media economics, scaling and attribution — from first tests to stable ROAS.",
+        "initials": "AM",
+        "photo": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&auto=format"
+      },
+      {
+        "name": "Daria Volkova",
+        "role": "Creative Director",
+        "bio": "Builds creative systems that beat ad fatigue and lift conversion across funnels.",
+        "initials": "DV",
+        "photo": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&auto=format"
+      },
+      {
+        "name": "Ilya Petrov",
+        "role": "Strategy Lead",
+        "bio": "Turns market context into a growth thesis: offers, angles and channel mix.",
+        "initials": "IP",
+        "photo": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&auto=format"
+      },
+      {
+        "name": "Maria Sokolova",
+        "role": "Senior Media Buyer",
+        "bio": "Buys and optimizes traffic across channels — disciplined tests and clean learnings.",
+        "initials": "MS",
+        "photo": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop&auto=format"
+      },
+      {
+        "name": "Konstantin Orlov",
+        "role": "Head of Client Success",
+        "bio": "Keeps delivery, communication and timelines tight — you always know what ships next.",
+        "initials": "KO",
+        "photo": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&auto=format"
+      },
+      {
+        "name": "Elena Kuznetsova",
+        "role": "Paid Social Lead",
+        "bio": "Meta/TikTok scale-ups with creative iteration loops and disciplined learning budgets.",
+        "initials": "EK",
+        "photo": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&auto=format"
+      }
+    ]
+  },
+  "homeIndustries": {
+    "badge": "Industries",
+    "title": "We dominate 15 niches",
+    "subtitle": "Deep playbooks per vertical — not generic “one size fits all” campaigns.",
+    "items": [
+      { "key": "medicine", "caseId": "dentistry" },
+      { "key": "ecommerce", "caseId": "electronics" },
+      { "key": "legal", "caseId": "law-firm" },
+      { "key": "edtech", "caseId": "edu-center" },
+      { "key": "beauty", "caseId": "beauty-premium" },
+      { "key": "construction", "caseId": "construction" },
+      { "key": "realestate", "caseId": "real-estate" },
+      { "key": "fitness", "caseId": "fitness" },
+      { "key": "manufacturing", "caseId": "buildcraft" },
+      { "key": "auto", "caseId": "autoservice" },
+      { "key": "horeca", "caseId": "food-delivery" },
+      { "key": "saas", "caseId": "saas" },
+      { "key": "retail", "caseId": "furniture-store" },
+      { "key": "finance", "caseId": "law-firm" },
+      { "key": "services", "caseId": "beauty-premium" }
+    ],
+    "labels": {
+      "medicine": "Healthcare & clinics",
+      "ecommerce": "E‑commerce",
+      "legal": "Legal services",
+      "edtech": "EdTech",
+      "beauty": "Beauty & premium",
+      "construction": "Construction",
+      "realestate": "Real estate",
+      "fitness": "Fitness",
+      "manufacturing": "Manufacturing",
+      "auto": "Automotive",
+      "horeca": "HoReCa & delivery",
+      "saas": "IT / SaaS",
+      "retail": "Retail & furniture",
+      "finance": "Finance & B2B",
+      "services": "Professional services"
+    }
+  },
+  "videoCasesTeaser": {
+    "badge": "Video cases",
+    "title": "Video case studies: how we deliver 3–7× ROI",
+    "subtitle": "Real breakdowns — creative, media and numbers in one place.",
+    "scrollHint": "Swipe for more",
+    "playAria": "Play video case"
+  },
+  "certifications": {
+    "badge": "Partners",
+    "title": "Official partners & certifications",
+    "subtitle": "Platform programs and credentials we maintain — so execution stays current.",
+    "partners": [
+      { "key": "google", "abbr": "G", "label": "Google Partners" },
+      { "key": "meta", "abbr": "M", "label": "Meta Business Partner" },
+      { "key": "tiktok", "abbr": "TT", "label": "TikTok Ads Partner" },
+      { "key": "yandex", "abbr": "Y", "label": "Yandex Certified" },
+      { "key": "vk", "abbr": "VK", "label": "VK Ads" },
+      { "key": "telegram", "abbr": "TG", "label": "Telegram Ads" }
+    ]
+  },
+  "latestInsights": {
+    "badge": "Insights",
+    "title": "Fresh guides & insights",
+    "subtitle": "Practical notes on funnels, creative testing and performance economics.",
+    "readMore": "Read →",
+    "items": [
+      {
+        "href": "/faq",
+        "title": "Performance marketing FAQ — budgets, timelines, reporting",
+        "desc": "What to expect in the first weeks, how we measure success and how reporting stays actionable.",
+        "date": "2026-04-28",
+        "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop&auto=format"
+      },
+      {
+        "href": "/kejsy",
+        "title": "Case library — verticals, funnels and ROAS patterns",
+        "desc": "How we structure tests by niche and scale what actually moves revenue.",
+        "date": "2026-04-12",
+        "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=500&fit=crop&auto=format"
+      },
+      {
+        "href": "/uslugi",
+        "title": "Services map — strategy, creative, media, analytics",
+        "desc": "Where we plug in end‑to‑end and how we collaborate with in‑house teams.",
+        "date": "2026-03-30",
+        "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=500&fit=crop&auto=format"
+      },
+      {
+        "href": "/kontakty",
+        "title": "Book a strategy call — align KPIs and next steps",
+        "desc": "A focused session on unit economics, channel mix and a realistic growth plan.",
+        "date": "2026-03-15",
+        "image": "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=500&fit=crop&auto=format"
+      }
+    ]
   },
   "homeFaq": {
     "badge": "FAQ",

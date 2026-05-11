@@ -23,6 +23,15 @@ function currencyOptions(locale: string) {
   return { currency: "RUB" as const, numberingLocale: "ru-RU", defaultBudget: 500_000 };
 }
 
+function formatRoiCurrency(numberingLocale: string, currency: string, value: number) {
+  return new Intl.NumberFormat(numberingLocale, {
+    style: "currency",
+    currency,
+    maximumFractionDigits: 0,
+    minimumFractionDigits: 0
+  }).format(Math.round(value));
+}
+
 export function ROICalculator() {
   const t = useTranslations("roiCalculator");
   const tSec = useTranslations("sectionsSeo");
@@ -69,8 +78,8 @@ export function ROICalculator() {
   }, [profit]);
 
   const profitFormatted = useMemo(
-    () => moneyFmt.format(Math.round(profitDisplay)),
-    [moneyFmt, profitDisplay]
+    () => formatRoiCurrency(numberingLocale, currency, profitDisplay),
+    [numberingLocale, currency, profitDisplay]
   );
 
   async function onSubmitModal(e: FormEvent<HTMLFormElement>) {
@@ -85,10 +94,10 @@ export function ROICalculator() {
       "message",
       [
         t("modalNote", {
-          budget: moneyFmt.format(budget),
+          budget: formatRoiCurrency(numberingLocale, currency, budget),
           roas: String(roas),
           growth: String(growthPct),
-          profit: moneyFmt.format(profit)
+          profit: formatRoiCurrency(numberingLocale, currency, profit)
         })
       ].join("\n")
     );

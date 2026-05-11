@@ -1,28 +1,27 @@
 "use client";
 
 import { useRef } from "react";
-import { useInView } from "framer-motion";
+import { useInView, motion } from "framer-motion";
 import {
   BadgeCheck,
-  CalendarDays,
-  CircleDollarSign,
-  FileBarChart,
+  Code2,
+  FileText,
+  Layers,
+  MessageCircle,
+  Target,
   TrendingUp,
-  UserCircle2,
-  Zap,
   type LucideIcon
 } from "lucide-react";
 import { MotionDiv, MotionSection } from "@/components/motion";
-import { ParallaxFloat } from "@/components/ParallaxFloat";
 import { useTranslations } from "next-intl";
 
 const CARD_ICONS: Record<string, LucideIcon> = {
-  trend: TrendingUp,
-  roas: CircleDollarSign,
-  zap: Zap,
-  report: FileBarChart,
-  history: CalendarDays,
-  partner: UserCircle2
+  profit: Target,
+  nextjs: Code2,
+  messenger: MessageCircle,
+  roigrowth: TrendingUp,
+  fullcycle: Layers,
+  transparency: FileText
 };
 
 type WhyCard = {
@@ -84,51 +83,55 @@ export function WhyUs() {
           <p className="mt-3 text-sm text-white/72 sm:text-base">{t("subtitle")}</p>
         </MotionDiv>
 
-        <ParallaxFloat>
-          <MotionDiv
-            variants={{
-              hidden: {},
-              show: {
-                transition: { staggerChildren: 0.07, delayChildren: 0.08 }
-              }
-            }}
-            className="mt-12 grid gap-4 sm:grid-cols-2 xl:grid-cols-3"
-          >
-            {cards.map((c, idx) => {
-              const Icon = CARD_ICONS[c.icon] ?? TrendingUp;
-              return (
-                <MotionDiv
-                  key={c.headline}
-                  variants={{
-                    hidden: { opacity: 0, y: 18 },
-                    show: {
-                      opacity: 1,
-                      y: 0,
-                      transition: { duration: 0.52, delay: idx * 0.02 }
-                    }
+        <MotionDiv
+          variants={{
+            hidden: {},
+            show: {
+              transition: { staggerChildren: 0.07, delayChildren: 0.08 }
+            }
+          }}
+          className="mt-12 grid grid-cols-2 gap-4 lg:grid-cols-3 lg:gap-5"
+        >
+          {cards.map((c, idx) => {
+            const Icon = CARD_ICONS[c.icon] ?? Target;
+            return (
+              <MotionDiv
+                key={c.headline}
+                variants={{
+                  hidden: { opacity: 0, y: 18 },
+                  show: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 0.52, delay: idx * 0.02 }
+                  }
+                }}
+              >
+                <motion.div
+                  className="group relative h-full overflow-hidden rounded-3xl border border-white/[0.1] bg-[linear-gradient(165deg,rgba(255,255,255,0.06)_0%,rgba(255,255,255,0.02)_100%)] p-5 shadow-[0_20px_64px_rgba(0,0,0,0.35)] backdrop-blur-md transition-[border-color,box-shadow] duration-300 sm:p-6"
+                  whileHover={{
+                    y: -5,
+                    scale: 1.02,
+                    transition: { type: "spring", stiffness: 400, damping: 24 }
                   }}
-                  className="glass hover-lift group relative overflow-hidden rounded-3xl p-6 transition-[box-shadow,transform,border-color] duration-300 hover:border-[#00BFFF]/32 hover:shadow-[0_30px_92px_rgba(0,0,0,0.6),0_0_58px_rgba(0,191,255,0.18)]"
                 >
                   <div
                     aria-hidden
-                    className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-[rgba(0,191,255,0.08)] blur-2xl transition group-hover:bg-[rgba(0,191,255,0.18)]"
+                    className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-[rgba(0,191,255,0.08)] blur-2xl transition group-hover:bg-[rgba(0,191,255,0.2)]"
                   />
-                  <div className="relative flex items-start gap-4">
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-[rgba(0,191,255,0.32)] bg-[rgba(0,191,255,0.1)] shadow-[0_0_32px_rgba(0,191,255,0.22)] transition group-hover:border-[rgba(0,191,255,0.48)]">
-                      <Icon className="h-7 w-7 text-[#7AE0FF]" aria-hidden />
+                  <div className="relative flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-4">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[rgba(0,191,255,0.32)] bg-[rgba(0,191,255,0.1)] shadow-[0_0_32px_rgba(0,191,255,0.22)] transition group-hover:border-[rgba(0,191,255,0.5)] group-hover:shadow-[0_0_40px_rgba(34,211,238,0.35)] sm:h-14 sm:w-14">
+                      <Icon className="h-6 w-6 text-[#7AE0FF] sm:h-7 sm:w-7" aria-hidden />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <h3 className="brand-glow text-lg font-semibold leading-snug tracking-tight">
-                        {c.headline}
-                      </h3>
+                      <h3 className="text-base font-semibold leading-snug tracking-tight text-white sm:text-lg">{c.headline}</h3>
                       <p className="mt-2 text-sm leading-relaxed text-white/62">{c.desc}</p>
                     </div>
                   </div>
-                </MotionDiv>
-              );
-            })}
-          </MotionDiv>
-        </ParallaxFloat>
+                </motion.div>
+              </MotionDiv>
+            );
+          })}
+        </MotionDiv>
       </div>
     </MotionSection>
   );

@@ -1171,7 +1171,8 @@ header.site-header.glass-nav:hover::after {
 }
 
 .group-trust-marquee:hover .home-logo-marquee-track,
-.group-trust-marquee:hover .home-logo-marquee-track-reverse {
+.group-trust-marquee:hover .home-logo-marquee-track-reverse,
+.group-cert-marquee:hover .home-logo-marquee-track {
   animation-play-state: paused;
 }
 

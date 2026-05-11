@@ -70,10 +70,9 @@ export default function Navbar() {
     [pathname, onHome, hash]
   );
   const websiteActive = useMemo(() => pathname.startsWith("/sozdanie-sajta"), [pathname]);
-  const aboutActive = useMemo(() => pathname === "/o-nas", [pathname]);
   const guidesActive = useMemo(() => onHome && hash === "#guides", [onHome, hash]);
   const moreActive = useMemo(
-    () => pathname === "/faq" || pathname === "/otzyvy",
+    () => pathname === "/faq" || pathname === "/otzyvy" || pathname === "/o-nas",
     [pathname]
   );
   const contactActive = useMemo(
@@ -334,18 +333,19 @@ export default function Navbar() {
             </div>
 
             <Link
-              href="/o-nas"
-              className="rounded-xl px-3 py-3 font-medium hover:bg-white/5"
-              onClick={() => setIsOpen(false)}
-            >
-              {tNav("about")}
-            </Link>
-            <Link
               href={homeHashHref("guides")}
               className="rounded-xl px-3 py-3 font-medium hover:bg-white/5"
               onClick={() => setIsOpen(false)}
             >
               {tNav("guides")}
+            </Link>
+
+            <Link
+              href="/kontakty"
+              className="rounded-xl px-3 py-3 font-medium hover:bg-white/5"
+              onClick={() => setIsOpen(false)}
+            >
+              {tNav("contact")}
             </Link>
 
             <div className="rounded-xl">
@@ -359,6 +359,13 @@ export default function Navbar() {
               </button>
               {moreOpen ? (
                 <div className="ml-3 space-y-0.5 border-l border-cyan-400/25 py-1 pl-4">
+                  <Link
+                    href="/o-nas"
+                    className="block rounded-lg py-2.5 text-[15px] text-white/75 hover:text-[#7ee8ff]"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {tNav("about")}
+                  </Link>
                   <Link
                     href="/faq"
                     className="block rounded-lg py-2.5 text-[15px] text-white/75 hover:text-[#7ee8ff]"
@@ -376,14 +383,6 @@ export default function Navbar() {
                 </div>
               ) : null}
             </div>
-
-            <Link
-              href="/kontakty"
-              className="rounded-xl px-3 py-3 font-medium hover:bg-white/5"
-              onClick={() => setIsOpen(false)}
-            >
-              {tNav("contact")}
-            </Link>
 
             <div className="mt-4 flex flex-wrap gap-2 border-t border-white/10 pt-4">
               {routing.locales.map((loc) => {

@@ -10,11 +10,16 @@ import { Platforms } from "@/components/sections/Platforms";
 import { Services } from "@/components/sections/Services";
 import { Results } from "@/components/sections/Results";
 import { Process } from "@/components/sections/Process";
+import { WhyUs } from "@/components/sections/WhyUs";
 import { HomeGrowthBento } from "@/components/sections/HomeGrowthBento";
 import { HomeSpotlightCase } from "@/components/sections/HomeSpotlightCase";
+import { Team } from "@/components/sections/Team";
+import { Certifications } from "@/components/sections/Certifications";
+import { Industries } from "@/components/sections/Industries";
+import { VideoCasesTeaser } from "@/components/sections/VideoCasesTeaser";
 import { Cases } from "@/components/sections/Cases";
 import { Testimonials } from "@/components/sections/Testimonials";
-import { BlogSection } from "@/components/sections/BlogSection";
+import { LatestGuides } from "@/components/sections/LatestGuides";
 import { ROICalculator } from "@/components/sections/ROICalculator";
 import { CTA } from "@/components/sections/CTA";
 import { HomePageJsonLd } from "@/components/seo/HomePageJsonLd";
@@ -49,11 +54,16 @@ export default function HomePage() {
       <Services />
       <Results />
       <Process />
+      <Team />
+      <WhyUs />
+      <Certifications />
+      <Industries />
       <HomeGrowthBento />
       <HomeSpotlightCase />
+      <VideoCasesTeaser />
       <Cases />
       <Testimonials limit={6} />
-      <BlogSection />
+      <LatestInsights />
       <ROICalculator />
       <CTA />
     </>
