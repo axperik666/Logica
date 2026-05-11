@@ -60,7 +60,8 @@ export function IntroSplash() {
   const [open, setOpen] = useState(false);
   const [entered, setEntered] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  /** В DOM `setTimeout` возвращает `number`; с @types/node у глобального `setTimeout` тип другой. */
+  const timeoutRef = useRef<number | null>(null);
 
   const close = useCallback(
     (reason: "skip" | "ended" | "error" | "timeout" | "reduced") => {
