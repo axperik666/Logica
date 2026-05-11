@@ -5,7 +5,6 @@ import { useInView } from "framer-motion";
 import { MotionSection } from "@/components/motion";
 import { useTranslations } from "next-intl";
 import CasesGrid from "@/components/cases/CasesGrid";
-import { HOME_CASE_IDS } from "@/content/homeCases";
 import { useNarrowViewport } from "@/lib/use-narrow-viewport";
 
 export function Cases() {
@@ -42,7 +41,6 @@ export function Cases() {
           <p>{tSec("cases.metaTitle")}</p>
           <p>{tSec("cases.metaDescription")}</p>
           <p>{t("titleBrand")}</p>
-          <p>{t("subtitle", { count: HOME_CASE_IDS.length })}</p>
           <p>
             {t("gridTitleLine1")} {t("gridTitleLine2")}
           </p>
