@@ -17,7 +17,7 @@ export default function ContactForm() {
             Ready to scale in 2026?
           </h2>
           <p className="text-xl text-gray-400 mt-4 max-w-xl mx-auto">
-            We'll show where your budgets leak and what moves the needle fastest.
+            We&apos;ll show where your budgets leak and what moves the needle fastest.
           </p>
         </div>
 

@@ -1,10 +1,18 @@
+import Image from "next/image";
+
 export default function Footer() {
   return (
     <footer className="bg-black border-t border-white/10 py-16">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-12 gap-12">
           <div className="md:col-span-5">
-            <img src="/logo.png" alt="LOGICA Marketing" className="h-10 mb-6" />
+            <Image
+              src="/logo.png"
+              alt="LOGICA Marketing"
+              width={160}
+              height={40}
+              className="h-10 w-auto mb-6"
+            />
             <p className="text-gray-400 max-w-md">
               Performance-маркетинг, который реально приносит прибыль. Специализируемся на ROI от
               3×.
