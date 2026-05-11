@@ -41,10 +41,6 @@ section[id],
     padding-top: 5rem;
     padding-bottom: 5rem;
   }
-
-  h1 {
-    font-size: 2.75rem !important;
-  }
 }
 
 @media (max-width: 767px) {

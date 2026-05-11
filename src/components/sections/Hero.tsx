@@ -76,10 +76,10 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, delay: 0.1, ease: easeOut }}
-          className="mb-5 text-pretty text-[clamp(1.65rem,7.2vw,2.65rem)] font-semibold leading-[1.05] tracking-[-0.035em] text-white drop-shadow-[0_4px_48px_rgba(0,0,0,0.55)] min-[480px]:text-[clamp(2rem,8vw,3.75rem)] sm:mb-6 sm:leading-[1.02] sm:tracking-[-0.04em] md:text-7xl lg:text-8xl"
+          className="mx-auto mb-5 max-w-[min(100%,22rem)] text-pretty text-[clamp(1.45rem,6.5vw,2.65rem)] font-semibold leading-[1.08] tracking-[-0.035em] text-white drop-shadow-[0_4px_48px_rgba(0,0,0,0.55)] min-[400px]:max-w-none min-[480px]:text-[clamp(1.85rem,7vw,3.75rem)] sm:mb-6 sm:leading-[1.02] sm:tracking-[-0.04em] md:text-7xl lg:text-8xl"
         >
           {t("homeVideoLine1")}
-          <br className="hidden sm:block" />
+          <br />
           <span className="bg-gradient-to-r from-[#7ee8ff] via-[#00c8ff] to-[#e8d4ff] bg-clip-text text-transparent">
             {t("homeVideoHighlight")}
           </span>
