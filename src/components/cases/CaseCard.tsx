@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/navigation";
 import { homeSectionHref } from "@/lib/navHref";
@@ -20,6 +20,9 @@ type Props = {
  */
 export function CaseCard({ caseId, className, priority }: Props) {
   const t = useTranslations("cases");
+  const rootRef = useRef<HTMLDivElement>(null);
+  // Ленивая подгрузка: не качаем 13 видео сразу (иначе часть запросов/декод может падать на слабых сетях/устройствах)
+  const isInView = useInView(rootRef, { once: true, margin: "350px 0px" });
 
   const niche = t(`items.${caseId}.niche`);
   const client = t(`items.${caseId}.client`);
@@ -42,6 +45,7 @@ export function CaseCard({ caseId, className, priority }: Props) {
       )}
     >
       <motion.div
+        ref={rootRef}
         whileHover={{ y: -12 }}
         transition={{ type: "spring", stiffness: 420, damping: 28 }}
         className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-white/5 bg-zinc-950"
@@ -50,7 +54,7 @@ export function CaseCard({ caseId, className, priority }: Props) {
           <div className="absolute inset-0 bg-zinc-900" aria-hidden />
         ) : null}
 
-        {hasVideo && !hasError ? (
+        {isInView && hasVideo && !hasError ? (
           <video
             src={videoSrc}
             autoPlay
@@ -76,21 +80,18 @@ export function CaseCard({ caseId, className, priority }: Props) {
           </div>
         ) : null}
 
-        <div
-          className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-black via-black/70 to-transparent"
-          aria-hidden
-        />
-
         <div className="absolute bottom-0 left-0 z-10 w-full p-8">
-          <p className="mb-3 font-mono text-sm text-[#00b4ff]">
-            {niche} • {result}
-          </p>
-          <h3 className="mb-3 text-2xl font-semibold tracking-tight text-white">
-            {client}
-          </h3>
-          <p className="line-clamp-3 text-[15px] leading-relaxed text-gray-400">
-            {summary}
-          </p>
+          <div className="inline-block max-w-[min(44rem,100%)] rounded-2xl bg-black/35 p-5 backdrop-blur-sm">
+            <p className="mb-3 font-mono text-sm text-[#00b4ff]">
+              {niche} • {result}
+            </p>
+            <h3 className="mb-3 text-2xl font-semibold tracking-tight text-white">
+              {client}
+            </h3>
+            <p className="line-clamp-3 text-[15px] leading-relaxed text-gray-200/80">
+              {summary}
+            </p>
+          </div>
         </div>
 
         <div className="absolute right-6 top-6 z-10 opacity-0 transition-all duration-300 group-hover/card:opacity-100">
