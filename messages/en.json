@@ -120,7 +120,8 @@
   },
   "mobileIntro": {
     "ariaLabel": "Welcome video",
-    "skip": "Skip"
+    "skip": "Skip",
+    "tapAnywhere": "Tap anywhere to continue"
   },
   "aboutPage": {
     "metaTitle": "About us",

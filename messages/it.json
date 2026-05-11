@@ -120,7 +120,8 @@
   },
   "mobileIntro": {
     "ariaLabel": "Video di benvenuto",
-    "skip": "Salta"
+    "skip": "Salta",
+    "tapAnywhere": "Tocca ovunque per continuare"
   },
   "aboutPage": {
     "metaTitle": "Chi siamo",

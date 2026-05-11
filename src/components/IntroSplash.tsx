@@ -64,13 +64,30 @@ export function IntroSplash() {
   const timeoutRef = useRef<number | null>(null);
 
   const close = useCallback(
-    (reason: "skip" | "ended" | "error" | "timeout" | "reduced") => {
+    (
+      reason:
+        | "skip"
+        | "dismiss"
+        | "ended"
+        | "error"
+        | "timeout"
+        | "reduced"
+    ) => {
       setOpen(false);
       writeSessionDone();
       track("intro_splash_close", { reason });
     },
     []
   );
+
+  const dismissUser = useCallback(() => {
+    if (timeoutRef.current) {
+      window.clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    videoRef.current?.pause();
+    close("dismiss");
+  }, [close]);
 
   useEffect(() => {
     if (disabled) return;
@@ -113,6 +130,15 @@ export function IntroSplash() {
     return () => el.removeEventListener("loadeddata", tryPlay);
   }, [open]);
 
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") dismissUser();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, dismissUser]);
+
   if (!open) return null;
 
   return (
@@ -120,21 +146,23 @@ export function IntroSplash() {
       role="dialog"
       aria-modal="true"
       aria-label={t("ariaLabel")}
-      className={`fixed inset-0 z-[130] flex flex-col bg-black transition-opacity duration-500 ease-out ${
+      aria-describedby="intro-splash-hint"
+      className={`fixed inset-0 z-[130] flex min-h-dvh min-h-[100dvh] w-full cursor-pointer flex-col bg-black transition-opacity duration-500 ease-out ${
         entered ? "opacity-100" : "opacity-0"
       }`}
       style={{
         paddingTop: "env(safe-area-inset-top)",
         paddingBottom: "env(safe-area-inset-bottom)"
       }}
+      onClick={dismissUser}
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_20%,rgba(0,191,255,0.2),transparent_55%)]" />
 
-      <div className="relative flex min-h-0 flex-1 flex-col items-center justify-center px-3 sm:px-6">
+      <div className="relative min-h-0 w-full flex-1">
         <video
           ref={videoRef}
           key={videoBase}
-          className="h-full w-full max-h-[min(85dvh,720px)] max-w-5xl object-contain lg:max-h-[min(88dvh,900px)] xl:max-w-6xl"
+          className="absolute inset-0 h-full w-full object-cover"
           playsInline
           muted
           autoPlay
@@ -157,15 +185,14 @@ export function IntroSplash() {
         </video>
       </div>
 
-      <div className="relative flex shrink-0 justify-center pb-[max(1rem,env(safe-area-inset-bottom))] pt-2">
+      <div className="pointer-events-none relative flex shrink-0 flex-col items-center gap-2 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-2">
+        <p id="intro-splash-hint" className="max-w-md px-4 text-center text-xs text-white/55">
+          {t("tapAnywhere")}
+        </p>
         <button
           type="button"
-          onClick={() => {
-            if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
-            videoRef.current?.pause();
-            close("skip");
-          }}
-          className="rounded-full border border-white/20 bg-white/10 px-8 py-3 text-sm font-semibold uppercase tracking-widest text-white shadow-[0_0_32px_rgba(0,191,255,0.25)] backdrop-blur-md transition hover:border-cyan-400/40 hover:bg-white/15 active:scale-[0.98]"
+          tabIndex={0}
+          className="pointer-events-auto rounded-full border border-white/20 bg-white/10 px-8 py-3 text-sm font-semibold uppercase tracking-widest text-white shadow-[0_0_32px_rgba(0,191,255,0.25)] backdrop-blur-md transition hover:border-cyan-400/40 hover:bg-white/15 active:scale-[0.98]"
         >
           {t("skip")}
         </button>
