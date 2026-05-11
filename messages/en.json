@@ -73,6 +73,10 @@
     "websitesOffer": "Website creation",
     "servicesOverview": "Services section",
     "servicesMenuAria": "Service areas",
+    "moreMenuAria": "More sections",
+    "more": "More",
+    "faqShort": "FAQ",
+    "reviews": "Reviews",
     "serviceDrop": {
       "performance": "Performance Marketing",
       "seo": "SEO & content marketing",
@@ -140,7 +144,21 @@
     "submitErrorValidation": "Please fill in your name and a way to reach you.",
     "submitErrorDelivery": "Could not send right now. Please message us on Telegram or WhatsApp.",
     "submitErrorNotConfigured": "The form is not connected on this deployment yet — use Telegram or email on the left.",
-    "consent": "By clicking Send, you agree to the processing of the data you provide."
+    "consent": "By clicking Send, you agree to the processing of the data you provide.",
+    "kicker": "Performance · Growth · Clarity",
+    "heroBadge": "We respond fast",
+    "step1Title": "Send a request",
+    "step1Desc": "Describe the task and leave a convenient contact.",
+    "step2Title": "We clarify in messengers",
+    "step2Desc": "Typically within ~15 minutes on Telegram/WhatsApp — or by email.",
+    "step3Title": "Strategy call",
+    "step3Desc": "We align goals, scope and next steps — no fluff.",
+    "formKicker": "Start the conversation",
+    "trust1": "ROI‑led performance marketing",
+    "trust2": "Transparent numbers, not vanity metrics",
+    "trust3": "Premium delivery: sites, ads, creatives",
+    "openTelegram": "Open Telegram",
+    "writeEmail": "Write email"
   },
   "termsPage": {
     "metaTitle": "Terms",
@@ -368,6 +386,18 @@
       "15": {
         "result": "+$12k MRR",
         "description": "SaaS packaging and funnel clarity."
+      },
+      "16": {
+        "result": "+210% SQLs",
+        "description": "ABM‑style outbound + landing: cleaner pipeline for mid‑market B2B."
+      },
+      "17": {
+        "result": "ROAS 6.1",
+        "description": "Catalog + creative testing: scaled winners across Meta and PMax."
+      },
+      "18": {
+        "result": "+440% bookings",
+        "description": "Patient journey rebuild: search, trust blocks and call tracking."
       }
     },
     "filterLabels": {
@@ -917,8 +947,10 @@
   "casesPage": {
     "title": "Cases",
     "description": "Examples of our approach: site structure, ads, creatives and data‑driven conclusions.",
-    "intro": "Deep dives will appear here — for now, short cards (replace with your real cases anytime).",
-    "readMore": "Read →"
+    "intro": "Video cases with funnels, creatives and numbers — filter by industry. Below: long‑form write‑ups for selected projects.",
+    "readMore": "Read →",
+    "writtenTitle": "Written deep dives",
+    "writtenIntro": "Methodology‑first notes — a complement to the video showcase above."
   },
   "servicesPage": {
     "title": "Services",

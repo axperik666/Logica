@@ -70,6 +70,10 @@
       "multiPage": "Sito multi-pagina",
       "corporate": "Sito corporate"
     },
+    "moreMenuAria": "Altri collegamenti",
+    "more": "Altro",
+    "faqShort": "FAQ",
+    "reviews": "Recensioni",
     "websitesOffer": "Creazione siti",
     "servicesOverview": "Blocco servizi",
     "servicesMenuAria": "Tipologie di servizio",
@@ -140,7 +144,21 @@
     "submitErrorValidation": "Inserisci nome e un modo per contattarti.",
     "submitErrorDelivery": "Invio non riuscito. Scrivici su Telegram o WhatsApp.",
     "submitErrorNotConfigured": "Modulo non ancora collegato su questo deploy — usa Telegram o email a sinistra.",
-    "consent": "Cliccando Invia accetti il trattamento dei dati che inserisci."
+    "consent": "Cliccando Invia accetti il trattamento dei dati che inserisci.",
+    "kicker": "Performance · Crescita · Chiarezza",
+    "heroBadge": "Risposta rapida",
+    "step1Title": "Invia la richiesta",
+    "step1Desc": "Descrivi il task e lascia un contatto comodo.",
+    "step2Title": "Chiariamo sui messenger",
+    "step2Desc": "Di solito entro ~15 minuti su Telegram/WhatsApp — o via email.",
+    "step3Title": "Call di strategia",
+    "step3Desc": "Allineiamo obiettivi, scope e prossimi passi — senza hype.",
+    "formKicker": "Apri la conversazione",
+    "trust1": "Performance marketing guidato dal ROI",
+    "trust2": "Numeri trasparenti, non vanity metrics",
+    "trust3": "Delivery premium: siti, ads, creatività",
+    "openTelegram": "Apri Telegram",
+    "writeEmail": "Scrivi via email"
   },
   "termsPage": {
     "metaTitle": "Termini",
@@ -368,6 +386,18 @@
       "15": {
         "result": "+12k MRR",
         "description": "Packaging SaaS e funnel più chiaro."
+      },
+      "16": {
+        "result": "+210% SQL",
+        "description": "Stile ABM + landing: pipeline più pulita per B2B mid‑market."
+      },
+      "17": {
+        "result": "ROAS 6.1",
+        "description": "Catalogo + test creativi: scala dei vincenti su Meta e PMax."
+      },
+      "18": {
+        "result": "+440% prenotazioni",
+        "description": "Percorso paziente: search, trust e call tracking."
       }
     },
     "filterLabels": {
@@ -917,8 +947,10 @@
   "casesPage": {
     "title": "Casi",
     "description": "Esempi di approccio: struttura sito, ads, creatività e conclusioni dai dati.",
-    "intro": "Qui arriveranno analisi approfondite — per ora schede sintetiche (sostituibile con casi reali).",
-    "readMore": "Leggi →"
+    "intro": "Casi video con funnel, creatività e numeri — filtra per settore. Sotto: note scritte per progetti selezionati.",
+    "readMore": "Leggi →",
+    "writtenTitle": "Approfondimenti scritti",
+    "writtenIntro": "Focus metodologico — complemento al video sopra."
   },
   "servicesPage": {
     "title": "Servizi",

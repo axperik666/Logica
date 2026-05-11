@@ -39,8 +39,11 @@ export function KontaktyForm() {
     }
   }
 
+  const field =
+    "h-12 rounded-xl border border-white/[0.12] bg-[#050810]/80 px-4 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-cyan-400/45 focus:ring-2 focus:ring-cyan-400/25";
+
   return (
-    <form className="mt-6 grid gap-3" onSubmit={onSubmit}>
+    <form className="mt-8 grid gap-4" onSubmit={onSubmit}>
       <input type="hidden" name="source" value="kontakty" />
       <input
         type="text"
@@ -52,9 +55,9 @@ export function KontaktyForm() {
       />
 
       <label className="grid gap-2">
-        <span className="text-xs text-white/70">{t("fieldName")}</span>
+        <span className="text-xs font-medium uppercase tracking-wide text-white/55">{t("fieldName")}</span>
         <input
-          className="h-11 rounded-xl border border-white/10 bg-[#070B12]/40 px-4 text-sm outline-none focus:ring-2 focus:ring-brand-400/70"
+          className={field}
           placeholder={t("placeholderName")}
           name="name"
           required
@@ -62,9 +65,9 @@ export function KontaktyForm() {
         />
       </label>
       <label className="grid gap-2">
-        <span className="text-xs text-white/70">{t("fieldContact")}</span>
+        <span className="text-xs font-medium uppercase tracking-wide text-white/55">{t("fieldContact")}</span>
         <input
-          className="h-11 rounded-xl border border-white/10 bg-[#070B12]/40 px-4 text-sm outline-none focus:ring-2 focus:ring-brand-400/70"
+          className={field}
           placeholder={t("placeholderContact")}
           name="contact"
           required
@@ -72,9 +75,9 @@ export function KontaktyForm() {
         />
       </label>
       <label className="grid gap-2">
-        <span className="text-xs text-white/70">{t("fieldMessage")}</span>
+        <span className="text-xs font-medium uppercase tracking-wide text-white/55">{t("fieldMessage")}</span>
         <textarea
-          className="min-h-28 rounded-xl border border-white/10 bg-[#070B12]/40 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-brand-400/70"
+          className={`min-h-32 resize-y py-3 ${field}`}
           placeholder={t("placeholderMessage")}
           name="message"
           disabled={pending}
@@ -102,10 +105,14 @@ export function KontaktyForm() {
       ) : null}
 
       <div className="pt-2">
-        <Button type="submit" className="w-full" disabled={pending}>
+        <Button
+          type="submit"
+          className="w-full rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 py-3.5 text-sm font-bold uppercase tracking-wide shadow-[0_0_32px_rgba(0,180,255,0.35)] transition hover:brightness-110 disabled:opacity-60"
+          disabled={pending}
+        >
           {pending ? t("submitting") : t("submit")}
         </Button>
-        <p className="mt-3 text-xs text-white/55">{t("consent")}</p>
+        <p className="mt-4 text-xs leading-relaxed text-white/50">{t("consent")}</p>
       </div>
     </form>
   );

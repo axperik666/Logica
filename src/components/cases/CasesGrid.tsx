@@ -9,10 +9,17 @@ import {
   casesData,
   type CaseNicheKey
 } from "@/lib/casesData";
+import { cn } from "@/lib/cn";
 
 type FilterValue = "all" | CaseNicheKey;
 
-export default function CasesGrid() {
+type CasesGridProps = {
+  /** На странице `/kejsy` заголовок задаётся снаружи — скрываем дубль H2. */
+  showTitle?: boolean;
+  className?: string;
+};
+
+export default function CasesGrid({ showTitle = true, className }: CasesGridProps) {
   const t = useTranslations("cases");
   const [activeFilter, setActiveFilter] = useState<FilterValue>("all");
 
@@ -22,16 +29,18 @@ export default function CasesGrid() {
   }, [activeFilter]);
 
   return (
-    <div className="py-20 md:py-28 bg-[#0a0a0a]">
+    <div className={cn("bg-[#0a0a0a] py-12 md:py-20", showTitle ? "md:py-28" : "", className)}>
       <div className="max-w-7xl mx-auto px-5 md:px-6">
-        <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-white mb-4">
-            {t("resultsHeadline")}
-          </h2>
-          <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto">
-            {t("subtitle", { count: casesData.length })}
-          </p>
-        </div>
+        {showTitle ? (
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-white mb-4">
+              {t("resultsHeadline")}
+            </h2>
+            <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto">
+              {t("subtitle", { count: casesData.length })}
+            </p>
+          </div>
+        ) : null}
 
         <div
           className="flex flex-wrap justify-center gap-3 mb-10 md:mb-14"

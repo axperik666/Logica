@@ -54,6 +54,12 @@ export default async function Footer() {
               <Link href="/kontakty" className={linkClass}>
                 {tNav("contact")}
               </Link>
+              <Link href="/faq" className={linkClass}>
+                {tNav("faqShort")}
+              </Link>
+              <Link href="/otzyvy" className={linkClass}>
+                {tNav("reviews")}
+              </Link>
             </div>
           </div>
 

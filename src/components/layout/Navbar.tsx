@@ -26,6 +26,7 @@ function offerSectionKey(k: (typeof WEBSITE_MENU_KEYS)[number]): "landing" | "mu
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [websiteOpen, setWebsiteOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
   const tNav = useTranslations("nav");
   const tHeader = useTranslations("header");
   const pathname = usePathname();
@@ -46,6 +47,7 @@ export default function Navbar() {
   useEffect(() => {
     setIsOpen(false);
     setWebsiteOpen(false);
+    setMoreOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -70,6 +72,10 @@ export default function Navbar() {
   const websiteActive = useMemo(() => pathname.startsWith("/sozdanie-sajta"), [pathname]);
   const aboutActive = useMemo(() => pathname === "/o-nas", [pathname]);
   const blogActive = useMemo(() => onHome && hash === "#blog", [onHome, hash]);
+  const moreActive = useMemo(
+    () => pathname === "/faq" || pathname === "/otzyvy",
+    [pathname]
+  );
   const contactActive = useMemo(
     () => pathname === "/kontakty" || (onHome && hash === "#contact"),
     [pathname, onHome, hash]
@@ -109,7 +115,7 @@ export default function Navbar() {
             </span>
           </Link>
 
-          <div className="hidden min-w-0 flex-1 items-center justify-center gap-4 lg:gap-7 xl:gap-8 md:flex">
+          <div className="hidden min-w-0 flex-1 items-center justify-center gap-2 lg:gap-4 xl:gap-5 2xl:gap-6 md:flex">
             <Link href="/kejsy" className={itemClass(casesActive)}>
               {tNav("cases")}
               {casesActive ? (
@@ -173,6 +179,46 @@ export default function Navbar() {
                 <span className="absolute bottom-1 left-4 right-4 h-px rounded-full bg-gradient-to-r from-transparent via-[#00b4ff] to-transparent" />
               ) : null}
             </Link>
+
+            <div className="group relative flex h-10 items-center">
+              <button
+                type="button"
+                className={cn(
+                  itemClass(moreActive),
+                  "cursor-pointer gap-1 border-0 bg-transparent pr-2 pl-3.5",
+                  !moreActive && "hover:bg-white/[0.07]"
+                )}
+                aria-haspopup="menu"
+                aria-label={tNav("moreMenuAria")}
+              >
+                {tNav("more")}
+                <ChevronDown className="h-3.5 w-3.5 shrink-0 opacity-75 transition duration-300 group-hover:rotate-180" />
+              </button>
+              {moreActive ? (
+                <span className="absolute bottom-1 left-4 right-4 h-px rounded-full bg-gradient-to-r from-transparent via-[#00b4ff] to-transparent" />
+              ) : null}
+              <div
+                className="pointer-events-none invisible absolute left-1/2 top-full z-50 w-52 -translate-x-1/2 pt-4 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100"
+                role="menu"
+              >
+                <div className="rounded-2xl border border-cyan-400/25 bg-[linear-gradient(165deg,rgba(18,22,38,0.98)_0%,rgba(10,12,24,0.97)_100%)] p-2 shadow-[0_24px_80px_rgba(0,0,0,0.65)] backdrop-blur-xl">
+                  <Link
+                    href="/faq"
+                    role="menuitem"
+                    className="block rounded-xl px-4 py-3 text-sm text-white/88 transition hover:bg-cyan-400/10 hover:text-[#8aebff]"
+                  >
+                    {tNav("faqShort")}
+                  </Link>
+                  <Link
+                    href="/otzyvy"
+                    role="menuitem"
+                    className="block rounded-xl px-4 py-3 text-sm text-white/88 transition hover:bg-cyan-400/10 hover:text-[#8aebff]"
+                  >
+                    {tNav("reviews")}
+                  </Link>
+                </div>
+              </div>
+            </div>
 
             <Link href="/kontakty" className={itemClass(contactActive)}>
               {tNav("contact")}
@@ -297,6 +343,36 @@ export default function Navbar() {
             >
               {tNav("blog")}
             </Link>
+
+            <div className="rounded-xl">
+              <button
+                type="button"
+                onClick={() => setMoreOpen((v) => !v)}
+                className="flex w-full items-center justify-between px-3 py-3 text-left font-medium hover:bg-white/5"
+              >
+                {tNav("more")}
+                <ChevronDown className={cn("h-5 w-5 shrink-0 transition", moreOpen ? "rotate-180" : "")} />
+              </button>
+              {moreOpen ? (
+                <div className="ml-3 space-y-0.5 border-l border-cyan-400/25 py-1 pl-4">
+                  <Link
+                    href="/faq"
+                    className="block rounded-lg py-2.5 text-[15px] text-white/75 hover:text-[#7ee8ff]"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {tNav("faqShort")}
+                  </Link>
+                  <Link
+                    href="/otzyvy"
+                    className="block rounded-lg py-2.5 text-[15px] text-white/75 hover:text-[#7ee8ff]"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {tNav("reviews")}
+                  </Link>
+                </div>
+              ) : null}
+            </div>
+
             <Link
               href="/kontakty"
               className="rounded-xl px-3 py-3 font-medium hover:bg-white/5"

@@ -49,5 +49,8 @@ export const casesData: Case[] = [
   { id: 12, client: "AutoHub", nicheKey: "auto", video: "/videos/cases/autohub.mp4" },
   { id: 13, client: "TradeMind", nicheKey: "edtech", video: "/videos/cases/trademind.mp4" },
   { id: 14, client: "UrbanKitchen", nicheKey: "horeca", video: "/videos/cases/urbankitchen.mp4" },
-  { id: 15, client: "CloudDesk", nicheKey: "saas", video: "/videos/cases/clouddesk.mp4" }
+  { id: 15, client: "CloudDesk", nicheKey: "saas", video: "/videos/cases/clouddesk.mp4" },
+  { id: 16, client: "LeadForge", nicheKey: "saas", video: "/videos/cases/techpoint.mp4" },
+  { id: 17, client: "OmniRetail", nicheKey: "ecommerce", video: "/videos/cases/nordmebel.mp4" },
+  { id: 18, client: "AstraDent", nicheKey: "medicine", video: "/videos/cases/smileline.mp4" }
 ];
