@@ -4,13 +4,18 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { track } from "@/lib/analytics";
 
-const SESSION_KEY = "logica_mobile_intro_done_v1";
-const MOBILE_MAX_PX = 767;
+const SESSION_KEY = "logica_intro_splash_done_v1";
+/** Раньше заставка была только на мобильных — учитываем и старый ключ. */
+const LEGACY_SESSION_KEY = "logica_mobile_intro_done_v1";
 const AUTO_DISMISS_MS = 22_000;
 
 function readSessionDone(): boolean {
   try {
-    return typeof window !== "undefined" && window.sessionStorage.getItem(SESSION_KEY) === "1";
+    if (typeof window === "undefined") return false;
+    return (
+      window.sessionStorage.getItem(SESSION_KEY) === "1" ||
+      window.sessionStorage.getItem(LEGACY_SESSION_KEY) === "1"
+    );
   } catch {
     return false;
   }
@@ -29,43 +34,51 @@ function prefersReducedMotion(): boolean {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-function isMobileViewport(): boolean {
-  if (typeof window === "undefined") return false;
-  return window.matchMedia(`(max-width: ${MOBILE_MAX_PX}px)`).matches;
-}
-
 const videoBase =
-  process.env.NEXT_PUBLIC_MOBILE_INTRO_VIDEO?.trim() || "/mobile-intro.mp4";
-const posterUrl = process.env.NEXT_PUBLIC_MOBILE_INTRO_POSTER?.trim() || "";
-const disabled = process.env.NEXT_PUBLIC_MOBILE_INTRO_DISABLED === "1";
+  process.env.NEXT_PUBLIC_INTRO_SPLASH_VIDEO?.trim() ||
+  process.env.NEXT_PUBLIC_MOBILE_INTRO_VIDEO?.trim() ||
+  "/mobile-intro.mp4";
+const posterUrl =
+  process.env.NEXT_PUBLIC_INTRO_SPLASH_POSTER?.trim() ||
+  process.env.NEXT_PUBLIC_MOBILE_INTRO_POSTER?.trim() ||
+  "";
+const disabled =
+  process.env.NEXT_PUBLIC_INTRO_SPLASH_DISABLED === "1" ||
+  process.env.NEXT_PUBLIC_MOBILE_INTRO_DISABLED === "1";
+
+const webmSrc =
+  process.env.NEXT_PUBLIC_INTRO_SPLASH_WEBM?.trim() || "/mobile-intro.webm";
 
 /**
- * Полноэкранный короткий ролик при первом заходе с телефона в этой вкладке.
- * Положите файл в `public/mobile-intro.mp4` (опционально `public/mobile-intro.webm`).
- * Переменные: NEXT_PUBLIC_MOBILE_INTRO_VIDEO, NEXT_PUBLIC_MOBILE_INTRO_POSTER, NEXT_PUBLIC_MOBILE_INTRO_DISABLED=1
+ * Полноэкранный короткий ролик при первом заходе в этой вкладке (мобильный и десктоп).
+ * Файлы: `public/mobile-intro.mp4`, опционально `public/mobile-intro.webm`.
+ * Env: NEXT_PUBLIC_INTRO_SPLASH_VIDEO, NEXT_PUBLIC_INTRO_SPLASH_WEBM, NEXT_PUBLIC_INTRO_SPLASH_POSTER, NEXT_PUBLIC_INTRO_SPLASH_DISABLED=1
+ * (старые имена NEXT_PUBLIC_MOBILE_INTRO_* тоже работают)
  */
-export function MobileIntroSplash() {
+export function IntroSplash() {
   const t = useTranslations("mobileIntro");
   const [open, setOpen] = useState(false);
   const [entered, setEntered] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const close = useCallback((reason: "skip" | "ended" | "error" | "timeout" | "reduced") => {
-    setOpen(false);
-    writeSessionDone();
-    track("mobile_intro_close", { reason });
-  }, []);
+  const close = useCallback(
+    (reason: "skip" | "ended" | "error" | "timeout" | "reduced") => {
+      setOpen(false);
+      writeSessionDone();
+      track("intro_splash_close", { reason });
+    },
+    []
+  );
 
   useEffect(() => {
     if (disabled) return;
     if (typeof window === "undefined") return;
     if (readSessionDone()) return;
     if (prefersReducedMotion()) return;
-    if (!isMobileViewport()) return;
 
     setOpen(true);
-    track("mobile_intro_open", {});
+    track("intro_splash_open", {});
 
     const id = window.setTimeout(() => close("timeout"), AUTO_DISMISS_MS);
     timeoutRef.current = id;
@@ -85,16 +98,6 @@ export function MobileIntroSplash() {
     };
   }, [open]);
 
-  useEffect(() => {
-    if (!open || typeof window === "undefined") return;
-    const mq = window.matchMedia(`(max-width: ${MOBILE_MAX_PX}px)`);
-    const onChange = () => {
-      if (!mq.matches) close("skip");
-    };
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, [open, close]);
-
   if (!open) return null;
 
   return (
@@ -112,10 +115,10 @@ export function MobileIntroSplash() {
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_20%,rgba(0,191,255,0.2),transparent_55%)]" />
 
-      <div className="relative flex min-h-0 flex-1 flex-col items-center justify-center px-2">
+      <div className="relative flex min-h-0 flex-1 flex-col items-center justify-center px-3 sm:px-6">
         <video
           ref={videoRef}
-          className="h-full max-h-[min(85dvh,640px)] w-full max-w-lg object-contain sm:max-w-xl"
+          className="h-full w-full max-h-[min(85dvh,720px)] max-w-5xl object-contain lg:max-h-[min(88dvh,900px)] xl:max-w-6xl"
           playsInline
           muted
           autoPlay
@@ -130,7 +133,7 @@ export function MobileIntroSplash() {
             close("error");
           }}
         >
-          <source src="/mobile-intro.webm" type="video/webm" />
+          <source src={webmSrc} type="video/webm" />
           <source src={videoBase} type="video/mp4" />
         </video>
       </div>

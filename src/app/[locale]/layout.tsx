@@ -8,7 +8,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { DocumentLang } from "@/components/DocumentLang";
 import { CookieConsent } from "@/components/CookieConsent";
-import { MobileIntroSplash } from "@/components/MobileIntroSplash";
+import { IntroSplash } from "@/components/IntroSplash";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -71,7 +71,7 @@ export default async function LocaleLayout({
       </main>
       <Footer />
       <CookieConsent />
-      <MobileIntroSplash />
+      <IntroSplash />
     </NextIntlClientProvider>
   );
 }
