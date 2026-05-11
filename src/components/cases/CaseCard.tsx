@@ -63,4 +63,4 @@ export default function CaseCard({
   );
 }
 
-export { default as CaseCard };
+export { CaseCard };
