@@ -1,196 +1,62 @@
 "use client";
+import { motion } from "framer-motion";
 
-import { useRef } from "react";
-import { useInView } from "framer-motion";
-import {
-  BarChart3,
-  Compass,
-  Code2,
-  LineChart,
-  Megaphone,
-  Search
-} from "lucide-react";
-import { MotionDiv, MotionSection } from "@/components/motion";
-import { Button } from "@/components/ui/button";
-import { useTranslations } from "next-intl";
-import { Link } from "@/navigation";
-import { useNarrowViewport } from "@/lib/use-narrow-viewport";
-import { homeSectionHref } from "@/lib/navHref";
-import {
-  CONTACT_SERVICE_ORDER,
-  homeContactLink
-} from "@/lib/contactHref";
-
-type CardMsg = {
-  title: string;
-  desc: string;
-  href: string;
-};
-
-const ICONS = [Megaphone, Search, BarChart3, Code2, Compass, LineChart];
-
-/** «Подробнее» → страница услуги в каталоге (порядок как у карточек) */
-const MORE_PATHS: string[] = [
-  "/uslugi/nastrojka-reklamy-google",
-  "/uslugi/sozdanie-lendinga",
-  "/uslugi/nastrojka-reklamy-meta",
-  "/uslugi/sozdanie-lendinga",
-  "/uslugi/nastrojka-reklamy-google",
-  "/uslugi/nastrojka-reklamy-google"
+const services = [
+  {
+    title: "Performance Marketing",
+    desc: "Meta, Google, TikTok + Performance Max. Запускаем только то, что приносит ROI от 3×",
+    icon: "📈"
+  },
+  {
+    title: "Strategy & Audit",
+    desc: "Полный разбор текущей воронки + стратегия роста на 90 дней с прогнозом прибыли",
+    icon: "🎯"
+  },
+  {
+    title: "Creative & Offer",
+    desc: "Создаём креативы и офферы, которые реально продают. Тестируем и масштабируем победителей",
+    icon: "✨"
+  },
+  {
+    title: "Full-Funnel Marketing",
+    desc: "От лид-магнита до повторных продаж. Автоворонки, прогрев, ретаргетинг и лояльность",
+    icon: "🔄"
+  }
 ];
 
-export function Services() {
-  const t = useTranslations("services");
-  const tSec = useTranslations("sectionsSeo");
-  const cardsRaw = t.raw("cards");
-  const cards = Array.isArray(cardsRaw) ? (cardsRaw as CardMsg[]) : [];
-  const narrow = useNarrowViewport();
-  const ref = useRef(null);
-  const isInView = useInView(ref, {
-    once: true,
-    amount: 0.08,
-    margin: "0px 0px 100px 0px"
-  });
-
+export default function Services() {
   return (
-    <MotionSection
-      ref={ref}
-      id="services"
-      className="full-bleed tech-bg relative overflow-x-clip py-24 lg:py-28 scroll-mt-[calc(var(--header-h)+env(safe-area-inset-top,0px)+1rem)]"
-      initial="hidden"
-      animate={isInView ? "show" : "hidden"}
-      variants={{
-        hidden: {},
-        show: {
-          transition: {
-            staggerChildren: narrow ? 0.03 : 0.08,
-            delayChildren: narrow ? 0.02 : 0.04
-          }
-        }
-      }}
-    >
-      <div className="site-container">
-      <MotionDiv
-        variants={{
-          hidden: { opacity: 0, y: 10 },
-          show: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-        }}
-        className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end"
-      >
-        <div className="max-w-3xl">
-          <div className="sr-only">
-            <p>{tSec("services.metaTitle")}</p>
-            <p>{tSec("services.metaDescription")}</p>
-          </div>
-          <h2 className="brand-glow mt-4 text-balance text-2xl font-semibold tracking-tight sm:text-3xl">
-            {t("title")}
+    <section id="services" className="py-24 bg-[#0a0a0a]">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-bold tracking-tighter text-white mb-4">
+            What we do best
           </h2>
-          <p className="mt-3 max-w-2xl text-sm text-white/75 sm:text-base">
-            {t("subtitle")}
+          <p className="text-2xl text-gray-400">
+            Инструменты, которые приносят реальный рост
           </p>
-
-          <nav
-            aria-label={t("internalRelatedAria")}
-            className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-white/10 pt-5 text-sm text-white/65"
-          >
-            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-white/45">
-              {t("seeAlso")}
-            </span>
-            <Link
-              href="/uslugi"
-              className="font-medium text-primary underline-offset-4 transition hover:text-white hover:underline"
-            >
-              {t("internalAllServices")}
-            </Link>
-            <span className="text-white/25" aria-hidden>
-              ·
-            </span>
-            <Link
-              href="/kejsy"
-              className="font-medium text-primary underline-offset-4 transition hover:text-white hover:underline"
-            >
-              {t("internalCasesPage")}
-            </Link>
-            <span className="text-white/25" aria-hidden>
-              ·
-            </span>
-            <Link
-              href={homeSectionHref("cases")}
-              className="font-medium text-primary underline-offset-4 transition hover:text-white hover:underline"
-            >
-              {t("internalCasesAnchor")}
-            </Link>
-            <span className="text-white/25" aria-hidden>
-              ·
-            </span>
-            <Link
-              href="/o-nas"
-              className="font-medium text-primary underline-offset-4 transition hover:text-white hover:underline"
-            >
-              {t("internalAbout")}
-            </Link>
-          </nav>
         </div>
 
-        <Button href={homeSectionHref("contact")} variant="ghost" className="hover-lift shrink-0">
-          {t("cta")}
-        </Button>
-      </MotionDiv>
-
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {cards.map((c, idx) => {
-          const Icon = ICONS[idx] ?? Megaphone;
-          const svc = CONTACT_SERVICE_ORDER[idx];
-          const moreHref = MORE_PATHS[idx] ?? "/uslugi";
-          return (
-            <MotionDiv
-              key={c.title}
-              id={svc ? `service-${svc}` : undefined}
-              variants={{
-                hidden: { opacity: 0, y: 14 },
-                show: {
-                  opacity: 1,
-                  y: 0,
-                  transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
-                }
-              }}
-              className="glass hover-lift rounded-3xl p-6 scroll-mt-[calc(5rem+env(safe-area-inset-top,0px))]"
+        <div className="grid md:grid-cols-2 gap-6">
+          {services.map((service, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              className="group p-10 bg-zinc-950 border border-white/10 rounded-3xl hover:border-[#00b4ff]/30 transition-all hover:bg-zinc-900"
             >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
-                    <Icon className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-semibold leading-snug">{c.title}</h3>
-                  </div>
-                </div>
-              </div>
-
-              <p className="mt-4 text-sm leading-relaxed text-white/65">{c.desc}</p>
-
-              <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
-                <Link
-                  href={moreHref}
-                  className="text-sm font-semibold text-primary transition hover:opacity-90"
-                >
-                  {t("moreLink")}
-                </Link>
-                {svc ? (
-                  <Button href={homeContactLink({ service: svc })} className="hover-lift">
-                    {t("orderBtn")}
-                  </Button>
-                ) : (
-                  <Button href={homeSectionHref("contact")} className="hover-lift">
-                    {t("orderBtn")}
-                  </Button>
-                )}
-              </div>
-            </MotionDiv>
-          );
-        })}
+              <div className="text-5xl mb-8">{service.icon}</div>
+              <h3 className="text-3xl font-semibold text-white mb-4 group-hover:text-[#00b4ff] transition-colors">
+                {service.title}
+              </h3>
+              <p className="text-gray-400 text-lg leading-relaxed">
+                {service.desc}
+              </p>
+            </motion.div>
+          ))}
+        </div>
       </div>
-      </div>
-    </MotionSection>
+    </section>
   );
 }

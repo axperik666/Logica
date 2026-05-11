@@ -1,38 +1,5 @@
-import type { HomeCaseId } from "@/content/homeCases";
-
-/** Тег фильтра сетки кейсов (языконезависимый). */
-export type CaseFilterTag =
-  | "medicine"
-  | "ecommerce"
-  | "legal"
-  | "edtech"
-  | "beauty"
-  | "construction"
-  | "realestate"
-  | "fitness"
-  | "auto"
-  | "horeca"
-  | "saas";
-
-export const CASE_FILTER_ORDER: CaseFilterTag[] = [
-  "medicine",
-  "ecommerce",
-  "legal",
-  "edtech",
-  "beauty",
-  "construction",
-  "realestate",
-  "fitness",
-  "auto",
-  "horeca",
-  "saas"
-];
-
-/** Данные кейса: видео и эталонные подписи (карточки на сайте берут тексты из messages → cases.items). */
 export interface Case {
   id: number;
-  homeCaseId: HomeCaseId;
-  filterTag: CaseFilterTag;
   client: string;
   niche: string;
   result: string;
@@ -43,28 +10,31 @@ export interface Case {
 export const casesData: Case[] = [
   {
     id: 1,
-    homeCaseId: "furniture-store",
-    filterTag: "ecommerce",
-    client: "NordMebel",
-    niche: "E-commerce",
-    result: "ROAS 8.4",
-    description: "Выстроили связку каталога, фидов и Performance Max.",
-    video: "/videos/cases/nordmebel.mp4"
+    client: "VitaMed",
+    niche: "Медицина",
+    result: "+340% лидов",
+    description:
+      "Пересобрали оффер, посадочную и рекламные связки. Убрали «мусорные» заявки, усилили ретаргет.",
+    video: "/videos/cases/vitamed.mp4"
   },
   {
     id: 2,
-    homeCaseId: "law-firm",
-    filterTag: "legal",
-    client: "LexPro",
-    niche: "Юриспруденция",
-    result: "+180% заявок",
-    description: "Усилили доверие через кейсы и гарантии.",
-    video: "/videos/cases/lexpro.mp4"
+    client: "NordMebel",
+    niche: "E-commerce",
+    result: "ROAS 8.4",
+    description: "Выстроили связку каталога, фидов и Performance Max/Meta.",
+    video: "/videos/cases/nordmebel.mp4"
   },
   {
     id: 3,
-    homeCaseId: "edu-center",
-    filterTag: "edtech",
+    client: "LexPro",
+    niche: "Юриспруденция",
+    result: "+180% заявок",
+    description: "Сместили фокус на «горячий» спрос и усилили доверие.",
+    video: "/videos/cases/lexpro.mp4"
+  },
+  {
+    id: 4,
     client: "SkillNova",
     niche: "EdTech",
     result: "12 400 студентов",
@@ -72,9 +42,7 @@ export const casesData: Case[] = [
     video: "/videos/cases/skillnova.mp4"
   },
   {
-    id: 4,
-    homeCaseId: "beauty-premium",
-    filterTag: "beauty",
+    id: 5,
     client: "Éclat Studio",
     niche: "Beauty",
     result: "+290% записей",
@@ -82,9 +50,7 @@ export const casesData: Case[] = [
     video: "/videos/cases/eclat.mp4"
   },
   {
-    id: 5,
-    homeCaseId: "construction",
-    filterTag: "construction",
+    id: 6,
     client: "BuildCraft",
     niche: "Строительство",
     result: "47 новых объектов",
@@ -92,9 +58,7 @@ export const casesData: Case[] = [
     video: "/videos/cases/buildcraft.mp4"
   },
   {
-    id: 6,
-    homeCaseId: "electronics",
-    filterTag: "ecommerce",
+    id: 7,
     client: "TechPoint",
     niche: "E-commerce",
     result: "+520% продаж",
@@ -102,9 +66,7 @@ export const casesData: Case[] = [
     video: "/videos/cases/techpoint.mp4"
   },
   {
-    id: 7,
-    homeCaseId: "dentistry",
-    filterTag: "medicine",
+    id: 8,
     client: "SmileLine",
     niche: "Медицина",
     result: "380 пациентов/мес",
@@ -112,9 +74,7 @@ export const casesData: Case[] = [
     video: "/videos/cases/smileline.mp4"
   },
   {
-    id: 8,
-    homeCaseId: "real-estate",
-    filterTag: "realestate",
+    id: 9,
     client: "PrimeEstate",
     niche: "Недвижимость",
     result: "2.8 млн ₽ с лида",
@@ -122,9 +82,7 @@ export const casesData: Case[] = [
     video: "/videos/cases/primeestate.mp4"
   },
   {
-    id: 9,
-    homeCaseId: "fitness",
-    filterTag: "fitness",
+    id: 10,
     client: "Pulse Gym",
     niche: "Фитнес",
     result: "+410% продаж",
@@ -132,9 +90,15 @@ export const casesData: Case[] = [
     video: "/videos/cases/pulsegym.mp4"
   },
   {
-    id: 10,
-    homeCaseId: "autoservice",
-    filterTag: "auto",
+    id: 11,
+    client: "Atelier Mebel",
+    niche: "Производство",
+    result: "+670% заявок",
+    description: "Новая структура услуг и кейсы «до/после».",
+    video: "/videos/cases/atelier-mebel.mp4"
+  },
+  {
+    id: 12,
     client: "AutoHub",
     niche: "Авто",
     result: "940 клиентов",
@@ -142,9 +106,7 @@ export const casesData: Case[] = [
     video: "/videos/cases/autohub.mp4"
   },
   {
-    id: 11,
-    homeCaseId: "trading-courses",
-    filterTag: "edtech",
+    id: 13,
     client: "TradeMind",
     niche: "EdTech",
     result: "1 840 студентов",
@@ -152,9 +114,7 @@ export const casesData: Case[] = [
     video: "/videos/cases/trademind.mp4"
   },
   {
-    id: 12,
-    homeCaseId: "food-delivery",
-    filterTag: "horeca",
+    id: 14,
     client: "UrbanKitchen",
     niche: "HoReCa",
     result: "+380% среднего чека",
@@ -162,9 +122,7 @@ export const casesData: Case[] = [
     video: "/videos/cases/urbankitchen.mp4"
   },
   {
-    id: 13,
-    homeCaseId: "saas",
-    filterTag: "saas",
+    id: 15,
     client: "CloudDesk",
     niche: "IT / SaaS",
     result: "+12 000 MRR",

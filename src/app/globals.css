@@ -23,13 +23,13 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px));
+  scroll-padding-top: 80px;
   scrollbar-gutter: stable;
 }
 
 @media (max-width: 767px) {
   html {
-    scroll-behavior: auto;
+    scroll-behavior: smooth;
   }
 
   body {
@@ -66,6 +66,35 @@ body {
 
 body:not(.tech-bg) {
   background-color: #0a0a1f;
+}
+
+@layer base {
+  .rounded-3xl {
+    border-radius: 24px;
+  }
+
+  /* Увеличиваем touch targets */
+  button,
+  a {
+    min-height: 48px;
+  }
+
+  /* Мобильные отступы (не мешает секциям с Tailwind `py-*`) */
+  section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2.75rem !important;
+      line-height: 1.1 !important;
+    }
+
+    .text-2xl {
+      font-size: 1.35rem !important;
+    }
+  }
 }
 
 /* Анимированный фон в стиле лого */
@@ -1058,5 +1087,25 @@ header.site-header.glass-nav:hover::after {
 
   .glass:hover {
     transform: none;
+  }
+}
+
+/* Мобильная полировка */
+@layer utilities {
+  .mobile-padding {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  @media (max-width: 640px) {
+    section {
+      padding-top: 4.5rem;
+      padding-bottom: 4.5rem;
+    }
+
+    h2 {
+      font-size: 2.5rem !important;
+      line-height: 1.15 !important;
+    }
   }
 }

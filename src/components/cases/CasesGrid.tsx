@@ -1,138 +1,81 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import { useTranslations } from "next-intl";
-import { Link } from "@/navigation";
-import { homeSectionHref } from "@/lib/navHref";
-import { CaseCard } from "@/components/cases/CaseCard";
-import {
-  CASE_FILTER_ORDER,
-  casesData,
-  type CaseFilterTag
-} from "@/lib/casesData";
-import { HOME_CASE_IDS } from "@/content/homeCases";
-import { cn } from "@/lib/cn";
+import CaseCard from "./CaseCard";
+import { casesData } from "@/lib/casesData";
+import { motion } from "framer-motion";
 
-type CaseFilter = "all" | CaseFilterTag;
+const niches = [
+  "Все",
+  "Медицина",
+  "E-commerce",
+  "EdTech",
+  "Beauty",
+  "Строительство",
+  "Недвижимость",
+  "Фитнес",
+  "Производство",
+  "Авто",
+  "HoReCa",
+  "IT / SaaS"
+];
 
 export default function CasesGrid() {
-  const t = useTranslations("cases");
-  const reduceMotion = useReducedMotion();
-  const [filter, setFilter] = useState<CaseFilter>("all");
+  const [activeFilter, setActiveFilter] = useState("Все");
 
-  const filtered = useMemo(
-    () =>
-      filter === "all"
-        ? casesData
-        : casesData.filter((c) => c.filterTag === filter),
-    [filter]
-  );
-
-  const tapHover = reduceMotion
-    ? {}
-    : { whileHover: { scale: 1.05 }, whileTap: { scale: 0.95 } };
+  const filteredCases = useMemo(() => {
+    if (activeFilter === "Все") return casesData;
+    return casesData.filter((c) => c.niche === activeFilter);
+  }, [activeFilter]);
 
   return (
-    <div className="w-full">
-      <div className="mb-16 flex flex-col items-center text-center">
-        <div className="mb-6 inline-flex items-center gap-3 rounded-full bg-white/5 px-5 py-2">
-          <div
-            className="h-2 w-2 shrink-0 animate-pulse rounded-full bg-[#00b4ff]"
-            aria-hidden
-          />
-          <span className="text-sm uppercase tracking-[0.2em] text-gray-400 sm:tracking-[3px]">
-            {t("gridPill")}
-          </span>
+    <section id="cases" className="py-20 md:py-28 bg-[#0a0a0a]">
+      <div className="max-w-7xl mx-auto px-5 md:px-6">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-white mb-4">
+            Real Results
+          </h2>
+          <p className="text-xl md:text-2xl text-gray-400">15 proven cases with video proof</p>
         </div>
 
-        <h2 className="brand-glow max-w-4xl text-balance text-4xl font-bold tracking-tighter text-white md:text-5xl lg:text-6xl">
-          {t("gridTitleLine1")}
-          <br />
-          {t("gridTitleLine2")}
-        </h2>
-        <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-white/65 sm:text-base">
-          {t("subtitle", { count: HOME_CASE_IDS.length })}
-        </p>
-      </div>
-
-      <div
-        role="toolbar"
-        aria-label={t("filtersAria")}
-        className="mb-12 flex flex-wrap justify-center gap-3"
-      >
-        <motion.button
-          type="button"
-          aria-pressed={filter === "all"}
-          onClick={() => setFilter("all")}
-          {...tapHover}
-          className={cn(
-            "rounded-2xl px-6 py-3 text-sm font-medium transition-all duration-300 sm:px-7",
-            filter === "all"
-              ? "bg-white text-black shadow-lg shadow-white/20"
-              : "border border-white/10 bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
-          )}
-        >
-          {t("filterLabels.all")}
-        </motion.button>
-        {CASE_FILTER_ORDER.map((tag) => (
-          <motion.button
-            type="button"
-            key={tag}
-            aria-pressed={filter === tag}
-            onClick={() => setFilter(tag)}
-            {...tapHover}
-            className={cn(
-              "rounded-2xl px-6 py-3 text-sm font-medium transition-all duration-300 sm:px-7",
-              filter === tag
-                ? "bg-white text-black shadow-lg shadow-white/20"
-                : "border border-white/10 bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
-            )}
-          >
-            {t(`filterLabels.${tag}`)}
-          </motion.button>
-        ))}
-      </div>
-
-      {filtered.length === 0 ? (
-        <p className="py-12 text-center text-sm text-white/60">{t("filterEmpty")}</p>
-      ) : (
-        <motion.div
-          layout
-          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:grid-flow-dense"
-        >
-          {filtered.map((item, index) => (
-            <motion.div
-              key={item.homeCaseId}
-              id={`case-${item.homeCaseId}`}
-              layout
-              initial={reduceMotion ? false : { opacity: 0, y: 40 }}
-              animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.5,
-                delay: reduceMotion ? 0 : index * 0.05,
-                layout: { duration: 0.35 }
-              }}
-              className={cn(
-                /* Одна широкая карточка — иначе две «простыни» (0 и 9) выглядят как лишняя статика */
-                filter === "all" && index === 0 ? "lg:col-span-2" : ""
-              )}
+        <div className="flex flex-wrap justify-center gap-3 mb-10 md:mb-14">
+          {niches.map((niche) => (
+            <motion.button
+              key={niche}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setActiveFilter(niche)}
+              className={`px-6 py-3 rounded-2xl text-sm font-medium transition-all whitespace-nowrap ${
+                activeFilter === niche
+                  ? "bg-white text-black shadow-lg"
+                  : "bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10"
+              }`}
             >
-              <CaseCard caseId={item.homeCaseId} priority={index < 3} />
+              {niche}
+            </motion.button>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {filteredCases.map((item, index) => (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.04 }}
+              viewport={{ once: true }}
+            >
+              <CaseCard
+                client={item.client}
+                niche={item.niche}
+                result={item.result}
+                description={item.description}
+                video={item.video}
+              />
             </motion.div>
           ))}
-        </motion.div>
-      )}
-
-      <div className="mt-16 text-center">
-        <p className="mb-6 text-gray-400">{t("gridBottomLead")}</p>
-        <Link
-          href={homeSectionHref("contact")}
-          className="inline-block rounded-2xl bg-white px-8 py-4 text-base font-semibold text-black transition-all hover:bg-[#00b4ff] hover:text-white sm:px-10 sm:py-5"
-        >
-          {t("gridBottomCta")}
-        </Link>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
