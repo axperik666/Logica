@@ -118,6 +118,10 @@
     "closeMenu": "Закрыть меню",
     "switchTo": "Переключить язык"
   },
+  "mobileIntro": {
+    "ariaLabel": "Приветственное видео",
+    "skip": "Пропустить"
+  },
   "aboutPage": {
     "metaTitle": "О нас",
     "metaDescription": "LOGICA Marketing: подход, процесс, принципы и то, как мы делаем рост предсказуемым.",

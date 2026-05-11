@@ -118,6 +118,10 @@
     "closeMenu": "Chiudi menu",
     "switchTo": "Cambia lingua"
   },
+  "mobileIntro": {
+    "ariaLabel": "Video di benvenuto",
+    "skip": "Salta"
+  },
   "aboutPage": {
     "metaTitle": "Chi siamo",
     "metaDescription": "LOGICA Marketing: approccio, processo, principi e come rendiamo la crescita più prevedibile.",

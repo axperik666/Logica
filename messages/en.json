@@ -118,6 +118,10 @@
     "closeMenu": "Close menu",
     "switchTo": "Switch language"
   },
+  "mobileIntro": {
+    "ariaLabel": "Welcome video",
+    "skip": "Skip"
+  },
   "aboutPage": {
     "metaTitle": "About us",
     "metaDescription": "LOGICA Marketing — our approach, process, principles, and how we make growth predictable.",
