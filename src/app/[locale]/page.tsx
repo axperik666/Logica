@@ -19,7 +19,7 @@ import { Industries } from "@/components/sections/Industries";
 import { VideoCasesTeaser } from "@/components/sections/VideoCasesTeaser";
 import { Cases } from "@/components/sections/Cases";
 import { Testimonials } from "@/components/sections/Testimonials";
-import { LatestGuides } from "@/components/sections/LatestGuides";
+import { LatestInsights } from "@/components/sections/LatestInsights";
 import { ROICalculator } from "@/components/sections/ROICalculator";
 import { CTA } from "@/components/sections/CTA";
 import { HomePageJsonLd } from "@/components/seo/HomePageJsonLd";
