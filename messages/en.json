@@ -974,7 +974,7 @@
     "badge": "Lead magnet",
     "title": "ROI calculator — see the upside",
     "subtitle": "Rough incremental revenue if efficiency improves. We’ll sanity‑check assumptions on a call.",
-    "fieldBudget": "Monthly ad spend",
+    "fieldBudget": "Monthly ad spend (USD)",
     "fieldRoas": "Current ROAS",
     "fieldGrowth": "Target efficiency gain (%)",
     "resultKicker": "Illustrative 30‑day upside",

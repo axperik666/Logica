@@ -4,7 +4,7 @@ import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "re
 import { AnimatePresence, animate, motion, useInView } from "framer-motion";
 import { Calculator, Sparkles, X } from "lucide-react";
 import { MotionDiv, MotionSection } from "@/components/motion";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { TurnstileField } from "@/components/TurnstileField";
 import { track } from "@/lib/analytics";
@@ -13,14 +13,26 @@ function clamp(n: number, min: number, max: number) {
   return Math.min(max, Math.max(min, n));
 }
 
+function currencyOptions(locale: string) {
+  if (locale === "it") {
+    return { currency: "EUR" as const, numberingLocale: "it-IT", defaultBudget: 7_500 };
+  }
+  if (locale === "en") {
+    return { currency: "USD" as const, numberingLocale: "en-US", defaultBudget: 8_000 };
+  }
+  return { currency: "RUB" as const, numberingLocale: "ru-RU", defaultBudget: 500_000 };
+}
+
 export function ROICalculator() {
   const t = useTranslations("roiCalculator");
   const tSec = useTranslations("sectionsSeo");
   const tl = useTranslations("leads");
+  const locale = useLocale();
+  const { currency, numberingLocale, defaultBudget } = currencyOptions(locale);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
 
-  const [budget, setBudget] = useState(500_000);
+  const [budget, setBudget] = useState(defaultBudget);
   const [roas, setRoas] = useState(3.2);
   const [growthPct, setGrowthPct] = useState(25);
   const [profitDisplay, setProfitDisplay] = useState(0);
@@ -57,11 +69,8 @@ export function ROICalculator() {
   }, [profit]);
 
   const profitFormatted = useMemo(
-    () =>
-      new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 }).format(
-        Math.round(profitDisplay)
-      ),
-    [profitDisplay]
+    () => moneyFmt.format(Math.round(profitDisplay)),
+    [moneyFmt, profitDisplay]
   );
 
   async function onSubmitModal(e: FormEvent<HTMLFormElement>) {
@@ -76,10 +85,10 @@ export function ROICalculator() {
       "message",
       [
         t("modalNote", {
-          budget: new Intl.NumberFormat(undefined).format(budget),
+          budget: moneyFmt.format(budget),
           roas: String(roas),
           growth: String(growthPct),
-          profit: new Intl.NumberFormat(undefined).format(profit)
+          profit: moneyFmt.format(profit)
         })
       ].join("\n")
     );
@@ -201,7 +210,7 @@ export function ROICalculator() {
               <span className="bg-gradient-to-r from-cyan-200 to-cyan-400 bg-clip-text text-transparent">
                 +{profitFormatted}
               </span>{" "}
-              {t("resultCurrency")}
+              <span className="text-white/90">{t("resultCurrency")}</span>
             </p>
             <p className="mt-2 text-xs text-white/50">{t("resultDisclaimer")}</p>
           </div>
