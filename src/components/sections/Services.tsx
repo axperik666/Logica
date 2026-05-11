@@ -1,39 +1,66 @@
 "use client";
 
 import { motion } from "framer-motion";
+import {
+  Target,
+  TrendingUp,
+  Wand2,
+  Workflow,
+  type LucideIcon
+} from "lucide-react";
 import { useTranslations } from "next-intl";
 
 const HOME_TILE_IDS = ["perf", "strategy", "creative", "funnel"] as const;
+
+const TILE_ICONS: Record<(typeof HOME_TILE_IDS)[number], LucideIcon> = {
+  perf: TrendingUp,
+  strategy: Target,
+  creative: Wand2,
+  funnel: Workflow
+};
 
 export function Services() {
   const t = useTranslations("services");
 
   return (
-    <section id="services" className="py-24 bg-[#0a0a0a]">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold tracking-tighter text-white mb-4">
+    <section id="services" className="bg-[#0a0a0a] py-24">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="mb-16 text-center">
+          <h2 className="mb-4 text-4xl font-bold tracking-tighter text-white sm:text-5xl">
             {t("homeSectionTitle")}
           </h2>
-          <p className="text-2xl text-gray-400">{t("homeSectionSubtitle")}</p>
+          <p className="mx-auto max-w-2xl text-lg text-white/55 sm:text-xl">
+            {t("homeSectionSubtitle")}
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {HOME_TILE_IDS.map((id, i) => (
-            <motion.div
-              key={id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-              className="group p-10 bg-zinc-950 border border-white/10 rounded-3xl hover:border-[#00b4ff]/30 transition-all hover:bg-zinc-900"
-            >
-              <div className="text-5xl mb-8">{t(`homeTiles.${id}.icon`)}</div>
-              <h3 className="text-3xl font-semibold text-white mb-4 group-hover:text-[#00b4ff] transition-colors">
-                {t(`homeTiles.${id}.title`)}
-              </h3>
-              <p className="text-gray-400 text-lg leading-relaxed">{t(`homeTiles.${id}.desc`)}</p>
-            </motion.div>
-          ))}
+        <div className="grid gap-6 md:grid-cols-2">
+          {HOME_TILE_IDS.map((id, i) => {
+            const Icon = TILE_ICONS[id];
+            return (
+              <motion.article
+                key={id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ delay: i * 0.08, duration: 0.45 }}
+                className="group rounded-3xl border border-white/[0.09] bg-[linear-gradient(165deg,rgba(255,255,255,0.04)_0%,rgba(255,255,255,0.01)_100%)] p-8 backdrop-blur-sm transition-all duration-300 hover:border-cyan-400/25 hover:shadow-[0_20px_50px_rgba(0,180,255,0.08)] sm:p-10"
+              >
+                <div
+                  className="mb-8 flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-400/20 bg-cyan-400/[0.08] text-cyan-300 shadow-[0_0_32px_rgba(34,211,238,0.12)] transition group-hover:border-cyan-400/35 group-hover:bg-cyan-400/[0.12]"
+                  aria-hidden
+                >
+                  <Icon className="h-7 w-7" strokeWidth={2} />
+                </div>
+                <h3 className="mb-4 text-2xl font-semibold tracking-tight text-white transition group-hover:text-cyan-200 sm:text-3xl">
+                  {t(`homeTiles.${id}.title`)}
+                </h3>
+                <p className="text-base leading-relaxed text-white/60 sm:text-lg">
+                  {t(`homeTiles.${id}.desc`)}
+                </p>
+              </motion.article>
+            );
+          })}
         </div>
       </div>
     </section>

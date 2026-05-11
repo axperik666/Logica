@@ -71,7 +71,7 @@ export default function Navbar() {
   );
   const websiteActive = useMemo(() => pathname.startsWith("/sozdanie-sajta"), [pathname]);
   const aboutActive = useMemo(() => pathname === "/o-nas", [pathname]);
-  const blogActive = useMemo(() => onHome && hash === "#blog", [onHome, hash]);
+  const guidesActive = useMemo(() => onHome && hash === "#guides", [onHome, hash]);
   const moreActive = useMemo(
     () => pathname === "/faq" || pathname === "/otzyvy",
     [pathname]
@@ -90,9 +90,13 @@ export default function Navbar() {
     );
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.09] bg-[linear-gradient(180deg,rgba(8,10,22,0.94)_0%,rgba(4,6,14,0.9)_50%,rgba(6,8,18,0.92)_100%)] shadow-[0_4px_32px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-2xl backdrop-saturate-150">
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.07] bg-[linear-gradient(180deg,rgba(18,22,40,0.62)_0%,rgba(12,16,32,0.52)_100%)] shadow-[0_8px_40px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-xl backdrop-saturate-[1.75] supports-[backdrop-filter]:bg-[linear-gradient(180deg,rgba(18,22,40,0.48)_0%,rgba(12,16,32,0.38)_100%)]">
       <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#00b4ff]/45 to-transparent"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_110%_100%_at_50%_-35%,rgba(0,180,255,0.16),transparent_52%),radial-gradient(ellipse_55%_70%_at_100%_-10%,rgba(139,92,246,0.09),transparent_48%)]"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#00b4ff]/55 to-transparent"
         aria-hidden
       />
 
@@ -173,9 +177,9 @@ export default function Navbar() {
               ) : null}
             </Link>
 
-            <Link href={homeHashHref("blog")} className={itemClass(blogActive)}>
-              {tNav("blog")}
-              {blogActive ? (
+            <Link href={homeHashHref("guides")} className={itemClass(guidesActive)}>
+              {tNav("guides")}
+              {guidesActive ? (
                 <span className="absolute bottom-1 left-4 right-4 h-px rounded-full bg-gradient-to-r from-transparent via-[#00b4ff] to-transparent" />
               ) : null}
             </Link>
@@ -286,7 +290,7 @@ export default function Navbar() {
         <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
-          className="border-t border-white/10 bg-[linear-gradient(180deg,#05070f_0%,#080c18_100%)] backdrop-blur-xl md:hidden"
+          className="border-t border-white/[0.08] bg-[linear-gradient(180deg,rgba(12,16,30,0.96)_0%,rgba(8,10,22,0.98)_100%)] backdrop-blur-xl md:hidden"
         >
           <div className="flex max-h-[min(78vh,calc(100dvh-var(--header-h)))] flex-col gap-1 overflow-y-auto px-6 py-6 text-[17px] text-white/95">
             <Link
@@ -337,11 +341,11 @@ export default function Navbar() {
               {tNav("about")}
             </Link>
             <Link
-              href={homeHashHref("blog")}
+              href={homeHashHref("guides")}
               className="rounded-xl px-3 py-3 font-medium hover:bg-white/5"
               onClick={() => setIsOpen(false)}
             >
-              {tNav("blog")}
+              {tNav("guides")}
             </Link>
 
             <div className="rounded-xl">

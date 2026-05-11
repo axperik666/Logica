@@ -44,7 +44,7 @@ export default function CaseCard({
         />
       ) : null}
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent group-hover:via-black/80 transition-all" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent transition-all group-hover:via-black/35" />
 
       <div className="absolute bottom-0 left-0 p-7 sm:p-8 w-full z-10">
         <p className="text-[#00b4ff] font-mono text-sm mb-3 tracking-widest">

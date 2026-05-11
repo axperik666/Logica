@@ -29,7 +29,7 @@ export default function CasesGrid({ showTitle = true, className }: CasesGridProp
   }, [activeFilter]);
 
   return (
-    <div className={cn("bg-[#0a0a0a] py-12 md:py-20", showTitle ? "md:py-28" : "", className)}>
+    <div className={cn("bg-transparent py-12 md:py-20", showTitle ? "md:py-28" : "", className)}>
       <div className="max-w-7xl mx-auto px-5 md:px-6">
         {showTitle ? (
           <div className="text-center mb-12 md:mb-16">

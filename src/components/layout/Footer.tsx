@@ -48,8 +48,8 @@ export default async function Footer() {
               <Link href="/o-nas" className={linkClass}>
                 {tNav("about")}
               </Link>
-              <Link href={homeHashHref("blog")} className={linkClass}>
-                {tNav("blog")}
+              <Link href={homeHashHref("guides")} className={linkClass}>
+                {tNav("guides")}
               </Link>
               <Link href="/kontakty" className={linkClass}>
                 {tNav("contact")}
@@ -75,6 +75,14 @@ export default async function Footer() {
                 className="flex items-center gap-3 rounded-lg transition hover:text-cyan-300"
               >
                 {tFooter("telegramLabel")}
+              </a>
+              <a
+                href={CONTACTS.whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 rounded-lg transition hover:text-emerald-300"
+              >
+                {tFooter("whatsappLabel")}
               </a>
               <a
                 href={CONTACTS.mailto}

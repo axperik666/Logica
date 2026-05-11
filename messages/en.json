@@ -54,9 +54,16 @@
   "nav": {
     "services": "Services",
     "cases": "Cases",
-    "blog": "Blog",
-    "blogSectionTitle": "Blog",
-    "blogSectionLead": "Guides and breakdowns on performance marketing — this section is coming soon.",
+    "guides": "Guides",
+    "guidesSectionTitle": "Guides & shortcuts",
+    "guidesSectionLead": "Answers, proof, and a fast path to talk — no empty pages.",
+    "guidesCardFaqTitle": "FAQ",
+    "guidesCardFaqDesc": "How we work, timelines, budgets, and what to expect.",
+    "guidesCardCasesTitle": "Case studies",
+    "guidesCardCasesDesc": "Video breakdowns with metrics — filter by niche.",
+    "guidesCardContactTitle": "Contact",
+    "guidesCardContactDesc": "Form, messengers, or email — we reply quickly.",
+    "guidesCardCta": "Open",
     "testimonials": "Testimonials",
     "about": "About",
     "contact": "Contact",
@@ -158,7 +165,9 @@
     "trust2": "Transparent numbers, not vanity metrics",
     "trust3": "Premium delivery: sites, ads, creatives",
     "openTelegram": "Open Telegram",
-    "writeEmail": "Write email"
+    "writeEmail": "Write email",
+    "whatsappLabel": "WhatsApp",
+    "openWhatsapp": "Open WhatsApp"
   },
   "termsPage": {
     "metaTitle": "Terms",
@@ -257,22 +266,18 @@
     "homeSectionSubtitle": "Tools that drive real growth",
     "homeTiles": {
       "perf": {
-        "icon": "📈",
         "title": "Performance Marketing",
         "desc": "Meta, Google, TikTok and Performance Max. We scale only bundles that clear 3×+ ROI."
       },
       "strategy": {
-        "icon": "🎯",
         "title": "Strategy & Audit",
         "desc": "Full funnel teardown plus a 90‑day roadmap with profit projections."
       },
       "creative": {
-        "icon": "✨",
         "title": "Creative & Offer",
         "desc": "Creatives and offers that sell. Rapid tests, then scale what wins."
       },
       "funnel": {
-        "icon": "🔄",
         "title": "Full‑Funnel Marketing",
         "desc": "From lead magnet to repeat purchases: automation, warm‑up, retargeting and loyalty."
       }
@@ -309,6 +314,51 @@
         "href": "/#contact"
       }
     ]
+  },
+  "homeBento": {
+    "logoStripAria": "Selected client and project names we work with",
+    "logoStripLabel": "Brands & directions we ship for",
+    "kicker": "System · Speed · Proof",
+    "title": "Growth engineering, not slide decks",
+    "subtitle": "Strategy, Next.js sites, Meta / Google / TikTok, and creatives — one loop measured on profit, not vanity metrics.",
+    "logos": [
+      "VitaMed",
+      "NordMebel",
+      "SkillNova",
+      "CloudDesk",
+      "LexPro",
+      "PrimeEstate",
+      "Éclat Studio",
+      "BuildCraft",
+      "TechPoint",
+      "Pulse Gym",
+      "UrbanKitchen",
+      "AutoHub"
+    ],
+    "tileLargeEyebrow": "Performance core",
+    "tileLargeTitle": "3–7× payback when unit economics fit",
+    "tileLargeBody": "We structure tests, cut weak spend, and scale bundles that hit your CPL/CPA and margin targets.",
+    "tileStat1K": "Cadence",
+    "tileStat1V": "Weekly test cycles",
+    "tileStat2K": "North star",
+    "tileStat2V": "Profit per qualified lead",
+    "tileStat3K": "UX baseline",
+    "tileStat3V": "Core Web Vitals first",
+    "tileCtaEyebrow": "Next step",
+    "tileCtaTitle": "Strategy snapshot — on the house",
+    "tileCtaBody": "Share your niche and goal. We come back with priorities and a clear next move — fast.",
+    "tileCtaButton": "Open contacts",
+    "tileCasesEyebrow": "Proof",
+    "tileCasesTitle": "Video cases by industry",
+    "tileCasesBody": "Real funnels, creatives, and metrics — filter by niche.",
+    "tileCasesButton": "Browse cases",
+    "tileSiteEyebrow": "Websites",
+    "tileSiteTitle": "Landing → multi-page → corporate",
+    "tileSiteBody": "Premium Next.js builds: speed, conversion UX, analytics baked in.",
+    "tileSiteButton": "Website services",
+    "tileSpeedEyebrow": "Velocity",
+    "tileSpeedTitle": "Ship creative iterations faster",
+    "tileSpeedBody": "Pipelines for UGC, hooks, and angles — fewer meetings, more winning tests."
   },
   "cases": {
     "titleBrand": "LOGICA Marketing cases — outcomes that speak for themselves",

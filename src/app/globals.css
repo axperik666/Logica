@@ -1121,3 +1121,25 @@ header.site-header.glass-nav:hover::after {
     }
   }
 }
+
+/* Home: доверительная полоса (marquee) */
+@keyframes home-logo-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.home-logo-marquee-track {
+  animation: home-logo-marquee 42s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-logo-marquee-track {
+    animation: none;
+    transform: none;
+  }
+}

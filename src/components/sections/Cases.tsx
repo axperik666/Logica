@@ -23,7 +23,7 @@ export function Cases() {
     <MotionSection
       ref={sectionRef}
       id="cases"
-      className="full-bleed tech-bg relative overflow-x-clip py-24 lg:py-28"
+      className="full-bleed relative overflow-x-clip py-24 lg:py-28"
       initial="hidden"
       animate={isInView ? "show" : "hidden"}
       variants={{
@@ -36,7 +36,11 @@ export function Cases() {
         }
       }}
     >
-      <div className="site-container">
+      <div
+        className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_100%_85%_at_50%_-30%,rgba(0,180,255,0.11),transparent_55%)]"
+        aria-hidden
+      />
+      <div className="site-container relative z-[1]">
         <div className="sr-only">
           <p>{tSec("cases.metaTitle")}</p>
           <p>{tSec("cases.metaDescription")}</p>

@@ -37,6 +37,9 @@ export function CTA() {
   const tSec = useTranslations("sectionsSeo");
   const narrow = useNarrowViewport();
 
+  const fieldClass =
+    "h-12 w-full rounded-xl border border-white/[0.12] bg-[#050810]/80 px-4 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-cyan-400/45 focus:ring-2 focus:ring-cyan-400/25 disabled:opacity-60";
+
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -141,7 +144,7 @@ export function CTA() {
     <MotionSection
       ref={sectionRef}
       id="contact"
-      className="full-bleed tech-bg relative overflow-x-clip py-24 lg:py-28"
+      className="full-bleed relative overflow-x-clip py-24 lg:py-28"
       initial="hidden"
       animate={isInView ? "show" : "hidden"}
       variants={{
@@ -154,20 +157,20 @@ export function CTA() {
         }
       }}
     >
-      <div aria-hidden className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
-        <div className="section-edge-vignette" />
-      </div>
+      <div
+        className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_90%_70%_at_50%_-30%,rgba(0,180,255,0.12),transparent_55%),radial-gradient(ellipse_60%_50%_at_100%_40%,rgba(139,92,246,0.06),transparent_45%)]"
+        aria-hidden
+      />
 
       <div className="site-container relative z-[2]">
-      <div className="glass relative overflow-hidden rounded-[2rem] p-6 sm:p-10">
+      <div className="relative overflow-hidden rounded-[2rem] border border-white/[0.1] bg-[linear-gradient(165deg,rgba(255,255,255,0.05)_0%,rgba(255,255,255,0.02)_100%)] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.4)] backdrop-blur-xl sm:p-10">
         <div className="sr-only">
           <p>{tSec("cta.metaTitle")}</p>
           <p>{tSec("cta.metaDescription")}</p>
         </div>
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-          <div className="absolute -top-24 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-primary/20 blur-3xl" />
-          <div className="absolute -bottom-24 left-1/3 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-sky-400/10 blur-3xl" />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/5 via-transparent to-transparent" />
+          <div className="absolute -top-24 left-1/2 h-[380px] w-[380px] -translate-x-1/2 rounded-full bg-cyan-400/15 blur-3xl" />
+          <div className="absolute -bottom-20 right-0 h-[320px] w-[320px] rounded-full bg-violet-500/10 blur-3xl" />
         </div>
 
         <MotionDiv
@@ -204,7 +207,7 @@ export function CTA() {
             }}
             className="lg:col-span-7"
           >
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-5 sm:p-6">
+            <div className="rounded-3xl border border-white/[0.08] bg-[linear-gradient(165deg,rgba(255,255,255,0.06)_0%,rgba(255,255,255,0.02)_100%)] p-5 shadow-[0_16px_48px_rgba(0,0,0,0.3)] backdrop-blur-md sm:p-6">
               <div className="flex items-start gap-3">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
                   <Target className="h-5 w-5 text-primary" aria-hidden />
@@ -247,9 +250,13 @@ export function CTA() {
             }}
             className="lg:col-span-5"
           >
-            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-5 sm:p-6">
-              <h3 className="text-sm font-semibold">{t("formTitle")}</h3>
-              <p className="mt-2 text-sm text-white/70">{t("formSub")}</p>
+            <div className="relative rounded-[1.5rem] p-[1px] shadow-[0_24px_80px_rgba(0,0,0,0.45)] [background:linear-gradient(135deg,rgba(0,180,255,0.45),rgba(139,92,246,0.25),rgba(0,180,255,0.15))]">
+              <div className="relative overflow-hidden rounded-[1.45rem] border border-white/[0.06] bg-[linear-gradient(165deg,rgba(12,16,32,0.97)_0%,rgba(6,8,18,0.98)_100%)] p-5 backdrop-blur-xl sm:p-6">
+              <div className="flex items-center gap-2 text-cyan-300">
+                <Sparkles className="h-5 w-5 shrink-0" strokeWidth={2} aria-hidden />
+                <h3 className="text-sm font-semibold">{t("formTitle")}</h3>
+              </div>
+              <p className="mt-2 text-sm text-white/60">{t("formSub")}</p>
 
               {formSuccess ? (
                 <MotionDiv
@@ -301,13 +308,15 @@ export function CTA() {
                   </button>
                 </MotionDiv>
               ) : (
-                <form className="mt-5 grid gap-3" onSubmit={handleSubmit}>
+                <form className="mt-6 grid gap-4" onSubmit={handleSubmit}>
                   <label className="grid gap-2">
-                    <span className="text-xs text-white/70">{t("name")}</span>
+                    <span className="text-xs font-medium uppercase tracking-wide text-white/55">
+                      {t("name")}
+                    </span>
                     <input
                       name="name"
                       autoComplete="name"
-                      className="h-11 rounded-xl border border-white/10 bg-[rgba(8,12,28,0.92)] px-4 text-sm text-white outline-none placeholder:text-white/35 focus:ring-2 focus:ring-primary/60"
+                      className={fieldClass}
                       placeholder={t("phName")}
                       value={name}
                       onChange={(e) => setName(e.target.value)}
@@ -315,15 +324,17 @@ export function CTA() {
                     />
                   </label>
                   <label className="grid gap-2">
-                    <span className="text-xs text-white/70">{t("phone")}</span>
+                    <span className="text-xs font-medium uppercase tracking-wide text-white/55">
+                      {t("phone")}
+                    </span>
                     <input
                       name="phone"
                       type="tel"
                       autoComplete="tel"
                       inputMode="tel"
                       className={
-                        "h-11 rounded-xl border bg-[rgba(8,12,28,0.92)] px-4 text-sm text-white outline-none placeholder:text-white/35 focus:ring-2 focus:ring-primary/60 " +
-                        (phoneError ? "border-red-400/60" : "border-white/10")
+                        fieldClass +
+                        (phoneError ? " border-red-400/60 focus:border-red-400/50 focus:ring-red-400/20" : "")
                       }
                       placeholder={t("phPhone")}
                       value={phone}
@@ -338,12 +349,14 @@ export function CTA() {
                     ) : null}
                   </label>
                   <label className="grid gap-2">
-                    <span className="text-xs text-white/70">{t("email")}</span>
+                    <span className="text-xs font-medium uppercase tracking-wide text-white/55">
+                      {t("email")}
+                    </span>
                     <input
                       name="email"
                       type="email"
                       autoComplete="email"
-                      className="h-11 rounded-xl border border-white/10 bg-[rgba(8,12,28,0.92)] px-4 text-sm text-white outline-none placeholder:text-white/35 focus:ring-2 focus:ring-primary/60"
+                      className={fieldClass}
                       placeholder={t("phEmail")}
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -352,13 +365,15 @@ export function CTA() {
                   </label>
 
                   <label className="grid gap-2">
-                    <span className="text-xs text-white/70">{t("niche")}</span>
+                    <span className="text-xs font-medium uppercase tracking-wide text-white/55">
+                      {t("niche")}
+                    </span>
                     <input
                       name="niche"
                       type="text"
                       autoComplete="organization"
                       maxLength={120}
-                      className="h-11 rounded-xl border border-white/10 bg-[rgba(8,12,28,0.92)] px-4 text-sm text-white outline-none placeholder:text-white/35 focus:ring-2 focus:ring-primary/60"
+                      className={fieldClass}
                       placeholder={t("phNiche")}
                       value={niche}
                       onChange={(e) => setNiche(e.target.value)}
@@ -367,12 +382,14 @@ export function CTA() {
                   </label>
 
                   <label className="grid gap-2">
-                    <span className="text-xs text-white/70">{t("message")}</span>
+                    <span className="text-xs font-medium uppercase tracking-wide text-white/55">
+                      {t("message")}
+                    </span>
                     <textarea
                       name="message"
                       rows={4}
                       required
-                      className="min-h-[104px] resize-y rounded-xl border border-white/10 bg-[rgba(8,12,28,0.92)] px-4 py-3 text-sm text-white outline-none placeholder:text-white/35 focus:ring-2 focus:ring-primary/60"
+                      className={`min-h-[7.5rem] resize-y py-3 ${fieldClass}`}
                       placeholder={t("phMessage")}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
@@ -393,15 +410,15 @@ export function CTA() {
                     <Button
                       type="submit"
                       disabled={submitPending}
-                      className="btn-cta-premium w-full py-4 text-base font-semibold shadow-[0_0_40px_rgba(0,191,255,0.5),0_18px_48px_rgba(0,191,255,0.28)] ring-1 ring-[#00BFFF]/40 backdrop-blur-sm hover-lift"
+                      className="w-full rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 py-3.5 text-sm font-bold uppercase tracking-wide text-white shadow-[0_0_32px_rgba(0,180,255,0.35)] transition hover:brightness-110 disabled:opacity-60"
                     >
                       {submitPending ? t("submitSending") : t("submitApplication")}
                     </Button>
-                    <p className="mt-3 text-xs leading-relaxed text-white/55">
+                    <p className="mt-4 text-xs leading-relaxed text-white/50">
                       {t("consent")}
                     </p>
 
-                    <div className="mt-6 border-t border-white/10 pt-5">
+                    <div className="mt-6 border-t border-white/[0.08] pt-5">
                       <p className="text-center text-xs font-semibold uppercase tracking-[0.14em] text-white/50 max-md:normal-case max-md:tracking-normal sm:text-left">
                         {t("directMessengersTitle")}
                       </p>
@@ -427,6 +444,7 @@ export function CTA() {
                   </div>
                 </form>
               )}
+              </div>
             </div>
           </MotionDiv>
         </div>

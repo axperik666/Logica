@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, MessageCircle, Sparkles } from "lucide-react";
+import { Mail, MessageCircle, Send, Sparkles } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { KontaktyForm } from "@/components/contacts/KontaktyForm";
 import { CONTACTS } from "@/lib/contacts";
@@ -90,13 +90,30 @@ export function ContactsPagePremium() {
                 className="group flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4 transition hover:border-cyan-400/30 hover:bg-cyan-400/5"
               >
                 <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-400/15 text-cyan-300 transition group-hover:bg-cyan-400/25">
-                  <MessageCircle className="h-5 w-5" strokeWidth={2} />
+                  <Send className="h-5 w-5" strokeWidth={2} aria-hidden />
                 </span>
                 <span>
                   <span className="block text-xs font-semibold uppercase tracking-wide text-white/50">
                     {t("telegramLabel")}
                   </span>
                   <span className="font-medium text-white">{t("openTelegram")}</span>
+                </span>
+              </a>
+
+              <a
+                href={CONTACTS.whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4 transition hover:border-emerald-400/35 hover:bg-emerald-500/[0.07]"
+              >
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-200 transition group-hover:bg-emerald-500/25">
+                  <MessageCircle className="h-5 w-5" strokeWidth={2} aria-hidden />
+                </span>
+                <span>
+                  <span className="block text-xs font-semibold uppercase tracking-wide text-white/50">
+                    {t("whatsappLabel")}
+                  </span>
+                  <span className="font-medium text-white">{t("openWhatsapp")}</span>
                 </span>
               </a>
 

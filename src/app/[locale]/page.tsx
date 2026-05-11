@@ -6,6 +6,7 @@ import { Hero } from "@/components/sections/Hero";
 export const dynamic = "force-dynamic";
 import { Platforms } from "@/components/sections/Platforms";
 import { Services } from "@/components/sections/Services";
+import { HomeGrowthBento } from "@/components/sections/HomeGrowthBento";
 import { Cases } from "@/components/sections/Cases";
 import { BlogSection } from "@/components/sections/BlogSection";
 import { CTA } from "@/components/sections/CTA";
@@ -37,6 +38,7 @@ export default function HomePage() {
       <Hero />
       <Platforms />
       <Services />
+      <HomeGrowthBento />
       <Cases />
       <BlogSection />
       <CTA />

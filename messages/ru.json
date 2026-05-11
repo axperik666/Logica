@@ -54,9 +54,16 @@
   "nav": {
     "services": "Услуги",
     "cases": "Кейсы",
-    "blog": "Блог",
-    "blogSectionTitle": "Блог",
-    "blogSectionLead": "Разборы и заметки по performance-маркетингу — раздел скоро пополнится материалами.",
+    "guides": "Гайды",
+    "guidesSectionTitle": "Гайды и быстрые ссылки",
+    "guidesSectionLead": "Ответы на вопросы, кейсы с цифрами и короткий путь к диалогу — без пустых разделов.",
+    "guidesCardFaqTitle": "FAQ",
+    "guidesCardFaqDesc": "Как работаем, сроки, бюджеты и что будет дальше.",
+    "guidesCardCasesTitle": "Кейсы",
+    "guidesCardCasesDesc": "Видеоразборы с метриками — фильтр по нише.",
+    "guidesCardContactTitle": "Контакты",
+    "guidesCardContactDesc": "Форма, мессенджеры или почта — отвечаем быстро.",
+    "guidesCardCta": "Перейти",
     "testimonials": "Отзывы",
     "about": "О нас",
     "contact": "Контакты",
@@ -158,7 +165,9 @@
     "trust2": "Прозрачные цифры, а не «красивые» метрики",
     "trust3": "Премиальная подача: сайты, реклама, креативы",
     "openTelegram": "Открыть Telegram",
-    "writeEmail": "Написать на почту"
+    "writeEmail": "Написать на почту",
+    "whatsappLabel": "WhatsApp",
+    "openWhatsapp": "Написать в WhatsApp"
   },
   "termsPage": {
     "metaTitle": "Условия",
@@ -257,12 +266,10 @@
     "homeSectionSubtitle": "Инструменты, которые приносят измеримый рост",
     "homeTiles": {
       "perf": {
-        "icon": "📈",
         "title": "Performance Marketing",
         "desc": "Meta, Google, TikTok + Performance Max. Масштабируем только то, что даёт ROI от 3×."
       },
       "strategy": {
-        "icon": "🎯",
         "title": "Стратегия и аудит",
         "desc": "Полный разбор воронки и план роста на 90 дней с прогнозом прибыли."
       },
@@ -272,7 +279,6 @@
         "desc": "Креативы и офферы, которые продают. Быстрые тесты и масштаб победителей."
       },
       "funnel": {
-        "icon": "🔄",
         "title": "Full‑Funnel маркетинг",
         "desc": "От лида до повторных продаж: автоворонки, прогрев, ретаргетинг и лояльность."
       }
@@ -309,6 +315,51 @@
         "href": "/#contact"
       }
     ]
+  },
+  "homeBento": {
+    "logoStripAria": "Названия брендов и направлений, с которыми мы работаем",
+    "logoStripLabel": "Бренды и направления, которые мы ведём до результата",
+    "kicker": "Система · Скорость · Доказательства",
+    "title": "Инженерия роста, а не слайды",
+    "subtitle": "Стратегия, сайты на Next.js, Meta / Google / TikTok и креативы — один контур, где метрика прибыль, а не «красивые цифры».",
+    "logos": [
+      "VitaMed",
+      "NordMebel",
+      "SkillNova",
+      "CloudDesk",
+      "LexPro",
+      "PrimeEstate",
+      "Éclat Studio",
+      "BuildCraft",
+      "TechPoint",
+      "Pulse Gym",
+      "UrbanKitchen",
+      "AutoHub"
+    ],
+    "tileLargeEyebrow": "Ядро performance",
+    "tileLargeTitle": "Окупаемость 3–7× при сходящейся юнит-экономике",
+    "tileLargeBody": "Выстраиваем тесты, отрезаем слабый спенд и масштабируем связки под CPL/CPA и маржу.",
+    "tileStat1K": "Ритм",
+    "tileStat1V": "Еженедельные циклы тестов",
+    "tileStat2K": "Северная звезда",
+    "tileStat2V": "Прибыль на квалифицированный лид",
+    "tileStat3K": "База UX",
+    "tileStat3V": "Сначала Core Web Vitals",
+    "tileCtaEyebrow": "Следующий шаг",
+    "tileCtaTitle": "Снимок стратегии — в подарок",
+    "tileCtaBody": "Расскажите нишу и цель. Вернёмся с приоритетами и ясным следующим шагом — быстро.",
+    "tileCtaButton": "Перейти к контактам",
+    "tileCasesEyebrow": "Доказательства",
+    "tileCasesTitle": "Видео-кейсы по индустриям",
+    "tileCasesBody": "Реальные воронки, креативы и метрики — фильтр по нише.",
+    "tileCasesButton": "Смотреть кейсы",
+    "tileSiteEyebrow": "Сайты",
+    "tileSiteTitle": "Лендинг → многостраничный → корпоративный",
+    "tileSiteBody": "Премиум Next.js: скорость, конверсионный UX, аналитика из коробки.",
+    "tileSiteButton": "Услуги по сайтам",
+    "tileSpeedEyebrow": "Скорость поставки",
+    "tileSpeedTitle": "Быстрее итерации креатива",
+    "tileSpeedBody": "Пайплайны UGC, хуков и углов — меньше встреч, больше выигрышных тестов."
   },
   "cases": {
     "titleBrand": "Кейсы LOGICA Marketing — результаты, которые говорят сами за себя",

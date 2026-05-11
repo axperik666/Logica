@@ -54,9 +54,16 @@
   "nav": {
     "services": "Servizi",
     "cases": "Casi",
-    "blog": "Blog",
-    "blogSectionTitle": "Blog",
-    "blogSectionLead": "Guide e approfondimenti sul performance marketing — sezione in arrivo.",
+    "guides": "Guide",
+    "guidesSectionTitle": "Guide e scorciatoie",
+    "guidesSectionLead": "Risposte, prove e un percorso rapido per parlare con noi — niente pagine vuote.",
+    "guidesCardFaqTitle": "FAQ",
+    "guidesCardFaqDesc": "Come lavoriamo, tempi, budget e cosa aspettarsi.",
+    "guidesCardCasesTitle": "Casi",
+    "guidesCardCasesDesc": "Video con metriche — filtra per settore.",
+    "guidesCardContactTitle": "Contatti",
+    "guidesCardContactDesc": "Modulo, messenger o email — rispondiamo in fretta.",
+    "guidesCardCta": "Apri",
     "testimonials": "Recensioni",
     "about": "Chi siamo",
     "contact": "Contatti",
@@ -158,7 +165,9 @@
     "trust2": "Numeri trasparenti, non vanity metrics",
     "trust3": "Delivery premium: siti, ads, creatività",
     "openTelegram": "Apri Telegram",
-    "writeEmail": "Scrivi via email"
+    "writeEmail": "Scrivi via email",
+    "whatsappLabel": "WhatsApp",
+    "openWhatsapp": "Apri WhatsApp"
   },
   "termsPage": {
     "metaTitle": "Termini",
@@ -257,12 +266,10 @@
     "homeSectionSubtitle": "Strumenti che generano crescita reale",
     "homeTiles": {
       "perf": {
-        "icon": "📈",
         "title": "Performance Marketing",
         "desc": "Meta, Google, TikTok e Performance Max. Scaliamo solo ciò che supera 3× di ROI."
       },
       "strategy": {
-        "icon": "🎯",
         "title": "Strategia & Audit",
         "desc": "Analisi completa del funnel e roadmap 90 giorni con stime di profitto."
       },
@@ -272,7 +279,6 @@
         "desc": "Creative e offerte che vendono. Test rapidi, poi scala i vincenti."
       },
       "funnel": {
-        "icon": "🔄",
         "title": "Marketing full‑funnel",
         "desc": "Dal lead magnet ai riacquisti: automazioni, warm‑up, retargeting e loyalty."
       }
@@ -309,6 +315,51 @@
         "href": "/#contact"
       }
     ]
+  },
+  "homeBento": {
+    "logoStripAria": "Nomi di brand e direzioni su cui lavoriamo",
+    "logoStripLabel": "Brand e direzioni che portiamo fino al risultato",
+    "kicker": "Sistema · Velocità · Prove",
+    "title": "Ingegneria della crescita, non slide",
+    "subtitle": "Strategia, siti Next.js, Meta / Google / TikTok e creatività — un solo loop misurato sul profitto, non su metriche di vanità.",
+    "logos": [
+      "VitaMed",
+      "NordMebel",
+      "SkillNova",
+      "CloudDesk",
+      "LexPro",
+      "PrimeEstate",
+      "Éclat Studio",
+      "BuildCraft",
+      "TechPoint",
+      "Pulse Gym",
+      "UrbanKitchen",
+      "AutoHub"
+    ],
+    "tileLargeEyebrow": "Nucleo performance",
+    "tileLargeTitle": "Payback 3–7× quando i numeri unitari tornano",
+    "tileLargeBody": "Strutturiamo test, tagliamo spend debole e scaliamo bundle su CPL/CPA e margini.",
+    "tileStat1K": "Ritmo",
+    "tileStat1V": "Cicli di test settimanali",
+    "tileStat2K": "North star",
+    "tileStat2V": "Profitto per lead qualificato",
+    "tileStat3K": "Baseline UX",
+    "tileStat3V": "Core Web Vitals first",
+    "tileCtaEyebrow": "Prossimo passo",
+    "tileCtaTitle": "Snapshot strategico — in omaggio",
+    "tileCtaBody": "Indica nicchia e obiettivo. Torniamo con priorità e una mossa chiara — veloce.",
+    "tileCtaButton": "Apri contatti",
+    "tileCasesEyebrow": "Prove",
+    "tileCasesTitle": "Casi video per settore",
+    "tileCasesBody": "Funnel, creatività e metriche reali — filtra per nicchia.",
+    "tileCasesButton": "Sfoglia i casi",
+    "tileSiteEyebrow": "Siti web",
+    "tileSiteTitle": "Landing → multi-pagina → corporate",
+    "tileSiteBody": "Build Next.js premium: velocità, UX di conversione, analytics integrata.",
+    "tileSiteButton": "Servizi sito",
+    "tileSpeedEyebrow": "Velocità",
+    "tileSpeedTitle": "Iterazioni creative più rapide",
+    "tileSpeedBody": "Pipeline per UGC, hook e angoli — meno riunioni, più test vincenti."
   },
   "cases": {
     "titleBrand": "Casi LOGICA Marketing — risultati che parlano chiaro",
