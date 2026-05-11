@@ -1,17 +1,31 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useCallback, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { track } from "@/lib/analytics";
+import { TurnstileField } from "@/components/TurnstileField";
+import { LeadMessengersHint } from "@/components/contacts/LeadMessengersHint";
 
-type Err = "VALIDATION" | "DELIVERY" | "NOT_CONFIGURED" | null;
+type Err =
+  | "VALIDATION"
+  | "DELIVERY"
+  | "NOT_CONFIGURED"
+  | "RATE_LIMIT"
+  | "CAPTCHA"
+  | null;
 
 export function KontaktyForm() {
   const t = useTranslations("contactsPage");
+  const tl = useTranslations("leads");
   const [pending, setPending] = useState(false);
   const [ok, setOk] = useState(false);
   const [err, setErr] = useState<Err>(null);
+  const [turnstileToken, setTurnstileToken] = useState("");
+
+  const onTurnstile = useCallback((token: string | null) => {
+    setTurnstileToken(token ?? "");
+  }, []);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -20,15 +34,21 @@ export function KontaktyForm() {
     setPending(true);
     const form = e.currentTarget;
     const fd = new FormData(form);
+    if (turnstileToken) fd.set("cf-turnstile-response", turnstileToken);
     try {
       const res = await fetch("/api/lead", { method: "POST", body: fd });
       const data = (await res.json()) as { ok?: boolean; error?: string };
       if (res.ok && data.ok) {
         setOk(true);
         form.reset();
+        setTurnstileToken("");
         track("lead_submit", { source: "kontakty" });
       } else if (data.error === "VALIDATION") {
         setErr("VALIDATION");
+      } else if (data.error === "RATE_LIMIT") {
+        setErr("RATE_LIMIT");
+      } else if (data.error === "CAPTCHA") {
+        setErr("CAPTCHA");
       } else if (data.error === "DELIVERY") {
         setErr("DELIVERY");
       } else {
@@ -43,6 +63,15 @@ export function KontaktyForm() {
 
   const field =
     "h-12 rounded-xl border border-white/[0.12] bg-[#050810]/80 px-4 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-cyan-400/45 focus:ring-2 focus:ring-cyan-400/25";
+
+  if (ok) {
+    return (
+      <div className="mt-8 rounded-2xl border border-emerald-400/25 bg-emerald-500/10 p-5">
+        <p className="text-sm font-medium text-emerald-200/95">{t("submitSuccess")}</p>
+        <LeadMessengersHint />
+      </div>
+    );
+  }
 
   return (
     <form className="mt-8 grid gap-4" onSubmit={onSubmit}>
@@ -91,6 +120,16 @@ export function KontaktyForm() {
           {t("submitErrorValidation")}
         </p>
       ) : null}
+      {err === "RATE_LIMIT" ? (
+        <p className="text-sm text-amber-200/90" role="alert">
+          {tl("submitErrorRateLimit")}
+        </p>
+      ) : null}
+      {err === "CAPTCHA" ? (
+        <p className="text-sm text-amber-200/90" role="alert">
+          {tl("submitErrorCaptcha")}
+        </p>
+      ) : null}
       {err === "DELIVERY" ? (
         <p className="text-sm text-amber-200/90" role="alert">
           {t("submitErrorDelivery")}
@@ -102,9 +141,7 @@ export function KontaktyForm() {
         </p>
       ) : null}
 
-      {ok ? (
-        <p className="text-sm font-medium text-emerald-300/95">{t("submitSuccess")}</p>
-      ) : null}
+      <TurnstileField onToken={onTurnstile} />
 
       <div className="pt-2">
         <Button

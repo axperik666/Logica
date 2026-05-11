@@ -2,11 +2,33 @@ import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 
-export const alt = "LOGICA Marketing — performance marketing";
+export const alt = "LOGICA Marketing";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OpenGraphImage() {
+const OG_COPY: Record<string, { tagline: string; sub: string }> = {
+  en: {
+    tagline: "Performance marketing",
+    sub: "3–7× ROI · Funnels · Paid media · Creative"
+  },
+  ru: {
+    tagline: "Performance-маркетинг",
+    sub: "ROI 3–7× · Воронки · Реклама · Креативы"
+  },
+  it: {
+    tagline: "Performance marketing",
+    sub: "ROI 3–7× · Funnel · Ads · Creatività"
+  }
+};
+
+export default async function Image({
+  params
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const copy = OG_COPY[locale] ?? OG_COPY.en;
+
   return new ImageResponse(
     (
       <div
@@ -44,10 +66,10 @@ export default function OpenGraphImage() {
             LOGICA
           </div>
           <div style={{ fontSize: 30, fontWeight: 600, color: "rgba(255,255,255,0.88)" }}>
-            Performance marketing
+            {copy.tagline}
           </div>
           <div style={{ fontSize: 22, color: "rgba(126,232,255,0.9)", marginTop: 8 }}>
-            3–7× ROI · Paid social · Funnels · Creative
+            {copy.sub}
           </div>
         </div>
       </div>

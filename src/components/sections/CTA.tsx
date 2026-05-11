@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
 import {
   CheckCircle2,
@@ -23,6 +23,8 @@ import {
 } from "@/lib/contactHref";
 import { sectionInViewOptions } from "@/lib/sectionReveal";
 import { track } from "@/lib/analytics";
+import { TurnstileField } from "@/components/TurnstileField";
+import { LeadMessengersHint } from "@/components/contacts/LeadMessengersHint";
 
 const PLATFORM_KEYS: ContactPlatform[] = ["google", "meta", "tiktok", "telegram"];
 
@@ -36,6 +38,7 @@ function isContactServiceKey(v: string | null): v is ContactServiceKey {
 
 export function CTA() {
   const t = useTranslations("cta");
+  const tl = useTranslations("leads");
   const tSec = useTranslations("sectionsSeo");
   const narrow = useNarrowViewport();
 
@@ -51,8 +54,12 @@ export function CTA() {
   const [phoneError, setPhoneError] = useState(false);
   const [submitPending, setSubmitPending] = useState(false);
   const [submitErr, setSubmitErr] = useState<
-    "delivery" | "notConfigured" | null
+    "delivery" | "notConfigured" | "rateLimit" | "captcha" | null
   >(null);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const onTurnstile = useCallback((token: string | null) => {
+    setTurnstileToken(token ?? "");
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -92,6 +99,14 @@ export function CTA() {
 
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, sectionInViewOptions);
+  const sectionViewTracked = useRef(false);
+
+  useEffect(() => {
+    if (isInView && !sectionViewTracked.current) {
+      sectionViewTracked.current = true;
+      track("section_view", { section: "cta" });
+    }
+  }, [isInView]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -110,14 +125,22 @@ export function CTA() {
     fd.set("niche", niche);
     fd.set("message", message);
     fd.set("company", "");
+    if (turnstileToken) fd.set("cf-turnstile-response", turnstileToken);
     try {
       const res = await fetch("/api/lead", { method: "POST", body: fd });
       const data = (await res.json()) as { ok?: boolean; error?: string };
       if (res.ok && data.ok) {
         setFormSuccess(true);
+        setTurnstileToken("");
         track("lead_submit", { source: "cta" });
       } else if (data.error === "NOT_CONFIGURED") {
         setSubmitErr("notConfigured");
+      } else if (data.error === "RATE_LIMIT") {
+        setSubmitErr("rateLimit");
+      } else if (data.error === "CAPTCHA") {
+        setSubmitErr("captcha");
+      } else if (data.error === "VALIDATION") {
+        setPhoneError(true);
       } else {
         setSubmitErr("delivery");
       }
@@ -137,6 +160,7 @@ export function CTA() {
     setMessage("");
     setPhoneError(false);
     setSubmitErr(null);
+    setTurnstileToken("");
   }
 
   return (
@@ -280,24 +304,7 @@ export function CTA() {
                     <p className="mt-4 text-sm text-white/65">{t("successHint")}</p>
                   </div>
 
-                  <div className="mt-3 flex justify-center gap-4 sm:gap-5">
-                    <a
-                      href={CONTACTS.telegramHttps}
-                      aria-label={t("ctaTelegram")}
-                      className="btn-cta-premium inline-flex h-16 w-16 items-center justify-center rounded-2xl border border-primary/35 bg-primary/12 text-white shadow-[0_8px_36px_rgba(0,191,255,0.18)] transition hover:border-primary/55 hover:bg-primary/20 hover-lift"
-                    >
-                      <Send className="h-8 w-8 text-primary" aria-hidden />
-                    </a>
-                    <a
-                      href={CONTACTS.whatsappHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={t("ctaWhatsapp")}
-                      className="inline-flex h-16 w-16 items-center justify-center rounded-2xl border border-emerald-400/25 bg-emerald-500/10 text-white shadow-[0_8px_36px_rgba(16,185,129,0.12)] transition hover:border-emerald-400/45 hover:bg-emerald-500/15 hover-lift"
-                    >
-                      <MessageCircle className="h-8 w-8 text-emerald-400" aria-hidden />
-                    </a>
-                  </div>
+                  <LeadMessengersHint />
 
                   <button
                     type="button"
@@ -396,6 +403,8 @@ export function CTA() {
                     />
                   </label>
 
+                  <TurnstileField onToken={onTurnstile} />
+
                   <div className="pt-2">
                     {submitErr === "delivery" ? (
                       <p className="mb-3 text-sm text-amber-200/90" role="alert">
@@ -405,6 +414,16 @@ export function CTA() {
                     {submitErr === "notConfigured" ? (
                       <p className="mb-3 text-sm text-amber-200/90" role="alert">
                         {t("submitNotConfigured")}
+                      </p>
+                    ) : null}
+                    {submitErr === "rateLimit" ? (
+                      <p className="mb-3 text-sm text-amber-200/90" role="alert">
+                        {tl("submitErrorRateLimit")}
+                      </p>
+                    ) : null}
+                    {submitErr === "captcha" ? (
+                      <p className="mb-3 text-sm text-amber-200/90" role="alert">
+                        {tl("submitErrorCaptcha")}
                       </p>
                     ) : null}
                     <Button

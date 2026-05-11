@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Button } from "@/components/ui/button";
+import { AboutTeam } from "@/components/about/AboutTeam";
 import { WhyUs } from "@/components/sections/WhyUs";
 import { Process } from "@/components/sections/Process";
 
@@ -51,6 +52,8 @@ export default async function AboutPage({
                 </div>
               ))}
             </div>
+
+            <AboutTeam />
           </div>
 
           <aside className="lg:col-span-5">

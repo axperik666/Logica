@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/navigation";
 import { listCases } from "@/content/cases";
 import CasesGrid from "@/components/cases/CasesGrid";
+import { BreadcrumbsJsonLd } from "@/components/seo/BreadcrumbsJsonLd";
 
 export async function generateMetadata({
   params
@@ -26,8 +27,17 @@ export default async function CasesListingPage({
   const t = await getTranslations({ locale, namespace: "casesPage" });
   const cases = listCases(locale);
 
+  const tNav = await getTranslations({ locale, namespace: "nav" });
+
   return (
     <>
+      <BreadcrumbsJsonLd
+        locale={locale}
+        items={[
+          { name: tNav("breadcrumbHome"), path: "" },
+          { name: t("title"), path: "/kejsy" }
+        ]}
+      />
       <section className="tech-bg relative overflow-hidden">
         <div
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_100%_80%_at_50%_-40%,rgba(0,180,255,0.14),transparent_55%)]"

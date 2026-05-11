@@ -30,6 +30,11 @@ async function notifyViaEnvChannel(
   const hook = process.env.LEAD_WEBHOOK_URL?.trim();
   if (hook) {
     const ok = await postJson(hook, payload);
+    if (!ok) {
+      console.error("[lead] webhook delivery failed", {
+        source: payload.source
+      });
+    }
     return ok ? { outcome: "accepted" } : { outcome: "reject", reason: "DELIVERY" };
   }
 
@@ -42,6 +47,11 @@ async function notifyViaEnvChannel(
       chat_id: chatId,
       text: plainText.slice(0, 4000)
     });
+    if (!ok) {
+      console.error("[lead] telegram delivery failed", {
+        source: payload.source
+      });
+    }
     return ok ? { outcome: "accepted" } : { outcome: "reject", reason: "DELIVERY" };
   }
 

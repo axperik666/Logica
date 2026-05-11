@@ -11,7 +11,15 @@ import { cn } from "@/lib/cn";
 
 const LOGO_COUNT = 12;
 
-function ClientChip({ label, className }: { label: string; className?: string }) {
+function ClientChip({
+  label,
+  caption,
+  className
+}: {
+  label: string;
+  caption: string;
+  className?: string;
+}) {
   return (
     <div
       className={cn(
@@ -23,6 +31,9 @@ function ClientChip({ label, className }: { label: string; className?: string })
     >
       <span className="block max-w-[14rem] text-center text-[13px] font-bold uppercase tracking-[0.14em] text-white/38 transition duration-300 group-hover/client:scale-[1.02] group-hover/client:text-white sm:text-sm">
         {label}
+      </span>
+      <span className="mt-1.5 block max-w-[14rem] text-center text-[11px] font-medium leading-snug tracking-wide text-white/32 transition duration-300 group-hover/client:text-cyan-200/75 sm:text-xs">
+        {caption}
       </span>
     </div>
   );
@@ -110,6 +121,7 @@ export function Clients() {
                 <ClientChip
                   key={`${id}-${idx}`}
                   label={tCases(`items.${id}.client`)}
+                  caption={tCases(`items.${id}.niche`)}
                 />
               ))}
             </motion.div>
@@ -117,7 +129,11 @@ export function Clients() {
         ) : (
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
             {ids.map((id) => (
-              <ClientChip key={id} label={tCases(`items.${id}.client`)} />
+              <ClientChip
+                key={id}
+                label={tCases(`items.${id}.client`)}
+                caption={tCases(`items.${id}.niche`)}
+              />
             ))}
           </div>
         )}

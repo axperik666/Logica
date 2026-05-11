@@ -149,6 +149,12 @@ export function ContactsPagePremium() {
                 </div>
                 <p className="mt-2 text-sm text-white/60">{t("formNote")}</p>
                 <p className="mt-2 text-xs leading-relaxed text-white/50">{t("formWhatHappens")}</p>
+                <div className="mt-5 rounded-xl border border-cyan-400/20 bg-cyan-400/5 px-4 py-3">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-cyan-200/90">
+                    {t("formFlowTitle")}
+                  </p>
+                  <p className="mt-1.5 text-xs leading-relaxed text-white/60">{t("formFlowLead")}</p>
+                </div>
                 <KontaktyForm />
               </div>
             </div>

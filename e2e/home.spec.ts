@@ -25,4 +25,19 @@ test.describe("home", () => {
     await expect(guides.getByRole("link", { name: /FAQ/i })).toBeVisible();
     await expect(guides.getByRole("link", { name: /Кейсы/i })).toBeVisible();
   });
+
+  test("contacts page loads and shows form heading", async ({ page }) => {
+    await page.goto("/en/kontakty");
+    await expect(
+      page.getByRole("heading", { level: 1, name: /Contact/i })
+    ).toBeVisible({ timeout: 30_000 });
+  });
+
+  test("home spotlight block after scroll", async ({ page }) => {
+    await page.goto("/en");
+    await page.locator("#spotlight-case").scrollIntoViewIfNeeded();
+    await expect(page.locator("#spotlight-case")).toBeVisible({
+      timeout: 30_000
+    });
+  });
 });

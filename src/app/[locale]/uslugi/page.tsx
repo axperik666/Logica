@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { listServices } from "@/content/services";
 import { Card } from "@/components/ui/card";
 import { homeContactLink, type ContactServiceKey } from "@/lib/contactHref";
+import { BreadcrumbsJsonLd } from "@/components/seo/BreadcrumbsJsonLd";
 
 /** Префилл заявки по slug страницы услуги */
 const SLUG_TO_SERVICE: Record<string, ContactServiceKey> = {
@@ -33,11 +34,19 @@ export default async function ServicesPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "servicesPage" });
+  const tNav = await getTranslations({ locale, namespace: "nav" });
   const tSvc = await getTranslations({ locale, namespace: "services" });
   const services = listServices(locale);
 
   return (
     <section className="tech-bg relative site-container py-10 sm:py-14">
+      <BreadcrumbsJsonLd
+        locale={locale}
+        items={[
+          { name: tNav("breadcrumbHome"), path: "" },
+          { name: t("title"), path: "/uslugi" }
+        ]}
+      />
       <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
         {t("title")}
       </h1>

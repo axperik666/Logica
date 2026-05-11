@@ -66,6 +66,7 @@
     }
   },
   "nav": {
+    "breadcrumbHome": "Home",
     "services": "Services",
     "cases": "Cases",
     "guides": "Guides",
@@ -118,10 +119,20 @@
     "closeMenu": "Close menu",
     "switchTo": "Switch language"
   },
-  "mobileIntro": {
-    "ariaLabel": "Welcome video",
-    "skip": "Skip",
-    "tapAnywhere": "Tap anywhere to continue"
+  "leads": {
+    "successMessengersHint": "Fastest reply — Telegram or WhatsApp below.",
+    "submitErrorRateLimit": "Too many attempts. Wait a minute or message us directly.",
+    "submitErrorCaptcha": "Please refresh the page and complete the security check again."
+  },
+  "floatingCta": {
+    "ariaLabel": "Open contacts to get a strategy",
+    "label": "Get strategy"
+  },
+  "homeSpotlight": {
+    "kicker": "Proof-first",
+    "headline": "{client} — {result}",
+    "cta": "Explore case studies →",
+    "note": "Illustrative project; your metrics depend on niche, offer and tracking."
   },
   "aboutPage": {
     "metaTitle": "About us",
@@ -149,7 +160,23 @@
       "3) Action plan for the next 2–4 weeks"
     ],
     "ctaPlan": "Get a plan",
-    "ctaServices": "Services"
+    "ctaServices": "Services",
+    "teamBlockTitle": "Who runs your project",
+    "teamBlockSub": "Clear roles — you always know who owns delivery and the numbers.",
+    "teamRoles": [
+      {
+        "role": "Growth lead",
+        "scope": "Strategy, media and economics — your main point of contact."
+      },
+      {
+        "role": "Production",
+        "scope": "Sites, landings, creatives and experiment velocity."
+      },
+      {
+        "role": "Analytics",
+        "scope": "Events, dashboards, attribution and board-ready reporting."
+      }
+    ]
   },
   "contactsPage": {
     "metaTitle": "Contact",
@@ -183,6 +210,8 @@
     "step2Desc": "Typically within ~15 minutes on Telegram/WhatsApp — or by email.",
     "step3Title": "Strategy call",
     "step3Desc": "We align goals, scope and next steps — no fluff.",
+    "formFlowTitle": "After you send the form",
+    "formFlowLead": "We read every request the same day — usually faster in messengers. No automated spam sequences.",
     "formKicker": "Start the conversation",
     "trust1": "ROI‑led performance marketing",
     "trust2": "Transparent numbers, not vanity metrics",

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { getService, SERVICE_SLUGS } from "@/content/services";
 import { Button } from "@/components/ui/button";
+import { BreadcrumbsJsonLd } from "@/components/seo/BreadcrumbsJsonLd";
 
 export function generateStaticParams() {
   return SERVICE_SLUGS.map((slug) => ({ slug }));
@@ -36,9 +37,19 @@ export default async function ServicePage({
   if (!service) return notFound();
 
   const t = await getTranslations({ locale, namespace: "serviceDetailPage" });
+  const tNav = await getTranslations({ locale, namespace: "nav" });
+  const tSvcPage = await getTranslations({ locale, namespace: "servicesPage" });
 
   return (
     <section className="tech-bg relative site-container py-10 sm:py-14">
+      <BreadcrumbsJsonLd
+        locale={locale}
+        items={[
+          { name: tNav("breadcrumbHome"), path: "" },
+          { name: tSvcPage("title"), path: "/uslugi" },
+          { name: service.name, path: `/uslugi/${slug}` }
+        ]}
+      />
       <div className="grid gap-6 lg:grid-cols-12">
         <div className="lg:col-span-8">
           <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">

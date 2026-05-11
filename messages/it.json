@@ -66,6 +66,7 @@
     }
   },
   "nav": {
+    "breadcrumbHome": "Home",
     "services": "Servizi",
     "cases": "Casi",
     "guides": "Guide",
@@ -118,10 +119,20 @@
     "closeMenu": "Chiudi menu",
     "switchTo": "Cambia lingua"
   },
-  "mobileIntro": {
-    "ariaLabel": "Video di benvenuto",
-    "skip": "Salta",
-    "tapAnywhere": "Tocca ovunque per continuare"
+  "leads": {
+    "successMessengersHint": "Risposta più veloce su Telegram o WhatsApp qui sotto.",
+    "submitErrorRateLimit": "Troppi tentativi. Attendi un minuto o scrivici direttamente.",
+    "submitErrorCaptcha": "Aggiorna la pagina e completa di nuovo il controllo di sicurezza."
+  },
+  "floatingCta": {
+    "ariaLabel": "Apri i contatti per una strategia",
+    "label": "Strategia"
+  },
+  "homeSpotlight": {
+    "kicker": "Prove prima",
+    "headline": "{client} — {result}",
+    "cta": "Vedi i casi →",
+    "note": "Progetto esemplificativo; le metriche dipendono da nicchia, offerta e tracking."
   },
   "aboutPage": {
     "metaTitle": "Chi siamo",
@@ -149,7 +160,23 @@
       "3) Piano d’azione per 2–4 settimane"
     ],
     "ctaPlan": "Ricevi un piano",
-    "ctaServices": "Servizi"
+    "ctaServices": "Servizi",
+    "teamBlockTitle": "Chi guida il progetto",
+    "teamBlockSub": "Ruoli chiari — sai sempre chi è responsabile dell’esecuzione e dei numeri.",
+    "teamRoles": [
+      {
+        "role": "Growth lead",
+        "scope": "Strategia, media ed economia — il tuo referente principale."
+      },
+      {
+        "role": "Production",
+        "scope": "Siti, landing, creatività e velocità di test."
+      },
+      {
+        "role": "Analytics",
+        "scope": "Eventi, dashboard, attribuzione e reporting."
+      }
+    ]
   },
   "contactsPage": {
     "metaTitle": "Contatti",
@@ -183,6 +210,8 @@
     "step2Desc": "Di solito entro ~15 minuti su Telegram/WhatsApp — o via email.",
     "step3Title": "Call di strategia",
     "step3Desc": "Allineiamo obiettivi, scope e prossimi passi — senza hype.",
+    "formFlowTitle": "Dopo l’invio del modulo",
+    "formFlowLead": "Leggiamo ogni richiesta nello stesso giorno — spesso più velocemente sui messenger. Niente sequenze spam automatizzate.",
     "formKicker": "Apri la conversazione",
     "trust1": "Performance marketing guidato dal ROI",
     "trust2": "Numeri trasparenti, non vanity metrics",

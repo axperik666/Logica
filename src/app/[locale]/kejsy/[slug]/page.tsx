@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { getCase, CASE_SLUGS } from "@/content/cases";
 import { Button } from "@/components/ui/button";
+import { BreadcrumbsJsonLd } from "@/components/seo/BreadcrumbsJsonLd";
 
 export function generateStaticParams() {
   return CASE_SLUGS.map((slug) => ({ slug }));
@@ -36,9 +37,19 @@ export default async function CasePage({
   if (!c) return notFound();
 
   const t = await getTranslations({ locale, namespace: "caseDetailPage" });
+  const tNav = await getTranslations({ locale, namespace: "nav" });
+  const tCasesPage = await getTranslations({ locale, namespace: "casesPage" });
 
   return (
     <section className="tech-bg relative site-container py-10 sm:py-14">
+      <BreadcrumbsJsonLd
+        locale={locale}
+        items={[
+          { name: tNav("breadcrumbHome"), path: "" },
+          { name: tCasesPage("title"), path: "/kejsy" },
+          { name: c.title, path: `/kejsy/${slug}` }
+        ]}
+      />
       <div className="max-w-3xl">
         <div className="text-xs font-semibold text-brand-300">{c.niche}</div>
         <h1 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">

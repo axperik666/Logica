@@ -3,8 +3,10 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/navigation";
-
-const STORAGE_KEY = "logica_cookie_consent_v1";
+import {
+  COOKIE_CONSENT_STORAGE_KEY,
+  dispatchCookieConsentAccepted
+} from "@/lib/cookieConsent";
 
 export function CookieConsent() {
   const t = useTranslations("cookieBanner");
@@ -13,7 +15,7 @@ export function CookieConsent() {
   useEffect(() => {
     try {
       if (typeof window === "undefined") return;
-      const v = window.localStorage.getItem(STORAGE_KEY);
+      const v = window.localStorage.getItem(COOKIE_CONSENT_STORAGE_KEY);
       setVisible(v !== "1");
     } catch {
       setVisible(true);
@@ -22,7 +24,8 @@ export function CookieConsent() {
 
   function accept() {
     try {
-      window.localStorage.setItem(STORAGE_KEY, "1");
+      window.localStorage.setItem(COOKIE_CONSENT_STORAGE_KEY, "1");
+      dispatchCookieConsentAccepted();
     } catch {
       /* ignore */
     }
