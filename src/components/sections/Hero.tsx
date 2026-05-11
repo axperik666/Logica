@@ -31,12 +31,12 @@ export function Hero() {
 
         <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[1.05] text-white mb-6">
           Marketing that<br className="hidden sm:block" />
-          <span className="bg-gradient-to-r from-[#00b4ff] to-cyan-300 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-[#00b4ff] via-cyan-400 to-white bg-clip-text text-transparent">
             actually grows
           </span>
         </h1>
 
-        <p className="text-lg sm:text-2xl text-gray-300 max-w-xl mx-auto mb-10">
+        <p className="text-lg sm:text-2xl text-gray-300 max-w-2xl mx-auto mb-10">
           3–7× ROI. Real profit, not reports.
         </p>
 

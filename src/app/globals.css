@@ -27,6 +27,18 @@ html {
   scrollbar-gutter: stable;
 }
 
+/* Мобильная полировка */
+@media (max-width: 768px) {
+  section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  h1 {
+    font-size: 2.75rem !important;
+  }
+}
+
 @media (max-width: 767px) {
   html {
     scroll-behavior: smooth;
