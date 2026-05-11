@@ -63,13 +63,12 @@
     "cta": "Contact",
     "ctaStrategy": "Get strategy",
     "ctaStrategyLong": "Get a free strategy",
-    "servicesDropdownAria": "Services submenu",
-    "navbarServiceLinks": {
-      "performance": "Performance Marketing",
-      "strategyAudit": "Strategy & audit",
-      "creativeOffers": "Creatives & offers",
-      "turnkeyWebsite": "Full website build",
-      "fullFunnel": "Full-funnel marketing"
+    "websiteCreateAria": "Website services submenu",
+    "createWebsite": "Build a website",
+    "websiteCreateLinks": {
+      "landing": "Turnkey landing page",
+      "multiPage": "Multi-page website",
+      "corporate": "Corporate website"
     },
     "websitesOffer": "Website creation",
     "servicesOverview": "Services section",

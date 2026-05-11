@@ -63,13 +63,12 @@
     "cta": "Contatti",
     "ctaStrategy": "Richiedi strategia",
     "ctaStrategyLong": "Richiedi una strategia gratuita",
-    "servicesDropdownAria": "Sottomenu servizi",
-    "navbarServiceLinks": {
-      "performance": "Performance Marketing",
-      "strategyAudit": "Strategia & audit",
-      "creativeOffers": "Creative & offerte",
-      "turnkeyWebsite": "Sito chiavi in mano",
-      "fullFunnel": "Marketing full-funnel"
+    "websiteCreateAria": "Sottomenu sito web",
+    "createWebsite": "Crea un sito",
+    "websiteCreateLinks": {
+      "landing": "Landing chiavi in mano",
+      "multiPage": "Sito multi-pagina",
+      "corporate": "Sito corporate"
     },
     "websitesOffer": "Creazione siti",
     "servicesOverview": "Blocco servizi",
