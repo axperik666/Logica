@@ -114,7 +114,8 @@ export default function CasesGrid() {
                 layout: { duration: 0.35 }
               }}
               className={cn(
-                filter === "all" && index % 9 === 0 ? "lg:col-span-2" : ""
+                /* Одна широкая карточка — иначе две «простыни» (0 и 9) выглядят как лишняя статика */
+                filter === "all" && index === 0 ? "lg:col-span-2" : ""
               )}
             >
               <CaseCard caseId={item.homeCaseId} priority={index < 3} />
