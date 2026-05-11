@@ -1,0 +1,14 @@
+---
+description: Use MinGit from Desktop when git is not in PATH (Windows)
+alwaysApply: true
+---
+
+# Git (MinGit)
+
+On this machine, `git` is not in the shell `PATH`. Use the full path to MinGit:
+
+`c:\Users\user5\Desktop\MinGit\cmd\git.exe`
+
+Example: `& "c:\Users\user5\Desktop\MinGit\cmd\git.exe" status` from the repo root.
+
+For commits and pushes, run `add`, `commit`, and `push` yourself; do not only tell the user to run them unless push fails (e.g. auth) and they must fix credentials locally.
