@@ -46,12 +46,12 @@ const disabled =
   process.env.NEXT_PUBLIC_INTRO_SPLASH_DISABLED === "1" ||
   process.env.NEXT_PUBLIC_MOBILE_INTRO_DISABLED === "1";
 
-const webmSrc =
-  process.env.NEXT_PUBLIC_INTRO_SPLASH_WEBM?.trim() || "/ava.webm";
+/** Только если файл реально лежит в `public` — иначе пустой `<source webm>` даёт сбой загрузки в части браузеров. */
+const webmSrc = process.env.NEXT_PUBLIC_INTRO_SPLASH_WEBM?.trim() ?? "";
 
 /**
  * Полноэкранный короткий ролик при первом заходе в этой вкладке (мобильный и десктоп).
- * Файлы по умолчанию: `public/ava.mp4`, опционально `public/ava.webm`.
+ * По умолчанию: `public/ava.mp4`. WebM — только через NEXT_PUBLIC_INTRO_SPLASH_WEBM.
  * Env: NEXT_PUBLIC_INTRO_SPLASH_VIDEO, NEXT_PUBLIC_INTRO_SPLASH_WEBM, NEXT_PUBLIC_INTRO_SPLASH_POSTER, NEXT_PUBLIC_INTRO_SPLASH_DISABLED=1
  * (старые имена NEXT_PUBLIC_MOBILE_INTRO_* тоже работают)
  */
@@ -99,6 +99,20 @@ export function IntroSplash() {
     };
   }, [open]);
 
+  /** Автоплей после монтирования (iOS / часть Android без явного play() не стартуют). */
+  useEffect(() => {
+    if (!open) return;
+    const el = videoRef.current;
+    if (!el) return;
+    el.muted = true;
+    const tryPlay = () => {
+      void el.play().catch(() => {});
+    };
+    if (el.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) tryPlay();
+    else el.addEventListener("loadeddata", tryPlay, { once: true });
+    return () => el.removeEventListener("loadeddata", tryPlay);
+  }, [open]);
+
   if (!open) return null;
 
   return (
@@ -119,6 +133,7 @@ export function IntroSplash() {
       <div className="relative flex min-h-0 flex-1 flex-col items-center justify-center px-3 sm:px-6">
         <video
           ref={videoRef}
+          key={videoBase}
           className="h-full w-full max-h-[min(85dvh,720px)] max-w-5xl object-contain lg:max-h-[min(88dvh,900px)] xl:max-w-6xl"
           playsInline
           muted
@@ -131,11 +146,14 @@ export function IntroSplash() {
           }}
           onError={() => {
             if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
+            if (process.env.NODE_ENV === "development") {
+              console.warn("[IntroSplash] video error", videoBase);
+            }
             close("error");
           }}
         >
-          <source src={webmSrc} type="video/webm" />
           <source src={videoBase} type="video/mp4" />
+          {webmSrc ? <source src={webmSrc} type="video/webm" /> : null}
         </video>
       </div>
 
