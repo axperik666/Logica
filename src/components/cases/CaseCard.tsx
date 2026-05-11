@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useInView, useReducedMotion } from "framer-motion";
-import { useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/navigation";
 import { homeSectionHref } from "@/lib/navHref";
@@ -20,9 +20,6 @@ type Props = {
  */
 export function CaseCard({ caseId, className, priority }: Props) {
   const t = useTranslations("cases");
-  const reduceMotion = useReducedMotion();
-  const rootRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(rootRef, { once: true, margin: "-150px" });
 
   const niche = t(`items.${caseId}.niche`);
   const client = t(`items.${caseId}.client`);
@@ -31,12 +28,10 @@ export function CaseCard({ caseId, className, priority }: Props) {
 
   const videoSrc = CASE_COVER_VIDEOS[caseId]?.trim() ?? "";
   const [hasError, setHasError] = useState(false);
+  const [canPlay, setCanPlay] = useState(false);
 
-  const canPlayVideo =
-    isInView && Boolean(videoSrc) && !reduceMotion && !hasError;
-
-  const showVideoUnavailable =
-    isInView && Boolean(videoSrc) && hasError && !reduceMotion;
+  const hasVideo = Boolean(videoSrc);
+  const showVideoUnavailable = hasVideo && hasError;
 
   return (
     <Link
@@ -47,16 +42,15 @@ export function CaseCard({ caseId, className, priority }: Props) {
       )}
     >
       <motion.div
-        ref={rootRef}
-        whileHover={reduceMotion ? undefined : { y: -12 }}
+        whileHover={{ y: -12 }}
         transition={{ type: "spring", stiffness: 420, damping: 28 }}
         className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-white/5 bg-zinc-950"
       >
-        {!canPlayVideo ? (
+        {!canPlay || hasError ? (
           <div className="absolute inset-0 bg-zinc-900" aria-hidden />
         ) : null}
 
-        {canPlayVideo ? (
+        {hasVideo && !hasError ? (
           <video
             src={videoSrc}
             autoPlay
@@ -65,6 +59,7 @@ export function CaseCard({ caseId, className, priority }: Props) {
             playsInline
             preload={priority ? "auto" : "metadata"}
             onError={() => setHasError(true)}
+            onCanPlay={() => setCanPlay(true)}
             className="absolute inset-0 h-full w-full scale-105 object-cover transition-transform duration-700 group-hover/card:scale-100"
             aria-hidden
           />
