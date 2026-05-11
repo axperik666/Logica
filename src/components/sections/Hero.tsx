@@ -42,6 +42,18 @@ export function Hero() {
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/45 via-[#050810]/88 to-black" />
       <div className="premium-aurora z-[1]" />
       <div className="hero-vignette-ring z-[1]" />
+      {/* Крупная монограмма L — читается поверх видео, не зависит от кадра ролика */}
+      <div
+        className="pointer-events-none absolute inset-0 z-[1] overflow-hidden"
+        aria-hidden
+      >
+        <span
+          className="absolute left-[4%] top-[44%] -translate-y-1/2 font-semibold leading-[0.82] tracking-[-0.06em] text-white/[0.24] [-webkit-text-stroke:1.5px_rgba(255,255,255,0.42)] [filter:drop-shadow(0_0_52px_rgba(0,191,255,0.32))] text-[clamp(10.5rem,32vw,24rem)] sm:left-[7%] sm:top-[42%] sm:text-[clamp(13.5rem,28vw,32rem)] md:text-[clamp(16rem,26vw,36rem)]"
+          style={{ fontFamily: "var(--font-manrope), system-ui, sans-serif" }}
+        >
+          L
+        </span>
+      </div>
       <div className="premium-grain z-[2]" aria-hidden />
 
       <div className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6">
