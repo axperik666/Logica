@@ -80,8 +80,8 @@ export function CaseCard({ caseId, className, priority }: Props) {
           </div>
         ) : null}
 
-        <div className="absolute bottom-0 left-0 z-10 w-full p-8">
-          <div className="inline-block max-w-[min(44rem,100%)] rounded-2xl bg-black/35 p-5 backdrop-blur-sm">
+        <div className="absolute bottom-0 left-0 z-10 w-full p-6 sm:p-7 lg:p-8">
+          <div className="inline-block max-w-[min(44rem,100%)] rounded-2xl bg-black/25 p-4 sm:p-5 md:bg-black/30 md:backdrop-blur-[2px]">
             <p className="mb-3 font-mono text-sm text-[#00b4ff]">
               {niche} • {result}
             </p>
