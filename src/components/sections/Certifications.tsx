@@ -9,7 +9,7 @@ import { cn } from "@/lib/cn";
 
 type Partner = { key: string; abbr: string; label: string };
 
-function PartnerTile({ abbr, label }: Partner) {
+function PartnerTile({ abbr, label }: Pick<Partner, "abbr" | "label">) {
   return (
     <div
       className={cn(
@@ -95,14 +95,14 @@ export function Certifications() {
             <div className="overflow-hidden py-1">
               <div className="flex w-max gap-4 sm:gap-5 home-logo-marquee-track pr-4 sm:pr-5">
                 {rowDouble.map((p, i) => (
-                  <PartnerTile key={`${p.key}-${i}`} {...p} />
+                  <PartnerTile key={`${p.key}-${i}`} abbr={p.abbr} label={p.label} />
                 ))}
               </div>
             </div>
           ) : (
             <div className="flex flex-wrap justify-center gap-4 py-2">
               {partners.map((p) => (
-                <PartnerTile key={p.key} {...p} />
+                <PartnerTile key={p.key} abbr={p.abbr} label={p.label} />
               ))}
             </div>
           )}

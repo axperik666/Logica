@@ -3,9 +3,6 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { Hero } from "@/components/sections/Hero";
 import { TrustStrip } from "@/components/sections/TrustStrip";
 import { TrustBar } from "@/components/sections/TrustBar";
-
-/** Свежие кейсы и переводы без устаревшего статического снимка страницы. */
-export const dynamic = "force-dynamic";
 import { Platforms } from "@/components/sections/Platforms";
 import { Services } from "@/components/sections/Services";
 import { Results } from "@/components/sections/Results";
@@ -24,6 +21,9 @@ import { ROICalculator } from "@/components/sections/ROICalculator";
 import { CTA } from "@/components/sections/CTA";
 import { HomePageJsonLd } from "@/components/seo/HomePageJsonLd";
 import { absoluteLocalizedUrl, languageAlternates } from "@/lib/hreflang";
+
+/** Свежие кейсы и переводы без устаревшего статического снимка страницы. */
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
