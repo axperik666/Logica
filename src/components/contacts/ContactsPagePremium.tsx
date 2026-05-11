@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Mail, MessageCircle, Send, Sparkles } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { KontaktyForm } from "@/components/contacts/KontaktyForm";
+import { BookingCta } from "@/components/contacts/BookingCta";
 import { CONTACTS } from "@/lib/contacts";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -132,6 +133,7 @@ export function ContactsPagePremium() {
                   <span className="mt-0.5 block text-xs text-cyan-300/90">{t("writeEmail")}</span>
                 </span>
               </a>
+              <BookingCta />
             </div>
           </motion.div>
 

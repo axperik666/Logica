@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { routing } from "@/i18n/routing";
 import { getSiteUrl } from "@/lib/site";
 import { localizedPath } from "@/lib/localePath";
@@ -22,4 +23,19 @@ export function absoluteLocalizedUrl(locale: string, path: string): string {
   const base = getSiteUrl().replace(/\/+$/, "");
   const suffix = localizedPath(locale, path);
   return `${base}${suffix === "/" ? "" : suffix}`;
+}
+
+/** Canonical + hreflang + `openGraph.url` для страниц под `[locale]`. */
+export function localePageAlternates(
+  locale: string,
+  path: string
+): Pick<Metadata, "alternates" | "openGraph"> {
+  const canonical = absoluteLocalizedUrl(locale, path);
+  return {
+    alternates: {
+      canonical,
+      languages: languageAlternates(path)
+    },
+    openGraph: { url: canonical }
+  };
 }

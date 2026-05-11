@@ -42,7 +42,14 @@ export function CookieConsent() {
     >
       <div className="mx-auto flex max-w-5xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-pretty text-sm leading-relaxed text-white/75">
-          {t("message")}{" "}
+          {t("message")}
+          <Link
+            href="/cookies"
+            className="font-semibold text-cyan-300 underline decoration-cyan-400/40 underline-offset-2 hover:text-cyan-200"
+          >
+            {t("cookiesPolicy")}
+          </Link>
+          {t("messageMid")}
           <Link
             href="/privacy"
             className="font-semibold text-cyan-300 underline decoration-cyan-400/40 underline-offset-2 hover:text-cyan-200"

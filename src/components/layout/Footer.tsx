@@ -28,7 +28,18 @@ export default async function Footer() {
               className="mb-6 h-10 w-auto opacity-95"
             />
             <p className="max-w-md text-gray-400 leading-relaxed">{tFooter("about")}</p>
-            <p className="mt-8 text-sm text-gray-500">{tFooter("copyright")}</p>
+            <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-sm text-gray-500">
+              <Link href="/privacy" className="transition hover:text-cyan-300/90">
+                {tFooter("privacy")}
+              </Link>
+              <Link href="/cookies" className="transition hover:text-cyan-300/90">
+                {tFooter("cookies")}
+              </Link>
+              <Link href="/terms" className="transition hover:text-cyan-300/90">
+                {tFooter("userAgreement")}
+              </Link>
+            </div>
+            <p className="mt-4 text-sm text-gray-500">{tFooter("copyright")}</p>
           </div>
 
           <div className="md:col-span-4">

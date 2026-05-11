@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
+import { localePageAlternates } from "@/lib/hreflang";
 import { Button } from "@/components/ui/button";
 import { homeContactLink } from "@/lib/contactHref";
 
@@ -27,7 +28,8 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "websitesPage" });
   return {
     title: t("metaTitle"),
-    description: t("metaDescription")
+    description: t("metaDescription"),
+    ...localePageAlternates(locale, "/sozdanie-sajta")
   };
 }
 

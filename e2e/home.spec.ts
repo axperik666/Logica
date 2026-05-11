@@ -40,4 +40,11 @@ test.describe("home", () => {
       timeout: 30_000
     });
   });
+
+  test("cookie policy page", async ({ page }) => {
+    await page.goto("/en/cookies");
+    await expect(
+      page.getByRole("heading", { level: 1, name: /Cookie policy/i })
+    ).toBeVisible({ timeout: 30_000 });
+  });
 });

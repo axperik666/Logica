@@ -15,7 +15,9 @@
   },
   "cookieBanner": {
     "ariaLabel": "Avviso sui cookie",
-    "message": "Usiamo cookie necessari e, con il tuo consenso, analytics per migliorare il sito. Maggiori informazioni nella nostra ",
+    "message": "Usiamo cookie necessari e, con il tuo consenso, analytics. Consulta la ",
+    "cookiesPolicy": "Cookie policy",
+    "messageMid": " e l’",
     "privacy": "Informativa sulla privacy",
     "accept": "Accetta"
   },
@@ -219,7 +221,34 @@
     "openTelegram": "Apri Telegram",
     "writeEmail": "Scrivi via email",
     "whatsappLabel": "WhatsApp",
-    "openWhatsapp": "Apri WhatsApp"
+    "openWhatsapp": "Apri WhatsApp",
+    "bookCall": "Prenota una call introduttiva (15 min)",
+    "formStep1Label": "Passo 1 — come contattarti",
+    "formStep2Label": "Passo 2 — di cosa hai bisogno",
+    "formNext": "Avanti",
+    "formBack": "Indietro"
+  },
+  "cookiesPage": {
+    "metaTitle": "Cookie policy",
+    "metaDescription": "Come LOGICA Marketing usa cookie e tecnologie simili sul sito.",
+    "title": "Cookie policy",
+    "intro": "Panoramica delle categorie principali. Per effetti legali completa il testo con un consulente per il tuo mercato.",
+    "categories": [
+      {
+        "title": "Strettamente necessari",
+        "body": "Servono al funzionamento del sito (sicurezza, bilanciamento, lingua, antispam sul modulo se attivo). Non sono usati per profilazione pubblicitaria."
+      },
+      {
+        "title": "Analytics (con consenso)",
+        "body": "Dopo «Accetta» può caricarsi Google Analytics per traffico e profondità di scroll. Puoi revocare cancellando i dati del sito per questo dominio."
+      },
+      {
+        "title": "Messenger e link esterni",
+        "body": "I pulsanti Telegram, WhatsApp o prenotazione aprono servizi di terze parti — valgono i loro termini e cookie."
+      }
+    ],
+    "control": "Per evitare analytics opzionali non cliccare «Accetta», oppure cancella cookie/localStorage per questo sito.",
+    "outro": "Domande? Scrivici dalla pagina contatti — rispondiamo in fretta."
   },
   "termsPage": {
     "metaTitle": "Termini",
@@ -916,6 +945,8 @@
     "title": "Pronti a scalare nel 2026?",
     "sub": "Ti mostriamo dove si perdono budget e cosa accelera davvero la crescita. Sotto: cosa succede dopo la richiesta e un modulo breve — la nicchia la scrivi tu a parole tue.",
     "brandLine": "LOGICA Marketing — il tuo partner per la crescita",
+    "socialProofQuote": "«Trattiamo finalmente gli ads come investimento: KPI chiari e roadmap di scaling.»",
+    "socialProofCite": "Founder, retail premium · revenue +47%",
     "valueTitle": "Cosa ottieni dopo il primo contatto",
     "valueSub": "Senza termini complicati — parliamo di lead, budget e funnel in modo chiaro",
     "valuePoints": [
@@ -1010,7 +1041,9 @@
     "ariaWhatsapp": "Scrivi su WhatsApp",
     "ariaEmail": "Invia email",
     "mobileContactsTitle": "Contatto rapido",
-    "userAgreement": "Condizioni d'uso"
+    "userAgreement": "Condizioni d'uso",
+    "privacy": "Privacy",
+    "cookies": "Cookie"
   },
   "notFound": {
     "badge": "404",

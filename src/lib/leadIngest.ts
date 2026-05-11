@@ -1,5 +1,6 @@
 import { isPhonePlausible } from "@/lib/phoneMask";
 import { postJson } from "@/lib/postJson";
+import { alertLeadDeliveryFailure } from "@/lib/leadFailureAlert";
 
 export type LeadIngestResult =
   | { outcome: "accepted" }
@@ -34,6 +35,10 @@ async function notifyViaEnvChannel(
       console.error("[lead] webhook delivery failed", {
         source: payload.source
       });
+      void alertLeadDeliveryFailure({
+        channel: "webhook",
+        source: payload.source
+      });
     }
     return ok ? { outcome: "accepted" } : { outcome: "reject", reason: "DELIVERY" };
   }
@@ -49,6 +54,10 @@ async function notifyViaEnvChannel(
     });
     if (!ok) {
       console.error("[lead] telegram delivery failed", {
+        source: payload.source
+      });
+      void alertLeadDeliveryFailure({
+        channel: "telegram",
         source: payload.source
       });
     }

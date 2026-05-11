@@ -1,11 +1,11 @@
 import { getLocale, getMessages } from "next-intl/server";
 import { CONTACTS } from "@/lib/contacts";
 import { getSiteUrl } from "@/lib/site";
+import { localizedPath } from "@/lib/localePath";
 
 type JsonLdMessages = {
   description: string;
   country: string;
-  faq: { q: string; a: string }[];
 };
 
 export async function SiteJsonLd() {
@@ -14,9 +14,6 @@ export async function SiteJsonLd() {
   const locale = await getLocale();
   const messages = await getMessages();
   const jd = messages.jsonLd as JsonLdMessages;
-
-  const inLanguage =
-    locale === "ru" ? "ru-RU" : locale === "it" ? "it-IT" : "en-US";
 
   const serviceTypes = [
     "Performance marketing",
@@ -98,20 +95,16 @@ export async function SiteJsonLd() {
       url: base,
       name: "LOGICA Marketing",
       description: jd.description,
-      inLanguage,
-      publisher: { "@id": `${base}/#organization` }
-    },
-    {
-      "@type": "FAQPage",
-      "@id": `${base}/#faq`,
-      mainEntity: jd.faq.map((item) => ({
-        "@type": "Question",
-        name: item.q,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: item.a
-        }
-      }))
+      inLanguage: ["en-US", "ru-RU", "it-IT"],
+      publisher: { "@id": `${base}/#organization` },
+      potentialAction: {
+        "@type": "SearchAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: `${base}${localizedPath(locale, "/faq")}?q={search_term_string}`
+        },
+        "query-input": "required name=search_term_string"
+      }
     }
   ];
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { localePageAlternates } from "@/lib/hreflang";
 import { Link } from "@/navigation";
 import { listCases } from "@/content/cases";
 import CasesGrid from "@/components/cases/CasesGrid";
@@ -14,7 +15,8 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "casesPage" });
   return {
     title: t("title"),
-    description: t("description")
+    description: t("description"),
+    ...localePageAlternates(locale, "/kejsy")
   };
 }
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
+import { localePageAlternates } from "@/lib/hreflang";
 import { getCase, CASE_SLUGS } from "@/content/cases";
 import { Button } from "@/components/ui/button";
 import { BreadcrumbsJsonLd } from "@/components/seo/BreadcrumbsJsonLd";
@@ -17,10 +18,13 @@ export async function generateMetadata({
   const { locale, slug } = await params;
   const c = getCase(locale, slug);
   if (!c) return {};
+  const alt = localePageAlternates(locale, `/kejsy/${slug}`);
   return {
     title: c.title,
     description: c.result,
+    alternates: alt.alternates,
     openGraph: {
+      ...alt.openGraph,
       title: c.title,
       description: c.result
     }

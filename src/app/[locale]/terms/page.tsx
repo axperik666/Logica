@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { localePageAlternates } from "@/lib/hreflang";
 
 export async function generateMetadata({
   params
@@ -10,7 +11,8 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "termsPage" });
   return {
     title: t("metaTitle"),
-    description: t("metaDescription")
+    description: t("metaDescription"),
+    ...localePageAlternates(locale, "/terms")
   };
 }
 

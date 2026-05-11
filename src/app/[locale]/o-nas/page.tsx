@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { localePageAlternates } from "@/lib/hreflang";
 import { Button } from "@/components/ui/button";
 import { AboutTeam } from "@/components/about/AboutTeam";
 import { WhyUs } from "@/components/sections/WhyUs";
@@ -16,7 +17,8 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "aboutPage" });
   return {
     title: t("metaTitle"),
-    description: t("metaDescription")
+    description: t("metaDescription"),
+    ...localePageAlternates(locale, "/o-nas")
   };
 }
 

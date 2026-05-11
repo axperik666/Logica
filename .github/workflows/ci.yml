@@ -7,15 +7,30 @@ on:
     branches: [main, master]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
-    env:
-      NEXT_PUBLIC_SITE_URL: https://logicamarketing.pro
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
           cache: npm
-      - run: npm ci
-      - run: npm run build
+
+      - name: Install
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      - name: Install Playwright browsers
+        run: npx playwright install chromium --with-deps
+
+      - name: E2E
+        run: npm run test:e2e
+        env:
+          CI: "true"
+          NEXT_PUBLIC_GA_MEASUREMENT_ID: G-TESTE2E1

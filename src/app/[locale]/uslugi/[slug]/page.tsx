@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
+import { localePageAlternates } from "@/lib/hreflang";
 import { getService, SERVICE_SLUGS } from "@/content/services";
 import { Button } from "@/components/ui/button";
 import { BreadcrumbsJsonLd } from "@/components/seo/BreadcrumbsJsonLd";
@@ -17,10 +18,13 @@ export async function generateMetadata({
   const { locale, slug } = await params;
   const service = getService(locale, slug);
   if (!service) return {};
+  const alt = localePageAlternates(locale, `/uslugi/${slug}`);
   return {
     title: service.name,
     description: service.short,
+    alternates: alt.alternates,
     openGraph: {
+      ...alt.openGraph,
       title: service.name,
       description: service.short
     }

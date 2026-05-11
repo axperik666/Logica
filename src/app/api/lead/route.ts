@@ -10,7 +10,7 @@ function field(fd: FormData, key: string): string {
 
 export async function POST(req: Request) {
   const ip = getClientIp(req.headers);
-  if (!checkLeadRateLimit(ip)) {
+  if (!(await checkLeadRateLimit(ip))) {
     return NextResponse.json({ ok: false, error: "RATE_LIMIT" }, { status: 429 });
   }
 

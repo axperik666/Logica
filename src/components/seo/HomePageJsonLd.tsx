@@ -9,6 +9,8 @@ type ServiceCard = {
   href: string;
 };
 
+type FaqItem = { q: string; a: string };
+
 /** Rich results: WebPage sections + услуги + кейсы (CreativeWork с URL якоря). */
 export async function HomePageJsonLd() {
   const locale = await getLocale();
@@ -18,7 +20,10 @@ export async function HomePageJsonLd() {
   const tServices = await getTranslations({ locale, namespace: "services" });
   const tCases = await getTranslations({ locale, namespace: "cases" });
   const tSec = await getTranslations({ locale, namespace: "sectionsSeo" });
+  const tHomeFaq = await getTranslations({ locale, namespace: "homeFaq" });
   const cards = tServices.raw("cards") as ServiceCard[];
+  const faqRaw = tHomeFaq.raw("items");
+  const faqItems = Array.isArray(faqRaw) ? (faqRaw as FaqItem[]) : [];
 
   const sectionAnchors: { key: string; hash: string }[] = [
     { key: "hero", hash: "#hero" },
@@ -94,7 +99,24 @@ export async function HomePageJsonLd() {
       name: tCases("titleBrand"),
       numberOfItems: caseItems.length,
       itemListElement: caseItems
-    }
+    },
+    ...(faqItems.length > 0
+      ? [
+          {
+            "@type": "FAQPage" as const,
+            "@id": `${pageUrl}#faq`,
+            url: `${pageUrl}#faq`,
+            mainEntity: faqItems.map((item) => ({
+              "@type": "Question" as const,
+              name: item.q,
+              acceptedAnswer: {
+                "@type": "Answer" as const,
+                text: item.a
+              }
+            }))
+          }
+        ]
+      : [])
   ];
 
   const jsonLd = {

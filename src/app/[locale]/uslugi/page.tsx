@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { localePageAlternates } from "@/lib/hreflang";
 import { listServices } from "@/content/services";
 import { Card } from "@/components/ui/card";
 import { homeContactLink, type ContactServiceKey } from "@/lib/contactHref";
@@ -23,7 +24,8 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "servicesPage" });
   return {
     title: t("title"),
-    description: t("description")
+    description: t("description"),
+    ...localePageAlternates(locale, "/uslugi")
   };
 }
 

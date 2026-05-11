@@ -15,6 +15,7 @@ const STATIC_PATHS = [
   "/faq",
   "/otzyvy",
   "/privacy",
+  "/cookies",
   "/terms",
   "/sozdanie-sajta"
 ];

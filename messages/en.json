@@ -15,7 +15,9 @@
   },
   "cookieBanner": {
     "ariaLabel": "Cookie notice",
-    "message": "We use essential cookies and optional analytics to improve the site. Details in our",
+    "message": "We use essential cookies and optional analytics to improve the site. See the ",
+    "cookiesPolicy": "Cookie policy",
+    "messageMid": "and ",
     "privacy": "Privacy policy",
     "accept": "Accept"
   },
@@ -219,7 +221,34 @@
     "openTelegram": "Open Telegram",
     "writeEmail": "Write email",
     "whatsappLabel": "WhatsApp",
-    "openWhatsapp": "Open WhatsApp"
+    "openWhatsapp": "Open WhatsApp",
+    "bookCall": "Book a 15‑minute intro call",
+    "formStep1Label": "Step 1 — how we reach you",
+    "formStep2Label": "Step 2 — what you need",
+    "formNext": "Continue",
+    "formBack": "Back"
+  },
+  "cookiesPage": {
+    "metaTitle": "Cookie policy",
+    "metaDescription": "How LOGICA Marketing uses cookies and similar technologies on this site.",
+    "title": "Cookie policy",
+    "intro": "This page explains the main categories of cookies and local storage we use. It is not legal advice — have counsel adapt it for your markets if needed.",
+    "categories": [
+      {
+        "title": "Strictly necessary",
+        "body": "Needed for the site to work (security, load balancing, language choice, form spam protection where enabled). These are not used for ads profiling."
+      },
+      {
+        "title": "Analytics (optional, with consent)",
+        "body": "If you accept the banner, we may load Google Analytics to understand traffic and scroll depth. You can withdraw consent by clearing site data for this domain."
+      },
+      {
+        "title": "Messengers and third-party links",
+        "body": "Buttons to Telegram, WhatsApp or booking providers open their own sites or apps — their terms and cookies apply there."
+      }
+    ],
+    "control": "You can block optional analytics by not clicking “Accept”, or later by clearing cookies/localStorage for this site.",
+    "outro": "Questions? Reach us via the contacts page — we respond quickly."
   },
   "termsPage": {
     "metaTitle": "Terms",
@@ -915,6 +944,8 @@
     "title": "Ready to scale in 2026?",
     "sub": "We’ll show where budgets leak and what moves the needle fastest. Below: what happens after you submit — plus a short form (type your niche in your own words).",
     "brandLine": "LOGICA Marketing — your growth partner",
+    "socialProofQuote": "“We finally treat ads as an investment — clear KPIs and a scaling roadmap.”",
+    "socialProofCite": "Founder, premium retail · revenue +47%",
     "valueTitle": "What you get after reaching out",
     "valueSub": "Plain language — we talk leads, spend and your funnel without buzzwords",
     "valuePoints": [
@@ -1009,7 +1040,9 @@
     "ariaWhatsapp": "Message on WhatsApp",
     "ariaEmail": "Send email",
     "mobileContactsTitle": "Quick contact",
-    "userAgreement": "Terms of use"
+    "userAgreement": "Terms of use",
+    "privacy": "Privacy",
+    "cookies": "Cookies"
   },
   "notFound": {
     "badge": "404",

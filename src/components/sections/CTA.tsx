@@ -216,6 +216,14 @@ export function CTA() {
           <div className="brand-glow mt-3 text-xs font-semibold text-white/55 max-md:tracking-normal max-md:normal-case">
             {t("brandLine")}
           </div>
+          <figure className="mt-6 max-w-2xl rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 sm:px-5">
+            <blockquote className="text-sm leading-relaxed text-white/80">
+              {t("socialProofQuote")}
+            </blockquote>
+            <figcaption className="mt-2 text-xs font-medium text-cyan-300/85">
+              {t("socialProofCite")}
+            </figcaption>
+          </figure>
         </MotionDiv>
 
         <div className="relative mt-8 grid gap-6 lg:grid-cols-12">
