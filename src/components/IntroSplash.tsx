@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { track } from "@/lib/analytics";
 
@@ -158,11 +159,25 @@ export function IntroSplash() {
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_20%,rgba(0,191,255,0.2),transparent_55%)]" />
 
-      <div className="relative min-h-0 w-full flex-1">
+      {/* Логотип всегда читаем — ролик может кропаться или «ездить» по кадру */}
+      <div className="pointer-events-none absolute left-0 right-0 top-0 z-20 flex justify-center px-4 pt-[max(0.75rem,env(safe-area-inset-top))]">
+        <div className="rounded-2xl border border-white/[0.12] bg-black/55 px-5 py-3 shadow-[0_12px_48px_rgba(0,0,0,0.5)] backdrop-blur-md sm:px-7 sm:py-3.5">
+          <Image
+            src="/logo.png"
+            alt="LOGICA Marketing"
+            width={320}
+            height={80}
+            className="h-9 w-auto sm:h-11 md:h-12"
+            priority
+          />
+        </div>
+      </div>
+
+      <div className="relative flex min-h-0 w-full flex-1 items-center justify-center bg-black">
         <video
           ref={videoRef}
           key={videoBase}
-          className="absolute inset-0 h-full w-full object-cover"
+          className="max-h-full max-w-full object-contain"
           playsInline
           muted
           autoPlay
