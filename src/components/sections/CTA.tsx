@@ -21,6 +21,7 @@ import {
   type ContactPlatform,
   type ContactServiceKey
 } from "@/lib/contactHref";
+import { sectionInViewOptions } from "@/lib/sectionReveal";
 
 const PLATFORM_KEYS: ContactPlatform[] = ["google", "meta", "tiktok", "telegram"];
 
@@ -89,11 +90,7 @@ export function CTA() {
     : [];
 
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, {
-    once: true,
-    amount: 0.08,
-    margin: "0px 0px 120px 0px"
-  });
+  const isInView = useInView(sectionRef, sectionInViewOptions);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

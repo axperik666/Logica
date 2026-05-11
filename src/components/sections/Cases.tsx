@@ -6,6 +6,7 @@ import { MotionSection } from "@/components/motion";
 import { useTranslations } from "next-intl";
 import CasesGrid from "@/components/cases/CasesGrid";
 import { useNarrowViewport } from "@/lib/use-narrow-viewport";
+import { sectionInViewOptions } from "@/lib/sectionReveal";
 
 export function Cases() {
   const t = useTranslations("cases");
@@ -13,11 +14,7 @@ export function Cases() {
   const narrow = useNarrowViewport();
 
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, {
-    once: true,
-    amount: 0.08,
-    margin: "0px 0px 100px 0px"
-  });
+  const isInView = useInView(sectionRef, sectionInViewOptions);
 
   return (
     <MotionSection

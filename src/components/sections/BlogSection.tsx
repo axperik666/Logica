@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/navigation";
+import { RevealSection } from "@/components/motion/RevealSection";
 
 export async function BlogSection() {
   const t = await getTranslations("nav");
@@ -23,9 +24,9 @@ export async function BlogSection() {
   ] as const;
 
   return (
-    <section
+    <RevealSection
       id="guides"
-      className="scroll-mt-[calc(var(--header-h)+1rem)] border-t border-white/[0.08] bg-[linear-gradient(180deg,#0a0d18_0%,#070a12_100%)] py-16 md:py-24"
+      className="border-t border-white/[0.08] bg-[linear-gradient(180deg,#0a0d18_0%,#070a12_100%)] py-16 md:py-24"
     >
       <div className="mx-auto max-w-6xl px-6">
         <div className="mx-auto max-w-2xl text-center md:max-w-3xl">
@@ -54,6 +55,6 @@ export async function BlogSection() {
           ))}
         </div>
       </div>
-    </section>
+    </RevealSection>
   );
 }

@@ -111,9 +111,9 @@ export default function Navbar() {
               <Image
                 src="/logo.png"
                 alt="LOGICA Marketing"
-                width={144}
-                height={36}
-                className="relative h-8 w-auto sm:h-9"
+                width={200}
+                height={50}
+                className="relative h-10 w-auto sm:h-11 md:h-12 lg:h-[3.25rem]"
                 priority
               />
             </span>

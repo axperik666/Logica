@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 import { cn } from "@/lib/cn";
 import { Link } from "@/navigation";
 import { homeContactLink } from "@/lib/contactHref";
+import { sectionInViewOptions } from "@/lib/sectionReveal";
 
 type PlatformKey = "google" | "meta" | "tiktok" | "telegram";
 
@@ -163,11 +164,7 @@ export function Platforms() {
   const t = useTranslations("platforms");
   const tSec = useTranslations("sectionsSeo");
   const ref = useRef(null);
-  const isInView = useInView(ref, {
-    once: true,
-    amount: 0.1,
-    margin: "0px 0px 80px 0px"
-  });
+  const isInView = useInView(ref, sectionInViewOptions);
 
   const itemsRaw = t.raw("items");
   const items =

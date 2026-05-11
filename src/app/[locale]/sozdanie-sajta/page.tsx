@@ -52,7 +52,7 @@ export default async function SozdanieSajtaPage({
 
           <div
             id="landing"
-            className="mt-10 scroll-mt-[calc(var(--header-h)+1rem)]"
+            className="scroll-anchor mt-10"
           >
             <h2 className="text-lg font-semibold">{t("approachTitle")}</h2>
             <ul className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -66,7 +66,7 @@ export default async function SozdanieSajtaPage({
 
           <div
             id="multipage"
-            className="mt-14 scroll-mt-[calc(var(--header-h)+1rem)]"
+            className="scroll-anchor mt-14"
           >
             <h2 className="text-lg font-semibold">{t("casesTitle")}</h2>
             <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -91,7 +91,7 @@ export default async function SozdanieSajtaPage({
 
           <div
             id="corporate"
-            className="mt-12 flex scroll-mt-[calc(var(--header-h)+1rem)] flex-col gap-4 sm:flex-row sm:items-center"
+            className="scroll-anchor mt-12 flex flex-col gap-4 sm:flex-row sm:items-center"
           >
             <Button href={homeContactLink({ service: "web" })} className="hover-lift px-8 py-3">
               {t("ctaLabel")}

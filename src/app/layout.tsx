@@ -4,6 +4,7 @@ import { Inter, Manrope } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
 import { SiteJsonLd } from "@/components/seo/SiteJsonLd";
+import { getSiteUrl } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin", "latin-ext", "cyrillic"],
@@ -20,14 +21,37 @@ const manrope = Manrope({
   preload: true
 });
 
-export const metadata: Metadata = {
-  title: "LOGICA Marketing | Performance Marketing with Real ROI",
-  description:
-    "3–7× ROI. Мы помогаем бизнесу расти через Performance Marketing. Кейсы с видео.",
-  icons: {
-    icon: "/logo.png"
-  }
-};
+const defaultTitle = "LOGICA Marketing | Performance Marketing with Real ROI";
+const defaultDescription =
+  "3–7× ROI. Мы помогаем бизнесу расти через Performance Marketing. Кейсы с видео.";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const metadataBase = new URL(getSiteUrl());
+
+  return {
+    metadataBase,
+    title: {
+      default: defaultTitle,
+      template: "%s | LOGICA Marketing"
+    },
+    description: defaultDescription,
+    icons: {
+      icon: "/logo.png"
+    },
+    openGraph: {
+      type: "website",
+      siteName: "LOGICA Marketing",
+      locale: "ru_RU",
+      title: defaultTitle,
+      description: defaultDescription
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: defaultTitle,
+      description: defaultDescription
+    }
+  };
+}
 
 export const viewport: Viewport = {
   width: "device-width",

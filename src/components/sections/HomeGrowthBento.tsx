@@ -4,12 +4,14 @@ import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Link } from "@/navigation";
+import { RevealSection } from "@/components/motion/RevealSection";
+import { sectionRevealTransition, sectionRevealViewport } from "@/lib/sectionReveal";
 
 const tileMotion = {
-  initial: { opacity: 0, y: 24 },
+  initial: { opacity: 0, y: 28 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-40px" },
-  transition: { duration: 0.45 }
+  viewport: sectionRevealViewport,
+  transition: { duration: 0.52, ease: [0.22, 1, 0.36, 1] as const }
 } as const;
 
 function TileShell({
@@ -24,7 +26,7 @@ function TileShell({
   return (
     <motion.div
       {...tileMotion}
-      transition={{ ...tileMotion.transition, delay }}
+      transition={sectionRevealTransition(delay)}
       className={`flex flex-col justify-between rounded-3xl border border-white/[0.08] bg-[linear-gradient(165deg,rgba(18,22,38,0.85)_0%,rgba(8,10,20,0.92)_100%)] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition-all hover:border-cyan-400/25 hover:shadow-[0_20px_56px_rgba(0,180,255,0.08)] md:p-8 ${className}`}
     >
       {children}
@@ -38,7 +40,7 @@ export function HomeGrowthBento() {
   const marqueeItems = [...logos, ...logos];
 
   return (
-    <section
+    <RevealSection
       className="relative isolate overflow-hidden bg-[#05060e] py-24"
       aria-labelledby="home-bento-heading"
     >
@@ -193,7 +195,7 @@ export function HomeGrowthBento() {
           </TileShell>
         </div>
       </div>
-    </section>
+    </RevealSection>
   );
 }
 

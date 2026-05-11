@@ -19,12 +19,20 @@
   --text-subtle: rgba(255, 255, 255, 0.78);
   /* Высота fixed header (используется для anchor-scroll и верхних отступов). */
   --header-h: 4.375rem;
+  /* Единый отступ под фиксированную шапку при якорях и scroll-padding */
+  --section-scroll-margin: calc(var(--header-h) + 1rem);
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  scroll-padding-top: var(--section-scroll-margin);
   scrollbar-gutter: stable;
+}
+
+/* Якоря: секции с id и явные блоки */
+section[id],
+.scroll-anchor {
+  scroll-margin-top: var(--section-scroll-margin);
 }
 
 /* Мобильная полировка */

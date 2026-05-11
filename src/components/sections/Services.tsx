@@ -9,6 +9,8 @@ import {
   type LucideIcon
 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { RevealSection } from "@/components/motion/RevealSection";
+import { sectionRevealTransition, sectionRevealViewport } from "@/lib/sectionReveal";
 
 const HOME_TILE_IDS = ["perf", "strategy", "creative", "funnel"] as const;
 
@@ -23,7 +25,7 @@ export function Services() {
   const t = useTranslations("services");
 
   return (
-    <section
+    <RevealSection
       id="services"
       className="relative isolate overflow-hidden bg-[#06070e] py-24"
     >
@@ -51,10 +53,10 @@ export function Services() {
             return (
               <motion.article
                 key={id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ delay: i * 0.08, duration: 0.45 }}
+                viewport={sectionRevealViewport}
+                transition={sectionRevealTransition(i * 0.08)}
                 className="group rounded-3xl border border-white/[0.09] bg-[linear-gradient(165deg,rgba(255,255,255,0.04)_0%,rgba(255,255,255,0.01)_100%)] p-8 backdrop-blur-sm transition-all duration-300 hover:border-cyan-400/25 hover:shadow-[0_20px_50px_rgba(0,180,255,0.08)] sm:p-10"
               >
                 <div
@@ -74,7 +76,7 @@ export function Services() {
           })}
         </div>
       </div>
-    </section>
+    </RevealSection>
   );
 }
 
