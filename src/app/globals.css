@@ -1156,8 +1156,32 @@ header.site-header.glass-nav:hover::after {
   animation: home-logo-marquee 42s linear infinite;
 }
 
+@keyframes home-logo-marquee-rev {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.home-logo-marquee-track-reverse {
+  animation: home-logo-marquee-rev 52s linear infinite;
+}
+
+.group-trust-marquee:hover .home-logo-marquee-track,
+.group-trust-marquee:hover .home-logo-marquee-track-reverse {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .home-logo-marquee-track {
+    animation: none;
+    transform: none;
+  }
+
+  .home-logo-marquee-track-reverse {
     animation: none;
     transform: none;
   }

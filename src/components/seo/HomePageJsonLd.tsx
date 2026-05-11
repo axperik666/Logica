@@ -27,14 +27,17 @@ export async function HomePageJsonLd() {
 
   const sectionAnchors: { key: string; hash: string }[] = [
     { key: "hero", hash: "#hero" },
+    { key: "trustBar", hash: "#trust-bar" },
     { key: "platforms", hash: "#platforms" },
     { key: "whyUs", hash: "#why-us" },
-    { key: "process", hash: "#process" },
     { key: "services", hash: "#services" },
+    { key: "results", hash: "#results" },
+    { key: "process", hash: "#process" },
     { key: "clients", hash: "#clients" },
     { key: "cases", hash: "#cases" },
     { key: "testimonials", hash: "#testimonials" },
     { key: "homeFaq", hash: "#faq" },
+    { key: "roiCalculator", hash: "#roi-calculator" },
     { key: "cta", hash: "#contact" }
   ];
 

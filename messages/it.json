@@ -56,11 +56,23 @@
     },
     "process": {
       "metaTitle": "Processo di lavoro LOGICA Marketing — da audit a scale",
-      "metaDescription": "Cinque fasi: diagnosi, strategia, go‑live, ottimizzazione data‑driven e scale delle combinazioni vincenti."
+      "metaDescription": "Percorso trasparente in 45 giorni in cinque fasi: audit e strategia, funnel e sito, test e lancio ads, ottimizzazione e scale con reporting."
     },
     "clients": {
       "metaTitle": "Clienti LOGICA — leader di mercato e brand in crescita",
       "metaDescription": "Partnership in retail, e‑commerce, B2B, EdTech e servizi: crescita misurabile, KPI chiari e reporting affidabile."
+    },
+    "trustBar": {
+      "metaTitle": "Brand di fiducia — clienti reali",
+      "metaDescription": "Aziende per cui gestiamo performance: retail, cliniche, EdTech, costruzioni e altre verticali."
+    },
+    "results": {
+      "metaTitle": "Risultati — LOGICA Marketing",
+      "metaDescription": "Benchmark indicativi su progetti, ROI, ricavi e durata della partnership — con caveat su nicchia e tracking."
+    },
+    "roiCalculator": {
+      "metaTitle": "Calcolatore ROI — stima del potenziale",
+      "metaDescription": "Modello semplificato di ricavi incremental da efficienza media — richiedi un calcolo personalizzato al team."
     },
     "homeFaq": {
       "metaTitle": "FAQ — LOGICA Marketing",
@@ -718,8 +730,9 @@
   },
   "testimonials": {
     "badge": "Voci · LOGICA Marketing",
-    "title": "Cosa dicono i clienti di LOGICA Marketing",
+    "title": "Cosa dicono i clienti",
     "subtitle": "Brand premium e team in crescita si affidano a LOGICA Marketing per risultati misurabili e chiarezza.",
+    "dragHint": "Scorri o trascina la card — l’auto‑rotate si mette in pausa al passaggio del mouse.",
     "prev": "Indietro",
     "next": "Avanti",
     "auto": "Scorrimento auto",
@@ -869,36 +882,117 @@
   },
   "process": {
     "badge": "Processo",
-    "title": "Come lavoriamo",
-    "subtitle": "Cinque step dall’audit alla crescita continua — sintetici e orientati ai numeri.",
+    "title": "Processo trasparente in 45 giorni",
+    "subtitle": "Cinque fasi — dall’audit allo scale con reporting. Niente scatole nere.",
     "stepLabel": "Passo {n}",
     "steps": [
       {
         "icon": "search",
-        "title": "Audit gratuito",
-        "desc": "Analizziamo offerta, sito, canali e qualità lead — dove si perdono budget e dove sono i quick win."
+        "title": "Audit e strategia",
+        "desc": "Diagnostichiamo offerta, funnel, tracking ed economia — poi fissiamo le priorità del primo sprint."
       },
       {
         "icon": "pen",
-        "title": "Sviluppo della strategia",
-        "desc": "Media plan, combinazioni e mappa dei test coerenti con economia e orizzonte."
+        "title": "Funnel e sito",
+        "desc": "Struttura landing, copy e velocità su Next.js — allineati a come qualificate e chiudete la domanda."
       },
       {
         "icon": "rocket",
-        "title": "Lancio ads e contenuti",
-        "desc": "Partono campagne e contenuti di supporto; eventi e goal puliti per ottimizzare su segnali solidi."
+        "title": "Test e lancio ads",
+        "desc": "Test di creatività e combinazioni su Meta / Google / TikTok con eventi puliti dal giorno uno."
       },
       {
         "icon": "chart",
-        "title": "Ottimizzazione e scaling",
-        "desc": "Potenziamo i winner, tagliamo segmenti deboli e miglioriamo le landing dove muove la conversione."
+        "title": "Ottimizzazione e scale",
+        "desc": "Tagliamo il debole, scaliamo il forte e iteriamo le pagine dove la conversione muove il business."
       },
       {
         "icon": "report",
-        "title": "Report mensile + crescita",
-        "desc": "Reporting periodico e piano del mese successivo: cosa scalare, cosa testare e quali KPI tenere nel mirino."
+        "title": "Scale e reporting",
+        "desc": "Ritmo pianificabile: KPI, decisioni e prossimi esperimenti — non vanity dashboard."
       }
     ]
+  },
+  "trustBar": {
+    "badge": "Fiducia",
+    "title": "Brand con cui scaliamo media e prodotto",
+    "subtitle": "Monogrammi e nomi da progetti reali — le stesse discipline dei case study.",
+    "brands": [
+      { "label": "VitaMed", "abbr": "VM" },
+      { "label": "NordMebel", "abbr": "NM" },
+      { "label": "LexPro", "abbr": "LX" },
+      { "label": "SkillNova", "abbr": "SN" },
+      { "label": "Éclat Studio", "abbr": "ÉC" },
+      { "label": "BuildCraft", "abbr": "BC" },
+      { "label": "TechPoint", "abbr": "TP" },
+      { "label": "SmileLine", "abbr": "SL" },
+      { "label": "PrimeEstate", "abbr": "PE" },
+      { "label": "Pulse Gym", "abbr": "PG" },
+      { "label": "Atelier Mebel", "abbr": "AM" },
+      { "label": "AutoHub", "abbr": "AH" }
+    ]
+  },
+  "homeResults": {
+    "badge": "Risultati",
+    "title": "Risultati che portiamo sul mercato",
+    "subtitle": "Benchmark da progetti attivi — i numeri finali dipendono da nicchia, offerta e tracking.",
+    "metrics": [
+      {
+        "icon": "projects",
+        "value": 47,
+        "decimals": 0,
+        "suffix": "+",
+        "label": "progetti lanciati",
+        "sub": "Performance, sito e creatività nello stesso loop"
+      },
+      {
+        "icon": "roi",
+        "value": 380,
+        "decimals": 0,
+        "suffix": "%",
+        "label": "ROI medio in crescita",
+        "sub": "Dopo stabilizzazione di funnel e buying"
+      },
+      {
+        "icon": "revenue",
+        "value": 12.4,
+        "decimals": 1,
+        "suffix": "M ₽",
+        "label": "ricavi incremental stimati",
+        "sub": "Scala illustrativa con economia matura"
+      },
+      {
+        "icon": "ltv",
+        "value": 11,
+        "decimals": 0,
+        "suffix": " mesi",
+        "label": "LTV medio della partnership",
+        "sub": "Team che cercano orizzonte, non un one‑shot"
+      }
+    ]
+  },
+  "roiCalculator": {
+    "badge": "Lead magnet",
+    "title": "Calcolatore ROI — scopri il potenziale",
+    "subtitle": "Stima grezza dei ricavi se migliora l’efficienza. In call validiamo le ipotesi.",
+    "fieldBudget": "Budget pubblicitario mensile",
+    "fieldRoas": "ROAS attuale",
+    "fieldGrowth": "Crescita efficienza desiderata (%)",
+    "resultKicker": "Indicazione a 30 giorni",
+    "resultPrefix": "Circa",
+    "resultCurrency": "₽ di ricavi incremental",
+    "resultDisclaimer": "Non è consulenza finanziaria — è un pretesto per parlare. Margini, CRM e velocità di test contano.",
+    "cta": "Ricevi un calcolo personalizzato",
+    "modalClose": "Chiudi",
+    "modalTitle": "Invia i numeri al team",
+    "modalLead": "Rispondiamo con un modello più preciso — di solito lo stesso giorno.",
+    "modalName": "Il tuo nome",
+    "modalContact": "Telegram / WhatsApp / email",
+    "modalSubmit": "Invia",
+    "modalSending": "Invio…",
+    "modalSuccess": "Ricevuto — ti ricontattiamo presto.",
+    "modalError": "Invio non riuscito. Scrivici su Telegram o WhatsApp.",
+    "modalNote": "Richiesta dal calcolatore ROI.\nBudget/mese: {budget}\nROAS: {roas}\nObiettivo crescita: {growth}%\nStima ricavi incremental: {profit}"
   },
   "clients": {
     "badge": "Partner",

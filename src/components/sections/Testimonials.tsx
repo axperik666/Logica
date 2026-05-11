@@ -5,7 +5,8 @@ import {
   AnimatePresence,
   motion,
   useReducedMotion,
-  useInView
+  useInView,
+  type PanInfo
 } from "framer-motion";
 import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
 import { MotionDiv, MotionSection } from "@/components/motion";
@@ -35,15 +36,18 @@ function initials(name: string) {
   return (a + b).toUpperCase();
 }
 
-export function Testimonials() {
+export function Testimonials({ limit }: { limit?: number } = {}) {
   const t = useTranslations("testimonials");
   const tSec = useTranslations("sectionsSeo");
   const locale = useLocale();
   const rawItems = t.raw("items");
-  const items = Array.isArray(rawItems) ? (rawItems as Item[]) : [];
+  const allItems = Array.isArray(rawItems) ? (rawItems as Item[]) : [];
+  const items =
+    typeof limit === "number" ? allItems.slice(0, Math.max(0, limit)) : allItems;
   const reduceMotion = useReducedMotion();
   const narrow = useNarrowViewport();
   const ref = useRef(null);
+  const hoverRef = useRef(false);
   const isInView = useInView(ref, {
     once: true,
     amount: 0.08,
@@ -53,6 +57,7 @@ export function Testimonials() {
   const len = items.length;
   const [index, setIndex] = useState(0);
   const dirRef = useRef(1);
+  const [autoPaused, setAutoPaused] = useState(false);
 
   const prev = () => {
     if (!len) return;
@@ -66,18 +71,30 @@ export function Testimonials() {
     setIndex((i) => (i + 1) % len);
   };
 
+  function onCardDragEnd(_: unknown, info: PanInfo) {
+    const threshold = narrow ? 40 : 56;
+    if (info.offset.x < -threshold) {
+      dirRef.current = 1;
+      next();
+    } else if (info.offset.x > threshold) {
+      dirRef.current = -1;
+      prev();
+    }
+    if (!hoverRef.current) setAutoPaused(false);
+  }
+
   useEffect(() => {
     setIndex(0);
   }, [locale]);
 
   useEffect(() => {
-    if (reduceMotion || !len) return;
+    if (reduceMotion || !len || autoPaused) return;
     const id = window.setInterval(() => {
       dirRef.current = 1;
       setIndex((i) => (i + 1) % len);
     }, narrow ? AUTO_MS_NARROW : AUTO_MS_DESKTOP);
     return () => window.clearInterval(id);
-  }, [len, narrow, reduceMotion, locale]);
+  }, [len, narrow, reduceMotion, locale, autoPaused]);
 
   const safeIndex = len ? Math.min(Math.max(0, index), len - 1) : 0;
   const testimonial = len ? items[safeIndex] : undefined;
@@ -187,7 +204,20 @@ export function Testimonials() {
                   duration: narrow ? 0.28 : 0.45,
                   ease: [0.22, 1, 0.36, 1]
                 }}
-                className="glass-hover-glow glass rounded-[2rem] p-6 sm:p-8"
+                drag={reduceMotion ? false : "x"}
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.85}
+                onDragStart={() => setAutoPaused(true)}
+                onDragEnd={onCardDragEnd}
+                onMouseEnter={() => {
+                  hoverRef.current = true;
+                  setAutoPaused(true);
+                }}
+                onMouseLeave={() => {
+                  hoverRef.current = false;
+                  setAutoPaused(false);
+                }}
+                className="glass-hover-glow glass cursor-grab touch-pan-y rounded-[2rem] p-6 active:cursor-grabbing sm:p-8"
               >
                 <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
                   <div
@@ -247,6 +277,7 @@ export function Testimonials() {
             <p className="mt-4 text-center text-[11px] uppercase tracking-[0.2em] text-white/35">
               LOGICA Marketing · {t("auto")}
             </p>
+            <p className="mt-2 text-center text-xs text-white/40">{t("dragHint")}</p>
           </>
         ) : (
           <p className="rounded-2xl border border-white/10 bg-white/5 px-4 py-6 text-center text-sm text-white/60">
