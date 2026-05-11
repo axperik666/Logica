@@ -39,7 +39,6 @@ export async function HomePageJsonLd() {
     { key: "clients", hash: "#clients" },
     { key: "cases", hash: "#cases" },
     { key: "testimonials", hash: "#testimonials" },
-    { key: "videoCases", hash: "#video-cases" },
     { key: "latestInsights", hash: "#guides" },
     { key: "homeFaq", hash: "#faq" },
     { key: "roiCalculator", hash: "#roi-calculator" },

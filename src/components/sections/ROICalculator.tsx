@@ -4,7 +4,7 @@ import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "re
 import { AnimatePresence, animate, motion, useInView } from "framer-motion";
 import { Calculator, Sparkles, X } from "lucide-react";
 import { MotionDiv, MotionSection } from "@/components/motion";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { TurnstileField } from "@/components/TurnstileField";
 import { track } from "@/lib/analytics";
@@ -13,14 +13,9 @@ function clamp(n: number, min: number, max: number) {
   return Math.min(max, Math.max(min, n));
 }
 
-function currencyOptions(locale: string) {
-  if (locale === "it") {
-    return { currency: "EUR" as const, numberingLocale: "it-IT", defaultBudget: 7_500 };
-  }
-  if (locale === "en") {
-    return { currency: "USD" as const, numberingLocale: "en-US", defaultBudget: 8_000 };
-  }
-  return { currency: "RUB" as const, numberingLocale: "ru-RU", defaultBudget: 500_000 };
+/** USD для всех локалей сайта — единая модель для сравнения. */
+function currencyOptions() {
+  return { currency: "USD" as const, numberingLocale: "en-US", defaultBudget: 8_000 };
 }
 
 function formatRoiCurrency(numberingLocale: string, currency: string, value: number) {
@@ -36,8 +31,7 @@ export function ROICalculator() {
   const t = useTranslations("roiCalculator");
   const tSec = useTranslations("sectionsSeo");
   const tl = useTranslations("leads");
-  const locale = useLocale();
-  const { currency, numberingLocale, defaultBudget } = currencyOptions(locale);
+  const { currency, numberingLocale, defaultBudget } = currencyOptions();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
 

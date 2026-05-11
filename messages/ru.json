@@ -82,10 +82,6 @@
       "metaTitle": "Ниши — 15 отраслей, которые мы масштабируем",
       "metaDescription": "Медицина, e‑commerce, юр.услуги, EdTech, beauty, стройка, недвижимость, фитнес, производство, авто, HoReCa, SaaS и др."
     },
-    "videoCases": {
-      "metaTitle": "Видео-кейсы — как делаем 3–7× ROI",
-      "metaDescription": "Короткие видеоразборы: ROAS, лиды и выручка с понятным контекстом до/после."
-    },
     "certifications": {
       "metaTitle": "Официальные партнёры и сертификаты — LOGICA Marketing",
       "metaDescription": "Google Partners, Meta Business Partner, TikTok Ads, Яндекс, VK Ads, Telegram Ads и другие статусы платформ."
@@ -995,7 +991,7 @@
     "badge": "Лид-магнит",
     "title": "Калькулятор ROI — посчитайте апсайд",
     "subtitle": "Грубый прирост выручки при росте эффективности. На созвоне проверим допущения.",
-    "fieldBudget": "Среднемесячный бюджет на рекламу (₽)",
+    "fieldBudget": "Среднемесячный бюджет на рекламу (USD)",
     "fieldRoas": "Текущий ROAS",
     "fieldGrowth": "Желаемый рост эффективности (%)",
     "resultKicker": "Ориентир за 30 дней",
@@ -1026,45 +1022,45 @@
     "linkedinCompanyUrl": "https://www.linkedin.com/company/logica-marketing",
     "members": [
       {
-        "name": "Алексей Морозов",
+        "name": "Alexei Morozov",
         "role": "Head of Performance",
         "bio": "Медиа-экономика, масштаб и атрибуция — от первых тестов до стабильного ROAS.",
-        "initials": "АМ",
+        "initials": "AM",
         "photo": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&auto=format"
       },
       {
-        "name": "Дарья Волкова",
+        "name": "Daria Volkova",
         "role": "Creative Director",
         "bio": "Креативные системы против усталости креативов и рост конверсии по воронке.",
-        "initials": "ДВ",
+        "initials": "DV",
         "photo": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&auto=format"
       },
       {
-        "name": "Илья Петров",
+        "name": "Ilya Petrov",
         "role": "Strategy Lead",
         "bio": "Контекст рынка в тезис роста: оффер, углы и микс каналов.",
-        "initials": "ИП",
+        "initials": "IP",
         "photo": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&auto=format"
       },
       {
-        "name": "Мария Соколова",
+        "name": "Maria Sokolova",
         "role": "Senior Media Buyer",
         "bio": "Закупка и оптимизация трафика по каналам — дисциплина тестов и чистые выводы.",
-        "initials": "МС",
+        "initials": "MS",
         "photo": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop&auto=format"
       },
       {
-        "name": "Константин Орлов",
+        "name": "Konstantin Orlov",
         "role": "Head of Client Success",
         "bio": "Сроки, коммуникация и качество сдачи — всегда ясно, что делаем дальше.",
-        "initials": "КО",
+        "initials": "KO",
         "photo": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&auto=format"
       },
       {
-        "name": "Елена Кузнецова",
+        "name": "Elena Kuznetsova",
         "role": "Paid Social Lead",
         "bio": "Масштаб Meta/TikTok с циклами креативов и дисциплиной learning-бюджета.",
-        "initials": "ЕК",
+        "initials": "EK",
         "photo": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&auto=format"
       }
     ]
@@ -1107,13 +1103,6 @@
       "finance": "Финансы и B2B",
       "services": "Профессиональные услуги"
     }
-  },
-  "videoCasesTeaser": {
-    "badge": "Видео-кейсы",
-    "title": "Видео-кейсы: как мы делаем 3–7× ROI",
-    "subtitle": "Разборы с креативом, медиа и цифрами в одном месте.",
-    "scrollHint": "Листайте дальше",
-    "playAria": "Воспроизвести видео-кейс"
   },
   "certifications": {
     "badge": "Партнёры",

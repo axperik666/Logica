@@ -82,10 +82,6 @@
       "metaTitle": "Industries — 15 niches we scale",
       "metaDescription": "Healthcare, e‑commerce, legal, EdTech, beauty, construction, real estate, fitness, manufacturing, auto, HoReCa, SaaS and more."
     },
-    "videoCases": {
-      "metaTitle": "Video case studies — how we deliver 3–7× ROI",
-      "metaDescription": "Short video breakdowns of client wins: ROAS, leads and revenue impact with clear before/after context."
-    },
     "certifications": {
       "metaTitle": "Official partners & certifications — LOGICA Marketing",
       "metaDescription": "Google Partners, Meta Business Partner, TikTok Ads, Yandex, VK Ads, Telegram Ads and other platform credentials."
@@ -1106,13 +1102,6 @@
       "finance": "Finance & B2B",
       "services": "Professional services"
     }
-  },
-  "videoCasesTeaser": {
-    "badge": "Video cases",
-    "title": "Video case studies: how we deliver 3–7× ROI",
-    "subtitle": "Real breakdowns — creative, media and numbers in one place.",
-    "scrollHint": "Swipe for more",
-    "playAria": "Play video case"
   },
   "certifications": {
     "badge": "Partners",

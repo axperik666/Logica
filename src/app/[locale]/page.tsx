@@ -13,7 +13,6 @@ import { HomeSpotlightCase } from "@/components/sections/HomeSpotlightCase";
 import { Team } from "@/components/sections/Team";
 import { Certifications } from "@/components/sections/Certifications";
 import { Industries } from "@/components/sections/Industries";
-import { VideoCasesTeaser } from "@/components/sections/VideoCasesTeaser";
 import { Cases } from "@/components/sections/Cases";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { LatestInsights } from "@/components/sections/LatestInsights";
@@ -60,7 +59,6 @@ export default function HomePage() {
       <Industries />
       <HomeGrowthBento />
       <HomeSpotlightCase />
-      <VideoCasesTeaser />
       <Cases />
       <Testimonials limit={6} />
       <LatestInsights />

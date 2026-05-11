@@ -82,10 +82,6 @@
       "metaTitle": "Settori — 15 nicchie che scaliamo",
       "metaDescription": "Healthcare, e‑commerce, legale, EdTech, beauty, costruzioni, immobiliare, fitness, manifattura, auto, HoReCa, SaaS e altro."
     },
-    "videoCases": {
-      "metaTitle": "Video case study — come portiamo 3–7× ROI",
-      "metaDescription": "Video brevi con ROAS, lead e impatto ricavi — contesto chiaro prima/dopo."
-    },
     "certifications": {
       "metaTitle": "Partner ufficiali e certificazioni — LOGICA Marketing",
       "metaDescription": "Google Partners, Meta Business Partner, TikTok Ads, Yandex, VK Ads, Telegram Ads e altre credenziali piattaforma."
@@ -995,7 +991,7 @@
     "badge": "Lead magnet",
     "title": "Calcolatore ROI — scopri il potenziale",
     "subtitle": "Stima grezza dei ricavi se migliora l’efficienza. In call validiamo le ipotesi.",
-    "fieldBudget": "Budget pubblicitario mensile (€)",
+    "fieldBudget": "Budget pubblicitario mensile (USD)",
     "fieldRoas": "ROAS attuale",
     "fieldGrowth": "Crescita efficienza desiderata (%)",
     "resultKicker": "Indicazione a 30 giorni",
