@@ -169,16 +169,16 @@ export default function Navbar() {
               </div>
             </div>
 
-            <Link href="/o-nas" className={itemClass(aboutActive)}>
-              {tNav("about")}
-              {aboutActive ? (
+            <Link href={homeHashHref("guides")} className={itemClass(guidesActive)}>
+              {tNav("guides")}
+              {guidesActive ? (
                 <span className="absolute bottom-1 left-4 right-4 h-px rounded-full bg-gradient-to-r from-transparent via-[#00b4ff] to-transparent" />
               ) : null}
             </Link>
 
-            <Link href={homeHashHref("guides")} className={itemClass(guidesActive)}>
-              {tNav("guides")}
-              {guidesActive ? (
+            <Link href="/kontakty" className={itemClass(contactActive)}>
+              {tNav("contact")}
+              {contactActive ? (
                 <span className="absolute bottom-1 left-4 right-4 h-px rounded-full bg-gradient-to-r from-transparent via-[#00b4ff] to-transparent" />
               ) : null}
             </Link>
@@ -206,6 +206,13 @@ export default function Navbar() {
               >
                 <div className="rounded-2xl border border-cyan-400/25 bg-[linear-gradient(165deg,rgba(18,22,38,0.98)_0%,rgba(10,12,24,0.97)_100%)] p-2 shadow-[0_24px_80px_rgba(0,0,0,0.65)] backdrop-blur-xl">
                   <Link
+                    href="/o-nas"
+                    role="menuitem"
+                    className="block rounded-xl px-4 py-3 text-sm text-white/88 transition hover:bg-cyan-400/10 hover:text-[#8aebff]"
+                  >
+                    {tNav("about")}
+                  </Link>
+                  <Link
                     href="/faq"
                     role="menuitem"
                     className="block rounded-xl px-4 py-3 text-sm text-white/88 transition hover:bg-cyan-400/10 hover:text-[#8aebff]"
@@ -222,13 +229,6 @@ export default function Navbar() {
                 </div>
               </div>
             </div>
-
-            <Link href="/kontakty" className={itemClass(contactActive)}>
-              {tNav("contact")}
-              {contactActive ? (
-                <span className="absolute bottom-1 left-4 right-4 h-px rounded-full bg-gradient-to-r from-transparent via-[#00b4ff] to-transparent" />
-              ) : null}
-            </Link>
           </div>
 
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">
