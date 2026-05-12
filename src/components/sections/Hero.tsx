@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Link } from "@/navigation";
 import { homeSectionHref } from "@/lib/navHref";
 import { cn } from "@/lib/cn";
+import { useMouseParallax } from "@/hooks/useMouseParallax";
+import { HeroPlatformField } from "@/components/HeroPlatformField";
 
 const MotionLink = motion(Link);
 
@@ -15,34 +17,52 @@ const easeOut = [0.22, 1, 0.36, 1] as const;
 export function Hero() {
   const t = useTranslations("hero");
   const [videoActive, setVideoActive] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const parallax = useMouseParallax(sectionRef, { maxPx: 26 });
 
   return (
     <section
+      ref={sectionRef}
       id="hero"
       className="relative flex min-h-[100dvh] items-center justify-center overflow-hidden bg-[#020308]"
     >
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        poster="/hero-poster.svg"
-        onLoadedData={() => setVideoActive(true)}
-        onPlaying={() => setVideoActive(true)}
-        className={cn(
-          "absolute inset-0 h-full w-full scale-[1.03] object-cover transition-opacity duration-[900ms] ease-out",
-          videoActive ? "opacity-[0.68]" : "opacity-0"
-        )}
+      <motion.div
+        className="absolute inset-[-6%] z-0 will-change-transform"
+        style={{ x: parallax.backX, y: parallax.backY }}
       >
-        <source src="/hero-bg.webm" type="video/webm" />
-        <source src="/hero-bg.mp4" type="video/mp4" />
-      </video>
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/hero-poster.svg"
+          onLoadedData={() => setVideoActive(true)}
+          onPlaying={() => setVideoActive(true)}
+          className={cn(
+            "h-full w-full scale-[1.06] object-cover transition-opacity duration-[900ms] ease-out",
+            videoActive ? "opacity-[0.68]" : "opacity-0"
+          )}
+        >
+          <source src="/hero-bg.webm" type="video/webm" />
+          <source src="/hero-bg.mp4" type="video/mp4" />
+        </video>
+      </motion.div>
 
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/45 via-[#050810]/88 to-black" />
-      <div className="premium-aurora z-[1]" />
-      <div className="hero-vignette-ring z-[1]" />
-      <div className="premium-grain z-[2]" aria-hidden />
+      <motion.div
+        className="absolute inset-0 z-0 bg-gradient-to-b from-black/45 via-[#050810]/88 to-black will-change-transform"
+        style={{ x: parallax.midX, y: parallax.midY }}
+      />
+      <motion.div
+        className="pointer-events-none absolute inset-0 z-[1] will-change-transform"
+        style={{ x: parallax.frontX, y: parallax.frontY }}
+      >
+        <div className="premium-aurora absolute inset-0" />
+        <div className="hero-vignette-ring absolute inset-0" />
+      </motion.div>
+      <div className="premium-grain pointer-events-none absolute inset-0 z-[2]" aria-hidden />
+
+      <HeroPlatformField sectionRef={sectionRef} />
 
       <div className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6">
         <motion.p
