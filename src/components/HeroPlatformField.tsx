@@ -26,7 +26,10 @@ const SLOTS = [
   { nx: 0.63, ny: 0.35 }
 ] as const;
 
-/** Широкая зона + мягкий спад — иконки заметно загораются рядом с курсором/пальцем */
+/**
+ * Двухслойное гауссово свечение: яркое ядро + широкий «плечо»,
+ * как мягкий прожектор на референсах вроде Rocket10.
+ */
 function glowStrength(px: Pt, cx: number, cy: number, w: number, h: number, radiusFrac: number) {
   const ix = cx * w;
   const iy = cy * h;
@@ -34,16 +37,24 @@ function glowStrength(px: Pt, cx: number, cy: number, w: number, h: number, radi
   const dy = px.y - iy;
   const r = Math.min(w, h) * radiusFrac;
   const d2 = dx * dx + dy * dy;
-  const raw = Math.exp(-d2 / (r * r * 0.58));
-  return Math.min(1, Math.pow(raw, 0.82));
+  const core = Math.exp(-d2 / (r * r * 0.76));
+  const halo = Math.exp(-d2 / (r * r * 2.05));
+  return Math.min(1, 0.68 * Math.pow(core, 0.72) + 0.32 * Math.pow(halo, 0.58));
 }
 
+/** S-кривая + усиление верха диапазона — яркий «продающий» акцент в центре пятна */
 function punchGlow(g: number) {
-  return Math.min(1, Math.pow(g, 0.72));
+  const t = Math.min(1, Math.max(0, g));
+  const s = t * t * (3 - 2 * t);
+  const base = Math.pow(s, 0.46);
+  return Math.min(1, base * (0.88 + 0.12 * Math.pow(s, 0.5)));
 }
 
-/** Скорость сходимости сглаженной точки к цели (чем больше — тем резче, но всё ещё плавно на 30–60 FPS). */
-const POINTER_SMOOTH_LAMBDA = 28;
+const EASE_SPOTLIGHT = [0.14, 1, 0.18, 1] as const;
+
+/** Десктоп / тач: на мобиле шире зона и чуть резче след за пальцем */
+const POINTER_LAMBDA_FINE = 30;
+const POINTER_LAMBDA_COARSE = 38;
 /** Порог в px: ниже — считаем, что догнали цель и можно остановить rAF (экономия CPU). */
 const POINTER_SNAP_EPS = 0.42;
 
@@ -63,11 +74,19 @@ function IconBubble({
   reduced: boolean;
 }) {
   const p = punchGlow(glow);
-  const idle = 0.04;
+  /** Сильный контраст: в тени почти нет, в фокусе — «витрина» */
+  const idle = 0.026;
+  const hot = p > 0.38;
+
+  const tweenSoft = { type: "tween" as const, duration: 0.48, ease: EASE_SPOTLIGHT };
+  const tweenGlow = { type: "tween" as const, duration: 0.4, ease: EASE_SPOTLIGHT };
 
   return (
     <motion.div
-      className={cn("pointer-events-none absolute sm:h-[3.35rem] sm:w-[3.35rem]", className)}
+      className={cn(
+        "pointer-events-none absolute will-change-[opacity,transform] sm:h-[3.35rem] sm:w-[3.35rem]",
+        className
+      )}
       style={{
         left: `${cx * 100}%`,
         top: `${cy * 100}%`,
@@ -79,43 +98,69 @@ function IconBubble({
           ? { opacity: 0.38, scale: 1 }
           : {
               opacity: idle + (1 - idle) * p,
-              scale: 0.86 + 0.22 * p
+              scale: 0.86 + 0.18 * p
             }
       }
-      transition={{ type: "spring", stiffness: 420, damping: 36, mass: 0.42 }}
+      transition={
+        reduced
+          ? { duration: 0.2 }
+          : { opacity: tweenSoft, scale: { ...tweenSoft, duration: 0.56 } }
+      }
     >
-      {/* внешнее мягкое свечение у курсора */}
+      {/* внутреннее ядро свечения */}
       <motion.div
         aria-hidden
-        className="absolute -inset-3 rounded-[1.35rem] bg-gradient-to-br from-cyan-400/35 via-violet-500/25 to-transparent blur-xl"
+        className="absolute -inset-2 rounded-[1.35rem] bg-gradient-to-br from-cyan-300/45 via-sky-400/25 to-fuchsia-500/30 blur-md"
+        animate={{ opacity: reduced ? 0 : p * 0.55 }}
+        transition={tweenGlow}
+      />
+      {/* широкий ореол «дорогого» сервиса */}
+      <motion.div
+        aria-hidden
+        className="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-cyan-400/35 via-violet-500/22 to-transparent blur-3xl"
         animate={{ opacity: reduced ? 0 : p * 0.95 }}
-        transition={{ type: "spring", stiffness: 380, damping: 38 }}
+        transition={tweenGlow}
       />
       <motion.div
         className={cn(
-          "relative flex h-12 w-12 items-center justify-center rounded-2xl border backdrop-blur-md sm:h-[3.35rem] sm:w-[3.35rem]",
+          "relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border backdrop-blur-md sm:h-[3.35rem] sm:w-[3.35rem]",
           reduced
             ? "border-white/[0.14] bg-[rgba(8,12,28,0.65)]"
-            : p > 0.35
-              ? "border-cyan-300/55 bg-[rgba(12,20,44,0.72)] shadow-[0_0_40px_rgba(34,211,238,0.35)]"
-              : "border-white/[0.12] bg-[rgba(6,10,24,0.5)]"
+            : hot
+              ? "border-cyan-200/65 bg-gradient-to-br from-[rgba(16,40,72,0.92)] via-[rgba(10,24,52,0.88)] to-[rgba(24,16,56,0.85)] shadow-[0_0_56px_rgba(34,211,238,0.45)] ring-1 ring-cyan-300/35"
+              : "border-white/[0.09] bg-[rgba(3,6,18,0.5)]"
         )}
         animate={
           reduced
             ? {}
             : {
                 boxShadow:
-                  p > 0.12
-                    ? `0 0 ${18 + 42 * p}px rgba(34,211,238,${0.25 + 0.45 * p}), 0 0 ${8 + 24 * p}px rgba(167,139,250,${0.12 + 0.28 * p}), inset 0 1px 0 rgba(255,255,255,${0.18 + 0.22 * p})`
-                    : "0 8px 28px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.08)"
+                  p > 0.08
+                    ? `0 0 ${22 + 58 * p}px rgba(34,211,238,${0.28 + 0.48 * p}), 0 0 ${12 + 36 * p}px rgba(192,132,252,${0.14 + 0.34 * p}), 0 0 ${4 + 12 * p}px rgba(255,255,255,${0.08 + 0.12 * p}), inset 0 1px 0 rgba(255,255,255,${0.2 + 0.28 * p})`
+                    : "0 12px 36px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.05)"
               }
         }
-        transition={{ type: "spring", stiffness: 360, damping: 38 }}
+        transition={{ type: "tween", duration: 0.44, ease: EASE_SPOTLIGHT }}
       >
         <motion.div
-          className="flex h-[1.85rem] w-[1.85rem] items-center justify-center sm:h-8 sm:w-8 [&_svg]:h-full [&_svg]:w-full [&_svg]:drop-shadow-[0_0_10px_rgba(255,255,255,0.35)]"
-          animate={reduced ? {} : { filter: p > 0.2 ? `brightness(${1 + 0.35 * p}) contrast(${1 + 0.15 * p})` : "brightness(0.92)" }}
-          transition={{ type: "spring", stiffness: 480, damping: 42 }}
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/[0.14] via-transparent to-cyan-300/18"
+          animate={{ opacity: reduced ? 0 : hot ? 1 : 0 }}
+          transition={{ duration: 0.32, ease: EASE_SPOTLIGHT }}
+        />
+        <motion.div
+          className="relative flex h-[1.85rem] w-[1.85rem] items-center justify-center sm:h-8 sm:w-8 [&_svg]:h-full [&_svg]:w-full [&_svg]:drop-shadow-[0_0_14px_rgba(255,255,255,0.35)]"
+          animate={
+            reduced
+              ? {}
+              : {
+                  filter:
+                    p > 0.14
+                      ? `brightness(${1 + 0.52 * p}) saturate(${1 + 0.35 * p}) contrast(${1 + 0.14 * p})`
+                      : "brightness(0.48) saturate(0.75)"
+                }
+          }
+          transition={{ type: "tween", duration: 0.38, ease: EASE_SPOTLIGHT }}
         >
           {children}
         </motion.div>
@@ -364,6 +409,20 @@ export function HeroPlatformField({ sectionRef }: Props) {
   const [pointer, setPointer] = useState<Pt | null>(null);
   const [dims, setDims] = useState({ w: 0, h: 0 });
   const dimsRef = useRef({ w: 0, h: 0 });
+  const [coarsePointer, setCoarsePointer] = useState(false);
+  const pointerLambdaRef = useRef(POINTER_LAMBDA_FINE);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(pointer: coarse)");
+    const syncPointerMode = () => {
+      const coarse = mq.matches;
+      setCoarsePointer(coarse);
+      pointerLambdaRef.current = coarse ? POINTER_LAMBDA_COARSE : POINTER_LAMBDA_FINE;
+    };
+    syncPointerMode();
+    mq.addEventListener("change", syncPointerMode);
+    return () => mq.removeEventListener("change", syncPointerMode);
+  }, []);
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -405,7 +464,7 @@ export function HeroPlatformField({ sectionRef }: Props) {
       if (!smooth.current) {
         smooth.current = { x: tgt.x, y: tgt.y };
       } else {
-        const a = 1 - Math.exp(-POINTER_SMOOTH_LAMBDA * dt);
+        const a = 1 - Math.exp(-pointerLambdaRef.current * dt);
         smooth.current.x += (tgt.x - smooth.current.x) * a;
         smooth.current.y += (tgt.y - smooth.current.y) * a;
       }
@@ -492,22 +551,67 @@ export function HeroPlatformField({ sectionRef }: Props) {
   const h = Math.max(dims.h, 1);
   const slots = SLOTS.slice(0, ICON_SET.length);
 
+  const minSide = Math.min(w, h);
+  const touchBoost = coarsePointer ? 1.18 : 1;
+  const sx = (pointer.x / w) * 100;
+  const sy = (pointer.y / h) * 100;
+  const rCore = minSide * 0.26 * touchBoost;
+  const rMid = minSide * 0.52 * touchBoost;
+  const rWide = minSide * (coarsePointer ? 0.92 : 0.78);
+
   return (
     <div
       className="pointer-events-none absolute inset-0 z-[4] overflow-hidden"
       aria-hidden
     >
+      {/* Живой фон поля: лёгкое «дыхание» — страница не статичная */}
+      {!reduceMotion && (
+        <>
+          <motion.div
+            className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_75%_55%_at_25%_15%,rgba(56,189,248,0.09),transparent_58%)]"
+            animate={{ opacity: [0.35, 0.85, 0.35] }}
+            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_60%_40%_at_85%_65%,rgba(167,139,250,0.07),transparent_55%)]"
+            animate={{ opacity: [0.25, 0.7, 0.25] }}
+            transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
+          />
+        </>
+      )}
+
+      {/* Многослойный прожектор: ядро + cyan + фиолетовое кольцо — ярко и «премиально» */}
+      {!reduceMotion && pointer && (
+        <div
+          className="absolute inset-0 z-0 mix-blend-screen"
+          style={{
+            background: `
+              radial-gradient(circle ${rCore}px at ${sx}% ${sy}%, rgba(255,255,255,0.18) 0%, rgba(186,230,253,0.12) 38%, transparent 52%),
+              radial-gradient(circle ${rMid}px at ${sx}% ${sy}%, rgba(34,211,238,0.22) 0%, rgba(56,189,248,0.08) 42%, transparent 58%),
+              radial-gradient(circle ${rWide}px at ${sx}% ${sy}%, rgba(167,139,250,0.08) 0%, rgba(59,130,246,0.04) 38%, transparent 62%)
+            `
+          }}
+        />
+      )}
+
       {slots.map((slot, i) => {
         const Icon = ICON_SET[i] ?? ICON_SET[0];
         let glow = 0;
         if (reduceMotion) {
           glow = 0.35;
         } else if (pointer) {
-          glow = glowStrength(pointer, slot.nx, slot.ny, w, h, 0.34);
+          glow = glowStrength(pointer, slot.nx, slot.ny, w, h, coarsePointer ? 0.53 : 0.44);
         }
 
         return (
-          <IconBubble key={i} cx={slot.nx} cy={slot.ny} glow={glow} reduced={!!reduceMotion}>
+          <IconBubble
+            key={i}
+            cx={slot.nx}
+            cy={slot.ny}
+            glow={glow}
+            reduced={!!reduceMotion}
+            className="relative z-[1]"
+          >
             <Icon />
           </IconBubble>
         );
