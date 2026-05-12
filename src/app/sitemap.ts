@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { CASE_SLUGS } from "@/content/cases";
+import { INDUSTRY_KEYS } from "@/content/industryVertical";
 import { SERVICE_SLUGS } from "@/content/services";
 import { routing } from "@/i18n/routing";
 import { languageAlternates } from "@/lib/hreflang";
@@ -73,6 +74,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: new Date(),
         changeFrequency: "monthly",
         priority: 0.72,
+        alternates: {
+          languages: languageAlternates(path)
+        }
+      });
+    }
+  }
+
+  for (const key of INDUSTRY_KEYS) {
+    const path = `/vertical/${key}`;
+    for (const locale of routing.locales) {
+      const suffix = localizedPath(locale, path);
+      const url = `${base}${suffix}`;
+      entries.push({
+        url,
+        lastModified: new Date(),
+        changeFrequency: "monthly",
+        priority: 0.7,
         alternates: {
           languages: languageAlternates(path)
         }

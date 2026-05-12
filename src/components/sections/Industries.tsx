@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { MotionDiv, MotionSection } from "@/components/motion";
 import { useTranslations } from "next-intl";
+import { Link } from "@/navigation";
 import { cn } from "@/lib/cn";
 
 type Industry = { key: string; caseId: string };
@@ -104,31 +105,36 @@ export function Industries() {
                   }
                 }}
               >
-                <motion.div
-                  className={cn(
-                    "group relative flex min-h-[7.5rem] flex-col items-center justify-center rounded-2xl border border-white/[0.1] bg-[linear-gradient(165deg,rgba(255,255,255,0.05)_0%,rgba(255,255,255,0.02)_100%)] px-3 py-4 text-center backdrop-blur-md transition duration-300 sm:min-h-[8.25rem]",
-                    hovered === item.key && "border-cyan-400/40 shadow-[0_0_36px_rgba(34,211,238,0.2)]"
-                  )}
-                  whileHover={{ y: -4, scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 22 }}
-                  onHoverStart={() => setHovered(item.key)}
-                  onHoverEnd={() => setHovered(null)}
+                <Link
+                  href={`/vertical/${item.key}`}
+                  className="block rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400/80"
                 >
-                  <div
+                  <motion.div
                     className={cn(
-                      "flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-white/55 transition duration-300",
-                      "group-hover:border-cyan-400/35 group-hover:text-cyan-200 group-hover:shadow-[0_0_24px_rgba(34,211,238,0.35)]"
+                      "group relative flex min-h-[7.5rem] flex-col items-center justify-center rounded-2xl border border-white/[0.1] bg-[linear-gradient(165deg,rgba(255,255,255,0.05)_0%,rgba(255,255,255,0.02)_100%)] px-3 py-4 text-center backdrop-blur-md transition duration-300 sm:min-h-[8.25rem]",
+                      hovered === item.key && "border-cyan-400/40 shadow-[0_0_36px_rgba(34,211,238,0.2)]"
                     )}
+                    whileHover={{ y: -4, scale: 1.02 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 22 }}
+                    onHoverStart={() => setHovered(item.key)}
+                    onHoverEnd={() => setHovered(null)}
                   >
-                    <Icon className="h-5 w-5" aria-hidden />
-                  </div>
-                  <p className="mt-2.5 text-[11px] font-semibold uppercase leading-tight tracking-wide text-white/80 sm:text-xs">
-                    {label}
-                  </p>
-                  <p className="mt-1.5 hidden text-[10px] font-bold text-cyan-300 sm:text-[11px] group-hover:block">
-                    {result}
-                  </p>
-                </motion.div>
+                    <div
+                      className={cn(
+                        "flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-white/55 transition duration-300",
+                        "group-hover:border-cyan-400/35 group-hover:text-cyan-200 group-hover:shadow-[0_0_24px_rgba(34,211,238,0.35)]"
+                      )}
+                    >
+                      <Icon className="h-5 w-5" aria-hidden />
+                    </div>
+                    <p className="mt-2.5 text-[11px] font-semibold uppercase leading-tight tracking-wide text-white/80 sm:text-xs">
+                      {label}
+                    </p>
+                    <p className="mt-1.5 hidden text-[10px] font-bold text-cyan-300 sm:text-[11px] group-hover:block">
+                      {result}
+                    </p>
+                  </motion.div>
+                </Link>
               </MotionDiv>
             );
           })}
