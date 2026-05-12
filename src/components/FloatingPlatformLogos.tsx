@@ -29,7 +29,6 @@ function pathForLogo(filename: string): string {
 }
 
 export default function FloatingPlatformLogos({ className }: FloatingPlatformLogosProps) {
-  const rootRef = useRef<HTMLDivElement>(null);
   const [sources, setSources] = useState<string[]>([]);
   const [pops, setPops] = useState<Pop[]>([]);
   const [touchUi, setTouchUi] = useState(false);
@@ -229,7 +228,6 @@ export default function FloatingPlatformLogos({ className }: FloatingPlatformLog
 
   return (
     <div
-      ref={rootRef}
       className={cn(
         "pointer-events-none absolute inset-0 z-[15] overflow-hidden min-h-[min(100%,100dvh)] min-w-full",
         className
@@ -248,28 +246,19 @@ export default function FloatingPlatformLogos({ className }: FloatingPlatformLog
             transition={enterTransition}
             layout={false}
           >
-            {/* В стиле Hero: стекло + тёмный подложечный тон (серые PNG менее «плашкой») */}
-            <div
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={p.src}
+              alt=""
+              width={72}
+              height={72}
+              draggable={false}
               className={cn(
-                "flex items-center justify-center rounded-2xl border border-white/[0.14]",
-                "bg-[#050810]/72 backdrop-blur-md",
-                "shadow-[0_0_0_1px_rgba(0,200,255,0.1),0_16px_44px_rgba(0,0,0,0.42),0_0_52px_rgba(0,180,255,0.14)]",
-                touchUi ? "h-[52px] w-[52px] p-1.5" : "h-16 w-16 p-2 sm:h-[68px] sm:w-[68px] sm:p-2"
+                "pointer-events-none select-none object-contain",
+                touchUi ? "h-11 w-11" : "h-14 w-14 sm:h-[72px] sm:w-[72px]",
+                "[filter:saturate(1.08)_brightness(1.04)_drop-shadow(0_4px_14px_rgba(0,0,0,0.55))_drop-shadow(0_0_22px_rgba(0,185,255,0.12))]"
               )}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={p.src}
-                alt=""
-                width={72}
-                height={72}
-                draggable={false}
-                className={cn(
-                  "pointer-events-none max-h-full max-w-full select-none object-contain",
-                  "[filter:saturate(1.12)_brightness(1.05)]"
-                )}
-              />
-            </div>
+            />
           </motion.div>
         ))}
       </AnimatePresence>
