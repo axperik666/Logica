@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  useCallback,
-  useEffect,
-  useId,
-  useRef,
-  useState,
-  type ReactNode
-} from "react";
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/cn";
 
@@ -24,7 +17,13 @@ const SLOTS = [
   { nx: 0.18, ny: 0.82 },
   { nx: 0.78, ny: 0.78 },
   { nx: 0.48, ny: 0.08 },
-  { nx: 0.52, ny: 0.88 }
+  { nx: 0.52, ny: 0.88 },
+  { nx: 0.32, ny: 0.2 },
+  { nx: 0.68, ny: 0.2 },
+  { nx: 0.26, ny: 0.5 },
+  { nx: 0.74, ny: 0.48 },
+  { nx: 0.38, ny: 0.68 },
+  { nx: 0.63, ny: 0.35 }
 ] as const;
 
 /** Широкая зона + мягкий спад — иконки заметно загораются рядом с курсором/пальцем */
@@ -42,6 +41,11 @@ function glowStrength(px: Pt, cx: number, cy: number, w: number, h: number, radi
 function punchGlow(g: number) {
   return Math.min(1, Math.pow(g, 0.72));
 }
+
+/** Скорость сходимости сглаженной точки к цели (чем больше — тем резче, но всё ещё плавно на 30–60 FPS). */
+const POINTER_SMOOTH_LAMBDA = 28;
+/** Порог в px: ниже — считаем, что догнали цель и можно остановить rAF (экономия CPU). */
+const POINTER_SNAP_EPS = 0.42;
 
 function IconBubble({
   children,
@@ -78,14 +82,14 @@ function IconBubble({
               scale: 0.86 + 0.22 * p
             }
       }
-      transition={{ type: "spring", stiffness: 460, damping: 32, mass: 0.45 }}
+      transition={{ type: "spring", stiffness: 420, damping: 36, mass: 0.42 }}
     >
       {/* внешнее мягкое свечение у курсора */}
       <motion.div
         aria-hidden
         className="absolute -inset-3 rounded-[1.35rem] bg-gradient-to-br from-cyan-400/35 via-violet-500/25 to-transparent blur-xl"
         animate={{ opacity: reduced ? 0 : p * 0.95 }}
-        transition={{ type: "spring", stiffness: 400, damping: 35 }}
+        transition={{ type: "spring", stiffness: 380, damping: 38 }}
       />
       <motion.div
         className={cn(
@@ -106,12 +110,12 @@ function IconBubble({
                     : "0 8px 28px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.08)"
               }
         }
-        transition={{ type: "spring", stiffness: 380, damping: 34 }}
+        transition={{ type: "spring", stiffness: 360, damping: 38 }}
       >
         <motion.div
           className="flex h-[1.85rem] w-[1.85rem] items-center justify-center sm:h-8 sm:w-8 [&_svg]:h-full [&_svg]:w-full [&_svg]:drop-shadow-[0_0_10px_rgba(255,255,255,0.35)]"
           animate={reduced ? {} : { filter: p > 0.2 ? `brightness(${1 + 0.35 * p}) contrast(${1 + 0.15 * p})` : "brightness(0.92)" }}
-          transition={{ type: "spring", stiffness: 500, damping: 38 }}
+          transition={{ type: "spring", stiffness: 480, damping: 42 }}
         >
           {children}
         </motion.div>
@@ -256,6 +260,82 @@ function SvgWhatsApp() {
   );
 }
 
+/** Стильный маркер «люкс»: крылья + акцент — без воспроизведения зарегистрированного знака. */
+function SvgArmaniStyle() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        stroke="#c9a962"
+        strokeWidth="1.35"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 5v4M7 10c2.5-3 7.5-3 10 0M6 14c2.5 4 9.5 4 12 0M9 17l3-4 3 4"
+      />
+      <path fill="#c9a962" d="M12 14.5c1 0 1.8.7 2 1.7l-4 .1c.2-1 1-1.8 2-1.8z" opacity="0.85" />
+    </svg>
+  );
+}
+
+/** Узнаваемый силуэт крокодила — декоративный, не копия логотипа Lacoste. */
+function SvgLacosteStyle() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden>
+      <path
+        fill="#0d5c4a"
+        d="M16 8.5c.8-.2 1.8.2 2.2 1 .5 1-.3 2.2-1.5 2.6-.4 1.4-1.4 2.4-2.8 2.8-.3 1.5-1.3 2.7-2.8 3.2l-.8 1.6h-1.2l.2-1.2c-2 .2-3.8-.8-4.8-2.5-.8.3-1.7 0-2.2-.7-.6-.9-.4-2 .5-2.6 1.5-2.8 4-4.5 7-5 .6-1.6 2.4-2.5 4.2-2.2zm-5 3.5c-1.8.5-3.3 1.7-4.2 3.3.4.5 1.1.7 1.7.5 1.5-2 3.8-3 6.2-3.5-.8-.8-2.3-.8-3.7-.3z"
+      />
+      <circle cx="14.5" cy="9.5" r="0.9" fill="#fff" opacity="0.9" />
+    </svg>
+  );
+}
+
+function SvgNikeStyle() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden>
+      <path
+        fill="#f5f5f5"
+        d="M4.2 15.8c5.8-5.2 11.6-7.8 17.5-7.3.4 4.6-6.8 9.4-17.3 11.5-.3-1.7-.4-3.2-.2-4.2z"
+      />
+    </svg>
+  );
+}
+
+function SvgAdidasStyle() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden>
+      <path fill="#f5f5f5" d="M5 20L9.5 6h2L7 20zM10.5 20L15 6h2L12.5 20zM16 20L20.5 6h2L18 20z" />
+    </svg>
+  );
+}
+
+/** Два переплетённых овала — отсылка к классическому люксовому знаку. */
+function SvgChanelStyle() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        stroke="#f5f5f5"
+        strokeWidth="1.45"
+        d="M9.5 8.5c-2.5 0-4.5 2-4.5 4.5s2 4.5 4.5 4.5a4.4 4.4 0 0 0 3.6-1.9M14.5 8.5c2.5 0 4.5 2 4.5 4.5s-2 4.5-4.5 4.5a4.4 4.4 0 0 1-3.6-1.9"
+      />
+    </svg>
+  );
+}
+
+/** Стильные переплетённые буквы — декоративная отсылка к GG-монограмме. */
+function SvgGucciStyle() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        stroke="#c9a962"
+        strokeWidth="1.35"
+        strokeLinecap="round"
+        d="M9 9c-2 0-3.5 1.8-3.5 4s1.5 4 3.5 4 3.5-1.8 3.5-4c0-.8-.2-1.5-.5-2.1M15 9c2 0 3.5 1.8 3.5 4s-1.5 4-3.5 4-3.5-1.8-3.5-4c0-.8.2-1.5.5-2.1"
+      />
+      <path stroke="#c9a962" strokeWidth="1.2" d="M11.5 11v5M11.5 11c.8-.8 2.2-.8 3 0" />
+    </svg>
+  );
+}
+
 const ICON_SET = [
   SvgMeta,
   SvgGoogle,
@@ -266,7 +346,13 @@ const ICON_SET = [
   SvgLinkedIn,
   SvgYoutube,
   SvgYandex,
-  SvgWhatsApp
+  SvgWhatsApp,
+  SvgArmaniStyle,
+  SvgLacosteStyle,
+  SvgNikeStyle,
+  SvgAdidasStyle,
+  SvgChanelStyle,
+  SvgGucciStyle
 ] as const;
 
 type Props = {
@@ -277,22 +363,16 @@ export function HeroPlatformField({ sectionRef }: Props) {
   const reduceMotion = useReducedMotion();
   const [pointer, setPointer] = useState<Pt | null>(null);
   const [dims, setDims] = useState({ w: 0, h: 0 });
-  const rafRef = useRef(0);
-
-  const updatePointer = useCallback((clientX: number, clientY: number) => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    setDims({ w: r.width, h: r.height });
-    setPointer({ x: clientX - r.left, y: clientY - r.top });
-  }, [sectionRef]);
+  const dimsRef = useRef({ w: 0, h: 0 });
 
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
     const measure = () => {
       const r = el.getBoundingClientRect();
-      setDims({ w: r.width, h: r.height });
+      const d = { w: r.width, h: r.height };
+      dimsRef.current = d;
+      setDims(d);
     };
     measure();
     const ro = new ResizeObserver(measure);
@@ -305,9 +385,66 @@ export function HeroPlatformField({ sectionRef }: Props) {
     const el = sectionRef.current;
     if (!el) return;
 
-    const flush = (clientX: number, clientY: number) => {
-      cancelAnimationFrame(rafRef.current);
-      rafRef.current = requestAnimationFrame(() => updatePointer(clientX, clientY));
+    let rafId = 0;
+    let lastTs = performance.now();
+    const target: { current: Pt | null } = { current: null };
+    const smooth: { current: Pt | null } = { current: null };
+
+    const tick = (ts: number) => {
+      const dt = Math.min((ts - lastTs) / 1000, 0.072);
+      lastTs = ts;
+
+      const tgt = target.current;
+      if (!tgt) {
+        smooth.current = null;
+        setPointer(null);
+        rafId = 0;
+        return;
+      }
+
+      if (!smooth.current) {
+        smooth.current = { x: tgt.x, y: tgt.y };
+      } else {
+        const a = 1 - Math.exp(-POINTER_SMOOTH_LAMBDA * dt);
+        smooth.current.x += (tgt.x - smooth.current.x) * a;
+        smooth.current.y += (tgt.y - smooth.current.y) * a;
+      }
+
+      setPointer({ x: smooth.current.x, y: smooth.current.y });
+
+      const dist = Math.hypot(tgt.x - smooth.current.x, tgt.y - smooth.current.y);
+      if (dist > POINTER_SNAP_EPS) {
+        rafId = requestAnimationFrame(tick);
+      } else {
+        smooth.current = { x: tgt.x, y: tgt.y };
+        setPointer({ x: tgt.x, y: tgt.y });
+        rafId = 0;
+      }
+    };
+
+    const startLoop = () => {
+      if (rafId !== 0) return;
+      lastTs = performance.now();
+      rafId = requestAnimationFrame(tick);
+    };
+
+    const setTargetFromClient = (clientX: number, clientY: number) => {
+      const r = el.getBoundingClientRect();
+      const d = { w: r.width, h: r.height };
+      dimsRef.current = d;
+      setDims(d);
+      const local = { x: clientX - r.left, y: clientY - r.top };
+      target.current = local;
+      if (!smooth.current) smooth.current = { ...local };
+      startLoop();
+    };
+
+    const clearTarget = () => {
+      target.current = null;
+      if (rafId === 0) {
+        smooth.current = null;
+        setPointer(null);
+      }
     };
 
     const inHero = (clientX: number, clientY: number) => {
@@ -320,32 +457,36 @@ export function HeroPlatformField({ sectionRef }: Props) {
       );
     };
 
-    const onMove = (e: MouseEvent) => flush(e.clientX, e.clientY);
-    const onLeave = () => setPointer(null);
+    const onMove = (e: MouseEvent) => setTargetFromClient(e.clientX, e.clientY);
+    const onLeave = () => clearTarget();
 
-    /** Палец над hero с любого слоя (в т.ч. поверх контента) — для мобилки */
+    /** Палец над hero — глобальные touch, чтобы ловить движение поверх контента */
     const onTouchGlobal = (e: TouchEvent) => {
       const t = e.touches[0];
       if (!t) return;
-      if (inHero(t.clientX, t.clientY)) flush(t.clientX, t.clientY);
+      if (inHero(t.clientX, t.clientY)) setTargetFromClient(t.clientX, t.clientY);
     };
-    const onTouchEndGlobal = () => setPointer(null);
+    const onTouchEndGlobal = () => clearTarget();
 
     el.addEventListener("mousemove", onMove);
     el.addEventListener("mouseleave", onLeave);
     window.addEventListener("touchstart", onTouchGlobal, { passive: true });
     window.addEventListener("touchmove", onTouchGlobal, { passive: true });
     window.addEventListener("touchend", onTouchEndGlobal);
+    window.addEventListener("touchcancel", onTouchEndGlobal);
 
     return () => {
-      cancelAnimationFrame(rafRef.current);
+      cancelAnimationFrame(rafId);
+      target.current = null;
+      smooth.current = null;
       el.removeEventListener("mousemove", onMove);
       el.removeEventListener("mouseleave", onLeave);
       window.removeEventListener("touchstart", onTouchGlobal);
       window.removeEventListener("touchmove", onTouchGlobal);
       window.removeEventListener("touchend", onTouchEndGlobal);
+      window.removeEventListener("touchcancel", onTouchEndGlobal);
     };
-  }, [sectionRef, updatePointer, reduceMotion]);
+  }, [sectionRef, reduceMotion]);
 
   const w = Math.max(dims.w, 1);
   const h = Math.max(dims.h, 1);
