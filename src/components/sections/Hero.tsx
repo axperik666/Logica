@@ -22,7 +22,7 @@ export function Hero({ children }: HeroProps) {
   const t = useTranslations("hero");
   const [videoActive, setVideoActive] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
-  const parallax = useMouseParallax(sectionRef, { maxPx: 26 });
+  const parallax = useMouseParallax(sectionRef, { maxPx: 38 });
   const reduceMotion = useReducedMotion();
 
   const { scrollYProgress } = useScroll({

@@ -4,11 +4,11 @@ import { useEffect, useRef } from "react";
 import { cn } from "@/lib/cn";
 
 const ACCENT = "#00bfff";
-const LINK_DIST = 130;
-const ATTRACT_DIST = 180;
-const MOBILE_GLOW_RADIUS = 220;
-const CURSOR_GLOW_RADIUS = 140;
-const DEFAULT_COUNT = 100;
+const LINK_DIST = 148;
+const ATTRACT_DIST = 195;
+const MOBILE_GLOW_RADIUS = 240;
+const CURSOR_GLOW_RADIUS = 155;
+const DEFAULT_COUNT = 110;
 const MIN_PARTICLES = 80;
 const MAX_PARTICLES = 120;
 
@@ -147,14 +147,16 @@ export default function InteractiveBackground({
 
       ctx.clearRect(0, 0, w, h);
 
-      if (mouse.active && !isMobile) {
+      const attractMul = isMobile ? 0.72 : 1;
+
+      if (mouse.active) {
         for (const p of particles) {
           const dx = mouse.x - p.x;
           const dy = mouse.y - p.y;
           const dist = Math.hypot(dx, dy);
           if (dist < ATTRACT_DIST && dist > 0.5) {
-            p.vx += dx * ATTRACT_FORCE;
-            p.vy += dy * ATTRACT_FORCE;
+            p.vx += dx * ATTRACT_FORCE * attractMul;
+            p.vy += dy * ATTRACT_FORCE * attractMul;
           }
           p.vx += (p.baseX - p.x) * HOME_SPRING;
           p.vy += (p.baseY - p.y) * HOME_SPRING;
@@ -165,8 +167,8 @@ export default function InteractiveBackground({
         }
       } else {
         for (const p of particles) {
-          p.vx += (p.baseX - p.x) * HOME_SPRING * 1.5;
-          p.vy += (p.baseY - p.y) * HOME_SPRING * 1.5;
+          p.vx += (p.baseX - p.x) * HOME_SPRING * 1.65;
+          p.vy += (p.baseY - p.y) * HOME_SPRING * 1.65;
           p.vx *= DAMPING;
           p.vy *= DAMPING;
           p.x += p.vx;
@@ -174,15 +176,25 @@ export default function InteractiveBackground({
         }
       }
 
-      const t = performance.now() * 0.00035;
-      const idleAmp = isMobile ? 0.8 : 1.2;
+      const t = performance.now() * 0.00052;
+      const idleAmp = isMobile ? 1.35 : 1.75;
+      const idleAmp2 = isMobile ? 0.42 : 0.55;
+
+      const drift = (bx: number, by: number) => ({
+        ox:
+          Math.sin(t + bx * 0.01) * idleAmp +
+          Math.sin(t * 1.72 + by * 0.013) * idleAmp2,
+        oy:
+          Math.cos(t * 0.95 + by * 0.008) * idleAmp +
+          Math.cos(t * 1.14 + bx * 0.011) * idleAmp2
+      });
 
       if (mouse.active) {
         ctx.save();
         const radius = isMobile ? MOBILE_GLOW_RADIUS : CURSOR_GLOW_RADIUS;
         const g = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, radius);
-        g.addColorStop(0, "rgba(0,191,255,0.35)");
-        g.addColorStop(0.5, "rgba(0,191,255,0.08)");
+        g.addColorStop(0, "rgba(0,191,255,0.42)");
+        g.addColorStop(0.5, "rgba(0,191,255,0.1)");
         g.addColorStop(1, "rgba(0,191,255,0)");
         ctx.fillStyle = g;
         ctx.fillRect(0, 0, w, h);
@@ -197,10 +209,12 @@ export default function InteractiveBackground({
         for (let j = i + 1; j < n; j++) {
           const a = particles[i]!;
           const b = particles[j]!;
-          const ax = a.x + Math.sin(t + a.baseX * 0.01) * idleAmp;
-          const ay = a.y + Math.cos(t * 0.95 + a.baseY * 0.008) * idleAmp;
-          const bx = b.x + Math.sin(t + b.baseX * 0.01) * idleAmp;
-          const by = b.y + Math.cos(t * 0.95 + b.baseY * 0.008) * idleAmp;
+          const da = drift(a.baseX, a.baseY);
+          const db = drift(b.baseX, b.baseY);
+          const ax = a.x + da.ox;
+          const ay = a.y + da.oy;
+          const bx = b.x + db.ox;
+          const by = b.y + db.oy;
           const d = Math.hypot(ax - bx, ay - by);
           if (d >= LINK_DIST) continue;
 
@@ -217,8 +231,9 @@ export default function InteractiveBackground({
       if (mouse.active) {
         const maxDist = isMobile ? MOBILE_GLOW_RADIUS : ATTRACT_DIST;
         for (const p of particles) {
-          const px = p.x + Math.sin(t + p.baseX * 0.01) * idleAmp;
-          const py = p.y + Math.cos(t * 0.95 + p.baseY * 0.008) * idleAmp;
+          const d0 = drift(p.baseX, p.baseY);
+          const px = p.x + d0.ox;
+          const py = p.y + d0.oy;
           const d = Math.hypot(mouse.x - px, mouse.y - py);
           if (d >= maxDist) continue;
 
@@ -233,10 +248,9 @@ export default function InteractiveBackground({
       }
 
       for (const p of particles) {
-        const ox = Math.sin(t + p.baseX * 0.01) * idleAmp;
-        const oy = Math.cos(t * 0.95 + p.baseY * 0.008) * idleAmp;
-        const px = p.x + ox;
-        const py = p.y + oy;
+        const d0 = drift(p.baseX, p.baseY);
+        const px = p.x + d0.ox;
+        const py = p.y + d0.oy;
 
         let rad = p.r;
         let alpha = 0.4;

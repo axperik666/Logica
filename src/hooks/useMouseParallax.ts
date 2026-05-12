@@ -19,8 +19,8 @@ export type MouseParallaxLayers = {
 };
 
 /**
- * Интерактивный параллакс по позиции курсора внутри элемента.
- * При уходе курсора с области — плавный возврат в центр.
+ * Интерактивный параллакс по позиции указателя (мышь и тач) внутри элемента.
+ * При уходе / отпускании — плавный возврат в центр.
  */
 export function useMouseParallax(
   containerRef: RefObject<HTMLElement | null>,
@@ -32,7 +32,7 @@ export function useMouseParallax(
   const rawX = useMotionValue(0);
   const rawY = useMotionValue(0);
 
-  const springConfig = { stiffness: 52, damping: 32, mass: 0.35 };
+  const springConfig = { stiffness: 58, damping: 28, mass: 0.32 };
   const x = useSpring(rawX, springConfig);
   const y = useSpring(rawY, springConfig);
 
@@ -53,7 +53,7 @@ export function useMouseParallax(
     const el = containerRef.current;
     if (!el) return;
 
-    const handleMove = (e: MouseEvent) => {
+    const handleMove = (e: PointerEvent) => {
       const r = el.getBoundingClientRect();
       const nx = (e.clientX - r.left) / Math.max(r.width, 1) - 0.5;
       const ny = (e.clientY - r.top) / Math.max(r.height, 1) - 0.5;
@@ -66,12 +66,16 @@ export function useMouseParallax(
       rawY.set(0);
     };
 
-    el.addEventListener("mousemove", handleMove);
-    el.addEventListener("mouseleave", reset);
+    el.addEventListener("pointermove", handleMove, { passive: true });
+    el.addEventListener("pointerleave", reset);
+    el.addEventListener("pointerup", reset);
+    el.addEventListener("pointercancel", reset);
 
     return () => {
-      el.removeEventListener("mousemove", handleMove);
-      el.removeEventListener("mouseleave", reset);
+      el.removeEventListener("pointermove", handleMove);
+      el.removeEventListener("pointerleave", reset);
+      el.removeEventListener("pointerup", reset);
+      el.removeEventListener("pointercancel", reset);
     };
   }, [containerRef, maxPx, rawX, rawY, reduceMotion]);
 
