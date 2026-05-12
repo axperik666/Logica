@@ -553,8 +553,8 @@ export function HeroPlatformField({ sectionRef }: Props) {
 
   const minSide = Math.min(w, h);
   const touchBoost = coarsePointer ? 1.18 : 1;
-  const sx = (pointer.x / w) * 100;
-  const sy = (pointer.y / h) * 100;
+  const sx = pointer ? (pointer.x / w) * 100 : 0;
+  const sy = pointer ? (pointer.y / h) * 100 : 0;
   const rCore = minSide * 0.26 * touchBoost;
   const rMid = minSide * 0.52 * touchBoost;
   const rWide = minSide * (coarsePointer ? 0.92 : 0.78);
