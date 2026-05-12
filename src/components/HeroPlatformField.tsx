@@ -8,7 +8,7 @@ import {
   useState,
   type ReactNode
 } from "react";
-import { useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/cn";
 
 type Pt = { x: number; y: number };
@@ -27,6 +27,7 @@ const SLOTS = [
   { nx: 0.52, ny: 0.88 }
 ] as const;
 
+/** Широкая зона + мягкий спад — иконки заметно загораются рядом с курсором/пальцем */
 function glowStrength(px: Pt, cx: number, cy: number, w: number, h: number, radiusFrac: number) {
   const ix = cx * w;
   const iy = cy * h;
@@ -34,7 +35,12 @@ function glowStrength(px: Pt, cx: number, cy: number, w: number, h: number, radi
   const dy = px.y - iy;
   const r = Math.min(w, h) * radiusFrac;
   const d2 = dx * dx + dy * dy;
-  return Math.exp(-d2 / (r * r * 0.42));
+  const raw = Math.exp(-d2 / (r * r * 0.58));
+  return Math.min(1, Math.pow(raw, 0.82));
+}
+
+function punchGlow(g: number) {
+  return Math.min(1, Math.pow(g, 0.72));
 }
 
 function IconBubble({
@@ -52,31 +58,65 @@ function IconBubble({
   cy: number;
   reduced: boolean;
 }) {
-  const base = reduced ? 0.34 : 0.1 + 0.58 * glow;
-  const scale = reduced ? 1 : 0.92 + 0.14 * glow;
-  const blur = reduced ? 0 : 12 * (0.2 + 0.8 * glow);
+  const p = punchGlow(glow);
+  const idle = 0.04;
 
   return (
-    <div
-      className={cn(
-        "pointer-events-none absolute flex h-11 w-11 items-center justify-center rounded-2xl border border-white/[0.12] bg-[rgba(6,10,24,0.55)] shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-md transition-[opacity,transform,box-shadow] duration-300 sm:h-12 sm:w-12",
-        className
-      )}
+    <motion.div
+      className={cn("pointer-events-none absolute sm:h-[3.35rem] sm:w-[3.35rem]", className)}
       style={{
         left: `${cx * 100}%`,
         top: `${cy * 100}%`,
-        transform: `translate(-50%, -50%) scale(${scale})`,
-        opacity: base,
-        boxShadow:
-          glow > 0.08 && !reduced
-            ? `0 0 ${blur}px rgba(34,211,238,${0.15 + 0.45 * glow}), inset 0 1px 0 rgba(255,255,255,0.12)`
-            : undefined
+        translateX: "-50%",
+        translateY: "-50%"
       }}
+      animate={
+        reduced
+          ? { opacity: 0.38, scale: 1 }
+          : {
+              opacity: idle + (1 - idle) * p,
+              scale: 0.86 + 0.22 * p
+            }
+      }
+      transition={{ type: "spring", stiffness: 460, damping: 32, mass: 0.45 }}
     >
-      <div className="flex h-7 w-7 items-center justify-center text-white/95 [&_svg]:h-full [&_svg]:w-full">
-        {children}
-      </div>
-    </div>
+      {/* внешнее мягкое свечение у курсора */}
+      <motion.div
+        aria-hidden
+        className="absolute -inset-3 rounded-[1.35rem] bg-gradient-to-br from-cyan-400/35 via-violet-500/25 to-transparent blur-xl"
+        animate={{ opacity: reduced ? 0 : p * 0.95 }}
+        transition={{ type: "spring", stiffness: 400, damping: 35 }}
+      />
+      <motion.div
+        className={cn(
+          "relative flex h-12 w-12 items-center justify-center rounded-2xl border backdrop-blur-md sm:h-[3.35rem] sm:w-[3.35rem]",
+          reduced
+            ? "border-white/[0.14] bg-[rgba(8,12,28,0.65)]"
+            : p > 0.35
+              ? "border-cyan-300/55 bg-[rgba(12,20,44,0.72)] shadow-[0_0_40px_rgba(34,211,238,0.35)]"
+              : "border-white/[0.12] bg-[rgba(6,10,24,0.5)]"
+        )}
+        animate={
+          reduced
+            ? {}
+            : {
+                boxShadow:
+                  p > 0.12
+                    ? `0 0 ${18 + 42 * p}px rgba(34,211,238,${0.25 + 0.45 * p}), 0 0 ${8 + 24 * p}px rgba(167,139,250,${0.12 + 0.28 * p}), inset 0 1px 0 rgba(255,255,255,${0.18 + 0.22 * p})`
+                    : "0 8px 28px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.08)"
+              }
+        }
+        transition={{ type: "spring", stiffness: 380, damping: 34 }}
+      >
+        <motion.div
+          className="flex h-[1.85rem] w-[1.85rem] items-center justify-center sm:h-8 sm:w-8 [&_svg]:h-full [&_svg]:w-full [&_svg]:drop-shadow-[0_0_10px_rgba(255,255,255,0.35)]"
+          animate={reduced ? {} : { filter: p > 0.2 ? `brightness(${1 + 0.35 * p}) contrast(${1 + 0.15 * p})` : "brightness(0.92)" }}
+          transition={{ type: "spring", stiffness: 500, damping: 38 }}
+        >
+          {children}
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 }
 
@@ -322,7 +362,7 @@ export function HeroPlatformField({ sectionRef }: Props) {
         if (reduceMotion) {
           glow = 0.35;
         } else if (pointer) {
-          glow = glowStrength(pointer, slot.nx, slot.ny, w, h, 0.24);
+          glow = glowStrength(pointer, slot.nx, slot.ny, w, h, 0.34);
         }
 
         return (
