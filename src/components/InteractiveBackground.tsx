@@ -13,9 +13,9 @@ const MIN_PARTICLES = 80;
 const MAX_PARTICLES = 120;
 
 const SHADOW_BLUR = 12;
-const ATTRACT_FORCE = 0.08;
-const DAMPING = 0.94;
-const HOME_SPRING = 0.038;
+const ATTRACT_FORCE = 0.085;
+const DAMPING = 0.93;
+const HOME_SPRING = 0.042;
 
 function clampOpacity(t: number): number {
   return Math.min(0.85, Math.max(0.15, t));
@@ -43,26 +43,16 @@ function initParticles(w: number, h: number, count: number): Particle[] {
   const n = Math.min(MAX_PARTICLES, Math.max(MIN_PARTICLES, Math.floor(count)));
   const out: Particle[] = [];
   const rng = (s: number) => {
-    let x = Math.sin(s * 12.9898 + w) * 43758.5453;
+    let x = Math.sin(s * 12.9898) * 43758.5453;
     return x - Math.floor(x);
   };
   for (let i = 0; i < n; i++) {
     const bx = rng(i * 7 + 1) * w;
     const by = rng(i * 13 + 2) * h;
-    const r = 1.2 + rng(i * 3) * 1.6;
+    const r = 1.3 + rng(i * 3) * 1.5;
     out.push({ baseX: bx, baseY: by, x: bx, y: by, vx: 0, vy: 0, r });
   }
   return out;
-}
-
-/** Узкий экран или coarse pointer — без физики притяжения (как в ТЗ), только glow/scale.
- * Не используем ontouchstart: в части Chrome он есть на десктопе и ломает притяжение. */
-function readMobileGlowOnly(): boolean {
-  if (typeof window === "undefined") return false;
-  return (
-    window.matchMedia("(max-width: 767px)").matches ||
-    window.matchMedia("(pointer: coarse)").matches
-  );
 }
 
 export type InteractiveBackgroundProps = {
@@ -78,11 +68,10 @@ export default function InteractiveBackground({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const mouseRef = useRef({ x: 0, y: 0, active: false });
-  const countRef = useRef(particleCount);
   const dimsRef = useRef({ w: 0, h: 0, dpr: 1 });
-  const rafRef = useRef(0);
-  const mobileGlowRef = useRef(false);
-  const reducePhysicsRef = useRef(false);
+  const rafRef = useRef<number>(0);
+  const isMobileRef = useRef(false);
+  const countRef = useRef(particleCount);
 
   countRef.current = Math.min(MAX_PARTICLES, Math.max(MIN_PARTICLES, Math.floor(particleCount)));
 
@@ -91,44 +80,45 @@ export default function InteractiveBackground({
     const canvas = canvasRef.current;
     if (!container || !canvas) return;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
-
-    const syncPrefs = () => {
-      mobileGlowRef.current = readMobileGlowOnly();
-      reducePhysicsRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    };
-    syncPrefs();
-
-    const mqMove = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const mqMobW = window.matchMedia("(max-width: 767px)");
-    const mqMobP = window.matchMedia("(pointer: coarse)");
-    const onPrefs = () => syncPrefs();
-    mqMove.addEventListener("change", onPrefs);
-    mqMobW.addEventListener("change", onPrefs);
-    mqMobP.addEventListener("change", onPrefs);
 
     const syncCanvasSize = () => {
       const rect = container.getBoundingClientRect();
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const w = Math.max(1, Math.floor(rect.width));
       const h = Math.max(1, Math.floor(rect.height));
+
       dimsRef.current = { w, h, dpr };
       canvas.width = Math.floor(w * dpr);
       canvas.height = Math.floor(h * dpr);
       canvas.style.width = `${w}px`;
       canvas.style.height = `${h}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
       particlesRef.current = initParticles(w, h, countRef.current);
     };
+
+    const refreshMobile = () => {
+      isMobileRef.current =
+        window.matchMedia("(max-width: 767px)").matches ||
+        window.matchMedia("(pointer: coarse)").matches;
+    };
+    refreshMobile();
 
     syncCanvasSize();
     requestAnimationFrame(() => syncCanvasSize());
 
-    const ro = new ResizeObserver(syncCanvasSize);
+    const ro = new ResizeObserver(() => {
+      refreshMobile();
+      syncCanvasSize();
+    });
     ro.observe(container);
 
-    const updateMouseFromEvent = (e: PointerEvent) => {
+    window.addEventListener("resize", refreshMobile);
+
+    /** Window + rect canvas: работает поверх градиента/aurora (они pointer-events-none), не блокирует CTA hero */
+    const updateMouse = (e: PointerEvent) => {
       const rect = canvas.getBoundingClientRect();
       const inside =
         e.clientX >= rect.left &&
@@ -146,19 +136,15 @@ export default function InteractiveBackground({
       };
     };
 
-    const onPointerDown = (e: PointerEvent) => updateMouseFromEvent(e);
-    const onPointerMove = (e: PointerEvent) => updateMouseFromEvent(e);
-    const onPointerUp = () => {
+    const clearMouse = () => {
       mouseRef.current.active = false;
     };
 
-    window.addEventListener("pointerdown", onPointerDown, { passive: true });
-    window.addEventListener("pointermove", onPointerMove, { passive: true });
-    window.addEventListener("pointerup", onPointerUp, { passive: true });
-    window.addEventListener("pointercancel", onPointerUp, { passive: true });
-    window.addEventListener("blur", onPointerUp);
-
-    const attractMul = () => (reducePhysicsRef.current ? 0.35 : 1);
+    window.addEventListener("pointermove", updateMouse, { passive: true });
+    window.addEventListener("pointerdown", updateMouse, { passive: true });
+    window.addEventListener("pointerup", clearMouse, { passive: true });
+    window.addEventListener("pointercancel", clearMouse, { passive: true });
+    window.addEventListener("blur", clearMouse);
 
     const animate = () => {
       const { w, h } = dimsRef.current;
@@ -169,35 +155,18 @@ export default function InteractiveBackground({
 
       const particles = particlesRef.current;
       const mouse = mouseRef.current;
-      const glowOnly = mobileGlowRef.current;
-      const am = attractMul();
+      const isMobile = isMobileRef.current;
 
       ctx.clearRect(0, 0, w, h);
 
-      if (!mouse.active) {
-        for (const p of particles) {
-          p.vx += (p.baseX - p.x) * HOME_SPRING * 1.4;
-          p.vy += (p.baseY - p.y) * HOME_SPRING * 1.4;
-          p.vx *= DAMPING;
-          p.vy *= DAMPING;
-          p.x += p.vx;
-          p.y += p.vy;
-        }
-      } else if (glowOnly) {
-        for (const p of particles) {
-          p.x = p.baseX;
-          p.y = p.baseY;
-          p.vx = 0;
-          p.vy = 0;
-        }
-      } else {
+      if (mouse.active && !isMobile) {
         for (const p of particles) {
           const dx = mouse.x - p.x;
           const dy = mouse.y - p.y;
           const dist = Math.hypot(dx, dy);
           if (dist < ATTRACT_DIST && dist > 0.5) {
-            p.vx += dx * ATTRACT_FORCE * am;
-            p.vy += dy * ATTRACT_FORCE * am;
+            p.vx += dx * ATTRACT_FORCE;
+            p.vy += dy * ATTRACT_FORCE;
           }
           p.vx += (p.baseX - p.x) * HOME_SPRING;
           p.vy += (p.baseY - p.y) * HOME_SPRING;
@@ -206,28 +175,29 @@ export default function InteractiveBackground({
           p.x += p.vx;
           p.y += p.vy;
         }
+      } else {
+        for (const p of particles) {
+          p.vx += (p.baseX - p.x) * HOME_SPRING * 1.5;
+          p.vy += (p.baseY - p.y) * HOME_SPRING * 1.5;
+          p.vx *= DAMPING;
+          p.vy *= DAMPING;
+          p.x += p.vx;
+          p.y += p.vy;
+        }
       }
 
       const t = performance.now() * 0.00035;
-      const idleAmp = reducePhysicsRef.current ? 0.6 : 1.2;
+      const idleAmp = isMobile ? 0.8 : 1.2;
 
       if (mouse.active) {
         ctx.save();
-        const g = ctx.createRadialGradient(
-          mouse.x,
-          mouse.y,
-          0,
-          mouse.x,
-          mouse.y,
-          CURSOR_GLOW_RADIUS
-        );
+        const radius = isMobile ? MOBILE_GLOW_RADIUS : CURSOR_GLOW_RADIUS;
+        const g = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, radius);
         g.addColorStop(0, "rgba(0,191,255,0.35)");
-        g.addColorStop(0.45, "rgba(0,191,255,0.08)");
+        g.addColorStop(0.5, "rgba(0,191,255,0.08)");
         g.addColorStop(1, "rgba(0,191,255,0)");
         ctx.fillStyle = g;
-        ctx.beginPath();
-        ctx.arc(mouse.x, mouse.y, CURSOR_GLOW_RADIUS, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.fillRect(0, 0, w, h);
         ctx.restore();
       }
 
@@ -245,8 +215,8 @@ export default function InteractiveBackground({
           const by = b.y + Math.cos(t * 0.95 + b.baseY * 0.008) * idleAmp;
           const d = Math.hypot(ax - bx, ay - by);
           if (d >= LINK_DIST) continue;
-          const tt = 1 - d / LINK_DIST;
-          const alpha = clampOpacity(0.15 + tt * 0.7);
+
+          const alpha = clampOpacity(0.15 + (1 - d / LINK_DIST) * 0.7);
           ctx.strokeStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${alpha})`;
           ctx.lineWidth = 1;
           ctx.beginPath();
@@ -257,18 +227,16 @@ export default function InteractiveBackground({
       }
 
       if (mouse.active) {
-        const linkDist = glowOnly ? MOBILE_GLOW_RADIUS : ATTRACT_DIST;
+        const maxDist = isMobile ? MOBILE_GLOW_RADIUS : ATTRACT_DIST;
         for (const p of particles) {
           const px = p.x + Math.sin(t + p.baseX * 0.01) * idleAmp;
           const py = p.y + Math.cos(t * 0.95 + p.baseY * 0.008) * idleAmp;
-          const dx = mouse.x - px;
-          const dy = mouse.y - py;
-          const d = Math.hypot(dx, dy);
-          if (d >= linkDist) continue;
-          const tt = 1 - d / linkDist;
-          const alpha = clampOpacity(0.2 + tt * 0.65);
+          const d = Math.hypot(mouse.x - px, mouse.y - py);
+          if (d >= maxDist) continue;
+
+          const alpha = clampOpacity(0.25 + (1 - d / maxDist) * 0.65);
           ctx.strokeStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${alpha})`;
-          ctx.lineWidth = 2 + (1 - d / linkDist) * 4;
+          ctx.lineWidth = 2.5;
           ctx.beginPath();
           ctx.moveTo(px, py);
           ctx.lineTo(mouse.x, mouse.y);
@@ -281,29 +249,27 @@ export default function InteractiveBackground({
         const oy = Math.cos(t * 0.95 + p.baseY * 0.008) * idleAmp;
         const px = p.x + ox;
         const py = p.y + oy;
+
         let rad = p.r;
-        let alpha = 0.35;
+        let alpha = 0.4;
+
         if (mouse.active) {
-          const dx = mouse.x - px;
-          const dy = mouse.y - py;
-          const d = Math.hypot(dx, dy);
-          const nearR = glowOnly ? MOBILE_GLOW_RADIUS : ATTRACT_DIST;
-          if (d < nearR) {
-            const falloff = 1 - d / nearR;
-            alpha = clampOpacity(0.18 + falloff * 0.67);
-            rad = p.r * (1 + falloff * (glowOnly ? 0.85 : 0.65));
+          const d = Math.hypot(mouse.x - px, mouse.y - py);
+          const maxR = isMobile ? MOBILE_GLOW_RADIUS : ATTRACT_DIST;
+          if (d < maxR) {
+            const falloff = 1 - d / maxR;
+            alpha = clampOpacity(0.2 + falloff * 0.75);
+            rad = p.r * (1 + falloff * (isMobile ? 1.1 : 0.7));
           }
         }
+
         ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${alpha})`;
-        ctx.lineWidth = 0;
         ctx.beginPath();
         ctx.arc(px, py, rad, 0, Math.PI * 2);
         ctx.fill();
       }
 
       ctx.shadowBlur = 0;
-      ctx.shadowColor = "transparent";
-
       rafRef.current = requestAnimationFrame(animate);
     };
 
@@ -312,14 +278,12 @@ export default function InteractiveBackground({
     return () => {
       ro.disconnect();
       cancelAnimationFrame(rafRef.current);
-      mqMove.removeEventListener("change", onPrefs);
-      mqMobW.removeEventListener("change", onPrefs);
-      mqMobP.removeEventListener("change", onPrefs);
-      window.removeEventListener("pointerdown", onPointerDown);
-      window.removeEventListener("pointermove", onPointerMove);
-      window.removeEventListener("pointerup", onPointerUp);
-      window.removeEventListener("pointercancel", onPointerUp);
-      window.removeEventListener("blur", onPointerUp);
+      window.removeEventListener("resize", refreshMobile);
+      window.removeEventListener("pointermove", updateMouse);
+      window.removeEventListener("pointerdown", updateMouse);
+      window.removeEventListener("pointerup", clearMouse);
+      window.removeEventListener("pointercancel", clearMouse);
+      window.removeEventListener("blur", clearMouse);
     };
   }, [particleCount]);
 
@@ -327,7 +291,7 @@ export default function InteractiveBackground({
     <div
       ref={containerRef}
       className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}
-      aria-hidden
+      aria-hidden="true"
     >
       <canvas ref={canvasRef} className="block h-full w-full" style={{ pointerEvents: "none" }} />
     </div>
