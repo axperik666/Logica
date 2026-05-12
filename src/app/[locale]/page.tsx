@@ -50,7 +50,7 @@ export default function HomePage() {
       <Hero>
         <InteractiveBackground
           className="absolute inset-0 z-[-1] pointer-events-none"
-          particleCount={96}
+          particleCount={100}
         />
       </Hero>
       <TrustStrip />
