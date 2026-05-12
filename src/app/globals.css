@@ -1,6 +1,9 @@
 /* Tailwind CSS v4: один импорт заменяет @tailwind base / components / utilities */
 @import "tailwindcss";
 
+/* Явная связка с tailwind.config.ts (на CI/Vercel иногда не подхватывается автоматически) */
+@config "../../tailwind.config.ts";
+
 /*
  * Шрифт Inter подключается через next/font в app/layout.tsx (preload, без блокирующего @import).
  * При желании fallback ниже в body дублирует системный стек.
@@ -116,17 +119,11 @@ body:not(.tech-bg) {
   }
 
   .section-header {
-    font-size: 3rem;
+    font-size: clamp(3rem, 2.35rem + 2.8vw, 3.75rem);
     line-height: 1;
     font-weight: 700;
     letter-spacing: -0.025em;
     color: #fff;
-  }
-
-  @media (min-width: 768px) {
-    .section-header {
-      font-size: 3.75rem;
-    }
   }
 }
 
