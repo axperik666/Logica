@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
-import InteractiveBackground from "@/components/InteractiveBackground";
+import { HeroBrandCursor } from "@/components/HeroBrandCursor";
 import { Hero } from "@/components/sections/Hero";
 import { TrustStrip } from "@/components/sections/TrustStrip";
 import { TrustBar } from "@/components/sections/TrustBar";
@@ -48,10 +48,7 @@ export default function HomePage() {
     <>
       <HomePageJsonLd />
       <Hero>
-        <InteractiveBackground
-          className="pointer-events-none absolute inset-0 z-0 min-h-full min-w-full"
-          particleCount={100}
-        />
+        <HeroBrandCursor className="min-h-full min-w-full" />
       </Hero>
       <TrustStrip />
       <TrustBar />
