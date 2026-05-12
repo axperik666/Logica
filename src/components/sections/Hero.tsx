@@ -2,10 +2,11 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/navigation";
-import { homeSectionHref } from "@/lib/navHref";
+import { homeHashHref, homeSectionHref } from "@/lib/navHref";
 import { cn } from "@/lib/cn";
 import { useMouseParallax } from "@/hooks/useMouseParallax";
 import { HeroPlatformField } from "@/components/HeroPlatformField";
@@ -19,6 +20,19 @@ export function Hero() {
   const [videoActive, setVideoActive] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const parallax = useMouseParallax(sectionRef, { maxPx: 26 });
+  const reduceMotion = useReducedMotion();
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"]
+  });
+  const scrollSmooth = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 28,
+    mass: 0.35
+  });
+  const heroContentFade = useTransform(scrollSmooth, [0, 0.42], [1, 0.88]);
+  const heroContentLift = useTransform(scrollSmooth, [0, 1], [0, 42]);
 
   return (
     <section
@@ -64,7 +78,17 @@ export function Hero() {
 
       <HeroPlatformField sectionRef={sectionRef} />
 
-      <div className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6">
+      <motion.div
+        className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6"
+        style={
+          reduceMotion
+            ? undefined
+            : {
+                opacity: heroContentFade,
+                y: heroContentLift
+              }
+        }
+      >
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -137,7 +161,38 @@ export function Hero() {
             {t("ctaSecondary")}
           </MotionLink>
         </motion.div>
-      </div>
+
+        {/* Как на Rocket10: явная подсказка к скроллу + якорь на следующий блок */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.85, duration: 0.55, ease: easeOut }}
+          className="mt-14 flex flex-col items-center gap-2 sm:mt-16"
+        >
+          <Link
+            href={homeHashHref("platforms")}
+            className="group inline-flex flex-col items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/45 transition-colors hover:text-cyan-200/90"
+          >
+            <span>{t("scrollDiscover")}</span>
+            <motion.span
+              aria-hidden
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.12] bg-white/[0.04] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm transition-[border,background] group-hover:border-cyan-400/25 group-hover:bg-white/[0.07]"
+              animate={
+                reduceMotion
+                  ? undefined
+                  : { y: [0, 6, 0] }
+              }
+              transition={
+                reduceMotion
+                  ? undefined
+                  : { duration: 2.2, repeat: Infinity, ease: "easeInOut" }
+              }
+            >
+              <ChevronDown className="h-5 w-5 text-cyan-200/75" strokeWidth={2} />
+            </motion.span>
+          </Link>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

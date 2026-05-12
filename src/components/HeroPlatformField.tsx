@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, type ReactNode } from "react";
+import { useEffect, useId, useMemo, useRef, useState, type ReactNode } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/cn";
 
@@ -27,27 +27,46 @@ const SLOTS = [
 ] as const;
 
 /**
- * Двухслойное гауссово свечение: яркое ядро + широкий «плечо»,
- * как мягкий прожектор на референсах вроде Rocket10.
+ * Один «активный» слот за раз: гауссовы веса по расстоянию + нормализация (softmax).
+ * Узкий σ → визуально одна иконка; при движении плавно перетекает на соседнюю.
  */
-function glowStrength(px: Pt, cx: number, cy: number, w: number, h: number, radiusFrac: number) {
-  const ix = cx * w;
-  const iy = cy * h;
-  const dx = px.x - ix;
-  const dy = px.y - iy;
-  const r = Math.min(w, h) * radiusFrac;
-  const d2 = dx * dx + dy * dy;
-  const core = Math.exp(-d2 / (r * r * 0.76));
-  const halo = Math.exp(-d2 / (r * r * 2.05));
-  return Math.min(1, 0.68 * Math.pow(core, 0.72) + 0.32 * Math.pow(halo, 0.58));
+function slotGlowWeights(px: Pt, w: number, h: number, slotCount: number, coarse: boolean): number[] {
+  const minS = Math.min(w, h);
+  const sigma = minS * (coarse ? 0.072 : 0.058);
+  const inv2s = 1 / (2 * sigma * sigma);
+  const raw: number[] = [];
+  let maxL = -Infinity;
+  for (let i = 0; i < slotCount; i++) {
+    const s = SLOTS[i];
+    if (!s) break;
+    const ix = s.nx * w;
+    const iy = s.ny * h;
+    const d2 = (px.x - ix) ** 2 + (px.y - iy) ** 2;
+    const logW = -d2 * inv2s;
+    raw.push(logW);
+    if (logW > maxL) maxL = logW;
+  }
+  let sum = 0;
+  const weights: number[] = [];
+  for (let i = 0; i < raw.length; i++) {
+    const v = Math.exp(raw[i]! - maxL);
+    weights.push(v);
+    sum += v;
+  }
+  if (sum <= 0) return Array(slotCount).fill(0);
+  const norm = weights.map((v) => v / sum);
+  /* Усиливаем лидера — почти одна иконка, мягкий кроссфейд между соседями */
+  const sharpPow = coarse ? 3.1 : 3.6;
+  const sharp = norm.map((v) => Math.pow(v, sharpPow));
+  const s2 = sharp.reduce((a, b) => a + b, 0);
+  return sharp.map((v) => (s2 > 0 ? v / s2 : 0));
 }
 
-/** S-кривая + усиление верха диапазона — яркий «продающий» акцент в центре пятна */
+/** Подчёркиваем пик без клиппинга в середину */
 function punchGlow(g: number) {
   const t = Math.min(1, Math.max(0, g));
   const s = t * t * (3 - 2 * t);
-  const base = Math.pow(s, 0.46);
-  return Math.min(1, base * (0.88 + 0.12 * Math.pow(s, 0.5)));
+  return Math.min(1, Math.pow(s, 0.42));
 }
 
 const EASE_SPOTLIGHT = [0.14, 1, 0.18, 1] as const;
@@ -74,12 +93,12 @@ function IconBubble({
   reduced: boolean;
 }) {
   const p = punchGlow(glow);
-  /** Сильный контраст: в тени почти нет, в фокусе — «витрина» */
-  const idle = 0.026;
-  const hot = p > 0.38;
+  /** Без наведения/тача — полностью скрыто; в фокусе — яркая «витрина» */
+  const visible = reduced || p > 0.006;
+  const hot = p > 0.45;
 
-  const tweenSoft = { type: "tween" as const, duration: 0.48, ease: EASE_SPOTLIGHT };
-  const tweenGlow = { type: "tween" as const, duration: 0.4, ease: EASE_SPOTLIGHT };
+  const tweenSoft = { type: "tween" as const, duration: 0.44, ease: EASE_SPOTLIGHT };
+  const tweenGlow = { type: "tween" as const, duration: 0.36, ease: EASE_SPOTLIGHT };
 
   return (
     <motion.div
@@ -97,8 +116,8 @@ function IconBubble({
         reduced
           ? { opacity: 0.38, scale: 1 }
           : {
-              opacity: idle + (1 - idle) * p,
-              scale: 0.86 + 0.18 * p
+              opacity: visible ? 0.07 + 0.93 * p : 0,
+              scale: visible ? 0.88 + 0.16 * p : 0.82
             }
       }
       transition={
@@ -491,7 +510,8 @@ export function HeroPlatformField({ sectionRef }: Props) {
       const r = el.getBoundingClientRect();
       const d = { w: r.width, h: r.height };
       dimsRef.current = d;
-      setDims(d);
+      /* один setState на кадр движения — без лишних пересчётов разметки */
+      setDims((prev) => (prev.w === d.w && prev.h === d.h ? prev : d));
       const local = { x: clientX - r.left, y: clientY - r.top };
       target.current = local;
       if (!smooth.current) smooth.current = { ...local };
@@ -516,56 +536,74 @@ export function HeroPlatformField({ sectionRef }: Props) {
       );
     };
 
-    const onMove = (e: MouseEvent) => setTargetFromClient(e.clientX, e.clientY);
-    const onLeave = () => clearTarget();
-
-    /** Палец над hero — глобальные touch, чтобы ловить движение поверх контента */
-    const onTouchGlobal = (e: TouchEvent) => {
-      const t = e.touches[0];
-      if (!t) return;
-      if (inHero(t.clientX, t.clientY)) setTargetFromClient(t.clientX, t.clientY);
+    /** Десктоп + тач: координаты с окна — hover работает даже над типографикой z-10 */
+    const onWindowPointerMove = (e: PointerEvent) => {
+      if (!inHero(e.clientX, e.clientY)) {
+        clearTarget();
+        return;
+      }
+      setTargetFromClient(e.clientX, e.clientY);
     };
-    const onTouchEndGlobal = () => clearTarget();
 
-    el.addEventListener("mousemove", onMove);
-    el.addEventListener("mouseleave", onLeave);
-    window.addEventListener("touchstart", onTouchGlobal, { passive: true });
-    window.addEventListener("touchmove", onTouchGlobal, { passive: true });
-    window.addEventListener("touchend", onTouchEndGlobal);
-    window.addEventListener("touchcancel", onTouchEndGlobal);
+    /** Мгновенная реакция на тап без ожидания pointermove (без capture — не ломаем клики по ссылкам) */
+    const onSectionPointerDown = (e: PointerEvent) => {
+      if (!inHero(e.clientX, e.clientY)) return;
+      setTargetFromClient(e.clientX, e.clientY);
+    };
+
+    const onSectionPointerUp = (e: PointerEvent) => {
+      if (e.pointerType === "mouse") return;
+      clearTarget();
+    };
+
+    window.addEventListener("pointermove", onWindowPointerMove, { passive: true });
+    window.addEventListener("blur", clearTarget);
+    el.addEventListener("pointerdown", onSectionPointerDown, true);
+    el.addEventListener("pointerup", onSectionPointerUp);
+    el.addEventListener("pointercancel", onSectionPointerUp);
 
     return () => {
       cancelAnimationFrame(rafId);
       target.current = null;
       smooth.current = null;
-      el.removeEventListener("mousemove", onMove);
-      el.removeEventListener("mouseleave", onLeave);
-      window.removeEventListener("touchstart", onTouchGlobal);
-      window.removeEventListener("touchmove", onTouchGlobal);
-      window.removeEventListener("touchend", onTouchEndGlobal);
-      window.removeEventListener("touchcancel", onTouchEndGlobal);
+      window.removeEventListener("pointermove", onWindowPointerMove);
+      window.removeEventListener("blur", clearTarget);
+      el.removeEventListener("pointerdown", onSectionPointerDown, true);
+      el.removeEventListener("pointerup", onSectionPointerUp);
+      el.removeEventListener("pointercancel", onSectionPointerUp);
     };
   }, [sectionRef, reduceMotion]);
 
   const w = Math.max(dims.w, 1);
   const h = Math.max(dims.h, 1);
-  const slots = SLOTS.slice(0, ICON_SET.length);
+  const slotCount = ICON_SET.length;
+  const slots = SLOTS.slice(0, slotCount);
+
+  const glowWeights = useMemo(() => {
+    if (reduceMotion || !pointer) return null;
+    return slotGlowWeights(pointer, w, h, slotCount, coarsePointer);
+  }, [pointer, w, h, slotCount, coarsePointer, reduceMotion]);
 
   const minSide = Math.min(w, h);
-  const touchBoost = coarsePointer ? 1.18 : 1;
+  const touchBoost = coarsePointer ? 1.12 : 1;
   const sx = pointer ? (pointer.x / w) * 100 : 0;
   const sy = pointer ? (pointer.y / h) * 100 : 0;
-  const rCore = minSide * 0.26 * touchBoost;
-  const rMid = minSide * 0.52 * touchBoost;
-  const rWide = minSide * (coarsePointer ? 0.92 : 0.78);
+  const rCore = minSide * 0.24 * touchBoost;
+  const rMid = minSide * 0.48 * touchBoost;
+  const rWide = minSide * (coarsePointer ? 0.82 : 0.72);
+
+  /** Параллакс слоёв относительно центра hero — глубина как у премиальных лендингов */
+  const driftX = pointer ? (pointer.x / w - 0.5) * (coarsePointer ? 11 : 16) : 0;
+  const driftY = pointer ? (pointer.y / h - 0.5) * (coarsePointer ? 9 : 13) : 0;
+  const idleMotion = !pointer;
 
   return (
     <div
       className="pointer-events-none absolute inset-0 z-[4] overflow-hidden"
       aria-hidden
     >
-      {/* Живой фон поля: лёгкое «дыхание» — страница не статичная */}
-      {!reduceMotion && (
+      {/* «Дыхание» фона только без взаимодействия — иначе мерцание на мобилке */}
+      {!reduceMotion && idleMotion && (
         <>
           <motion.div
             className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_75%_55%_at_25%_15%,rgba(56,189,248,0.09),transparent_58%)]"
@@ -580,42 +618,51 @@ export function HeroPlatformField({ sectionRef }: Props) {
         </>
       )}
 
-      {/* Многослойный прожектор: ядро + cyan + фиолетовое кольцо — ярко и «премиально» */}
-      {!reduceMotion && pointer && (
-        <div
-          className="absolute inset-0 z-0 mix-blend-screen"
-          style={{
-            background: `
-              radial-gradient(circle ${rCore}px at ${sx}% ${sy}%, rgba(255,255,255,0.18) 0%, rgba(186,230,253,0.12) 38%, transparent 52%),
-              radial-gradient(circle ${rMid}px at ${sx}% ${sy}%, rgba(34,211,238,0.22) 0%, rgba(56,189,248,0.08) 42%, transparent 58%),
-              radial-gradient(circle ${rWide}px at ${sx}% ${sy}%, rgba(167,139,250,0.08) 0%, rgba(59,130,246,0.04) 38%, transparent 62%)
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          transform: `translate3d(${driftX * 1.05}px, ${driftY * 0.85}px, 0)`
+        }}
+      >
+        {!reduceMotion && pointer && (
+          <div
+            className={cn(
+              "absolute inset-0",
+              coarsePointer ? "opacity-[0.92]" : "mix-blend-screen"
+            )}
+            style={{
+              background: `
+              radial-gradient(circle ${rCore}px at ${sx}% ${sy}%, rgba(255,255,255,0.2) 0%, rgba(186,230,253,0.14) 36%, transparent 50%),
+              radial-gradient(circle ${rMid}px at ${sx}% ${sy}%, rgba(34,211,238,0.24) 0%, rgba(56,189,248,0.09) 40%, transparent 56%),
+              radial-gradient(circle ${rWide}px at ${sx}% ${sy}%, rgba(167,139,250,0.09) 0%, rgba(59,130,246,0.045) 36%, transparent 60%)
             `
-          }}
-        />
-      )}
+            }}
+          />
+        )}
+      </div>
 
-      {slots.map((slot, i) => {
-        const Icon = ICON_SET[i] ?? ICON_SET[0];
-        let glow = 0;
-        if (reduceMotion) {
-          glow = 0.35;
-        } else if (pointer) {
-          glow = glowStrength(pointer, slot.nx, slot.ny, w, h, coarsePointer ? 0.53 : 0.44);
-        }
+      <div
+        className="absolute inset-0 z-[1]"
+        style={{
+          transform: `translate3d(${driftX * 0.55}px, ${driftY * 0.48}px, 0)`
+        }}
+      >
+        {slots.map((slot, i) => {
+          const Icon = ICON_SET[i] ?? ICON_SET[0];
+          let glow = 0;
+          if (reduceMotion) {
+            glow = 0.35;
+          } else if (glowWeights) {
+            glow = glowWeights[i] ?? 0;
+          }
 
-        return (
-          <IconBubble
-            key={i}
-            cx={slot.nx}
-            cy={slot.ny}
-            glow={glow}
-            reduced={!!reduceMotion}
-            className="relative z-[1]"
-          >
-            <Icon />
-          </IconBubble>
-        );
-      })}
+          return (
+            <IconBubble key={i} cx={slot.nx} cy={slot.ny} glow={glow} reduced={!!reduceMotion}>
+              <Icon />
+            </IconBubble>
+          );
+        })}
+      </div>
     </div>
   );
 }
