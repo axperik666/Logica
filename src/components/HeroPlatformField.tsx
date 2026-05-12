@@ -27,39 +27,39 @@ const SLOTS = [
 ] as const;
 
 /**
- * Один «активный» слот за раз: гауссовы веса по расстоянию + нормализация (softmax).
- * Узкий σ → визуально одна иконка; при движении плавно перетекает на соседнюю.
+ * Только ближайший слот (и при необходимости второй для плавного переезда).
+ * Раньше softmax по всем 16 давал «хвосты» — на мобилке казалось, что горят все.
  */
 function slotGlowWeights(px: Pt, w: number, h: number, slotCount: number, coarse: boolean): number[] {
   const minS = Math.min(w, h);
-  const sigma = minS * (coarse ? 0.072 : 0.058);
-  const inv2s = 1 / (2 * sigma * sigma);
-  const raw: number[] = [];
-  let maxL = -Infinity;
+  const sigma = minS * (coarse ? 0.038 : 0.032);
+  const inv2 = 1 / (2 * sigma * sigma);
+  const out = Array.from({ length: slotCount }, () => 0);
+
+  const dists: { i: number; d: number }[] = [];
   for (let i = 0; i < slotCount; i++) {
     const s = SLOTS[i];
-    if (!s) break;
+    if (!s) continue;
     const ix = s.nx * w;
     const iy = s.ny * h;
-    const d2 = (px.x - ix) ** 2 + (px.y - iy) ** 2;
-    const logW = -d2 * inv2s;
-    raw.push(logW);
-    if (logW > maxL) maxL = logW;
+    dists.push({ i, d: Math.hypot(px.x - ix, px.y - iy) });
   }
-  let sum = 0;
-  const weights: number[] = [];
-  for (let i = 0; i < raw.length; i++) {
-    const v = Math.exp(raw[i]! - maxL);
-    weights.push(v);
-    sum += v;
+  dists.sort((a, b) => a.d - b.d);
+  const best = dists[0];
+  const second = dists[1];
+  if (!best) return out;
+
+  if (!second || second.d - best.d > sigma * 2.8) {
+    out[best.i] = 1;
+    return out;
   }
-  if (sum <= 0) return Array(slotCount).fill(0);
-  const norm = weights.map((v) => v / sum);
-  /* Усиливаем лидера — почти одна иконка, мягкий кроссфейд между соседями */
-  const sharpPow = coarse ? 3.1 : 3.6;
-  const sharp = norm.map((v) => Math.pow(v, sharpPow));
-  const s2 = sharp.reduce((a, b) => a + b, 0);
-  return sharp.map((v) => (s2 > 0 ? v / s2 : 0));
+
+  const wa = Math.exp(-(best.d * best.d) * inv2);
+  const wb = Math.exp(-(second.d * second.d) * inv2);
+  const sum = wa + wb || 1;
+  out[best.i] = wa / sum;
+  out[second.i] = wb / sum;
+  return out;
 }
 
 /** Подчёркиваем пик без клиппинга в середину */
@@ -83,7 +83,8 @@ function IconBubble({
   glow,
   cx,
   cy,
-  reduced
+  reduced,
+  interacting
 }: {
   children: ReactNode;
   className?: string;
@@ -91,10 +92,11 @@ function IconBubble({
   cx: number;
   cy: number;
   reduced: boolean;
+  /** false = курсор/палец не в hero — не показываем слой вообще */
+  interacting: boolean;
 }) {
   const p = punchGlow(glow);
-  /** Без наведения/тача — полностью скрыто; в фокусе — яркая «витрина» */
-  const visible = reduced || p > 0.006;
+  const visible = reduced || (interacting && p > 0.002);
   const hot = p > 0.45;
 
   const tweenSoft = { type: "tween" as const, duration: 0.44, ease: EASE_SPOTLIGHT };
@@ -104,6 +106,7 @@ function IconBubble({
     <motion.div
       className={cn(
         "pointer-events-none absolute will-change-[opacity,transform] sm:h-[3.35rem] sm:w-[3.35rem]",
+        !visible && !reduced && "invisible",
         className
       )}
       style={{
@@ -112,12 +115,13 @@ function IconBubble({
         translateX: "-50%",
         translateY: "-50%"
       }}
+      initial={reduced ? false : { opacity: 0, scale: 0.88 }}
       animate={
         reduced
           ? { opacity: 0.38, scale: 1 }
           : {
-              opacity: visible ? 0.07 + 0.93 * p : 0,
-              scale: visible ? 0.88 + 0.16 * p : 0.82
+              opacity: visible ? 0.08 + 0.92 * p : 0,
+              scale: visible ? 0.88 + 0.16 * p : 0.86
             }
       }
       transition={
@@ -556,7 +560,7 @@ export function HeroPlatformField({ sectionRef }: Props) {
       clearTarget();
     };
 
-    window.addEventListener("pointermove", onWindowPointerMove, { passive: true });
+    document.addEventListener("pointermove", onWindowPointerMove, { passive: true, capture: true });
     window.addEventListener("blur", clearTarget);
     el.addEventListener("pointerdown", onSectionPointerDown, true);
     el.addEventListener("pointerup", onSectionPointerUp);
@@ -566,7 +570,7 @@ export function HeroPlatformField({ sectionRef }: Props) {
       cancelAnimationFrame(rafId);
       target.current = null;
       smooth.current = null;
-      window.removeEventListener("pointermove", onWindowPointerMove);
+      document.removeEventListener("pointermove", onWindowPointerMove, true);
       window.removeEventListener("blur", clearTarget);
       el.removeEventListener("pointerdown", onSectionPointerDown, true);
       el.removeEventListener("pointerup", onSectionPointerUp);
@@ -585,12 +589,10 @@ export function HeroPlatformField({ sectionRef }: Props) {
   }, [pointer, w, h, slotCount, coarsePointer, reduceMotion]);
 
   const minSide = Math.min(w, h);
-  const touchBoost = coarsePointer ? 1.12 : 1;
   const sx = pointer ? (pointer.x / w) * 100 : 0;
   const sy = pointer ? (pointer.y / h) * 100 : 0;
-  const rCore = minSide * 0.24 * touchBoost;
-  const rMid = minSide * 0.48 * touchBoost;
-  const rWide = minSide * (coarsePointer ? 0.82 : 0.72);
+  /** Узкое пятно — не «включает свет во всей секции», только локальный отблеск */
+  const spotR = Math.round(minSide * (coarsePointer ? 0.2 : 0.17));
 
   /** Параллакс слоёв относительно центра hero — глубина как у премиальных лендингов */
   const driftX = pointer ? (pointer.x / w - 0.5) * (coarsePointer ? 11 : 16) : 0;
@@ -626,16 +628,9 @@ export function HeroPlatformField({ sectionRef }: Props) {
       >
         {!reduceMotion && pointer && (
           <div
-            className={cn(
-              "absolute inset-0",
-              coarsePointer ? "opacity-[0.92]" : "mix-blend-screen"
-            )}
+            className="pointer-events-none absolute inset-0 opacity-90"
             style={{
-              background: `
-              radial-gradient(circle ${rCore}px at ${sx}% ${sy}%, rgba(255,255,255,0.2) 0%, rgba(186,230,253,0.14) 36%, transparent 50%),
-              radial-gradient(circle ${rMid}px at ${sx}% ${sy}%, rgba(34,211,238,0.24) 0%, rgba(56,189,248,0.09) 40%, transparent 56%),
-              radial-gradient(circle ${rWide}px at ${sx}% ${sy}%, rgba(167,139,250,0.09) 0%, rgba(59,130,246,0.045) 36%, transparent 60%)
-            `
+              background: `radial-gradient(circle ${spotR}px at ${sx}% ${sy}%, rgba(186,230,253,0.22) 0%, rgba(56,189,248,0.06) 42%, transparent 56%)`
             }}
           />
         )}
@@ -657,7 +652,14 @@ export function HeroPlatformField({ sectionRef }: Props) {
           }
 
           return (
-            <IconBubble key={i} cx={slot.nx} cy={slot.ny} glow={glow} reduced={!!reduceMotion}>
+            <IconBubble
+              key={i}
+              cx={slot.nx}
+              cy={slot.ny}
+              glow={glow}
+              reduced={!!reduceMotion}
+              interacting={reduceMotion || pointer !== null}
+            >
               <Icon />
             </IconBubble>
           );
