@@ -23,6 +23,9 @@ import { CTA } from "@/components/sections/CTA";
 import { HomePageJsonLd } from "@/components/seo/HomePageJsonLd";
 import { absoluteLocalizedUrl, languageAlternates } from "@/lib/hreflang";
 
+/** Включить след логотипов в hero после замены PNG в `public/logos/`. */
+const SHOW_FLOATING_PLATFORM_LOGOS = false;
+
 /** Свежие кейсы и переводы без устаревшего статического снимка страницы. */
 export const dynamic = "force-dynamic";
 
@@ -54,7 +57,7 @@ export default function HomePage() {
             className="absolute inset-0 z-[-1] min-h-full min-w-full"
             particleCount={100}
           />
-          <FloatingPlatformLogos />
+          {SHOW_FLOATING_PLATFORM_LOGOS ? <FloatingPlatformLogos /> : null}
         </>
       </Hero>
       <TrustStrip />
