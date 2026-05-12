@@ -971,7 +971,7 @@
       },
       {
         "icon": "revenue",
-        "value": 12.4,
+        "value": 1.2,
         "decimals": 1,
         "suffix": "M+ USD",
         "label": "incremental revenue modeled",
