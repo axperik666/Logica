@@ -83,6 +83,13 @@ export default function InteractiveBackground({
     const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
+    const refreshMobile = () => {
+      isMobileRef.current =
+        window.matchMedia("(max-width: 767px)").matches ||
+        window.matchMedia("(pointer: coarse)").matches;
+    };
+    refreshMobile();
+
     const syncCanvasSize = () => {
       const rect = container.getBoundingClientRect();
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -99,52 +106,33 @@ export default function InteractiveBackground({
       particlesRef.current = initParticles(w, h, countRef.current);
     };
 
-    const refreshMobile = () => {
-      isMobileRef.current =
-        window.matchMedia("(max-width: 767px)").matches ||
-        window.matchMedia("(pointer: coarse)").matches;
-    };
-    refreshMobile();
-
     syncCanvasSize();
-    requestAnimationFrame(() => syncCanvasSize());
-
     const ro = new ResizeObserver(() => {
       refreshMobile();
       syncCanvasSize();
     });
     ro.observe(container);
 
-    window.addEventListener("resize", refreshMobile);
-
-    /** Window + rect canvas: работает поверх градиента/aurora (они pointer-events-none), не блокирует CTA hero */
+    /** Логические координаты [0..w]×[0..h] — совпадают с p.x/p.y после setTransform(dpr) */
     const updateMouse = (e: PointerEvent) => {
       const rect = canvas.getBoundingClientRect();
-      const inside =
-        e.clientX >= rect.left &&
-        e.clientX <= rect.right &&
-        e.clientY >= rect.top &&
-        e.clientY <= rect.bottom;
-      if (!inside) {
-        mouseRef.current.active = false;
-        return;
-      }
-      mouseRef.current = {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-        active: true
-      };
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const inside = x >= 0 && x <= rect.width && y >= 0 && y <= rect.height;
+
+      mouseRef.current = { x, y, active: inside };
     };
 
     const clearMouse = () => {
       mouseRef.current.active = false;
     };
 
-    window.addEventListener("pointermove", updateMouse, { passive: true });
-    window.addEventListener("pointerdown", updateMouse, { passive: true });
-    window.addEventListener("pointerup", clearMouse, { passive: true });
-    window.addEventListener("pointercancel", clearMouse, { passive: true });
-    window.addEventListener("blur", clearMouse);
+    container.addEventListener("pointerdown", updateMouse, { passive: true });
+    container.addEventListener("pointermove", updateMouse, { passive: true });
+    container.addEventListener("pointerup", clearMouse, { passive: true });
+    container.addEventListener("pointerleave", clearMouse, { passive: true });
+    container.addEventListener("pointercancel", clearMouse, { passive: true });
 
     const animate = () => {
       const { w, h } = dimsRef.current;
@@ -278,19 +266,18 @@ export default function InteractiveBackground({
     return () => {
       ro.disconnect();
       cancelAnimationFrame(rafRef.current);
-      window.removeEventListener("resize", refreshMobile);
-      window.removeEventListener("pointermove", updateMouse);
-      window.removeEventListener("pointerdown", updateMouse);
-      window.removeEventListener("pointerup", clearMouse);
-      window.removeEventListener("pointercancel", clearMouse);
-      window.removeEventListener("blur", clearMouse);
+      container.removeEventListener("pointerdown", updateMouse);
+      container.removeEventListener("pointermove", updateMouse);
+      container.removeEventListener("pointerup", clearMouse);
+      container.removeEventListener("pointerleave", clearMouse);
+      container.removeEventListener("pointercancel", clearMouse);
     };
   }, [particleCount]);
 
   return (
     <div
       ref={containerRef}
-      className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}
+      className={cn("pointer-events-auto absolute inset-0 overflow-hidden", className)}
       aria-hidden="true"
     >
       <canvas ref={canvasRef} className="block h-full w-full" style={{ pointerEvents: "none" }} />
