@@ -29,7 +29,7 @@ export default function CaseCard({
     <motion.div
       ref={ref}
       whileHover={{ y: -14 }}
-      className="group relative overflow-hidden rounded-3xl aspect-[16/10] bg-zinc-950 border border-white/5 cursor-pointer shadow-2xl"
+      className="group relative min-h-[300px] overflow-hidden rounded-3xl border border-white/5 bg-zinc-950 shadow-2xl aspect-[4/5] cursor-pointer sm:aspect-[16/10] sm:min-h-0"
     >
       {isInView && !hasError ? (
         <video
@@ -46,14 +46,20 @@ export default function CaseCard({
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent transition-all group-hover:via-black/35" />
 
-      <div className="absolute bottom-0 left-0 p-7 sm:p-8 w-full z-10">
-        <p className="text-[#00b4ff] font-mono text-sm mb-3 tracking-widest">
-          {niche} • {result}
+      <div className="absolute bottom-0 left-0 z-10 w-full space-y-2.5 p-4 pb-5 sm:space-y-3 sm:p-7 sm:pb-8">
+        <p className="flex flex-wrap items-baseline gap-x-1.5 gap-y-1 break-words font-mono text-[11px] leading-snug tracking-wider text-[#00b4ff] sm:text-sm sm:tracking-widest">
+          <span>{niche}</span>
+          <span className="select-none opacity-60" aria-hidden>
+            •
+          </span>
+          <span>{result}</span>
         </p>
-        <h3 className="text-2xl sm:text-3xl font-semibold text-white mb-4 tracking-tight">
+        <h3 className="break-words text-xl font-semibold leading-snug tracking-tight text-white sm:text-3xl">
           {client}
         </h3>
-        <p className="text-gray-400 text-[15px] leading-relaxed line-clamp-3">{description}</p>
+        <p className="break-words text-sm leading-relaxed text-gray-400 line-clamp-4 sm:text-[15px] sm:line-clamp-3">
+          {description}
+        </p>
       </div>
 
       <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300">

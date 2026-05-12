@@ -1202,19 +1202,42 @@ header.site-header.glass-nav:hover::after {
 
 @media (prefers-reduced-motion: no-preference) {
   .premium-aurora {
-    animation: premium-aurora-drift 26s ease-in-out infinite alternate;
+    animation: premium-aurora-drift 18s ease-in-out infinite alternate;
   }
 }
 
 @keyframes premium-aurora-drift {
   0% {
-    opacity: 0.86;
-    filter: hue-rotate(-8deg) saturate(1.06);
+    opacity: 0.78;
+    filter: hue-rotate(-16deg) saturate(1.1);
   }
 
   100% {
     opacity: 1;
-    filter: hue-rotate(12deg) saturate(1.14);
+    filter: hue-rotate(22deg) saturate(1.28);
+  }
+}
+
+/* На узких экранах без filter/transform — меньше рывков GPU, движение через opacity */
+@media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
+  .premium-aurora {
+    animation: premium-aurora-drift-mobile 16s ease-in-out infinite alternate;
+    filter: none;
+    transform: none;
+  }
+}
+
+@keyframes premium-aurora-drift-mobile {
+  0% {
+    opacity: 0.68;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.72;
   }
 }
 
@@ -1223,6 +1246,7 @@ header.site-header.glass-nav:hover::after {
     animation: none;
     filter: none;
     opacity: 1;
+    transform: none;
   }
 }
 

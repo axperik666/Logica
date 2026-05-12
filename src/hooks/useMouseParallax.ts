@@ -1,6 +1,6 @@
 "use client";
 
-import { type RefObject, useEffect } from "react";
+import { type RefObject, useEffect, useRef } from "react";
 import {
   type MotionValue,
   useMotionValue,
@@ -43,6 +43,10 @@ export function useMouseParallax(
   const frontX = useTransform(x, (v) => v * 0.55);
   const frontY = useTransform(y, (v) => v * 0.55);
 
+  const moveRaf = useRef<number | null>(null);
+  const pending = useRef({ x: 0, y: 0 });
+  const coarsePtr = useRef(false);
+
   useEffect(() => {
     if (reduceMotion) {
       rawX.set(0);
@@ -53,15 +57,42 @@ export function useMouseParallax(
     const el = containerRef.current;
     if (!el) return;
 
+    const mq = window.matchMedia("(pointer: coarse)");
+    const syncCoarse = () => {
+      coarsePtr.current = mq.matches;
+    };
+    syncCoarse();
+    mq.addEventListener("change", syncCoarse);
+
+    const flushMove = () => {
+      moveRaf.current = null;
+      rawX.set(pending.current.x);
+      rawY.set(pending.current.y);
+    };
+
     const handleMove = (e: PointerEvent) => {
       const r = el.getBoundingClientRect();
       const nx = (e.clientX - r.left) / Math.max(r.width, 1) - 0.5;
       const ny = (e.clientY - r.top) / Math.max(r.height, 1) - 0.5;
-      rawX.set(nx * 2 * maxPx);
-      rawY.set(ny * 2 * maxPx);
+      const px = nx * 2 * maxPx;
+      const py = ny * 2 * maxPx;
+
+      if (coarsePtr.current) {
+        pending.current = { x: px, y: py };
+        if (moveRaf.current == null) {
+          moveRaf.current = requestAnimationFrame(flushMove);
+        }
+      } else {
+        rawX.set(px);
+        rawY.set(py);
+      }
     };
 
     const reset = () => {
+      if (moveRaf.current != null) {
+        cancelAnimationFrame(moveRaf.current);
+        moveRaf.current = null;
+      }
       rawX.set(0);
       rawY.set(0);
     };
@@ -72,6 +103,8 @@ export function useMouseParallax(
     el.addEventListener("pointercancel", reset);
 
     return () => {
+      mq.removeEventListener("change", syncCoarse);
+      if (moveRaf.current != null) cancelAnimationFrame(moveRaf.current);
       el.removeEventListener("pointermove", handleMove);
       el.removeEventListener("pointerleave", reset);
       el.removeEventListener("pointerup", reset);

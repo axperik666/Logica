@@ -4,18 +4,20 @@ import { useEffect, useRef } from "react";
 import { cn } from "@/lib/cn";
 
 const ACCENT = "#00bfff";
-const LINK_DIST = 148;
-const ATTRACT_DIST = 195;
-const MOBILE_GLOW_RADIUS = 240;
-const CURSOR_GLOW_RADIUS = 155;
-const DEFAULT_COUNT = 110;
+const LINK_DIST = 162;
+const ATTRACT_DIST = 208;
+const MOBILE_GLOW_RADIUS = 255;
+const CURSOR_GLOW_RADIUS = 165;
+const DEFAULT_COUNT = 118;
 const MIN_PARTICLES = 80;
 const MAX_PARTICLES = 120;
+/** Меньше точек и связей на телефонах — меньше лагов при O(n²) отрисовке */
+const MOBILE_PARTICLE_CAP = 78;
 
-const SHADOW_BLUR = 12;
-const ATTRACT_FORCE = 0.085;
-const DAMPING = 0.93;
-const HOME_SPRING = 0.042;
+const SHADOW_BLUR = 15;
+const ATTRACT_FORCE = 0.098;
+const DAMPING = 0.91;
+const HOME_SPRING = 0.053;
 
 function clampOpacity(t: number): number {
   return Math.min(0.85, Math.max(0.15, t));
@@ -91,8 +93,10 @@ export default function InteractiveBackground({
     refreshMobile();
 
     const syncCanvasSize = () => {
+      refreshMobile();
       const rect = container.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const isMob = isMobileRef.current;
+      const dpr = isMob ? 1 : Math.min(window.devicePixelRatio || 1, 2);
       const w = Math.max(1, Math.floor(rect.width));
       const h = Math.max(1, Math.floor(rect.height));
 
@@ -103,12 +107,12 @@ export default function InteractiveBackground({
       canvas.style.height = `${h}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      particlesRef.current = initParticles(w, h, countRef.current);
+      const cnt = isMob ? Math.min(countRef.current, MOBILE_PARTICLE_CAP) : countRef.current;
+      particlesRef.current = initParticles(w, h, cnt);
     };
 
     syncCanvasSize();
     const ro = new ResizeObserver(() => {
-      refreshMobile();
       syncCanvasSize();
     });
     ro.observe(container);
@@ -167,8 +171,8 @@ export default function InteractiveBackground({
         }
       } else {
         for (const p of particles) {
-          p.vx += (p.baseX - p.x) * HOME_SPRING * 1.65;
-          p.vy += (p.baseY - p.y) * HOME_SPRING * 1.65;
+          p.vx += (p.baseX - p.x) * HOME_SPRING * 1.78;
+          p.vy += (p.baseY - p.y) * HOME_SPRING * 1.78;
           p.vx *= DAMPING;
           p.vy *= DAMPING;
           p.x += p.vx;
@@ -176,32 +180,34 @@ export default function InteractiveBackground({
         }
       }
 
-      const t = performance.now() * 0.00052;
-      const idleAmp = isMobile ? 1.35 : 1.75;
-      const idleAmp2 = isMobile ? 0.42 : 0.55;
+      const t = performance.now() * 0.00074;
+      const idleAmp = isMobile ? 1.58 : 2.12;
+      const idleAmp2 = isMobile ? 0.56 : 0.74;
 
       const drift = (bx: number, by: number) => ({
         ox:
           Math.sin(t + bx * 0.01) * idleAmp +
-          Math.sin(t * 1.72 + by * 0.013) * idleAmp2,
+          Math.sin(t * 1.72 + by * 0.013) * idleAmp2 +
+          Math.sin(t * 2.35 + bx * 0.006) * idleAmp2 * 0.35,
         oy:
           Math.cos(t * 0.95 + by * 0.008) * idleAmp +
-          Math.cos(t * 1.14 + bx * 0.011) * idleAmp2
+          Math.cos(t * 1.14 + bx * 0.011) * idleAmp2 +
+          Math.cos(t * 2.1 + by * 0.007) * idleAmp2 * 0.35
       });
 
       if (mouse.active) {
         ctx.save();
         const radius = isMobile ? MOBILE_GLOW_RADIUS : CURSOR_GLOW_RADIUS;
         const g = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, radius);
-        g.addColorStop(0, "rgba(0,191,255,0.42)");
-        g.addColorStop(0.5, "rgba(0,191,255,0.1)");
+        g.addColorStop(0, isMobile ? "rgba(0,191,255,0.48)" : "rgba(0,191,255,0.45)");
+        g.addColorStop(0.5, isMobile ? "rgba(0,191,255,0.12)" : "rgba(0,191,255,0.11)");
         g.addColorStop(1, "rgba(0,191,255,0)");
         ctx.fillStyle = g;
         ctx.fillRect(0, 0, w, h);
         ctx.restore();
       }
 
-      ctx.shadowBlur = SHADOW_BLUR;
+      ctx.shadowBlur = isMobile ? 0 : SHADOW_BLUR;
       ctx.shadowColor = ACCENT;
 
       const n = particles.length;
