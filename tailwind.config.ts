@@ -1,13 +1,38 @@
 import type { Config } from "tailwindcss";
 
+/**
+ * Дизайн-система: primary #00b4ff, тёмная тема.
+ * `gray-ds` — шкала из макета; стандартные `gray-*` Tailwind не трогаем.
+ * Контент: `src/` (App Router).
+ */
 export default {
-  content: ["./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+  content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
-        primary: "#00BFFF",
-        dark: "#0A0A0A",
-        gray: "#1F1F1F",
+        primary: {
+          DEFAULT: "#00b4ff",
+          50: "#e6f8ff",
+          100: "#b3eeff",
+          500: "#00b4ff",
+          600: "#0099d9",
+          700: "#0077aa"
+        },
+        dark: {
+          DEFAULT: "#0a0a0a",
+          900: "#0a0a0a",
+          800: "#111111",
+          700: "#1a1a1a"
+        },
+        foreground: "#ffffff",
+        background: "#0a0a0a",
+        "gray-ds": {
+          100: "#f3f3f3",
+          200: "#e5e5e5",
+          300: "#d4d4d4",
+          400: "#a3a3a3",
+          500: "#737373"
+        },
         brand: {
           50: "#e6f6ff",
           100: "#cceeff",
@@ -29,10 +54,17 @@ export default {
           "Roboto",
           "Arial",
           "sans-serif"
+        ],
+        display: [
+          "var(--font-inter)",
+          "system-ui",
+          "Segoe UI",
+          "Roboto",
+          "Arial",
+          "sans-serif"
         ]
       }
     }
   },
   plugins: []
 } satisfies Config;
-

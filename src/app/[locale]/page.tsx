@@ -15,7 +15,7 @@ import { HomeSpotlightCase } from "@/components/sections/HomeSpotlightCase";
 import { Team } from "@/components/sections/Team";
 import { Certifications } from "@/components/sections/Certifications";
 import { Industries } from "@/components/sections/Industries";
-import { Cases } from "@/components/sections/Cases";
+import CasesSection from "@/components/sections/CasesSection";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { LatestInsights } from "@/components/sections/LatestInsights";
 import { ROICalculator } from "@/components/sections/ROICalculator";
@@ -72,7 +72,7 @@ export default function HomePage() {
       <Industries />
       <HomeGrowthBento />
       <HomeSpotlightCase />
-      <Cases />
+      <CasesSection />
       <Testimonials limit={6} />
       <LatestInsights />
       <ROICalculator />

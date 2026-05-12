@@ -7,8 +7,8 @@
  */
 
 :root {
-  --primary: #00bfff;
-  --tech-cyan: #00bfff;
+  --primary: #00b4ff;
+  --tech-cyan: #00b4ff;
   --tech-violet: #8a2be2;
   --tech-line-cyan: color-mix(in srgb, var(--tech-cyan) 26%, transparent);
   --tech-line-violet: color-mix(in srgb, var(--tech-violet) 19%, transparent);
@@ -17,6 +17,9 @@
   --header-surface: rgba(8, 12, 28, 0.78);
   --text-muted: rgba(255, 255, 255, 0.94);
   --text-subtle: rgba(255, 255, 255, 0.78);
+  /* Дизайн-система (RGB для возможных rgb(var(--…))/alpha) */
+  --background: 10 10 10;
+  --foreground: 255 255 255;
   /* Высота fixed header (используется для anchor-scroll и верхних отступов). */
   --header-h: 4.375rem;
   /* Единый отступ под фиксированную шапку при якорях и scroll-padding */
@@ -82,6 +85,18 @@ body {
 
 body:not(.tech-bg) {
   background-color: #0a0a1f;
+}
+
+/* Примитивы дизайн-системы (классы для новых блоков; body/hero не переопределяем) */
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-3 rounded-2xl bg-primary px-8 py-4 font-medium text-white shadow-lg shadow-primary/30 transition-all;
+    @apply hover:bg-[#0099d9] active:scale-[0.97];
+  }
+
+  .section-header {
+    @apply text-5xl font-bold leading-none tracking-tighter text-white md:text-6xl;
+  }
 }
 
 ::selection {

@@ -579,6 +579,7 @@
       "horeca": "HoReCa",
       "saas": "IT / SaaS"
     },
+    "filterB2b": "B2B",
     "bannerTitle": "Vuoi gli stessi risultati?",
     "bannerSub": "Rispondi a 5 domande — ti proponiamo un piano di crescita per la tua nicchia.",
     "bannerCta": "Richiedi strategia",
@@ -1340,6 +1341,66 @@
         "a": "Il minimo dipende da nicchia e canale: serve volume per test e scaling. All’avvio definiamo economia CPL/CPA e soglia di payback, poi scaliamo le combinazioni vincenti."
       }
     ]
+  },
+  "sectionsDs": {
+    "process": {
+      "title": "Come lavoriamo",
+      "steps": [
+        {
+          "num": "01",
+          "title": "Audit gratuito",
+          "desc": "Analizziamo canali attuali e unit economics entro 48 ore."
+        },
+        {
+          "num": "02",
+          "title": "Strategia 45 giorni",
+          "desc": "Funnel con target 3–7× ROI e milestone chiare."
+        },
+        {
+          "num": "03",
+          "title": "Launch e ottimizzazione",
+          "desc": "Annunci, creatività e tracking per decisioni pulite."
+        },
+        {
+          "num": "04",
+          "title": "Report settimanali",
+          "desc": "Profitto e metriche chiave — non dashboard di vanità."
+        },
+        {
+          "num": "05",
+          "title": "Scaling",
+          "desc": "Cresciamo il budget mantenendo il ROAS target."
+        }
+      ]
+    },
+    "results": {
+      "counter1Label": "progetti di crescita",
+      "counter2Display": "7×",
+      "counter2Label": "ROI medio (multiplo)",
+      "counter3Label": "orizzonte strategia",
+      "counter3Suffix": " giorni",
+      "counter4Label": "{count, plural, one {# caso reale} other {# casi reali}}"
+    },
+    "leadForm": {
+      "namePlaceholder": "Nome",
+      "contactPlaceholder": "Telefono / Telegram",
+      "messagePlaceholder": "Brevemente: business e obiettivo",
+      "submit": "Richiedi audit gratuito →",
+      "footnote": "Risposta in ~15 minuti • 100% confidenziale",
+      "thankTitle": "Grazie!",
+      "thankBody": "Ti contattiamo a breve sui messaggeri."
+    }
+  },
+  "stickyHeader": {
+    "brandShort": "LOGICA",
+    "logoAlt": "LOGICA Marketing",
+    "navAria": "Navigazione principale",
+    "navCases": "Casi",
+    "navProcess": "Processo",
+    "navServices": "Servizi",
+    "navResults": "Risultati",
+    "ctaDiscuss": "Parla del progetto",
+    "ctaFloat": "Richiedi audit"
   },
   "casesPage": {
     "title": "Casi",
