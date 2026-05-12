@@ -49,7 +49,7 @@ export default function HomePage() {
       <HomePageJsonLd />
       <Hero>
         <InteractiveBackground
-          className="absolute inset-0 z-[-1] pointer-events-none"
+          className="pointer-events-none absolute inset-0 z-0"
           particleCount={100}
         />
       </Hero>

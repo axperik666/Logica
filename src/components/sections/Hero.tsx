@@ -41,9 +41,8 @@ export function Hero({ children }: HeroProps) {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative flex min-h-[100dvh] items-center justify-center overflow-hidden bg-[#020308]"
+      className="relative isolate flex min-h-[100dvh] items-center justify-center overflow-hidden bg-[#020308]"
     >
-      {children}
       <motion.div
         className="absolute inset-[-6%] z-0 will-change-transform"
         style={{ x: parallax.backX, y: parallax.backY }}
@@ -66,6 +65,9 @@ export function Hero({ children }: HeroProps) {
           <source src="/hero-bg.mp4" type="video/mp4" />
         </video>
       </motion.div>
+
+      {/* Particle canvas above video, below tint — иначе z-[-1] уходит под слой и «анимации нет» */}
+      {children}
 
       <motion.div
         className="absolute inset-0 z-0 bg-gradient-to-b from-black/45 via-[#050810]/88 to-black will-change-transform"

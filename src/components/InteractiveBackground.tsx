@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/cn";
 
 const ACCENT = "#00bfff";
@@ -56,10 +55,14 @@ function initParticles(w: number, h: number, count: number): Particle[] {
   return out;
 }
 
-function mobileGlowOnly(): boolean {
+/** Узкий экран или coarse pointer — без физики притяжения (как в ТЗ), только glow/scale.
+ * Не используем ontouchstart: в части Chrome он есть на десктопе и ломает притяжение. */
+function readMobileGlowOnly(): boolean {
   if (typeof window === "undefined") return false;
-  const w = window as Window & { ontouchstart?: unknown };
-  return w.ontouchstart !== undefined || window.screen.width < 768;
+  return (
+    window.matchMedia("(max-width: 767px)").matches ||
+    window.matchMedia("(pointer: coarse)").matches
+  );
 }
 
 export type InteractiveBackgroundProps = {
@@ -71,35 +74,42 @@ export default function InteractiveBackground({
   className,
   particleCount = DEFAULT_COUNT
 }: InteractiveBackgroundProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const mouseRef = useRef({ x: 0, y: 0, active: false });
   const countRef = useRef(particleCount);
   const dimsRef = useRef({ w: 0, h: 0, dpr: 1 });
   const rafRef = useRef(0);
-  const mobileStaticRef = useRef(false);
-  const reducedMotion = useReducedMotion();
+  const mobileGlowRef = useRef(false);
+  const reducePhysicsRef = useRef(false);
 
   countRef.current = Math.min(MAX_PARTICLES, Math.max(MIN_PARTICLES, Math.floor(particleCount)));
 
   useEffect(() => {
-    mobileStaticRef.current = mobileGlowOnly();
-    const onResizeCheck = () => {
-      mobileStaticRef.current = mobileGlowOnly();
-    };
-    window.addEventListener("resize", onResizeCheck);
-    return () => window.removeEventListener("resize", onResizeCheck);
-  }, []);
-
-  useEffect(() => {
+    const container = containerRef.current;
     const canvas = canvasRef.current;
-    if (!canvas || reducedMotion) return;
+    if (!container || !canvas) return;
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    const syncPrefs = () => {
+      mobileGlowRef.current = readMobileGlowOnly();
+      reducePhysicsRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    };
+    syncPrefs();
+
+    const mqMove = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mqMobW = window.matchMedia("(max-width: 767px)");
+    const mqMobP = window.matchMedia("(pointer: coarse)");
+    const onPrefs = () => syncPrefs();
+    mqMove.addEventListener("change", onPrefs);
+    mqMobW.addEventListener("change", onPrefs);
+    mqMobP.addEventListener("change", onPrefs);
+
     const syncCanvasSize = () => {
-      const rect = canvas.getBoundingClientRect();
+      const rect = container.getBoundingClientRect();
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const w = Math.max(1, Math.floor(rect.width));
       const h = Math.max(1, Math.floor(rect.height));
@@ -113,8 +123,10 @@ export default function InteractiveBackground({
     };
 
     syncCanvasSize();
+    requestAnimationFrame(() => syncCanvasSize());
+
     const ro = new ResizeObserver(syncCanvasSize);
-    ro.observe(canvas);
+    ro.observe(container);
 
     const updateMouseFromEvent = (e: PointerEvent) => {
       const rect = canvas.getBoundingClientRect();
@@ -146,6 +158,8 @@ export default function InteractiveBackground({
     window.addEventListener("pointercancel", onPointerUp, { passive: true });
     window.addEventListener("blur", onPointerUp);
 
+    const attractMul = () => (reducePhysicsRef.current ? 0.35 : 1);
+
     const animate = () => {
       const { w, h } = dimsRef.current;
       if (w < 1 || h < 1) {
@@ -155,7 +169,8 @@ export default function InteractiveBackground({
 
       const particles = particlesRef.current;
       const mouse = mouseRef.current;
-      const glowOnly = mobileStaticRef.current;
+      const glowOnly = mobileGlowRef.current;
+      const am = attractMul();
 
       ctx.clearRect(0, 0, w, h);
 
@@ -181,8 +196,8 @@ export default function InteractiveBackground({
           const dy = mouse.y - p.y;
           const dist = Math.hypot(dx, dy);
           if (dist < ATTRACT_DIST && dist > 0.5) {
-            p.vx += dx * ATTRACT_FORCE;
-            p.vy += dy * ATTRACT_FORCE;
+            p.vx += dx * ATTRACT_FORCE * am;
+            p.vy += dy * ATTRACT_FORCE * am;
           }
           p.vx += (p.baseX - p.x) * HOME_SPRING;
           p.vy += (p.baseY - p.y) * HOME_SPRING;
@@ -192,6 +207,9 @@ export default function InteractiveBackground({
           p.y += p.vy;
         }
       }
+
+      const t = performance.now() * 0.00035;
+      const idleAmp = reducePhysicsRef.current ? 0.6 : 1.2;
 
       if (mouse.active) {
         ctx.save();
@@ -221,15 +239,19 @@ export default function InteractiveBackground({
         for (let j = i + 1; j < n; j++) {
           const a = particles[i]!;
           const b = particles[j]!;
-          const d = Math.hypot(a.x - b.x, a.y - b.y);
+          const ax = a.x + Math.sin(t + a.baseX * 0.01) * idleAmp;
+          const ay = a.y + Math.cos(t * 0.95 + a.baseY * 0.008) * idleAmp;
+          const bx = b.x + Math.sin(t + b.baseX * 0.01) * idleAmp;
+          const by = b.y + Math.cos(t * 0.95 + b.baseY * 0.008) * idleAmp;
+          const d = Math.hypot(ax - bx, ay - by);
           if (d >= LINK_DIST) continue;
-          const t = 1 - d / LINK_DIST;
-          const alpha = clampOpacity(0.15 + t * 0.7);
+          const tt = 1 - d / LINK_DIST;
+          const alpha = clampOpacity(0.15 + tt * 0.7);
           ctx.strokeStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${alpha})`;
           ctx.lineWidth = 1;
           ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
+          ctx.moveTo(ax, ay);
+          ctx.lineTo(bx, by);
           ctx.stroke();
         }
       }
@@ -237,27 +259,33 @@ export default function InteractiveBackground({
       if (mouse.active) {
         const linkDist = glowOnly ? MOBILE_GLOW_RADIUS : ATTRACT_DIST;
         for (const p of particles) {
-          const dx = mouse.x - p.x;
-          const dy = mouse.y - p.y;
+          const px = p.x + Math.sin(t + p.baseX * 0.01) * idleAmp;
+          const py = p.y + Math.cos(t * 0.95 + p.baseY * 0.008) * idleAmp;
+          const dx = mouse.x - px;
+          const dy = mouse.y - py;
           const d = Math.hypot(dx, dy);
           if (d >= linkDist) continue;
-          const t = 1 - d / linkDist;
-          const alpha = clampOpacity(0.2 + t * 0.65);
+          const tt = 1 - d / linkDist;
+          const alpha = clampOpacity(0.2 + tt * 0.65);
           ctx.strokeStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${alpha})`;
           ctx.lineWidth = 2 + (1 - d / linkDist) * 4;
           ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
+          ctx.moveTo(px, py);
           ctx.lineTo(mouse.x, mouse.y);
           ctx.stroke();
         }
       }
 
       for (const p of particles) {
+        const ox = Math.sin(t + p.baseX * 0.01) * idleAmp;
+        const oy = Math.cos(t * 0.95 + p.baseY * 0.008) * idleAmp;
+        const px = p.x + ox;
+        const py = p.y + oy;
         let rad = p.r;
         let alpha = 0.35;
         if (mouse.active) {
-          const dx = mouse.x - p.x;
-          const dy = mouse.y - p.y;
+          const dx = mouse.x - px;
+          const dy = mouse.y - py;
           const d = Math.hypot(dx, dy);
           const nearR = glowOnly ? MOBILE_GLOW_RADIUS : ATTRACT_DIST;
           if (d < nearR) {
@@ -269,7 +297,7 @@ export default function InteractiveBackground({
         ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${alpha})`;
         ctx.lineWidth = 0;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, rad, 0, Math.PI * 2);
+        ctx.arc(px, py, rad, 0, Math.PI * 2);
         ctx.fill();
       }
 
@@ -284,75 +312,24 @@ export default function InteractiveBackground({
     return () => {
       ro.disconnect();
       cancelAnimationFrame(rafRef.current);
+      mqMove.removeEventListener("change", onPrefs);
+      mqMobW.removeEventListener("change", onPrefs);
+      mqMobP.removeEventListener("change", onPrefs);
       window.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("pointerup", onPointerUp);
       window.removeEventListener("pointercancel", onPointerUp);
       window.removeEventListener("blur", onPointerUp);
     };
-  }, [reducedMotion, particleCount]);
-
-  useEffect(() => {
-    if (!reducedMotion) return;
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const draw = () => {
-      const rect = canvas.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const w = Math.max(1, Math.floor(rect.width));
-      const h = Math.max(1, Math.floor(rect.height));
-      canvas.width = Math.floor(w * dpr);
-      canvas.height = Math.floor(h * dpr);
-      canvas.style.width = `${w}px`;
-      canvas.style.height = `${h}px`;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const particles = initParticles(w, h, countRef.current);
-      ctx.clearRect(0, 0, w, h);
-      ctx.shadowBlur = SHADOW_BLUR;
-      ctx.shadowColor = ACCENT;
-      const n = particles.length;
-      for (let i = 0; i < n; i++) {
-        for (let j = i + 1; j < n; j++) {
-          const a = particles[i]!;
-          const b = particles[j]!;
-          const d = Math.hypot(a.x - b.x, a.y - b.y);
-          if (d >= LINK_DIST) continue;
-          const t = 1 - d / LINK_DIST;
-          const alpha = clampOpacity(0.15 + t * 0.55);
-          ctx.strokeStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${alpha})`;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.stroke();
-        }
-      }
-      for (const p of particles) {
-        ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},0.4)`;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      ctx.shadowBlur = 0;
-    };
-
-    draw();
-    const ro = new ResizeObserver(draw);
-    ro.observe(canvas);
-    return () => ro.disconnect();
-  }, [reducedMotion, particleCount]);
+  }, [particleCount]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className={cn("absolute inset-0 block h-full w-full", className)}
-      style={{
-        pointerEvents: "none",
-        zIndex: -1
-      }}
+    <div
+      ref={containerRef}
+      className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}
       aria-hidden
-    />
+    >
+      <canvas ref={canvasRef} className="block h-full w-full" style={{ pointerEvents: "none" }} />
+    </div>
   );
 }
