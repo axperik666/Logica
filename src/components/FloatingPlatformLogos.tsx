@@ -6,17 +6,17 @@ import { cn } from "@/lib/cn";
 
 const MANIFEST_URL = "/logos/manifest.json";
 
-/** Десктоп — плавная смена */
-const MIN_INTERVAL_MS = 120;
-const MIN_MOVE_PX = 26;
-const MAX_MARKERS = 10;
-const IDLE_HIDE_MS = 1600;
+/** Десктоп — ровный след, без «дребезга» */
+const MIN_INTERVAL_MS = 135;
+const MIN_MOVE_PX = 30;
+const MAX_MARKERS = 8;
+const IDLE_HIDE_MS = 1700;
 
-/** Мобилка / палец — заметно реже новые логотипы, больше путь между ними */
-const MIN_INTERVAL_TOUCH_MS = 340;
-const MIN_MOVE_TOUCH_PX = 58;
-const MAX_MARKERS_TOUCH = 6;
-const IDLE_HIDE_TOUCH_MS = 2200;
+/** Мобилка — реже спавн, длиннее «шаг», меньше одновременных маркеров */
+const MIN_INTERVAL_TOUCH_MS = 440;
+const MIN_MOVE_TOUCH_PX = 76;
+const MAX_MARKERS_TOUCH = 5;
+const IDLE_HIDE_TOUCH_MS = 2400;
 
 type Pop = { id: number; x: number; y: number; src: string };
 
@@ -38,6 +38,8 @@ export default function FloatingPlatformLogos({ className }: FloatingPlatformLog
   const lastSpawnT = useRef(0);
   const lastSpawnPos = useRef<{ x: number; y: number } | null>(null);
   const idleHideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const touchMoveRaf = useRef<number | null>(null);
+  const pendingMove = useRef<{ cx: number; cy: number } | null>(null);
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
@@ -119,7 +121,7 @@ export default function FloatingPlatformLogos({ className }: FloatingPlatformLog
       const now = performance.now();
       if (!force && now - lastSpawnT.current < interval) return;
 
-      const jitter = touchUi ? 8 : 12;
+      const jitter = touchUi ? 4 : 6;
       const x = clientX - rect.left + (Math.random() - 0.5) * jitter;
       const y = clientY - rect.top + (Math.random() - 0.5) * jitter;
 
@@ -134,7 +136,40 @@ export default function FloatingPlatformLogos({ className }: FloatingPlatformLog
       addPop(x, y);
     };
 
+    const flushTouchMove = () => {
+      touchMoveRaf.current = null;
+      const pending = pendingMove.current;
+      pendingMove.current = null;
+      if (!pending) return;
+
+      const rect = hero.getBoundingClientRect();
+      const inside =
+        pending.cx >= rect.left &&
+        pending.cx <= rect.right &&
+        pending.cy >= rect.top &&
+        pending.cy <= rect.bottom;
+
+      if (!inside) {
+        if (idleHideTimer.current) {
+          clearTimeout(idleHideTimer.current);
+          idleHideTimer.current = null;
+        }
+        clearAllMarkers();
+        return;
+      }
+
+      trySpawn(pending.cx, pending.cy, false);
+    };
+
     const onPointerMove = (e: PointerEvent) => {
+      if (touchUi) {
+        pendingMove.current = { cx: e.clientX, cy: e.clientY };
+        if (touchMoveRaf.current == null) {
+          touchMoveRaf.current = requestAnimationFrame(flushTouchMove);
+        }
+        return;
+      }
+
       const rect = hero.getBoundingClientRect();
       const inside =
         e.clientX >= rect.left &&
@@ -175,16 +210,22 @@ export default function FloatingPlatformLogos({ className }: FloatingPlatformLog
       hero.removeEventListener("pointerenter", onEnterHero);
       hero.removeEventListener("pointerleave", onLeaveHero);
       if (idleHideTimer.current) clearTimeout(idleHideTimer.current);
+      if (touchMoveRaf.current != null) cancelAnimationFrame(touchMoveRaf.current);
+      pendingMove.current = null;
     };
   }, [sources, touchUi]);
 
   const motionSimple = Boolean(reducedMotion);
 
   const enterTransition = motionSimple
-    ? { duration: 0.25 }
+    ? { duration: 0.22 }
     : touchUi
-      ? { type: "tween" as const, duration: 0.58, ease: [0.22, 1, 0.36, 1] as const }
-      : { type: "spring" as const, stiffness: 165, damping: 30, mass: 0.72 };
+      ? { type: "tween" as const, duration: 0.42, ease: [0.25, 0.1, 0.25, 1] as const }
+      : { type: "spring" as const, stiffness: 148, damping: 36, mass: 0.85 };
+
+  const exitTransition = motionSimple
+    ? { duration: 0.2 }
+    : { type: "tween" as const, duration: 0.32, ease: [0.4, 0, 0.2, 1] as const };
 
   return (
     <div
@@ -195,22 +236,25 @@ export default function FloatingPlatformLogos({ className }: FloatingPlatformLog
       )}
       aria-hidden
     >
-      <AnimatePresence mode="popLayout">
+      <AnimatePresence>
         {pops.map((p) => (
           <motion.div
             key={p.id}
             className="absolute z-[15] -translate-x-1/2 -translate-y-1/2 will-change-transform"
             style={{ left: p.x, top: p.y }}
-            initial={{ opacity: 0, scale: touchUi ? 0.88 : 0.72 }}
+            initial={{ opacity: 0, scale: touchUi ? 0.94 : 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.92 }}
+            exit={{ opacity: 0, scale: 0.97, transition: exitTransition }}
             transition={enterTransition}
+            layout={false}
           >
+            {/* В стиле Hero: стекло + тёмный подложечный тон (серые PNG менее «плашкой») */}
             <div
               className={cn(
-                "rounded-2xl bg-gradient-to-br from-cyan-400/45 via-fuchsia-500/35 to-amber-300/40 p-[2.5px]",
-                "shadow-[0_0_28px_rgba(0,210,255,0.35),0_0_44px_rgba(180,100,255,0.22)]",
-                touchUi && "p-[2px] shadow-[0_0_32px_rgba(0,220,255,0.4)]"
+                "flex items-center justify-center rounded-2xl border border-white/[0.14]",
+                "bg-[#050810]/72 backdrop-blur-md",
+                "shadow-[0_0_0_1px_rgba(0,200,255,0.1),0_16px_44px_rgba(0,0,0,0.42),0_0_52px_rgba(0,180,255,0.14)]",
+                touchUi ? "h-[52px] w-[52px] p-1.5" : "h-16 w-16 p-2 sm:h-[68px] sm:w-[68px] sm:p-2"
               )}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -221,9 +265,8 @@ export default function FloatingPlatformLogos({ className }: FloatingPlatformLog
                 height={72}
                 draggable={false}
                 className={cn(
-                  "pointer-events-none h-14 w-14 select-none rounded-[13px] object-cover sm:h-[72px] sm:w-[72px]",
-                  "[filter:saturate(1.45)_contrast(1.1)_brightness(1.07)]",
-                  "drop-shadow-[0_2px_16px_rgba(255,120,200,0.35)]"
+                  "pointer-events-none max-h-full max-w-full select-none object-contain",
+                  "[filter:saturate(1.12)_brightness(1.05)]"
                 )}
               />
             </div>

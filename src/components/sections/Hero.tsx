@@ -175,9 +175,11 @@ export function Hero({ children }: HeroProps) {
         >
           <Link
             href={homeHashHref("platforms")}
-            className="group inline-flex flex-col items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/45 transition-colors hover:text-cyan-200/90"
+            className="group inline-flex flex-col items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/45 transition-[gap,color] duration-300 ease-out hover:text-cyan-200/90 group-hover:gap-0"
           >
-            <span>{t("scrollDiscover")}</span>
+            <span className="block max-h-10 overflow-hidden text-center transition-[max-height,opacity,margin] duration-300 ease-out group-hover:max-h-0 group-hover:opacity-0 group-hover:mb-0">
+              {t("scrollDiscover")}
+            </span>
             <motion.span
               aria-hidden
               className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.12] bg-white/[0.04] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm transition-[border,background] group-hover:border-cyan-400/25 group-hover:bg-white/[0.07]"

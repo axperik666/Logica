@@ -138,13 +138,16 @@ export default function Navbar() {
                 type="button"
                 className={cn(
                   itemClass(websiteActive),
-                  "cursor-pointer gap-1 border-0 bg-transparent pr-2 pl-3.5",
+                  "cursor-pointer gap-1.5 border-0 bg-transparent px-3.5 pr-2 transition-[gap,padding] duration-300 ease-out",
+                  "inline-flex items-center justify-start group-hover:justify-center group-hover:gap-0 group-hover:px-3.5",
                   !websiteActive && "hover:bg-white/[0.07]"
                 )}
                 aria-haspopup="menu"
                 aria-label={tNav("websiteCreateAria")}
               >
-                {tNav("createWebsite")}
+                <span className="block min-w-0 overflow-hidden whitespace-nowrap text-left transition-[max-width,opacity] duration-300 ease-out max-w-[min(100vw,13rem)] group-hover:max-w-0 group-hover:opacity-0">
+                  {tNav("createWebsite")}
+                </span>
                 <ChevronDown className="h-3.5 w-3.5 shrink-0 opacity-75 transition duration-300 group-hover:rotate-180" />
               </button>
               {websiteActive ? (
@@ -188,13 +191,16 @@ export default function Navbar() {
                 type="button"
                 className={cn(
                   itemClass(moreActive),
-                  "cursor-pointer gap-1 border-0 bg-transparent pr-2 pl-3.5",
+                  "cursor-pointer gap-1.5 border-0 bg-transparent px-3.5 pr-2 transition-[gap,padding] duration-300 ease-out",
+                  "inline-flex items-center justify-start group-hover:justify-center group-hover:gap-0 group-hover:px-3.5",
                   !moreActive && "hover:bg-white/[0.07]"
                 )}
                 aria-haspopup="menu"
                 aria-label={tNav("moreMenuAria")}
               >
-                {tNav("more")}
+                <span className="block min-w-0 overflow-hidden whitespace-nowrap text-left transition-[max-width,opacity] duration-300 ease-out max-w-[min(100vw,10rem)] group-hover:max-w-0 group-hover:opacity-0">
+                  {tNav("more")}
+                </span>
                 <ChevronDown className="h-3.5 w-3.5 shrink-0 opacity-75 transition duration-300 group-hover:rotate-180" />
               </button>
               {moreActive ? (
