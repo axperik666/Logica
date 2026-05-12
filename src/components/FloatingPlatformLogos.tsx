@@ -229,7 +229,7 @@ export default function FloatingPlatformLogos({ className }: FloatingPlatformLog
   return (
     <div
       className={cn(
-        "pointer-events-none absolute inset-0 z-[15] overflow-hidden min-h-[min(100%,100dvh)] min-w-full",
+        "pointer-events-none absolute inset-0 z-[8] overflow-hidden min-h-[min(100%,100dvh)] min-w-full",
         className
       )}
       aria-hidden
@@ -238,7 +238,7 @@ export default function FloatingPlatformLogos({ className }: FloatingPlatformLog
         {pops.map((p) => (
           <motion.div
             key={p.id}
-            className="absolute z-[15] -translate-x-1/2 -translate-y-1/2 will-change-transform"
+            className="absolute z-[8] -translate-x-1/2 -translate-y-1/2 will-change-transform mix-blend-multiply"
             style={{ left: p.x, top: p.y }}
             initial={{ opacity: 0, scale: touchUi ? 0.94 : 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -256,7 +256,7 @@ export default function FloatingPlatformLogos({ className }: FloatingPlatformLog
               className={cn(
                 "pointer-events-none select-none object-contain",
                 touchUi ? "h-11 w-11" : "h-14 w-14 sm:h-[72px] sm:w-[72px]",
-                "[filter:saturate(1.08)_brightness(1.04)_drop-shadow(0_4px_14px_rgba(0,0,0,0.55))_drop-shadow(0_0_22px_rgba(0,185,255,0.12))]"
+                "[filter:brightness(1.22)_contrast(1.08)_saturate(1.18)]"
               )}
             />
           </motion.div>
