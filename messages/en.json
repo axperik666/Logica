@@ -1334,66 +1334,6 @@
       }
     ]
   },
-  "sectionsDs": {
-    "process": {
-      "title": "How we work",
-      "steps": [
-        {
-          "num": "01",
-          "title": "Free audit",
-          "desc": "We review current channels and unit economics within 48 hours."
-        },
-        {
-          "num": "02",
-          "title": "45‑day strategy",
-          "desc": "Funnel plan with a 3–7× ROI target and clear milestones."
-        },
-        {
-          "num": "03",
-          "title": "Launch & optimization",
-          "desc": "Ads, creatives and tracking wired for clean decisions."
-        },
-        {
-          "num": "04",
-          "title": "Weekly reports",
-          "desc": "Profit and key metrics — not vanity dashboards."
-        },
-        {
-          "num": "05",
-          "title": "Scaling",
-          "desc": "Grow budget while holding target ROAS."
-        }
-      ]
-    },
-    "results": {
-      "counter1Label": "growth projects",
-      "counter2Display": "7×",
-      "counter2Label": "avg. ROI multiple",
-      "counter3Label": "strategy horizon",
-      "counter3Suffix": " days",
-      "counter4Label": "{count, plural, one {# real case study} other {# real case studies}}"
-    },
-    "leadForm": {
-      "namePlaceholder": "Name",
-      "contactPlaceholder": "Phone / Telegram",
-      "messagePlaceholder": "Briefly: your business and goal",
-      "submit": "Get a free audit →",
-      "footnote": "We reply within ~15 minutes • 100% confidential",
-      "thankTitle": "Thank you!",
-      "thankBody": "We’ll reach out in messengers shortly."
-    }
-  },
-  "stickyHeader": {
-    "brandShort": "LOGICA",
-    "logoAlt": "LOGICA Marketing",
-    "navAria": "Primary navigation",
-    "navCases": "Cases",
-    "navProcess": "Process",
-    "navServices": "Services",
-    "navResults": "Results",
-    "ctaDiscuss": "Discuss project",
-    "ctaFloat": "Get audit"
-  },
   "casesPage": {
     "title": "Cases",
     "description": "Examples of our approach: site structure, ads, creatives and data‑driven conclusions.",

@@ -28,20 +28,6 @@ export const MotionSection = forwardRef<
   );
 });
 
-export const MotionHeader = forwardRef<
-  HTMLElement,
-  HTMLMotionProps<"header">
->(function MotionHeader(props, ref) {
-  const { style, ...rest } = props;
-  return (
-    <motion.header ref={ref} style={mergeMotionStyle(style)} {...rest} />
-  );
-});
-
-export const MotionMain = motion.main;
-export const MotionButton = motion.button;
-export const MotionA = motion.a;
-
 export function MotionProvider({ children }: { children: ReactNode }) {
   const reduced = useReducedMotion();
   return (
