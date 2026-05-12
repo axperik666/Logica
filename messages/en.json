@@ -522,7 +522,7 @@
         "description": "Funnel: diagnostics → treatment plan."
       },
       "9": {
-        "result": "₽2.8M from one lead",
+        "result": "$2.8M from one lead",
         "description": "Lead qualification flow and nurture."
       },
       "10": {
@@ -672,7 +672,7 @@
       "real-estate": {
         "niche": "Real estate",
         "client": "PrimeEstate",
-        "result": "₽2.8M",
+        "result": "$2.8M",
         "period": "per qualified lead",
         "summary": "Lead‑qual flows + nurture so deals close on warm leads, not random traffic.",
         "details": [
@@ -972,7 +972,7 @@
         "icon": "revenue",
         "value": 12.4,
         "decimals": 1,
-        "suffix": "M+ ₽",
+        "suffix": "M+ USD",
         "label": "incremental revenue modeled",
         "sub": "Illustrative enterprise impact at scale"
       },
@@ -1021,45 +1021,45 @@
     "linkedinCompanyUrl": "https://www.linkedin.com/company/logica-marketing",
     "members": [
       {
-        "name": "Alexei Morozov",
+        "name": "James Mitchell",
         "role": "Head of Performance",
         "bio": "Owns media economics, scaling and attribution — from first tests to stable ROAS.",
-        "initials": "AM",
+        "initials": "JM",
         "photo": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&auto=format"
       },
       {
-        "name": "Daria Volkova",
+        "name": "Sarah Bennett",
         "role": "Creative Director",
         "bio": "Builds creative systems that beat ad fatigue and lift conversion across funnels.",
-        "initials": "DV",
+        "initials": "SB",
         "photo": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&auto=format"
       },
       {
-        "name": "Ilya Petrov",
+        "name": "Marco Rossi",
         "role": "Strategy Lead",
         "bio": "Turns market context into a growth thesis: offers, angles and channel mix.",
-        "initials": "IP",
+        "initials": "MR",
         "photo": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&auto=format"
       },
       {
-        "name": "Maria Sokolova",
+        "name": "Olivia Hayes",
         "role": "Senior Media Buyer",
         "bio": "Buys and optimizes traffic across channels — disciplined tests and clean learnings.",
-        "initials": "MS",
+        "initials": "OH",
         "photo": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop&auto=format"
       },
       {
-        "name": "Konstantin Orlov",
+        "name": "Luca Ferretti",
         "role": "Head of Client Success",
         "bio": "Keeps delivery, communication and timelines tight — you always know what ships next.",
-        "initials": "KO",
+        "initials": "LF",
         "photo": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&auto=format"
       },
       {
-        "name": "Elena Kuznetsova",
+        "name": "Emma Clarke",
         "role": "Paid Social Lead",
         "bio": "Meta/TikTok scale-ups with creative iteration loops and disciplined learning budgets.",
-        "initials": "EK",
+        "initials": "EC",
         "photo": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&auto=format"
       }
     ]

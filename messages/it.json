@@ -523,7 +523,7 @@
         "description": "Funnel: diagnostica → piano di cura."
       },
       "9": {
-        "result": "2,8M ₽ da un lead",
+        "result": "$2.8M da un lead",
         "description": "Qualifica lead e nurturing."
       },
       "10": {
@@ -673,7 +673,7 @@
       "real-estate": {
         "niche": "Immobiliare",
         "client": "PrimeEstate",
-        "result": "2,8 mln ₽",
+        "result": "$2.8M",
         "period": "per lead qualificato",
         "summary": "Flusso qualifica + nurture così le trattative chiudono su lead caldi.",
         "details": [
@@ -973,7 +973,7 @@
         "icon": "revenue",
         "value": 12.4,
         "decimals": 1,
-        "suffix": "M ₽",
+        "suffix": "M USD",
         "label": "ricavi incremental stimati",
         "sub": "Scala illustrativa con economia matura"
       },
@@ -1022,45 +1022,45 @@
     "linkedinCompanyUrl": "https://www.linkedin.com/company/logica-marketing",
     "members": [
       {
-        "name": "Alexei Morozov",
+        "name": "Marco Rossi",
         "role": "Head of Performance",
         "bio": "Economia media, scaling e attribuzione — dai primi test al ROAS stabile.",
-        "initials": "AM",
+        "initials": "MR",
         "photo": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&auto=format"
       },
       {
-        "name": "Daria Volkova",
+        "name": "Giulia Romano",
         "role": "Creative Director",
         "bio": "Sistemi creativi che battono la fatigue e alzano la conversione nel funnel.",
-        "initials": "DV",
+        "initials": "GR",
         "photo": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&auto=format"
       },
       {
-        "name": "Ilya Petrov",
+        "name": "Luca Ferretti",
         "role": "Strategy Lead",
         "bio": "Dal contesto di mercato a una tesi di crescita: offerta, angoli e mix canali.",
-        "initials": "IP",
+        "initials": "LF",
         "photo": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&auto=format"
       },
       {
-        "name": "Maria Sokolova",
+        "name": "Elena Costa",
         "role": "Senior Media Buyer",
         "bio": "Acquisto e ottimizzazione del traffico cross-channel — test disciplinati e insight chiari.",
-        "initials": "MS",
+        "initials": "EC",
         "photo": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop&auto=format"
       },
       {
-        "name": "Konstantin Orlov",
+        "name": "Alessandro Martini",
         "role": "Head of Client Success",
         "bio": "Tempistiche, comunicazione e qualità di delivery — sempre chiaro cosa succede dopo.",
-        "initials": "KO",
+        "initials": "AM",
         "photo": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&auto=format"
       },
       {
-        "name": "Elena Kuznetsova",
+        "name": "James Mitchell",
         "role": "Paid Social Lead",
         "bio": "Scale-up Meta/TikTok con loop creativi e budget di learning disciplinato.",
-        "initials": "EK",
+        "initials": "JM",
         "photo": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&auto=format"
       }
     ]

@@ -523,7 +523,7 @@
         "description": "Воронка «диагностика → план лечения»."
       },
       "9": {
-        "result": "2.8 млн ₽ с лида",
+        "result": "$2.8M с лида",
         "description": "Lead-qual flow и прогрев."
       },
       "10": {
@@ -673,7 +673,7 @@
       "real-estate": {
         "niche": "Недвижимость",
         "client": "PrimeEstate",
-        "result": "2.8 млн ₽",
+        "result": "$2.8M",
         "period": "с одного лида",
         "summary": "Собрали lead‑qual flow и прогрев, чтобы сделки закрывались на «тёплых», а не на случайных.",
         "details": [
@@ -973,7 +973,7 @@
         "icon": "revenue",
         "value": 12.4,
         "decimals": 1,
-        "suffix": " млн ₽",
+        "suffix": " млн USD",
         "label": "дополнительной выручки",
         "sub": "Иллюстративный масштаб при зрелой экономике"
       },
@@ -1022,10 +1022,10 @@
     "linkedinCompanyUrl": "https://www.linkedin.com/company/logica-marketing",
     "members": [
       {
-        "name": "Alexei Morozov",
+        "name": "James Mitchell",
         "role": "Head of Performance",
         "bio": "Медиа-экономика, масштаб и атрибуция — от первых тестов до стабильного ROAS.",
-        "initials": "AM",
+        "initials": "JM",
         "photo": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&auto=format"
       },
       {
@@ -1036,31 +1036,31 @@
         "photo": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&auto=format"
       },
       {
-        "name": "Ilya Petrov",
+        "name": "Marco Rossi",
         "role": "Strategy Lead",
         "bio": "Контекст рынка в тезис роста: оффер, углы и микс каналов.",
-        "initials": "IP",
+        "initials": "MR",
         "photo": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&auto=format"
       },
       {
-        "name": "Maria Sokolova",
+        "name": "Olivia Hayes",
         "role": "Senior Media Buyer",
         "bio": "Закупка и оптимизация трафика по каналам — дисциплина тестов и чистые выводы.",
-        "initials": "MS",
+        "initials": "OH",
         "photo": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop&auto=format"
       },
       {
-        "name": "Konstantin Orlov",
+        "name": "Luca Ferretti",
         "role": "Head of Client Success",
         "bio": "Сроки, коммуникация и качество сдачи — всегда ясно, что делаем дальше.",
-        "initials": "KO",
+        "initials": "LF",
         "photo": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&auto=format"
       },
       {
-        "name": "Elena Kuznetsova",
+        "name": "Emma Clarke",
         "role": "Paid Social Lead",
         "bio": "Масштаб Meta/TikTok с циклами креативов и дисциплиной learning-бюджета.",
-        "initials": "EK",
+        "initials": "EC",
         "photo": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&auto=format"
       }
     ]
