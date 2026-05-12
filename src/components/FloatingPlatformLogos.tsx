@@ -5,10 +5,10 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const logos = [
-  { src: "/logos/tiktok.svg", alt: "TikTok", offsetX: -140, offsetY: -90 },
-  { src: "/logos/meta.svg", alt: "Meta", offsetX: 110, offsetY: -110 },
-  { src: "/logos/vk.svg", alt: "VK", offsetX: -160, offsetY: 130 },
-  { src: "/logos/yandex.svg", alt: "Yandex", offsetX: 130, offsetY: 100 }
+  { src: "/logos/tiktok.png", alt: "TikTok", offsetX: -140, offsetY: -90 },
+  { src: "/logos/meta.png", alt: "Meta", offsetX: 110, offsetY: -110 },
+  { src: "/logos/vk.png", alt: "VK", offsetX: -160, offsetY: 130 },
+  { src: "/logos/yandex.png", alt: "Yandex", offsetX: 130, offsetY: 100 }
 ];
 
 export default function FloatingPlatformLogos() {
