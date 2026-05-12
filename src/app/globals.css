@@ -87,15 +87,46 @@ body:not(.tech-bg) {
   background-color: #0a0a1f;
 }
 
-/* Примитивы дизайн-системы (классы для новых блоков; body/hero не переопределяем) */
+/* Примитивы DS — без @apply/Tailwind-resolve на Vercel (избегаем ошибок css-loader с shadow-primary/…) */
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center gap-3 rounded-2xl bg-primary px-8 py-4 font-medium text-white shadow-lg shadow-primary/30 transition-all;
-    @apply hover:bg-[#0099d9] active:scale-[0.97];
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-radius: 1rem;
+    padding: 1rem 2rem;
+    font-weight: 500;
+    color: #fff;
+    background-color: #00b4ff;
+    box-shadow:
+      0 10px 15px -3px rgb(0 180 255 / 0.35),
+      0 4px 6px -4px rgb(0 180 255 / 0.2);
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow,
+      transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+
+  .btn-primary:hover {
+    background-color: #0099d9;
+  }
+
+  .btn-primary:active {
+    transform: scale(0.97);
   }
 
   .section-header {
-    @apply text-5xl font-bold leading-none tracking-tighter text-white md:text-6xl;
+    font-size: 3rem;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: #fff;
+  }
+
+  @media (min-width: 768px) {
+    .section-header {
+      font-size: 3.75rem;
+    }
   }
 }
 
@@ -893,7 +924,9 @@ header.site-header.glass-nav:hover::after {
 
   /* Горизонтальные отступы + safe-area на вырезах / жестовой полоске */
   .container-px {
-    @apply mx-auto w-full;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
     max-width: 1480px;
     padding-left: max(1rem, env(safe-area-inset-left, 0px));
     padding-right: max(1rem, env(safe-area-inset-right, 0px));
@@ -978,10 +1011,15 @@ header.site-header.glass-nav:hover::after {
   }
 
   .hover-lift {
-    @apply transition will-change-transform hover:-translate-y-1;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow,
+      transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    will-change: transform;
   }
 
   .hover-lift:hover {
+    transform: translateY(-0.25rem);
     border-color: rgba(255, 255, 255, 0.16);
   }
 
