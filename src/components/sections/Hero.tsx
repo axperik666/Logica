@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { type ReactNode, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import { ChevronDown } from "lucide-react";
@@ -9,13 +9,16 @@ import { Link } from "@/navigation";
 import { homeHashHref, homeSectionHref } from "@/lib/navHref";
 import { cn } from "@/lib/cn";
 import { useMouseParallax } from "@/hooks/useMouseParallax";
-import { HeroPlatformField } from "@/components/HeroPlatformField";
 
 const MotionLink = motion(Link);
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 
-export function Hero() {
+type HeroProps = {
+  children?: ReactNode;
+};
+
+export function Hero({ children }: HeroProps) {
   const t = useTranslations("hero");
   const [videoActive, setVideoActive] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -40,6 +43,7 @@ export function Hero() {
       id="hero"
       className="relative flex min-h-[100dvh] items-center justify-center overflow-hidden bg-[#020308]"
     >
+      {children}
       <motion.div
         className="absolute inset-[-6%] z-0 will-change-transform"
         style={{ x: parallax.backX, y: parallax.backY }}
@@ -75,8 +79,6 @@ export function Hero() {
         <div className="hero-vignette-ring absolute inset-0" />
       </motion.div>
       <div className="premium-grain pointer-events-none absolute inset-0 z-[2]" aria-hidden />
-
-      <HeroPlatformField sectionRef={sectionRef} />
 
       <motion.div
         className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6"
