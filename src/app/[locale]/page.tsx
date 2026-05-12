@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
+import FloatingPlatformLogos from "@/components/FloatingPlatformLogos";
 import InteractiveBackground from "@/components/InteractiveBackground";
 import { Hero } from "@/components/sections/Hero";
 import { TrustStrip } from "@/components/sections/TrustStrip";
@@ -48,10 +49,13 @@ export default function HomePage() {
     <>
       <HomePageJsonLd />
       <Hero>
-        <InteractiveBackground
-          className="absolute inset-0 z-0 min-h-full min-w-full"
-          particleCount={100}
-        />
+        <>
+          <InteractiveBackground
+            className="absolute inset-0 z-[-1] min-h-full min-w-full"
+            particleCount={100}
+          />
+          <FloatingPlatformLogos />
+        </>
       </Hero>
       <TrustStrip />
       <TrustBar />
