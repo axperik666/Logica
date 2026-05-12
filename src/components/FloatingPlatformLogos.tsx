@@ -4,25 +4,23 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
 
-/** Партнёрские / платформенные логотипы — замени PNG в public/logos/ при необходимости */
+/** Бренды из public/logos/ — порядок = смена при движении курсора */
 const PLATFORM_LOGOS = [
-  "/logos/tiktok.png",
-  "/logos/meta.png",
-  "/logos/vk.png",
-  "/logos/yandex.png",
-  "/logos/instagram.png",
-  "/logos/youtube.png",
-  "/logos/telegram.png",
+  "/logos/Ford.png",
+  "/logos/Emporio%20Armani.png",
+  "/logos/Ralph.png",
+  "/logos/Instagram.png",
   "/logos/googleads.png",
-  "/logos/linkedin.png",
-  "/logos/x.png",
-  "/logos/pinterest.png",
-  "/logos/snapchat.png"
+  "/logos/Lacoste.png",
+  "/logos/Bottega.png",
+  "/logos/Baldinini.png",
+  "/logos/grok-image-1c29f2a4-c390-4de8-8b27-f8aefd991f71.png",
+  "/logos/grok-image-8ffb7819-c7e3-4618-b596-d0b5225623e4.png"
 ] as const;
 
 const MIN_INTERVAL_MS = 50;
 const MIN_MOVE_PX = 12;
-const MAX_MARKERS = 12;
+const MAX_MARKERS = 10;
 /** После последнего движения курсора над hero — всё скрыть */
 const IDLE_HIDE_MS = 320;
 /** Ушёл курсор из hero — скрыть сразу */
