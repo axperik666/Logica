@@ -68,28 +68,32 @@ export function SiteSplash() {
       aria-modal="true"
       aria-label={t("splashAria")}
       className={cn(
-        "fixed inset-0 z-[200] flex min-h-[100svh] flex-col bg-black transition-opacity duration-[420ms] ease-out",
+        "fixed inset-0 z-[200] flex min-h-dvh flex-col bg-[#020308] transition-opacity duration-[420ms] ease-out",
         phase === "exit" ? "pointer-events-none opacity-0" : "opacity-100"
       )}
     >
-      <video
-        ref={videoRef}
-        className={cn(
-          "absolute inset-0 box-border h-full w-full bg-black",
-          "object-contain object-center md:object-cover",
-          "brightness-[1.1] contrast-[1.04] saturate-[1.05] max-md:brightness-[1.18] max-md:contrast-[1.05]"
-        )}
-        src={SPLASH_SRC}
-        playsInline
-        muted
-        preload="auto"
-        onEnded={finish}
-        onError={finish}
+      {/* Full-bleed на любых соотношениях сторон: cover + тот же фон, что у hero — без «чёрных полос» */}
+      <div className="absolute inset-0 overflow-hidden" aria-hidden>
+        <video
+          ref={videoRef}
+          className={cn(
+            "absolute left-1/2 top-1/2 min-h-full min-w-full -translate-x-1/2 -translate-y-1/2",
+            "h-full w-full object-cover object-center",
+            "brightness-[1.08] contrast-[1.04] saturate-[1.04]"
+          )}
+          src={SPLASH_SRC}
+          playsInline
+          muted
+          preload="metadata"
+          onEnded={finish}
+          onError={finish}
+        />
+      </div>
+
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#020308]/90 via-[#020308]/35 to-transparent"
+        aria-hidden
       />
-
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/20 max-md:from-black/30 max-md:to-transparent" aria-hidden />
-
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/75 to-transparent max-md:from-black/40 max-md:h-24" aria-hidden />
 
       <div className="relative z-10 mt-auto flex justify-center p-6 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
         <button

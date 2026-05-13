@@ -72,13 +72,10 @@ export function Hero({ children }: HeroProps) {
       {/* Canvas над видео, под градиентом — сеть и «орбиты» читаются на мобилке */}
       {children}
 
+      {/* Один слой: тон + aurora + лёгкая виньетка (mid parallax) */}
       <motion.div
-        className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-b from-black/10 via-[#141c32]/38 to-black/55 will-change-transform max-md:from-black/[0.04] max-md:via-[#182238]/18 max-md:to-black/32 md:from-black/[0.04] md:via-[#141c32]/22 md:to-black/38"
+        className="pointer-events-none absolute inset-0 z-[2] will-change-transform bg-gradient-to-b from-black/10 via-[#141c32]/38 to-black/55 max-md:from-black/[0.04] max-md:via-[#182238]/18 max-md:to-black/32 md:from-black/[0.04] md:via-[#141c32]/22 md:to-black/38"
         style={{ x: parallax.midX, y: parallax.midY }}
-      />
-      <motion.div
-        className="pointer-events-none absolute inset-0 z-[3] will-change-transform"
-        style={{ x: parallax.frontX, y: parallax.frontY }}
       >
         <div className="premium-aurora hero-premium-aurora absolute inset-0 max-md:opacity-60 md:opacity-[0.55]" />
         <div
@@ -86,7 +83,6 @@ export function Hero({ children }: HeroProps) {
           aria-hidden
         />
       </motion.div>
-      <div className="premium-grain pointer-events-none absolute inset-0 z-[4] max-md:opacity-[0.018] md:opacity-[0.028]" aria-hidden />
 
       <motion.div
         className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6"

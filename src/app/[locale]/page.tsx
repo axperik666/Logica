@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
+import nextDynamic from "next/dynamic";
 import { getLocale, getTranslations } from "next-intl/server";
-import FloatingPlatformLogos from "@/components/FloatingPlatformLogos";
-import InteractiveBackground from "@/components/InteractiveBackground";
 import { SiteSplash } from "@/components/SiteSplash";
 import { Hero } from "@/components/sections/Hero";
 import { TrustStrip } from "@/components/sections/TrustStrip";
@@ -24,8 +23,10 @@ import { CTA } from "@/components/sections/CTA";
 import { HomePageJsonLd } from "@/components/seo/HomePageJsonLd";
 import { absoluteLocalizedUrl, languageAlternates } from "@/lib/hreflang";
 
-/** Включить след логотипов в hero после замены PNG в `public/logos/`. */
-const SHOW_FLOATING_PLATFORM_LOGOS = false;
+const InteractiveBackground = nextDynamic(() => import("@/components/InteractiveBackground"), {
+  ssr: false,
+  loading: () => null
+});
 
 /** Свежие кейсы и переводы без устаревшего статического снимка страницы. */
 export const dynamic = "force-dynamic";
@@ -54,13 +55,10 @@ export default function HomePage() {
       <HomePageJsonLd />
       <SiteSplash />
       <Hero>
-        <>
-          <InteractiveBackground
-            className="absolute inset-0 z-[1] min-h-full min-w-full max-md:opacity-[0.58] md:opacity-[0.48]"
-            particleCount={132}
-          />
-          {SHOW_FLOATING_PLATFORM_LOGOS ? <FloatingPlatformLogos /> : null}
-        </>
+        <InteractiveBackground
+          className="absolute inset-0 z-[1] min-h-full min-w-full max-md:opacity-[0.58] md:opacity-[0.48]"
+          particleCount={132}
+        />
       </Hero>
       <TrustStrip />
       <TrustBar />

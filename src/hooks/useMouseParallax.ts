@@ -14,8 +14,6 @@ export type MouseParallaxLayers = {
   backY: MotionValue<number>;
   midX: MotionValue<number>;
   midY: MotionValue<number>;
-  frontX: MotionValue<number>;
-  frontY: MotionValue<number>;
 };
 
 /**
@@ -45,8 +43,6 @@ export function useMouseParallax(
   const backY = useTransform(y, (v) => v * 0.42 * boost);
   const midX = useTransform(x, (v) => v * 0.28 * boost);
   const midY = useTransform(y, (v) => v * 0.28 * boost);
-  const frontX = useTransform(x, (v) => v * 0.62 * boost);
-  const frontY = useTransform(y, (v) => v * 0.62 * boost);
 
   const moveRaf = useRef<number | null>(null);
   const pending = useRef({ x: 0, y: 0 });
@@ -117,5 +113,5 @@ export function useMouseParallax(
     };
   }, [containerRef, maxPx, boost, rawX, rawY, reduceMotion]);
 
-  return { backX, backY, midX, midY, frontX, frontY };
+  return { backX, backY, midX, midY };
 }
