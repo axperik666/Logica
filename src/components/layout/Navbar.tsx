@@ -133,30 +133,33 @@ export default function Navbar() {
               ) : null}
             </Link>
 
-            <div className="group relative flex h-10 items-center">
+            <div className="group relative flex items-center py-2 -my-2">
               <button
                 type="button"
                 className={cn(
                   itemClass(websiteActive),
-                  "cursor-pointer gap-1.5 border-0 bg-transparent px-3.5 pr-2 transition-[gap,padding] duration-300 ease-out",
-                  "inline-flex items-center justify-start group-hover:justify-center group-hover:gap-0 group-hover:px-3.5",
+                  "cursor-pointer gap-1.5 border-0 bg-transparent px-3.5",
+                  "inline-flex items-center",
                   !websiteActive && "hover:bg-white/[0.07]"
                 )}
                 aria-haspopup="menu"
                 aria-label={tNav("websiteCreateAria")}
               >
-                <span className="block min-w-0 overflow-hidden whitespace-nowrap text-left transition-[max-width,opacity] duration-300 ease-out max-w-[min(100vw,13rem)] group-hover:max-w-0 group-hover:opacity-0">
-                  {tNav("createWebsite")}
-                </span>
-                <ChevronDown className="h-3.5 w-3.5 shrink-0 opacity-75 transition duration-300 group-hover:rotate-180" />
+                <span className="whitespace-nowrap">{tNav("createWebsite")}</span>
+                <ChevronDown
+                  strokeWidth={2.25}
+                  className="size-4 shrink-0 opacity-80 transition-transform duration-200 ease-out group-hover:rotate-180"
+                  aria-hidden
+                />
               </button>
               {websiteActive ? (
                 <span className="absolute bottom-1 left-4 right-4 h-px rounded-full bg-gradient-to-r from-transparent via-[#00b4ff] to-transparent" />
               ) : null}
               <div
-                className="pointer-events-none invisible absolute left-1/2 top-full z-50 w-[19rem] -translate-x-1/2 pt-4 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100"
+                className="pointer-events-none invisible absolute left-1/2 top-full z-50 w-[19rem] -translate-x-1/2 opacity-0 transition-opacity duration-150 group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100"
                 role="menu"
               >
+                <div className="h-4 w-full" aria-hidden />
                 <div className="rounded-2xl border border-cyan-400/25 bg-[linear-gradient(165deg,rgba(18,22,38,0.98)_0%,rgba(10,12,24,0.97)_100%)] p-2 shadow-[0_24px_80px_rgba(0,0,0,0.65),0_0_0_1px_rgba(255,255,255,0.04)_inset] backdrop-blur-xl">
                   {WEBSITE_MENU_KEYS.map((key) => (
                     <Link
@@ -186,30 +189,33 @@ export default function Navbar() {
               ) : null}
             </Link>
 
-            <div className="group relative flex h-10 items-center">
+            <div className="group relative flex items-center py-2 -my-2">
               <button
                 type="button"
                 className={cn(
                   itemClass(moreActive),
-                  "cursor-pointer gap-1.5 border-0 bg-transparent px-3.5 pr-2 transition-[gap,padding] duration-300 ease-out",
-                  "inline-flex items-center justify-start group-hover:justify-center group-hover:gap-0 group-hover:px-3.5",
+                  "cursor-pointer gap-1.5 border-0 bg-transparent px-3.5",
+                  "inline-flex items-center",
                   !moreActive && "hover:bg-white/[0.07]"
                 )}
                 aria-haspopup="menu"
                 aria-label={tNav("moreMenuAria")}
               >
-                <span className="block min-w-0 overflow-hidden whitespace-nowrap text-left transition-[max-width,opacity] duration-300 ease-out max-w-[min(100vw,10rem)] group-hover:max-w-0 group-hover:opacity-0">
-                  {tNav("more")}
-                </span>
-                <ChevronDown className="h-3.5 w-3.5 shrink-0 opacity-75 transition duration-300 group-hover:rotate-180" />
+                <span className="whitespace-nowrap">{tNav("more")}</span>
+                <ChevronDown
+                  strokeWidth={2.25}
+                  className="size-4 shrink-0 opacity-80 transition-transform duration-200 ease-out group-hover:rotate-180"
+                  aria-hidden
+                />
               </button>
               {moreActive ? (
                 <span className="absolute bottom-1 left-4 right-4 h-px rounded-full bg-gradient-to-r from-transparent via-[#00b4ff] to-transparent" />
               ) : null}
               <div
-                className="pointer-events-none invisible absolute left-1/2 top-full z-50 w-52 -translate-x-1/2 pt-4 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100"
+                className="pointer-events-none invisible absolute left-1/2 top-full z-50 w-52 -translate-x-1/2 opacity-0 transition-opacity duration-150 group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100"
                 role="menu"
               >
+                <div className="h-4 w-full" aria-hidden />
                 <div className="rounded-2xl border border-cyan-400/25 bg-[linear-gradient(165deg,rgba(18,22,38,0.98)_0%,rgba(10,12,24,0.97)_100%)] p-2 shadow-[0_24px_80px_rgba(0,0,0,0.65)] backdrop-blur-xl">
                   <Link
                     href="/o-nas"
