@@ -133,6 +133,7 @@ export function KontaktyForm() {
               required
               disabled={pending}
             />
+            <span className="text-[11px] leading-snug text-white/42">{t("hintContact")}</span>
           </label>
           {err === "VALIDATION" ? (
             <p className="text-sm text-amber-200/90" role="alert">
@@ -161,6 +162,7 @@ export function KontaktyForm() {
               onChange={(e) => setMessage(e.target.value)}
               disabled={pending}
             />
+            <span className="text-[11px] leading-snug text-white/42">{t("hintMessage")}</span>
           </label>
 
           {err === "VALIDATION" ? (
