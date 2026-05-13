@@ -271,16 +271,11 @@
       }
     ],
     "landingProcessTitle": "Как это работает",
-    "trustStripItems": [
-      {
-        "kind": "boldMid",
-        "before": "Ответ в мессенджере — ",
-        "bold": "15 минут",
-        "icon": "arrow"
-      },
-      { "kind": "plain", "text": "Читаем каждую заявку вручную", "icon": "check" },
-      { "kind": "plain", "text": "Без спама и автоматических воронок", "icon": "spark" },
-      { "kind": "plain", "text": "Честно скажем, если формат не наш", "icon": "fire" }
+    "trustBarLines": [
+      "Ответ в мессенджере — 15 минут",
+      "Читаем каждую заявку вручную",
+      "Без спама и автоматических воронок",
+      "Честно скажем, если формат задачи не наш"
     ],
     "landingLabelName": "Как к вам обращаться?",
     "landingPlaceholderNameCompany": "Имя / Компания",

@@ -271,28 +271,11 @@
       }
     ],
     "landingProcessTitle": "How it works",
-    "trustStripItems": [
-      {
-        "kind": "boldMid",
-        "before": "Messenger reply — ",
-        "bold": "~15 min",
-        "icon": "arrow"
-      },
-      {
-        "kind": "plain",
-        "text": "We read every request manually",
-        "icon": "check"
-      },
-      {
-        "kind": "plain",
-        "text": "No spam or automated funnels",
-        "icon": "spark"
-      },
-      {
-        "kind": "plain",
-        "text": "We’ll say honestly if we’re not the right fit",
-        "icon": "fire"
-      }
+    "trustBarLines": [
+      "Messenger reply — 15 minutes",
+      "We read every request manually",
+      "No spam or automated funnels",
+      "We’ll say honestly if the task format isn’t for us"
     ],
     "landingLabelName": "How should we address you?",
     "landingPlaceholderNameCompany": "Name / Company",

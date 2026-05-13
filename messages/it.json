@@ -271,28 +271,11 @@
       }
     ],
     "landingProcessTitle": "Come funziona",
-    "trustStripItems": [
-      {
-        "kind": "boldMid",
-        "before": "Risposta su messenger — ",
-        "bold": "~15 min",
-        "icon": "arrow"
-      },
-      {
-        "kind": "plain",
-        "text": "Leggiamo ogni richiesta a mano",
-        "icon": "check"
-      },
-      {
-        "kind": "plain",
-        "text": "Niente spam né funnel automatici",
-        "icon": "spark"
-      },
-      {
-        "kind": "plain",
-        "text": "Ti diremo con onestà se non siamo il fit giusto",
-        "icon": "fire"
-      }
+    "trustBarLines": [
+      "Risposta su messenger — 15 minuti",
+      "Leggiamo ogni richiesta a mano",
+      "Niente spam né funnel automatici",
+      "Te lo diciamo onestamente se il formato del task non è per noi"
     ],
     "landingLabelName": "Come possiamo chiamarti?",
     "landingPlaceholderNameCompany": "Nome / Azienda",
