@@ -109,7 +109,7 @@
     "guidesCardContactTitle": "Contact",
     "guidesCardContactDesc": "Form, messengers, or email — we reply quickly.",
     "guidesCardCta": "Open",
-    "guidesCardFaqInsight": "Budgets, reporting cadence, and how we run tests — so you know what you’re buying before the first call.",
+    "guidesCardFaqInsight": "Budgets, reporting cadence, and how we run tests — so you know what to expect from the engagement before the first call.",
     "guidesCardCasesInsight": "Short video breakdowns with niche filters — see funnels and numbers, not mockups labeled “results”.",
     "guidesCardContactInsight": "Leave a request or write in Telegram/WhatsApp — we typically respond within minutes on business days.",
     "testimonials": "Testimonials",
@@ -1031,7 +1031,7 @@
         "decimals": 0,
         "suffix": "%",
         "label": "avg. ROI uplift",
-        "sub": "After funnels, creatives and buying stabilize"
+        "sub": "After funnels, creatives and paid campaigns stabilize"
       },
       {
         "icon": "revenue",
@@ -1107,8 +1107,8 @@
       },
       {
         "name": "Olivia Hayes",
-        "role": "Senior Media Buyer",
-        "bio": "Buys and optimizes traffic across channels — disciplined tests and clean learnings.",
+        "role": "Performance Marketing Lead",
+        "bio": "Targeting and ad optimization across channels — disciplined tests and clear learnings.",
         "initials": "OH",
         "photo": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop&auto=format"
       },
@@ -1299,7 +1299,7 @@
       "google": "Platform: Google Ads — please contact me about launch or optimization.",
       "meta": "Platform: Meta (Facebook / Instagram) — please contact me about strategy and launch.",
       "tiktok": "Platform: TikTok Ads — please contact me about creative testing and scaling.",
-      "telegram": "Platform: Telegram — please contact me about promotion or media buying."
+      "telegram": "Platform: Telegram — please contact me about targeting, ads or marketing."
     },
     "prefillService": {
       "performance": "Service: Performance Marketing — I’d like to discuss launch and bundle economics.",

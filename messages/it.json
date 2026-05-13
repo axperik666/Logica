@@ -109,7 +109,7 @@
     "guidesCardContactTitle": "Contatti",
     "guidesCardContactDesc": "Modulo, messenger o email — rispondiamo in fretta.",
     "guidesCardCta": "Apri",
-    "guidesCardFaqInsight": "Budget, reporting e come gestiamo i test — così sai cosa compri prima della prima call.",
+    "guidesCardFaqInsight": "Budget, reporting e come gestiamo i test — così sai cosa aspettarti dall’incarico prima della prima call.",
     "guidesCardCasesInsight": "Video brevi con metriche e filtro per settore — funnel e numeri, non mockup etichettati «risultati».",
     "guidesCardContactInsight": "Modulo o Telegram/WhatsApp — nei giorni lavorativi rispondiamo in fretta.",
     "testimonials": "Recensioni",
@@ -1032,7 +1032,7 @@
         "decimals": 0,
         "suffix": "%",
         "label": "ROI medio in crescita",
-        "sub": "Dopo stabilizzazione di funnel e buying"
+        "sub": "Dopo stabilizzazione di funnel e campagne a pagamento"
       },
       {
         "icon": "revenue",
@@ -1108,8 +1108,8 @@
       },
       {
         "name": "Elena Costa",
-        "role": "Senior Media Buyer",
-        "bio": "Acquisto e ottimizzazione del traffico cross-channel — test disciplinati e insight chiari.",
+        "role": "Lead Performance Marketing",
+        "bio": "Targeting e ottimizzazione degli annunci sui canali — test disciplinati e insight chiari.",
         "initials": "EC",
         "photo": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop&auto=format"
       },
@@ -1307,7 +1307,7 @@
       "google": "Piattaforma: Google Ads — vorrei essere ricontattato per lancio o ottimizzazione.",
       "meta": "Piattaforma: Meta (Facebook / Instagram) — vorrei essere ricontattato per strategia e lancio.",
       "tiktok": "Piattaforma: TikTok Ads — vorrei essere ricontattato per test creativi e scaling.",
-      "telegram": "Piattaforma: Telegram — vorrei essere ricontattato per promozione o media buying."
+      "telegram": "Piattaforma: Telegram — vorrei essere ricontattato per targeting, ads o marketing."
     },
     "prefillService": {
       "performance": "Servizio: Performance Marketing — vorrei parlare di lancio ed economia delle combinazioni.",
