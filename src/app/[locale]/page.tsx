@@ -56,7 +56,7 @@ export default function HomePage() {
       <Hero>
         <>
           <InteractiveBackground
-            className="absolute inset-0 z-[-1] min-h-full min-w-full max-md:opacity-[0.32] md:opacity-100"
+            className="absolute inset-0 z-[-1] min-h-full min-w-full max-md:opacity-[0.32] md:opacity-[0.42]"
             particleCount={132}
           />
           {SHOW_FLOATING_PLATFORM_LOGOS ? <FloatingPlatformLogos /> : null}
