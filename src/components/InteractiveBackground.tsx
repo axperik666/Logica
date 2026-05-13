@@ -12,7 +12,7 @@ const DEFAULT_COUNT = 118;
 const MIN_PARTICLES = 80;
 const MAX_PARTICLES = 120;
 /** Меньше точек и связей на телефонах — меньше лагов при O(n²) отрисовке */
-const MOBILE_PARTICLE_CAP = 78;
+const MOBILE_PARTICLE_CAP = 52;
 
 const SHADOW_BLUR = 15;
 const ATTRACT_FORCE = 0.098;
@@ -72,6 +72,8 @@ export default function InteractiveBackground({
   const mouseRef = useRef({ x: 0, y: 0, active: false });
   const dimsRef = useRef({ w: 0, h: 0, dpr: 1 });
   const rafRef = useRef<number>(0);
+  const runLoopRef = useRef(false);
+  const heroInViewRef = useRef(true);
   const isMobileRef = useRef(false);
   const countRef = useRef(particleCount);
 
@@ -138,10 +140,43 @@ export default function InteractiveBackground({
     container.addEventListener("pointerleave", clearMouse, { passive: true });
     container.addEventListener("pointercancel", clearMouse, { passive: true });
 
-    const animate = () => {
+    const stopLoop = () => {
+      runLoopRef.current = false;
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = 0;
+    };
+
+    const startLoop = () => {
+      if (runLoopRef.current) return;
+      runLoopRef.current = true;
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    const syncLoopWithVisibility = () => {
+      const docOk = document.visibilityState === "visible";
+      if (docOk && heroInViewRef.current) startLoop();
+      else stopLoop();
+    };
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        heroInViewRef.current = entry.isIntersecting;
+        syncLoopWithVisibility();
+      },
+      { threshold: 0, rootMargin: "120px 0px 120px 0px" }
+    );
+    io.observe(container);
+
+    const onVisibility = () => syncLoopWithVisibility();
+    document.addEventListener("visibilitychange", onVisibility);
+
+    /** Пока hero не в кадре — не жжём requestAnimationFrame (цифры ROI/метрик на main thread от этого разгружаются). */
+    const tick = () => {
+      if (!runLoopRef.current) return;
+
       const { w, h } = dimsRef.current;
       if (w < 1 || h < 1) {
-        rafRef.current = requestAnimationFrame(animate);
+        rafRef.current = requestAnimationFrame(tick);
         return;
       }
 
@@ -278,14 +313,19 @@ export default function InteractiveBackground({
       }
 
       ctx.shadowBlur = 0;
-      rafRef.current = requestAnimationFrame(animate);
+      if (runLoopRef.current) {
+        rafRef.current = requestAnimationFrame(tick);
+      }
     };
 
-    rafRef.current = requestAnimationFrame(animate);
+    syncLoopWithVisibility();
+    requestAnimationFrame(syncLoopWithVisibility);
 
     return () => {
+      io.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
       ro.disconnect();
-      cancelAnimationFrame(rafRef.current);
+      stopLoop();
       container.removeEventListener("pointerdown", updateMouse);
       container.removeEventListener("pointermove", updateMouse);
       container.removeEventListener("pointerup", clearMouse);

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { animate, useInView } from "framer-motion";
+import { animate, useInView, useReducedMotion } from "framer-motion";
 import { BarChart3, Coins, FolderKanban, Timer } from "lucide-react";
 import { MotionDiv, MotionSection } from "@/components/motion";
 import { useLocale, useTranslations } from "next-intl";
@@ -24,23 +24,31 @@ const ICONS = {
 
 function MetricCard({
   metric,
-  inView
+  inView,
+  reduceMotion
 }: {
   metric: Metric;
   inView: boolean;
+  reduceMotion: boolean;
 }) {
-  const [display, setDisplay] = useState(0);
+  const target = Number(metric.value);
+  const [display, setDisplay] = useState(() => (reduceMotion ? target : 0));
   const Icon = ICONS[metric.icon];
 
   useEffect(() => {
     if (!inView) return;
-    const ctrl = animate(0, metric.value, {
-      duration: 2.1,
+    if (reduceMotion || !Number.isFinite(target)) {
+      setDisplay(target);
+      return;
+    }
+    const ctrl = animate(0, target, {
+      duration: 1.35,
       ease: [0.22, 1, 0.36, 1],
-      onUpdate: (v) => setDisplay(v)
+      onUpdate: (v) => setDisplay(v),
+      onComplete: () => setDisplay(target)
     });
     return () => ctrl.stop();
-  }, [inView, metric.value]);
+  }, [inView, target, reduceMotion]);
 
   const formatted =
     metric.decimals > 0
@@ -78,8 +86,10 @@ export function Results() {
   const t = useTranslations("homeResults");
   const tSec = useTranslations("sectionsSeo");
   const locale = useLocale();
+  const reduceMotion = useReducedMotion() ?? false;
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.12, margin: "0px 0px -40px 0px" });
+  /** Раньше срабатываем на мобильных; без отрицательного margin — секция не «зависает» невидимой. */
+  const isInView = useInView(ref, { once: true, amount: 0.05, margin: "0px 0px 20% 0px" });
 
   const raw = t.raw("metrics");
   const metrics = Array.isArray(raw) ? (raw as Metric[]) : [];
@@ -132,7 +142,7 @@ export function Results() {
                 }
               }}
             >
-              <MetricCard metric={m} inView={isInView} />
+              <MetricCard metric={m} inView={isInView} reduceMotion={reduceMotion} />
             </MotionDiv>
           ))}
         </div>

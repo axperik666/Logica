@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, animate, motion, useInView } from "framer-motion";
+import { AnimatePresence, animate, motion, useInView, useReducedMotion } from "framer-motion";
 import { Calculator, Sparkles, X } from "lucide-react";
 import { MotionDiv, MotionSection } from "@/components/motion";
 import { useTranslations } from "next-intl";
@@ -31,9 +31,10 @@ export function ROICalculator() {
   const t = useTranslations("roiCalculator");
   const tSec = useTranslations("sectionsSeo");
   const tl = useTranslations("leads");
+  const reduceMotion = useReducedMotion() ?? false;
   const { currency, numberingLocale, defaultBudget } = currencyOptions();
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
+  const isInView = useInView(ref, { once: true, amount: 0.05, margin: "0px 0px 20% 0px" });
 
   const [budget, setBudget] = useState(defaultBudget);
   const [roas, setRoas] = useState(3.2);
@@ -60,16 +61,25 @@ export function ROICalculator() {
   }, [budget, roas, growthPct]);
 
   useEffect(() => {
+    if (reduceMotion) {
+      profitAnimFrom.current = profit;
+      setProfitDisplay(profit);
+      return;
+    }
     const ctrl = animate(profitAnimFrom.current, profit, {
-      duration: 0.55,
+      duration: 0.45,
       ease: [0.22, 1, 0.36, 1],
       onUpdate: (v) => {
         profitAnimFrom.current = v;
         setProfitDisplay(v);
+      },
+      onComplete: () => {
+        profitAnimFrom.current = profit;
+        setProfitDisplay(profit);
       }
     });
     return () => ctrl.stop();
-  }, [profit]);
+  }, [profit, reduceMotion]);
 
   const profitFormatted = useMemo(
     () => formatRoiCurrency(numberingLocale, currency, profitDisplay),
