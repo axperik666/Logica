@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { animate, useInView, useReducedMotion } from "framer-motion";
+import { useInView, useReducedMotion } from "framer-motion";
 import { BarChart3, Coins, FolderKanban, Timer } from "lucide-react";
 import { MotionDiv, MotionSection } from "@/components/motion";
 import { useLocale, useTranslations } from "next-intl";
@@ -22,33 +22,61 @@ const ICONS = {
   ltv: Timer
 };
 
+/** Не используем framer `animate()` — под MotionConfig он может не дергать onUpdate; rAF всегда обновляет UI. */
+function easeOutCubic(t: number) {
+  return 1 - (1 - t) ** 3;
+}
+
 function MetricCard({
   metric,
-  inView,
   reduceMotion
 }: {
   metric: Metric;
-  inView: boolean;
   reduceMotion: boolean;
 }) {
   const target = Number(metric.value);
+  const cardRef = useRef<HTMLDivElement>(null);
+  /** Свой порог на карточке — не зависит от ref всей секции (мобильные / overflow). */
+  const cardInView = useInView(cardRef, {
+    once: true,
+    margin: "120px 0px 120px 0px"
+  });
+
   const [display, setDisplay] = useState(() => (reduceMotion ? target : 0));
   const Icon = ICONS[metric.icon];
 
   useEffect(() => {
-    if (!inView) return;
+    if (!cardInView) return;
     if (reduceMotion || !Number.isFinite(target)) {
       setDisplay(target);
       return;
     }
-    const ctrl = animate(0, target, {
-      duration: 1.35,
-      ease: [0.22, 1, 0.36, 1],
-      onUpdate: (v) => setDisplay(v),
-      onComplete: () => setDisplay(target)
-    });
-    return () => ctrl.stop();
-  }, [inView, target, reduceMotion]);
+
+    const durationMs = 1300;
+    let start: number | null = null;
+    let raf = 0;
+
+    const tick = (now: number) => {
+      if (start === null) start = now;
+      const u = Math.min(1, (now - start) / durationMs);
+      const eased = easeOutCubic(u);
+      setDisplay(target * eased);
+      if (u < 1) raf = requestAnimationFrame(tick);
+      else setDisplay(target);
+    };
+
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [cardInView, target, reduceMotion]);
+
+  /** Страховка: если rAF не отработал (редкий фриз), всё равно показать цель. */
+  useEffect(() => {
+    if (!cardInView || reduceMotion) return;
+    const id = window.setTimeout(() => {
+      setDisplay((d) => (Math.abs(d - target) > 0.001 ? target : d));
+    }, 2800);
+    return () => clearTimeout(id);
+  }, [cardInView, target, reduceMotion]);
 
   const formatted =
     metric.decimals > 0
@@ -56,7 +84,10 @@ function MetricCard({
       : Math.round(display).toString();
 
   return (
-    <div className="group relative overflow-hidden rounded-[1.75rem] border border-white/[0.1] bg-[linear-gradient(165deg,rgba(255,255,255,0.07)_0%,rgba(255,255,255,0.02)_100%)] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.35)] backdrop-blur-xl transition duration-500 hover:border-cyan-400/25 hover:shadow-[0_0_40px_rgba(34,211,238,0.12)] sm:p-7">
+    <div
+      ref={cardRef}
+      className="group relative overflow-hidden rounded-[1.75rem] border border-white/[0.1] bg-[linear-gradient(165deg,rgba(255,255,255,0.07)_0%,rgba(255,255,255,0.02)_100%)] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.35)] backdrop-blur-xl transition duration-500 hover:border-cyan-400/25 hover:shadow-[0_0_40px_rgba(34,211,238,0.12)] sm:p-7"
+    >
       <div
         aria-hidden
         className="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-cyan-400/10 blur-3xl transition group-hover:bg-cyan-400/18"
@@ -88,8 +119,7 @@ export function Results() {
   const locale = useLocale();
   const reduceMotion = useReducedMotion() ?? false;
   const ref = useRef(null);
-  /** Раньше срабатываем на мобильных; без отрицательного margin — секция не «зависает» невидимой. */
-  const isInView = useInView(ref, { once: true, amount: 0.05, margin: "0px 0px 20% 0px" });
+  const isInView = useInView(ref, { once: true, margin: "100px 0px 100px 0px" });
 
   const raw = t.raw("metrics");
   const metrics = Array.isArray(raw) ? (raw as Metric[]) : [];
@@ -142,7 +172,7 @@ export function Results() {
                 }
               }}
             >
-              <MetricCard metric={m} inView={isInView} reduceMotion={reduceMotion} />
+              <MetricCard metric={m} reduceMotion={reduceMotion} />
             </MotionDiv>
           ))}
         </div>
