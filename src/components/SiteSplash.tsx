@@ -68,25 +68,28 @@ export function SiteSplash() {
       aria-modal="true"
       aria-label={t("splashAria")}
       className={cn(
-        "fixed inset-0 z-[200] flex flex-col bg-black transition-opacity duration-[420ms] ease-out",
+        "fixed inset-0 z-[200] flex min-h-[100svh] flex-col bg-black transition-opacity duration-[420ms] ease-out",
         phase === "exit" ? "pointer-events-none opacity-0" : "opacity-100"
       )}
     >
       <video
         ref={videoRef}
-        className="absolute inset-0 h-full w-full object-cover brightness-[1.1] contrast-[1.04] saturate-[1.05] max-md:brightness-[1.22] max-md:contrast-[1.06]"
+        className={cn(
+          "absolute inset-0 box-border h-full w-full bg-black",
+          "object-contain object-center md:object-cover",
+          "brightness-[1.1] contrast-[1.04] saturate-[1.05] max-md:brightness-[1.18] max-md:contrast-[1.05]"
+        )}
         src={SPLASH_SRC}
         playsInline
         muted
         preload="auto"
-        poster="/hero-poster.svg"
         onEnded={finish}
         onError={finish}
       />
 
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-black/25 max-md:from-black/35 max-md:via-transparent max-md:to-black/15" aria-hidden />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/20 max-md:from-black/30 max-md:to-transparent" aria-hidden />
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/75 to-transparent max-md:from-black/45 max-md:h-24" aria-hidden />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/75 to-transparent max-md:from-black/40 max-md:h-24" aria-hidden />
 
       <div className="relative z-10 mt-auto flex justify-center p-6 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
         <button
