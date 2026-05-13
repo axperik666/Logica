@@ -30,7 +30,6 @@ export function ProcessSteps() {
               <div className="absolute right-6 top-6 text-7xl font-bold tracking-tighter text-[#00b4ff] opacity-10 transition-opacity group-hover:opacity-20">
                 {step.num}
               </div>
-              <div className="mb-4 text-5xl font-bold text-[#00b4ff]">{step.num}</div>
               <h3 className="mb-3 text-2xl font-semibold text-white">{step.title}</h3>
               <p className="text-white/80">{step.desc}</p>
             </motion.div>

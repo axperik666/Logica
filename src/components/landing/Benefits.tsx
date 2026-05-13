@@ -24,7 +24,7 @@ export function Benefits() {
           >
             <div className="absolute bottom-8 left-0 top-8 w-[3px] bg-gradient-to-b from-transparent via-[#00b4ff] to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
 
-            <h3 className="mb-4 text-2xl font-semibold tracking-tight text-white">{benefit.title}</h3>
+            <h3 className="mb-4 text-2xl font-semibold tracking-[-0.5px] text-white">{benefit.title}</h3>
             <p className="text-[17px] leading-relaxed text-white/80">{benefit.desc}</p>
           </motion.div>
         ))}
