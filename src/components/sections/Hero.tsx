@@ -70,7 +70,7 @@ export function Hero({ children }: HeroProps) {
       {children}
 
       <motion.div
-        className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-black/38 via-[#050810]/82 to-black will-change-transform"
+        className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-black/32 via-[#121a30]/78 to-black will-change-transform"
         style={{ x: parallax.midX, y: parallax.midY }}
       />
       <motion.div

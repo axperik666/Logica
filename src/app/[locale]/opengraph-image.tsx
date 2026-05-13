@@ -39,7 +39,7 @@ export default async function Image({
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(145deg, #050810 0%, #0a1224 45%, #12081a 100%)",
+          background: "linear-gradient(145deg, #101624 0%, #151e34 45%, #1a1428 100%)",
           color: "#fff",
           fontFamily:
             'ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'

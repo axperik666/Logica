@@ -15,7 +15,7 @@ export async function HomeSpotlightCase() {
   return (
     <RevealSection
       id="spotlight-case"
-      className="border-t border-white/[0.08] bg-[linear-gradient(180deg,#070a14_0%,#050810_100%)] py-14 md:py-20"
+      className="border-t border-white/[0.08] bg-[linear-gradient(180deg,#101624_0%,#0d1424_100%)] py-14 md:py-20"
     >
       <div className="site-container">
         <div className="mx-auto max-w-4xl rounded-[2rem] border border-white/[0.1] bg-[linear-gradient(165deg,rgba(255,255,255,0.06)_0%,rgba(255,255,255,0.02)_100%)] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.4)] backdrop-blur-xl sm:p-10 md:p-12">

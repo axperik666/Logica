@@ -1,8 +1,8 @@
 {
   "metadata": {
     "title": "LOGICA Marketing | Marketing che cresce",
-    "description": "Performance marketing e funnel con ROI misurabile fino a 3–7× — strategia, siti, ads e analytics.",
-    "keywords": "LOGICA Marketing, performance marketing, SEO, pubblicità mirata, SMM, aumento vendite, digital marketing agency, marketing digitale, ROAS, lead",
+    "description": "Performance marketing, targeting e media buying — funnel con ROI misurabile fino a 3–7× — strategia, siti, ads e analytics.",
+    "keywords": "LOGICA Marketing, performance marketing, media buying, targeting, SEO, pubblicità mirata, SMM, aumento vendite, digital marketing agency, marketing digitale, ROAS, lead",
     "titleTemplate": "%s | LOGICA Marketing"
   },
   "trustStrip": {
@@ -109,7 +109,7 @@
     "guidesCardContactTitle": "Contatti",
     "guidesCardContactDesc": "Modulo, messenger o email — rispondiamo in fretta.",
     "guidesCardCta": "Apri",
-    "guidesCardFaqInsight": "Budget, reporting e come gestiamo i test — così sai cosa aspettarti dall’incarico prima della prima call.",
+    "guidesCardFaqInsight": "Budget, reporting e come gestiamo i test — targeting, marketing e media buying nello stesso perimetro; chiarezza prima della prima call.",
     "guidesCardCasesInsight": "Video brevi con metriche e filtro per settore — funnel e numeri, non mockup etichettati «risultati».",
     "guidesCardContactInsight": "Modulo o Telegram/WhatsApp — nei giorni lavorativi rispondiamo in fretta.",
     "testimonials": "Recensioni",
@@ -1032,7 +1032,7 @@
         "decimals": 0,
         "suffix": "%",
         "label": "ROI medio in crescita",
-        "sub": "Dopo stabilizzazione di funnel e campagne a pagamento"
+        "sub": "Dopo stabilizzazione di funnel, targeting e media buying"
       },
       {
         "icon": "revenue",
@@ -1083,7 +1083,7 @@
   "homeTeam": {
     "badge": "Team",
     "title": "Il team che porta 3–7× ROI",
-    "subtitle": "Performance, creative e strategy sotto lo stesso tetto — accountability sui numeri.",
+    "subtitle": "Performance, creative e strategy — targeting, marketing e media buying nello stesso team; accountability sui numeri.",
     "members": [
       {
         "name": "Marco Rossi",
@@ -1108,8 +1108,8 @@
       },
       {
         "name": "Elena Costa",
-        "role": "Lead Performance Marketing",
-        "bio": "Targeting e ottimizzazione degli annunci sui canali — test disciplinati e insight chiari.",
+        "role": "Performance, targeting e media buying",
+        "bio": "Targeting, marketing e traffico a pagamento sui canali — test disciplinati e insight chiari.",
         "initials": "EC",
         "photo": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop&auto=format"
       },
@@ -1307,7 +1307,7 @@
       "google": "Piattaforma: Google Ads — vorrei essere ricontattato per lancio o ottimizzazione.",
       "meta": "Piattaforma: Meta (Facebook / Instagram) — vorrei essere ricontattato per strategia e lancio.",
       "tiktok": "Piattaforma: TikTok Ads — vorrei essere ricontattato per test creativi e scaling.",
-      "telegram": "Piattaforma: Telegram — vorrei essere ricontattato per targeting, ads o marketing."
+      "telegram": "Piattaforma: Telegram — vorrei essere ricontattato per targeting, marketing o media buying."
     },
     "prefillService": {
       "performance": "Servizio: Performance Marketing — vorrei parlare di lancio ed economia delle combinazioni.",

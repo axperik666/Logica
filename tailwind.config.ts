@@ -19,13 +19,13 @@ export default {
           700: "#0077aa"
         },
         dark: {
-          DEFAULT: "#0a0a0a",
-          900: "#0a0a0a",
-          800: "#111111",
-          700: "#1a1a1a"
+          DEFAULT: "#141824",
+          900: "#141824",
+          800: "#1c2234",
+          700: "#262d42"
         },
         foreground: "#ffffff",
-        background: "#0a0a0a",
+        background: "#141824",
         "gray-ds": {
           100: "#f3f3f3",
           200: "#e5e5e5",

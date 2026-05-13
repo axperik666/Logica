@@ -4,20 +4,20 @@ import { useEffect, useRef } from "react";
 import { cn } from "@/lib/cn";
 
 const ACCENT = "#00bfff";
-const LINK_DIST = 148;
-const ATTRACT_DIST = 208;
-const MOBILE_GLOW_RADIUS = 255;
-const CURSOR_GLOW_RADIUS = 165;
-const DEFAULT_COUNT = 118;
-const MIN_PARTICLES = 80;
-const MAX_PARTICLES = 120;
+const LINK_DIST = 132;
+const ATTRACT_DIST = 228;
+const MOBILE_GLOW_RADIUS = 268;
+const CURSOR_GLOW_RADIUS = 178;
+const DEFAULT_COUNT = 132;
+const MIN_PARTICLES = 88;
+const MAX_PARTICLES = 138;
 /** Меньше точек и связей на телефонах — меньше лагов при O(n²) отрисовке */
-const MOBILE_PARTICLE_CAP = 58;
+const MOBILE_PARTICLE_CAP = 74;
 
-const SHADOW_BLUR = 15;
-const ATTRACT_FORCE = 0.098;
-const DAMPING = 0.91;
-const HOME_SPRING = 0.053;
+const SHADOW_BLUR = 18;
+const ATTRACT_FORCE = 0.142;
+const DAMPING = 0.865;
+const HOME_SPRING = 0.068;
 
 function clampOpacity(t: number): number {
   return Math.min(0.92, Math.max(0.18, t));
@@ -51,7 +51,7 @@ function initParticles(w: number, h: number, count: number): Particle[] {
   for (let i = 0; i < n; i++) {
     const bx = rng(i * 7 + 1) * w;
     const by = rng(i * 13 + 2) * h;
-    const r = 1.3 + rng(i * 3) * 1.5;
+    const r = 1.45 + rng(i * 3) * 1.65;
     out.push({ baseX: bx, baseY: by, x: bx, y: by, vx: 0, vy: 0, r });
   }
   return out;
@@ -186,7 +186,7 @@ export default function InteractiveBackground({
 
       ctx.clearRect(0, 0, w, h);
 
-      const attractMul = isMobile ? 0.72 : 1;
+      const attractMul = isMobile ? 0.82 : 1;
 
       if (mouse.active) {
         for (const p of particles) {
@@ -206,8 +206,8 @@ export default function InteractiveBackground({
         }
       } else {
         for (const p of particles) {
-          p.vx += (p.baseX - p.x) * HOME_SPRING * 1.78;
-          p.vy += (p.baseY - p.y) * HOME_SPRING * 1.78;
+          p.vx += (p.baseX - p.x) * HOME_SPRING * 2.35;
+          p.vy += (p.baseY - p.y) * HOME_SPRING * 2.35;
           p.vx *= DAMPING;
           p.vy *= DAMPING;
           p.x += p.vx;
@@ -215,9 +215,9 @@ export default function InteractiveBackground({
         }
       }
 
-      const t = performance.now() * 0.00082;
-      const idleAmp = isMobile ? 2.05 : 2.65;
-      const idleAmp2 = isMobile ? 0.72 : 0.92;
+      const t = performance.now() * 0.00138;
+      const idleAmp = isMobile ? 3.45 : 4.95;
+      const idleAmp2 = isMobile ? 1.15 : 1.52;
 
       const drift = (bx: number, by: number) => ({
         ox:

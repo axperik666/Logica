@@ -89,7 +89,7 @@ export default function Navbar() {
     );
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.07] bg-[linear-gradient(180deg,rgba(18,22,40,0.62)_0%,rgba(12,16,32,0.52)_100%)] shadow-[0_8px_40px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-xl backdrop-saturate-[1.75] supports-[backdrop-filter]:bg-[linear-gradient(180deg,rgba(18,22,40,0.48)_0%,rgba(12,16,32,0.38)_100%)]">
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.08] bg-[linear-gradient(180deg,rgba(28,34,58,0.58)_0%,rgba(20,26,44,0.5)_100%)] shadow-[0_8px_40px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.11)] backdrop-blur-xl backdrop-saturate-[1.75] supports-[backdrop-filter]:bg-[linear-gradient(180deg,rgba(28,34,58,0.44)_0%,rgba(20,26,44,0.36)_100%)]">
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_110%_100%_at_50%_-35%,rgba(0,180,255,0.16),transparent_52%),radial-gradient(ellipse_55%_70%_at_100%_-10%,rgba(139,92,246,0.09),transparent_48%)]"
         aria-hidden

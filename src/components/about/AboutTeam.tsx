@@ -18,7 +18,7 @@ export async function AboutTeam() {
         {roles.map((r) => (
           <li
             key={r.role}
-            className="rounded-2xl border border-white/[0.08] bg-[#050810]/60 p-4"
+            className="rounded-2xl border border-white/[0.08] bg-[#131b30]/58 p-4"
           >
             <div className="text-sm font-semibold text-cyan-200/95">{r.role}</div>
             <p className="mt-2 text-xs leading-relaxed text-white/60 sm:text-sm">

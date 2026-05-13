@@ -41,7 +41,7 @@ export default async function KontaktyPage({
         ]}
       />
 
-      <main className="overflow-x-hidden bg-[#020617] text-white">
+      <main className="overflow-x-hidden bg-[#0f162c] text-white">
         <ContactHero />
         <TrustBar />
         <Benefits />

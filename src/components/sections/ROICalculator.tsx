@@ -124,7 +124,7 @@ export function ROICalculator() {
   }
 
   const fieldClass =
-    "h-11 w-full rounded-xl border border-white/[0.12] bg-[#050810]/85 px-3 text-sm text-white outline-none focus:border-cyan-400/45";
+    "h-11 w-full rounded-xl border border-white/[0.12] bg-[#131b30]/88 px-3 text-sm text-white outline-none focus:border-cyan-400/45";
 
   return (
     <MotionSection

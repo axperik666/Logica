@@ -17,11 +17,11 @@
   --tech-line-violet: color-mix(in srgb, var(--tech-violet) 19%, transparent);
   --tech-dot-cyan: color-mix(in srgb, var(--tech-cyan) 56%, transparent);
   --tech-dot-violet: color-mix(in srgb, var(--tech-violet) 42%, transparent);
-  --header-surface: rgba(8, 12, 28, 0.78);
+  --header-surface: rgba(22, 28, 52, 0.74);
   --text-muted: rgba(255, 255, 255, 0.94);
   --text-subtle: rgba(255, 255, 255, 0.78);
   /* Дизайн-система (RGB для возможных rgb(var(--…))/alpha) */
-  --background: 10 10 10;
+  --background: 22 24 42;
   --foreground: 255 255 255;
   /* Высота fixed header (используется для anchor-scroll и верхних отступов). */
   --header-h: 4.375rem;
@@ -87,7 +87,7 @@ body {
 }
 
 body:not(.tech-bg) {
-  background-color: #0a0a1f;
+  background-color: #15182e;
 }
 
 /* Примитивы DS — без @apply/Tailwind-resolve на Vercel (избегаем ошибок css-loader с shadow-primary/…) */
@@ -176,10 +176,10 @@ body:not(.tech-bg) {
   min-height: 100vh;
   z-index: 0;
   background:
-    radial-gradient(ellipse 90% 70% at 15% -15%, rgba(0, 191, 255, 0.14) 0%, transparent 55%),
-    radial-gradient(ellipse 70% 60% at 90% 20%, rgba(138, 43, 226, 0.11) 0%, transparent 50%),
-    radial-gradient(ellipse 80% 50% at 50% 110%, rgba(0, 120, 180, 0.08) 0%, transparent 45%),
-    linear-gradient(152deg, #050810 0%, #0a0e1c 42%, #0e0a18 100%);
+    radial-gradient(ellipse 90% 70% at 15% -15%, rgba(0, 191, 255, 0.17) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 60% at 90% 20%, rgba(138, 43, 226, 0.13) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 50% at 50% 110%, rgba(0, 120, 180, 0.1) 0%, transparent 45%),
+    linear-gradient(152deg, #101624 0%, #161e34 42%, #1a1628 100%);
 }
 
 /* Без полноэкранной высоты (футер, узкие прослойки) — иначе «пустота» под контентом на десктопе */
@@ -206,8 +206,8 @@ body:not(.tech-bg) {
     48px 48px,
     48px 48px,
     64px 64px;
-  animation: gridMove 90s linear infinite;
-  opacity: 0.72;
+  animation: gridMove 52s linear infinite;
+  opacity: 0.78;
   z-index: -1;
 }
 
@@ -217,8 +217,8 @@ body:not(.tech-bg) {
   inset: 0;
   background-image: radial-gradient(circle, rgba(255, 255, 255, 0.075) 1.5px, transparent 2px);
   background-size: 84px 84px;
-  animation: dotsDrift 65s linear infinite;
-  opacity: 0.62;
+  animation: dotsDrift 38s linear infinite;
+  opacity: 0.68;
   z-index: -1;
 }
 
@@ -241,7 +241,7 @@ body:not(.tech-bg) {
 }
 
 .glass {
-  background: rgba(7, 9, 22, 0.94);
+  background: rgba(18, 22, 42, 0.88);
   backdrop-filter: blur(26px) saturate(1.25);
   -webkit-backdrop-filter: blur(26px) saturate(1.25);
   border: 1px solid rgba(0, 191, 255, 0.38);
@@ -878,19 +878,19 @@ header.site-header.glass-nav:hover::after {
     border-radius: 999px;
     background: rgba(0, 191, 255, 0.85);
     filter: blur(4px);
-    opacity: 0.38;
-    animation: hero-particle-float 14s ease-in-out infinite;
+    opacity: 0.44;
+    animation: hero-particle-float 9.5s ease-in-out infinite;
   }
 
   @keyframes hero-particle-float {
     0%,
     100% {
       transform: translate(0, 0) scale(1);
-      opacity: 0.26;
+      opacity: 0.32;
     }
     50% {
-      transform: translate(-14px, -22px) scale(1.12);
-      opacity: 0.52;
+      transform: translate(-26px, -38px) scale(1.22);
+      opacity: 0.62;
     }
   }
 
@@ -1245,9 +1245,9 @@ header.site-header.glass-nav:hover::after {
   inset: 0;
   z-index: 1;
   background:
-    radial-gradient(ellipse 85% 60% at 15% -5%, rgba(0, 200, 255, 0.14), transparent 52%),
-    radial-gradient(ellipse 55% 50% at 92% 8%, rgba(167, 139, 250, 0.1), transparent 48%),
-    radial-gradient(ellipse 70% 45% at 50% 105%, rgba(0, 191, 255, 0.06), transparent 50%);
+    radial-gradient(ellipse 85% 60% at 15% -5%, rgba(0, 200, 255, 0.18), transparent 52%),
+    radial-gradient(ellipse 55% 50% at 92% 8%, rgba(167, 139, 250, 0.13), transparent 48%),
+    radial-gradient(ellipse 70% 45% at 50% 105%, rgba(0, 191, 255, 0.09), transparent 50%);
 }
 
 @media (prefers-reduced-motion: no-preference) {

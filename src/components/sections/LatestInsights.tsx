@@ -23,7 +23,7 @@ export function LatestInsights() {
     <MotionSection
       ref={ref}
       id="guides"
-      className="full-bleed relative overflow-x-clip border-t border-white/[0.06] bg-[linear-gradient(180deg,#080c18_0%,#050810_100%)] py-24 lg:py-28"
+      className="full-bleed relative overflow-x-clip border-t border-white/[0.06] bg-[linear-gradient(180deg,#121a2e_0%,#101824_100%)] py-24 lg:py-28"
       initial="hidden"
       animate={isInView ? "show" : "hidden"}
       variants={{
@@ -81,7 +81,7 @@ export function LatestInsights() {
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     />
                     <div
-                      className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050810]/90 via-transparent to-transparent opacity-80"
+                      className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#121a2e]/88 via-transparent to-transparent opacity-80"
                       aria-hidden
                     />
                   </div>

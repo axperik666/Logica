@@ -43,7 +43,7 @@ export function CTA() {
   const narrow = useNarrowViewport();
 
   const fieldClass =
-    "h-12 w-full rounded-xl border border-white/[0.12] bg-[#050810]/80 px-4 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-cyan-400/45 focus:ring-2 focus:ring-cyan-400/25 disabled:opacity-60";
+    "h-12 w-full rounded-xl border border-white/[0.12] bg-[#131b30]/82 px-4 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-cyan-400/45 focus:ring-2 focus:ring-cyan-400/25 disabled:opacity-60";
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
