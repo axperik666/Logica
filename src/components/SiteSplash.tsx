@@ -30,6 +30,11 @@ export function SiteSplash() {
       setPhase("done");
       return;
     }
+    /* На телефонах заставка тяжёлая и раздражает — сразу показываем страницу. */
+    if (window.matchMedia("(max-width: 767px)").matches) {
+      setPhase("done");
+      return;
+    }
     try {
       if (sessionStorage.getItem(SPLASH_STORAGE_KEY)) {
         setPhase("done");
