@@ -4,15 +4,17 @@ import { useEffect, useRef } from "react";
 import { cn } from "@/lib/cn";
 
 const ACCENT = "#00bfff";
-const LINK_DIST = 132;
+/** Больше расстояние — меньше отрезков O(n²), плавнее на десктопе */
+const LINK_DIST = 156;
+const LINK_DIST_MOBILE = 176;
 const ATTRACT_DIST = 228;
 const MOBILE_GLOW_RADIUS = 268;
 const CURSOR_GLOW_RADIUS = 178;
 const DEFAULT_COUNT = 132;
-const MIN_PARTICLES = 88;
-const MAX_PARTICLES = 138;
-/** Меньше точек и связей на телефонах — меньше лагов при O(n²) отрисовке */
-const MOBILE_PARTICLE_CAP = 74;
+const MIN_PARTICLES = 52;
+const MAX_PARTICLES = 120;
+/** Меньше точек на телефонах — меньше лагов */
+const MOBILE_PARTICLE_CAP = 46;
 
 const ATTRACT_FORCE = 0.142;
 const DAMPING = 0.865;
@@ -99,7 +101,7 @@ export default function InteractiveBackground({
       refreshMobile();
       const rect = container.getBoundingClientRect();
       const isMob = isMobileRef.current;
-      const dpr = isMob ? 1 : Math.min(window.devicePixelRatio || 1, 1.75);
+      const dpr = isMob ? 1 : Math.min(window.devicePixelRatio || 1, 1.5);
       const w = Math.max(1, Math.floor(rect.width));
       const h = Math.max(1, Math.floor(rect.height));
       const prevW = dimsRef.current.w;
@@ -251,8 +253,8 @@ export default function InteractiveBackground({
       }
 
       const t = performance.now() * 0.00138;
-      const idleAmp = isMobile ? 3.45 : 4.95;
-      const idleAmp2 = isMobile ? 1.15 : 1.52;
+      const idleAmp = isMobile ? 2.85 : 4.1;
+      const idleAmp2 = isMobile ? 0.95 : 1.28;
 
       const drift = (bx: number, by: number) => ({
         ox:
@@ -265,21 +267,23 @@ export default function InteractiveBackground({
           Math.cos(t * 2.1 + by * 0.007) * idleAmp2 * 0.35
       });
 
-      if (mouse.active) {
+      if (mouse.active && !isMobile) {
         ctx.save();
-        const radius = isMobile ? MOBILE_GLOW_RADIUS : CURSOR_GLOW_RADIUS;
+        const radius = CURSOR_GLOW_RADIUS;
         const g = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, radius);
-        g.addColorStop(0, isMobile ? "rgba(0,191,255,0.55)" : "rgba(0,191,255,0.52)");
-        g.addColorStop(0.5, isMobile ? "rgba(0,191,255,0.16)" : "rgba(0,191,255,0.14)");
+        g.addColorStop(0, "rgba(0,191,255,0.52)");
+        g.addColorStop(0.5, "rgba(0,191,255,0.14)");
         g.addColorStop(1, "rgba(0,191,255,0)");
         ctx.fillStyle = g;
         ctx.fillRect(0, 0, w, h);
         ctx.restore();
       }
 
+      const linkDist = isMobile ? LINK_DIST_MOBILE : LINK_DIST;
       const n = particles.length;
+      const jStep = isMobile && n > 40 ? 2 : 1;
       for (let i = 0; i < n; i++) {
-        for (let j = i + 1; j < n; j++) {
+        for (let j = i + 1; j < n; j += jStep) {
           const a = particles[i]!;
           const b = particles[j]!;
           const da = drift(a.baseX, a.baseY);
@@ -289,9 +293,9 @@ export default function InteractiveBackground({
           const bx = b.x + db.ox;
           const by = b.y + db.oy;
           const d = Math.hypot(ax - bx, ay - by);
-          if (d >= LINK_DIST) continue;
+          if (d >= linkDist) continue;
 
-          const alpha = clampOpacity(0.18 + (1 - d / LINK_DIST) * 0.76);
+          const alpha = clampOpacity(0.18 + (1 - d / linkDist) * 0.76);
           ctx.strokeStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${alpha})`;
           ctx.lineWidth = 1;
           ctx.beginPath();

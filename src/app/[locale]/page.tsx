@@ -51,8 +51,8 @@ export default function HomePage() {
       <SiteSplash />
       <Hero>
         <InteractiveBackground
-          className="absolute inset-0 z-[1] min-h-full min-w-full max-md:opacity-[0.58] md:opacity-[0.48]"
-          particleCount={108}
+          className="absolute inset-0 z-[1] min-h-full min-w-full max-md:opacity-[0.5] md:opacity-[0.42]"
+          particleCount={84}
         />
       </Hero>
       <TrustStrip />

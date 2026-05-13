@@ -78,7 +78,7 @@ export function Hero({ children }: HeroProps) {
         className="pointer-events-none absolute inset-0 z-[2] will-change-transform bg-gradient-to-b from-black/10 via-[#141c32]/38 to-black/55 max-md:from-black/[0.04] max-md:via-[#182238]/18 max-md:to-black/32 md:from-black/[0.04] md:via-[#141c32]/22 md:to-black/38"
         style={{ x: parallax.midX, y: parallax.midY }}
       >
-        <div className="premium-aurora hero-premium-aurora absolute inset-0 max-md:opacity-60 md:opacity-[0.55]" />
+        <div className="premium-aurora hero-premium-aurora absolute inset-0 md:opacity-[0.55]" />
         <div
           className="pointer-events-none absolute inset-0 max-md:[box-shadow:inset_0_0_40px_rgba(0,0,0,0.1),inset_0_0_100px_rgba(0,0,0,0.06)] md:[box-shadow:inset_0_0_90px_rgba(0,0,0,0.22),inset_0_0_180px_rgba(0,0,0,0.12),inset_0_-80px_120px_rgba(0,180,255,0.04)]"
           aria-hidden
@@ -100,7 +100,7 @@ export function Hero({ children }: HeroProps) {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.58, ease: easeOut }}
-          className="mx-auto mb-5 max-w-[22rem] text-pretty text-[9px] font-semibold uppercase leading-snug tracking-[0.28em] text-cyan-200/85 min-[400px]:max-w-none min-[400px]:text-[10px] min-[400px]:tracking-[0.34em] sm:mb-6 sm:text-[11px] sm:tracking-[0.38em]"
+          className="mx-auto mb-4 max-w-[22rem] text-pretty text-[9px] font-semibold uppercase leading-snug tracking-[0.28em] text-cyan-200/85 min-[400px]:max-w-none min-[400px]:text-[10px] min-[400px]:tracking-[0.34em] sm:mb-5 sm:text-[11px] sm:tracking-[0.38em] md:mb-5"
         >
           {t("homeHeroKicker")}
         </motion.p>
@@ -109,10 +109,9 @@ export function Hero({ children }: HeroProps) {
           initial={{ opacity: 0, y: -22, scale: 0.94 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.68, delay: 0.05, ease: easeOut }}
-          className="mb-10 flex w-full justify-center"
+          className="mb-6 hidden w-full justify-center md:mb-10 md:flex"
         >
-          {/* Десктоп: стекло + логотип; мобилка — только слово в шапке слева, здесь контрастный wordmark */}
-          <div className="hidden rounded-2xl border border-white/[0.16] bg-white/[0.07] px-8 py-4 shadow-[0_0_0_1px_rgba(0,220,255,0.18),0_28px_96px_rgba(0,0,0,0.5),0_0_80px_rgba(0,200,255,0.28)] backdrop-blur-xl sm:px-10 sm:py-5 md:block">
+          <div className="rounded-2xl border border-white/[0.16] bg-white/[0.07] px-8 py-4 shadow-[0_0_0_1px_rgba(0,220,255,0.18),0_28px_96px_rgba(0,0,0,0.5),0_0_80px_rgba(0,200,255,0.28)] backdrop-blur-xl sm:px-10 sm:py-5">
             <Image
               src="/logo.png"
               alt="LOGICA Marketing"
@@ -121,33 +120,6 @@ export function Hero({ children }: HeroProps) {
               className="h-[3.25rem] w-auto sm:h-[4.25rem] md:h-20 lg:h-24"
               priority
             />
-          </div>
-
-          <div
-            className="relative flex w-full max-w-[min(100%,20rem)] flex-col items-center justify-center py-1 md:hidden"
-            aria-hidden
-          >
-            <div
-              className="pointer-events-none absolute left-1/2 top-1/2 h-[min(140%,11rem)] w-[min(118vw,22rem)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse_at_50%_45%,rgba(2,8,24,0.88)_0%,rgba(2,8,24,0.45)_42%,rgba(2,8,24,0)_72%)]"
-              aria-hidden
-            />
-            <motion.div
-              aria-hidden
-              className="pointer-events-none absolute left-1/2 top-1/2 h-24 w-[min(100vw,20rem)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse_at_50%_50%,rgba(0,220,255,0.22)_0%,rgba(120,200,255,0.08)_45%,transparent_70%)] blur-md"
-              animate={
-                reduceMotion
-                  ? undefined
-                  : { opacity: [0.45, 0.85, 0.45], scale: [0.96, 1.06, 0.96] }
-              }
-              transition={{ duration: 2.75, repeat: Infinity, ease: "easeInOut" }}
-            />
-            <motion.span
-              className="relative z-[1] block bg-clip-text text-center text-[clamp(2.15rem,9.5vw,3.15rem)] font-semibold leading-none tracking-[-0.045em] text-transparent [-webkit-background-clip:text] [filter:drop-shadow(0_3px_18px_rgba(0,0,0,0.92))_drop-shadow(0_0_28px_rgba(0,220,255,0.42))_drop-shadow(0_0_52px_rgba(140,210,255,0.22))] bg-gradient-to-r from-white via-[#d2f7ff] to-[#6ee0ff]"
-              animate={reduceMotion ? undefined : { scale: [1, 1.045, 1] }}
-              transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
-            >
-              {t("homeHeroWordmark")}
-            </motion.span>
           </div>
         </motion.div>
 

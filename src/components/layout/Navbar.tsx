@@ -82,18 +82,18 @@ export default function Navbar() {
 
   const itemClass = (active: boolean) =>
     cn(
-      "relative inline-flex min-h-10 items-center justify-center whitespace-nowrap px-2.5 text-[15px] font-medium leading-snug tracking-tight text-white transition-[font-weight,opacity] duration-200 sm:min-h-11 sm:px-3 sm:text-sm",
-      active ? "font-semibold" : "font-normal opacity-95 hover:opacity-100"
+      "relative inline-flex min-h-10 items-center justify-center whitespace-nowrap px-2.5 text-[15px] font-medium leading-snug tracking-tight text-zinc-600 transition-colors duration-200 sm:min-h-11 sm:px-3 sm:text-sm",
+      active ? "font-semibold text-zinc-900" : "font-normal hover:text-zinc-900"
     );
 
   return (
-    <nav className="fixed left-0 right-0 top-0 z-50 bg-transparent shadow-none ring-0 backdrop-blur-md backdrop-saturate-100">
+    <nav className="fixed left-0 right-0 top-0 z-50 border-b border-zinc-200/90 bg-white shadow-none ring-0 backdrop-blur-0">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <div className="grid h-[var(--header-h)] min-h-[4.375rem] grid-cols-[1fr_auto_1fr] items-center gap-3 lg:min-h-[5.75rem]">
           <div className="flex min-w-0 items-center justify-start">
             <Link
               href="/"
-              className="flex shrink-0 items-center outline-none ring-0 ring-offset-0 focus-visible:rounded-md focus-visible:ring-2 focus-visible:ring-white/30"
+              className="flex shrink-0 items-center outline-none ring-0 ring-offset-0 focus-visible:rounded-md focus-visible:ring-2 focus-visible:ring-cyan-500/35"
             >
               <Image
                 src="/logo.png"
@@ -129,7 +129,7 @@ export default function Navbar() {
                 <span className="whitespace-nowrap">{tNav("createWebsite")}</span>
                 <ChevronDown
                   strokeWidth={2.25}
-                  className="size-4 shrink-0 text-white opacity-90 transition-transform duration-200 ease-out group-hover:rotate-180"
+                  className="size-4 shrink-0 text-zinc-500 transition-transform duration-200 ease-out group-hover:rotate-180"
                   aria-hidden
                 />
               </button>
@@ -138,13 +138,13 @@ export default function Navbar() {
                 role="menu"
               >
                 <div className="h-4 w-full" aria-hidden />
-                <div className="rounded-xl bg-[rgba(8,10,20,0.96)] p-1.5 shadow-xl backdrop-blur-xl">
+                <div className="rounded-xl border border-zinc-200/90 bg-white p-1.5 shadow-xl">
                   {WEBSITE_MENU_KEYS.map((key) => (
                     <Link
                       key={key}
                       href={websiteOfferHref(offerSectionKey(key))}
                       role="menuitem"
-                      className="block rounded-lg px-4 py-2.5 text-sm font-medium text-white transition hover:bg-white/[0.06]"
+                      className="block rounded-lg px-4 py-2.5 text-sm font-medium text-zinc-800 transition hover:bg-zinc-50"
                     >
                       {tNav(`websiteCreateLinks.${key}`)}
                     </Link>
@@ -175,7 +175,7 @@ export default function Navbar() {
                 <span className="whitespace-nowrap">{tNav("more")}</span>
                 <ChevronDown
                   strokeWidth={2.25}
-                  className="size-4 shrink-0 text-white opacity-90 transition-transform duration-200 ease-out group-hover:rotate-180"
+                  className="size-4 shrink-0 text-zinc-500 transition-transform duration-200 ease-out group-hover:rotate-180"
                   aria-hidden
                 />
               </button>
@@ -184,25 +184,25 @@ export default function Navbar() {
                 role="menu"
               >
                 <div className="h-4 w-full" aria-hidden />
-                <div className="rounded-xl bg-[rgba(8,10,20,0.96)] p-1.5 shadow-xl backdrop-blur-xl">
+                <div className="rounded-xl border border-zinc-200/90 bg-white p-1.5 shadow-xl">
                   <Link
                     href="/o-nas"
                     role="menuitem"
-                    className="block rounded-lg px-4 py-2.5 text-sm font-medium text-white transition hover:bg-white/[0.06]"
+                    className="block rounded-lg px-4 py-2.5 text-sm font-medium text-zinc-800 transition hover:bg-zinc-50"
                   >
                     {tNav("about")}
                   </Link>
                   <Link
                     href="/faq"
                     role="menuitem"
-                    className="block rounded-lg px-4 py-2.5 text-sm font-medium text-white transition hover:bg-white/[0.06]"
+                    className="block rounded-lg px-4 py-2.5 text-sm font-medium text-zinc-800 transition hover:bg-zinc-50"
                   >
                     {tNav("faqShort")}
                   </Link>
                   <Link
                     href="/otzyvy"
                     role="menuitem"
-                    className="block rounded-lg px-4 py-2.5 text-sm font-medium text-white transition hover:bg-white/[0.06]"
+                    className="block rounded-lg px-4 py-2.5 text-sm font-medium text-zinc-800 transition hover:bg-zinc-50"
                   >
                     {tNav("reviews")}
                   </Link>
@@ -215,7 +215,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setIsOpen((v) => !v)}
-              className="flex min-h-11 min-w-11 items-center justify-center rounded-md text-white transition hover:bg-white/[0.06] md:hidden"
+              className="flex min-h-11 min-w-11 items-center justify-center rounded-md text-zinc-900 transition hover:bg-zinc-100 md:hidden"
               aria-expanded={isOpen}
               aria-label={isOpen ? tHeader("closeMenu") : tHeader("openMenu")}
             >
@@ -229,19 +229,19 @@ export default function Navbar() {
         <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
-          className="bg-[rgba(10,12,24,0.98)] backdrop-blur-xl md:hidden"
+          className="border-t border-zinc-200 bg-white md:hidden"
         >
-          <div className="flex max-h-[min(78vh,calc(100dvh-var(--header-h)))] flex-col gap-1 overflow-y-auto px-6 py-6 text-[17px] text-white">
+          <div className="flex max-h-[min(78vh,calc(100dvh-var(--header-h)))] flex-col gap-1 overflow-y-auto px-6 py-6 text-[17px] text-zinc-800">
             <Link
               href="/kejsy"
-              className="rounded-lg px-3 py-3 font-medium text-white hover:bg-white/[0.04]"
+              className="rounded-lg px-3 py-3 font-medium text-zinc-800 hover:bg-zinc-50"
               onClick={() => setIsOpen(false)}
             >
               {tNav("cases")}
             </Link>
             <Link
               href="/uslugi"
-              className="rounded-lg px-3 py-3 font-medium text-white hover:bg-white/[0.04]"
+              className="rounded-lg px-3 py-3 font-medium text-zinc-800 hover:bg-zinc-50"
               onClick={() => setIsOpen(false)}
             >
               {tNav("services")}
@@ -251,10 +251,10 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setWebsiteOpen((v) => !v)}
-                className="flex w-full items-center justify-between px-3 py-3 text-left font-medium text-white hover:bg-white/[0.04]"
+                className="flex w-full items-center justify-between px-3 py-3 text-left font-medium text-zinc-800 hover:bg-zinc-50"
               >
                 {tNav("createWebsite")}
-                <ChevronDown className={cn("h-5 w-5 shrink-0 text-white transition", websiteOpen ? "rotate-180" : "")} />
+                <ChevronDown className={cn("h-5 w-5 shrink-0 text-zinc-500 transition", websiteOpen ? "rotate-180" : "")} />
               </button>
               {websiteOpen ? (
                 <div className="ml-3 space-y-0.5 py-1 pl-4">
@@ -262,7 +262,7 @@ export default function Navbar() {
                     <Link
                       key={key}
                       href={websiteOfferHref(offerSectionKey(key))}
-                      className="block rounded-lg py-2.5 text-[15px] text-white hover:bg-white/[0.04]"
+                      className="block rounded-lg py-2.5 text-[15px] text-zinc-800 hover:bg-zinc-50"
                       onClick={() => setIsOpen(false)}
                     >
                       {tNav(`websiteCreateLinks.${key}`)}
@@ -274,7 +274,7 @@ export default function Navbar() {
 
             <Link
               href={homeHashHref("guides")}
-              className="rounded-lg px-3 py-3 font-medium text-white hover:bg-white/[0.04]"
+              className="rounded-lg px-3 py-3 font-medium text-zinc-800 hover:bg-zinc-50"
               onClick={() => setIsOpen(false)}
             >
               {tNav("guides")}
@@ -282,7 +282,7 @@ export default function Navbar() {
 
             <Link
               href="/kontakty"
-              className="rounded-lg px-3 py-3 font-medium text-white hover:bg-white/[0.04]"
+              className="rounded-lg px-3 py-3 font-medium text-zinc-800 hover:bg-zinc-50"
               onClick={() => setIsOpen(false)}
             >
               {tNav("contact")}
@@ -292,30 +292,30 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setMoreOpen((v) => !v)}
-                className="flex w-full items-center justify-between px-3 py-3 text-left font-medium text-white hover:bg-white/[0.04]"
+                className="flex w-full items-center justify-between px-3 py-3 text-left font-medium text-zinc-800 hover:bg-zinc-50"
               >
                 {tNav("more")}
-                <ChevronDown className={cn("h-5 w-5 shrink-0 text-white transition", moreOpen ? "rotate-180" : "")} />
+                <ChevronDown className={cn("h-5 w-5 shrink-0 text-zinc-500 transition", moreOpen ? "rotate-180" : "")} />
               </button>
               {moreOpen ? (
                 <div className="ml-3 space-y-0.5 py-1 pl-4">
                   <Link
                     href="/o-nas"
-                    className="block rounded-lg py-2.5 text-[15px] text-white hover:bg-white/[0.04]"
+                    className="block rounded-lg py-2.5 text-[15px] text-zinc-800 hover:bg-zinc-50"
                     onClick={() => setIsOpen(false)}
                   >
                     {tNav("about")}
                   </Link>
                   <Link
                     href="/faq"
-                    className="block rounded-lg py-2.5 text-[15px] text-white hover:bg-white/[0.04]"
+                    className="block rounded-lg py-2.5 text-[15px] text-zinc-800 hover:bg-zinc-50"
                     onClick={() => setIsOpen(false)}
                   >
                     {tNav("faqShort")}
                   </Link>
                   <Link
                     href="/otzyvy"
-                    className="block rounded-lg py-2.5 text-[15px] text-white hover:bg-white/[0.04]"
+                    className="block rounded-lg py-2.5 text-[15px] text-zinc-800 hover:bg-zinc-50"
                     onClick={() => setIsOpen(false)}
                   >
                     {tNav("reviews")}
@@ -325,20 +325,20 @@ export default function Navbar() {
             </div>
 
             <div
-              className="mt-5 flex flex-wrap items-center gap-x-1 gap-y-2 text-sm font-semibold uppercase tracking-wider text-white"
+              className="mt-5 flex flex-wrap items-center gap-x-1 gap-y-2 text-sm font-semibold uppercase tracking-wider text-zinc-600"
               role="group"
               aria-label={tHeader("switchTo")}
             >
               {routing.locales.map((loc, idx) => (
                 <span key={loc} className="inline-flex items-center">
-                  {idx > 0 ? <span className="mx-2 text-white/35" aria-hidden>·</span> : null}
+                  {idx > 0 ? <span className="mx-2 text-zinc-300" aria-hidden>·</span> : null}
                   <Link
                     href={pathname}
                     locale={loc}
                     prefetch={false}
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "rounded-md px-1 py-2 text-white transition hover:opacity-100",
+                      "rounded-md px-1 py-2 text-zinc-700 transition hover:text-zinc-950",
                       locale === loc ? "font-bold opacity-100" : "font-medium opacity-75"
                     )}
                   >
@@ -351,7 +351,7 @@ export default function Navbar() {
             <Link
               href="/kontakty"
               onClick={() => setIsOpen(false)}
-              className="mt-2 py-3 text-center text-base font-semibold text-white hover:opacity-90"
+              className="mt-2 py-3 text-center text-base font-semibold text-cyan-700 hover:text-cyan-800"
             >
               {tNav("ctaStrategyLong")}
             </Link>
