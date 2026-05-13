@@ -75,7 +75,7 @@ export function Hero({ children }: HeroProps) {
 
       {/* Один слой: тон + aurora + лёгкая виньетка (mid parallax) */}
       <motion.div
-        className="pointer-events-none absolute inset-0 z-[2] will-change-transform bg-gradient-to-b from-black/10 via-[#141c32]/38 to-black/55 max-md:from-black/[0.04] max-md:via-[#182238]/18 max-md:to-black/32 md:from-black/[0.04] md:via-[#141c32]/22 md:to-black/38"
+        className="pointer-events-none absolute inset-0 z-[2] will-change-transform bg-gradient-to-b from-black/10 via-[#141c32]/38 to-black/55 max-md:from-black/[0.02] max-md:via-[#182238]/12 max-md:to-black/22 md:from-black/[0.04] md:via-[#141c32]/22 md:to-black/38"
         style={{ x: parallax.midX, y: parallax.midY }}
       >
         <div className="premium-aurora hero-premium-aurora absolute inset-0 md:opacity-[0.55]" />
@@ -96,85 +96,95 @@ export function Hero({ children }: HeroProps) {
               }
         }
       >
-        <motion.p
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.58, ease: easeOut }}
-          className="mx-auto mb-4 max-w-[22rem] text-pretty text-[9px] font-semibold uppercase leading-snug tracking-[0.28em] text-cyan-200/85 min-[400px]:max-w-none min-[400px]:text-[10px] min-[400px]:tracking-[0.34em] sm:mb-5 sm:text-[11px] sm:tracking-[0.38em] md:mb-5"
-        >
-          {t("homeHeroKicker")}
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: -22, scale: 0.94 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.68, delay: 0.05, ease: easeOut }}
-          className="mb-6 hidden w-full justify-center md:mb-10 md:flex"
-        >
-          <div className="rounded-2xl border border-white/[0.16] bg-white/[0.07] px-8 py-4 shadow-[0_0_0_1px_rgba(0,220,255,0.18),0_28px_96px_rgba(0,0,0,0.5),0_0_80px_rgba(0,200,255,0.28)] backdrop-blur-xl sm:px-10 sm:py-5">
-            <Image
-              src="/logo.png"
-              alt="LOGICA Marketing"
-              width={400}
-              height={100}
-              className="h-[3.25rem] w-auto sm:h-[4.25rem] md:h-20 lg:h-24"
-              priority
-            />
-          </div>
-        </motion.div>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.72, delay: 0.1, ease: easeOut }}
-          className="mx-auto mb-5 max-w-[min(100%,22rem)] text-pretty text-[clamp(1.45rem,6.5vw,2.65rem)] font-semibold leading-[1.08] tracking-[-0.035em] text-white drop-shadow-[0_6px_64px_rgba(0,0,0,0.65)] min-[400px]:max-w-none min-[480px]:text-[clamp(1.85rem,7vw,3.75rem)] sm:mb-6 sm:leading-[1.02] sm:tracking-[-0.04em] md:text-7xl lg:text-8xl"
-        >
-          {t("homeVideoLine1")}
-          <br />
-          <span className="bg-gradient-to-r from-[#7ee8ff] via-[#00c8ff] to-[#e8d4ff] bg-clip-text text-transparent">
-            {t("homeVideoHighlight")}
-          </span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.58, delay: 0.14, ease: easeOut }}
-          className="mx-auto mb-10 max-w-xl text-pretty text-[0.9375rem] font-medium leading-snug text-white/72 sm:mb-12 sm:max-w-2xl sm:text-xl sm:leading-relaxed"
-        >
-          {t("homeVideoSub")}
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 22 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.58, delay: 0.2, ease: easeOut }}
-          className="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center sm:gap-4"
-        >
-          <MotionLink
-            href="/kontakty"
-            whileHover={{ scale: 1.045 }}
-            whileTap={{ scale: 0.98 }}
-            className="inline-flex min-h-[3.25rem] items-center justify-center rounded-2xl bg-gradient-to-r from-white via-white to-white/95 px-6 py-3.5 text-center text-sm font-semibold text-[#0a0a12] shadow-[0_0_0_1px_rgba(255,255,255,0.55),0_10px_48px_rgba(0,210,255,0.42),0_28px_72px_rgba(0,0,0,0.4)] transition-[box-shadow] hover:shadow-[0_0_0_1px_rgba(255,255,255,0.72),0_14px_64px_rgba(0,230,255,0.52)] sm:min-h-0 sm:px-11 sm:py-4 sm:text-base"
+        {/* Мобилка: лёгкая «подложка» только под блок текста — фон виден по краям; десктоп без плашки */}
+        <div className="max-md:rounded-[1.75rem] max-md:border max-md:border-white/[0.14] max-md:bg-gradient-to-b max-md:from-[rgba(4,10,26,0.52)] max-md:to-[rgba(4,10,26,0.34)] max-md:px-4 max-md:py-6 max-md:shadow-[0_18px_56px_rgba(0,0,0,0.42)] max-md:backdrop-blur-md md:contents">
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.58, ease: easeOut }}
+            className="mx-auto mb-4 hidden max-w-[22rem] text-pretty text-[9px] font-semibold uppercase leading-snug tracking-[0.28em] text-cyan-200/85 min-[400px]:max-w-none min-[400px]:text-[10px] min-[400px]:tracking-[0.34em] sm:mb-5 sm:text-[11px] sm:tracking-[0.38em] md:mb-5 md:block"
           >
-            {t("homeVideoCta")}
-          </MotionLink>
-          <MotionLink
-            href={homeSectionHref("cases")}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="inline-flex min-h-[3.25rem] items-center justify-center rounded-2xl border border-white/[0.22] bg-white/[0.06] px-6 py-3.5 text-center text-sm font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-md transition-colors hover:border-cyan-400/35 hover:bg-white/[0.1] sm:min-h-0 sm:px-10 sm:py-4 sm:text-base"
-          >
-            {t("ctaSecondary")}
-          </MotionLink>
-        </motion.div>
+            {t("homeHeroKicker")}
+          </motion.p>
 
-        {/* Как на Rocket10: явная подсказка к скроллу + якорь на следующий блок */}
+          <motion.div
+            initial={{ opacity: 0, y: -22, scale: 0.94 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.68, delay: 0.05, ease: easeOut }}
+            className="mb-6 hidden w-full justify-center md:mb-10 md:flex"
+          >
+            <div className="rounded-2xl border border-white/[0.16] bg-white/[0.07] px-8 py-4 shadow-[0_0_0_1px_rgba(0,220,255,0.18),0_28px_96px_rgba(0,0,0,0.5),0_0_80px_rgba(0,200,255,0.28)] backdrop-blur-xl sm:px-10 sm:py-5">
+              <Image
+                src="/logo.png"
+                alt="LOGICA Marketing"
+                width={400}
+                height={100}
+                className="h-[3.25rem] w-auto sm:h-[4.25rem] md:h-20 lg:h-24"
+                priority
+              />
+            </div>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.72, delay: 0.1, ease: easeOut }}
+            className="mx-auto mb-4 max-w-[min(100%,22rem)] text-pretty text-[clamp(1.35rem,5.9vw,2.35rem)] font-semibold leading-[1.1] tracking-[-0.03em] text-white [text-shadow:0_2px_28px_rgba(0,0,0,0.75),0_1px_0_rgba(0,0,0,0.5)] min-[400px]:max-w-none min-[480px]:text-[clamp(1.85rem,7vw,3.75rem)] sm:mb-6 sm:leading-[1.02] sm:tracking-[-0.04em] md:mb-5 md:text-7xl md:leading-[1.08] md:tracking-[-0.035em] md:[text-shadow:0_6px_64px_rgba(0,0,0,0.65)] lg:text-8xl"
+          >
+            {t("homeVideoLine1")}
+            <br />
+            <span className="bg-gradient-to-r from-[#7ee8ff] via-[#00c8ff] to-[#e8d4ff] bg-clip-text text-transparent [filter:drop-shadow(0_2px_20px_rgba(0,0,0,0.55))] md:[filter:none]">
+              {t("homeVideoHighlight")}
+            </span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.58, delay: 0.14, ease: easeOut }}
+            className="mx-auto mb-8 hidden max-w-xl text-pretty text-[0.9375rem] font-medium leading-snug text-white/72 sm:mb-12 sm:max-w-2xl sm:text-xl sm:leading-relaxed md:block"
+          >
+            {t("homeVideoSub")}
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.52, delay: 0.12, ease: easeOut }}
+            className="mx-auto mb-8 max-w-md text-pretty text-[0.9rem] font-medium leading-snug text-white/90 md:hidden"
+          >
+            {t("homeVideoSubMobile")}
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.58, delay: 0.2, ease: easeOut }}
+            className="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center sm:gap-4"
+          >
+            <MotionLink
+              href="/kontakty"
+              whileHover={{ scale: 1.045 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex min-h-[3.25rem] items-center justify-center rounded-2xl bg-gradient-to-r from-white via-white to-white/95 px-6 py-3.5 text-center text-sm font-semibold text-[#0a0a12] shadow-[0_0_0_1px_rgba(255,255,255,0.55),0_10px_48px_rgba(0,210,255,0.42),0_28px_72px_rgba(0,0,0,0.4)] transition-[box-shadow] hover:shadow-[0_0_0_1px_rgba(255,255,255,0.72),0_14px_64px_rgba(0,230,255,0.52)] sm:min-h-0 sm:px-11 sm:py-4 sm:text-base"
+            >
+              {t("homeVideoCta")}
+            </MotionLink>
+            <MotionLink
+              href={homeSectionHref("cases")}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex min-h-[3.25rem] items-center justify-center rounded-2xl border border-white/[0.22] bg-white/[0.06] px-6 py-3.5 text-center text-sm font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-md transition-colors hover:border-cyan-400/35 hover:bg-white/[0.1] sm:min-h-0 sm:px-10 sm:py-4 sm:text-base"
+            >
+              {t("ctaSecondary")}
+            </MotionLink>
+          </motion.div>
+        </div>
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.85, duration: 0.55, ease: easeOut }}
-          className="mt-14 flex flex-col items-center gap-2 sm:mt-16"
+          className="mt-10 flex flex-col items-center gap-2 sm:mt-16"
         >
           <Link
             href={homeHashHref("platforms")}
