@@ -57,9 +57,11 @@ export function Hero({ children }: HeroProps) {
           onPlaying={() => setVideoActive(true)}
           className={cn(
             "h-full w-full transition-opacity duration-[900ms] ease-out",
-            "max-md:object-contain max-md:object-center max-md:scale-100 md:object-cover",
+            "max-md:object-contain max-md:object-center max-md:scale-100",
+            /* Десктоп: full-bleed без полос (cover), без лишнего «докропа» от scale>1 */
+            "md:object-cover md:object-[center_42%] md:scale-100",
             "scale-[1.02] brightness-[1.12] contrast-[1.03] saturate-[1.06]",
-            "md:scale-[1.04] md:brightness-[1.14] md:contrast-[1.05] md:saturate-[1.05]",
+            "md:brightness-[1.12] md:contrast-[1.04] md:saturate-[1.05]",
             videoActive ? "max-md:opacity-100 md:opacity-100" : "opacity-0"
           )}
         >
