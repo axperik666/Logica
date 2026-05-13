@@ -56,7 +56,8 @@ export function Hero({ children }: HeroProps) {
           onLoadedData={() => setVideoActive(true)}
           onPlaying={() => setVideoActive(true)}
           className={cn(
-            "h-full w-full object-cover transition-opacity duration-[900ms] ease-out",
+            "h-full w-full transition-opacity duration-[900ms] ease-out",
+            "max-md:object-contain max-md:object-center max-md:scale-100 md:object-cover",
             "scale-[1.02] brightness-[1.12] contrast-[1.03] saturate-[1.06]",
             "md:scale-[1.04] md:brightness-[1.14] md:contrast-[1.05] md:saturate-[1.05]",
             videoActive ? "max-md:opacity-100 md:opacity-100" : "opacity-0"
@@ -66,24 +67,24 @@ export function Hero({ children }: HeroProps) {
         </video>
       </motion.div>
 
-      {/* Particle canvas above video, below tint — иначе z-[-1] уходит под слой и «анимации нет» */}
+      {/* Canvas над видео, под градиентом — сеть и «орбиты» читаются на мобилке */}
       {children}
 
       <motion.div
-        className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-black/10 via-[#141c32]/38 to-black/55 will-change-transform max-md:from-black/[0.06] max-md:via-[#182238]/28 max-md:to-black/40 md:from-black/[0.04] md:via-[#141c32]/22 md:to-black/38"
+        className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-b from-black/10 via-[#141c32]/38 to-black/55 will-change-transform max-md:from-black/[0.04] max-md:via-[#182238]/18 max-md:to-black/32 md:from-black/[0.04] md:via-[#141c32]/22 md:to-black/38"
         style={{ x: parallax.midX, y: parallax.midY }}
       />
       <motion.div
-        className="pointer-events-none absolute inset-0 z-[1] will-change-transform"
+        className="pointer-events-none absolute inset-0 z-[3] will-change-transform"
         style={{ x: parallax.frontX, y: parallax.frontY }}
       >
-        <div className="premium-aurora hero-premium-aurora absolute inset-0 max-md:opacity-75 md:opacity-[0.55]" />
+        <div className="premium-aurora hero-premium-aurora absolute inset-0 max-md:opacity-60 md:opacity-[0.55]" />
         <div
-          className="pointer-events-none absolute inset-0 max-md:[box-shadow:inset_0_0_48px_rgba(0,0,0,0.14),inset_0_0_120px_rgba(0,0,0,0.08)] md:[box-shadow:inset_0_0_90px_rgba(0,0,0,0.22),inset_0_0_180px_rgba(0,0,0,0.12),inset_0_-80px_120px_rgba(0,180,255,0.04)]"
+          className="pointer-events-none absolute inset-0 max-md:[box-shadow:inset_0_0_40px_rgba(0,0,0,0.1),inset_0_0_100px_rgba(0,0,0,0.06)] md:[box-shadow:inset_0_0_90px_rgba(0,0,0,0.22),inset_0_0_180px_rgba(0,0,0,0.12),inset_0_-80px_120px_rgba(0,180,255,0.04)]"
           aria-hidden
         />
       </motion.div>
-      <div className="premium-grain pointer-events-none absolute inset-0 z-[2] max-md:opacity-[0.02] md:opacity-[0.028]" aria-hidden />
+      <div className="premium-grain pointer-events-none absolute inset-0 z-[4] max-md:opacity-[0.018] md:opacity-[0.028]" aria-hidden />
 
       <motion.div
         className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6"
