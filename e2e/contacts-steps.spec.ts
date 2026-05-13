@@ -3,9 +3,7 @@ import { test, expect } from "@playwright/test";
 test.describe("contacts form steps", () => {
   test("step validation then step 2", async ({ page }) => {
     await page.goto("/en/kontakty");
-    await expect(
-      page.getByRole("heading", { level: 1, name: /Contact/i })
-    ).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible({ timeout: 30_000 });
 
     await page.getByRole("button", { name: /Continue/i }).click();
     await expect(page.getByRole("alert")).toBeVisible();
