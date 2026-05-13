@@ -56,13 +56,14 @@ export function Hero({ children }: HeroProps) {
           onLoadedData={() => setVideoActive(true)}
           onPlaying={() => setVideoActive(true)}
           className={cn(
-            "h-full w-full transition-opacity duration-[900ms] ease-out",
-            "max-md:object-contain max-md:object-center max-md:scale-100",
-            /* Десктоп: full-bleed без полос (cover), без лишнего «докропа» от scale>1 */
+            "h-full w-full",
+            "max-md:object-contain max-md:object-center max-md:scale-100 max-md:opacity-100",
+            "md:transition-opacity md:duration-[900ms] md:ease-out",
+            /* Десктоп: full-bleed без полос (cover) */
             "md:object-cover md:object-[center_42%] md:scale-100",
             "scale-[1.02] brightness-[1.12] contrast-[1.03] saturate-[1.06]",
             "md:brightness-[1.12] md:contrast-[1.04] md:saturate-[1.05]",
-            videoActive ? "max-md:opacity-100 md:opacity-100" : "opacity-0"
+            videoActive ? "md:opacity-100" : "md:opacity-0"
           )}
         >
           <source src="/videos/site-bg-loop.mp4" type="video/mp4" />

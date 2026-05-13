@@ -14,7 +14,6 @@ const MAX_PARTICLES = 138;
 /** Меньше точек и связей на телефонах — меньше лагов при O(n²) отрисовке */
 const MOBILE_PARTICLE_CAP = 74;
 
-const SHADOW_BLUR = 18;
 const ATTRACT_FORCE = 0.142;
 const DAMPING = 0.865;
 const HOME_SPRING = 0.068;
@@ -73,7 +72,9 @@ export default function InteractiveBackground({
   const dimsRef = useRef({ w: 0, h: 0, dpr: 1 });
   const rafRef = useRef<number>(0);
   const runLoopRef = useRef(false);
+  /** На мобилке не отключаем RAF по IntersectionObserver — скачки viewport/хром дают ложные «вне кадра» и мерцание. */
   const heroInViewRef = useRef(true);
+  const resizeDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isMobileRef = useRef(false);
   const countRef = useRef(particleCount);
 
@@ -98,9 +99,11 @@ export default function InteractiveBackground({
       refreshMobile();
       const rect = container.getBoundingClientRect();
       const isMob = isMobileRef.current;
-      const dpr = isMob ? 1 : Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = isMob ? 1 : Math.min(window.devicePixelRatio || 1, 1.75);
       const w = Math.max(1, Math.floor(rect.width));
       const h = Math.max(1, Math.floor(rect.height));
+      const prevW = dimsRef.current.w;
+      const prevH = dimsRef.current.h;
 
       dimsRef.current = { w, h, dpr };
       canvas.width = Math.floor(w * dpr);
@@ -110,12 +113,41 @@ export default function InteractiveBackground({
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       const cnt = isMob ? Math.min(countRef.current, MOBILE_PARTICLE_CAP) : countRef.current;
+      const targetN = Math.min(MAX_PARTICLES, Math.max(MIN_PARTICLES, Math.floor(cnt)));
+      const existing = particlesRef.current;
+
+      if (prevW > 0 && prevH > 0 && existing.length === targetN) {
+        const sx = w / prevW;
+        const sy = h / prevH;
+        if (sx >= 0.86 && sx <= 1.16 && sy >= 0.86 && sy <= 1.16) {
+          for (const p of existing) {
+            p.baseX *= sx;
+            p.baseY *= sy;
+            p.x *= sx;
+            p.y *= sy;
+            p.vx = 0;
+            p.vy = 0;
+          }
+          return;
+        }
+      }
+
       particlesRef.current = initParticles(w, h, cnt);
     };
 
     syncCanvasSize();
+
+    const scheduleResize = () => {
+      if (resizeDebounceRef.current) clearTimeout(resizeDebounceRef.current);
+      const delay = isMobileRef.current ? 260 : 120;
+      resizeDebounceRef.current = setTimeout(() => {
+        resizeDebounceRef.current = null;
+        syncCanvasSize();
+      }, delay);
+    };
+
     const ro = new ResizeObserver(() => {
-      syncCanvasSize();
+      scheduleResize();
     });
     ro.observe(container);
 
@@ -158,14 +190,17 @@ export default function InteractiveBackground({
       else stopLoop();
     };
 
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        heroInViewRef.current = entry.isIntersecting;
-        syncLoopWithVisibility();
-      },
-      { threshold: 0, rootMargin: "120px 0px 120px 0px" }
-    );
-    io.observe(container);
+    const io: IntersectionObserver | null = isMobileRef.current
+      ? null
+      : new IntersectionObserver(
+          ([entry]) => {
+            heroInViewRef.current = entry.isIntersecting;
+            syncLoopWithVisibility();
+          },
+          { threshold: 0.02, rootMargin: "0px 0px 200px 0px" }
+        );
+    if (io) io.observe(container);
+    else heroInViewRef.current = true;
 
     const onVisibility = () => syncLoopWithVisibility();
     document.addEventListener("visibilitychange", onVisibility);
@@ -242,9 +277,6 @@ export default function InteractiveBackground({
         ctx.restore();
       }
 
-      ctx.shadowBlur = isMobile ? 0 : SHADOW_BLUR;
-      ctx.shadowColor = ACCENT;
-
       const n = particles.length;
       for (let i = 0; i < n; i++) {
         for (let j = i + 1; j < n; j++) {
@@ -312,7 +344,6 @@ export default function InteractiveBackground({
         ctx.fill();
       }
 
-      ctx.shadowBlur = 0;
       if (runLoopRef.current) {
         rafRef.current = requestAnimationFrame(tick);
       }
@@ -322,9 +353,10 @@ export default function InteractiveBackground({
     requestAnimationFrame(syncLoopWithVisibility);
 
     return () => {
-      io.disconnect();
+      if (io) io.disconnect();
       document.removeEventListener("visibilitychange", onVisibility);
       ro.disconnect();
+      if (resizeDebounceRef.current) clearTimeout(resizeDebounceRef.current);
       stopLoop();
       container.removeEventListener("pointerdown", updateMouse);
       container.removeEventListener("pointermove", updateMouse);
