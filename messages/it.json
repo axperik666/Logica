@@ -150,6 +150,8 @@
     "switchTo": "Cambia lingua"
   },
   "leads": {
+    "ariaTelegram": "Apri Telegram",
+    "ariaWhatsapp": "Apri WhatsApp",
     "successMessengersHint": "Risposta più veloce su Telegram o WhatsApp qui sotto.",
     "submitErrorRateLimit": "Troppi tentativi. Attendi un minuto o scrivici direttamente.",
     "submitErrorCaptcha": "Aggiorna la pagina e completa di nuovo il controllo di sicurezza."

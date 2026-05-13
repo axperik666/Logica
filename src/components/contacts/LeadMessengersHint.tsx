@@ -16,7 +16,7 @@ export function LeadMessengersHint() {
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-primary/35 bg-primary/12 text-white shadow-[0_8px_36px_rgba(0,191,255,0.18)] transition hover:border-primary/55 hover:bg-primary/20"
-          aria-label="Telegram"
+          aria-label={t("ariaTelegram")}
         >
           <Send className="h-7 w-7 text-primary" aria-hidden />
         </a>
@@ -25,7 +25,7 @@ export function LeadMessengersHint() {
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-emerald-400/25 bg-emerald-500/10 text-white shadow-[0_8px_36px_rgba(16,185,129,0.12)] transition hover:border-emerald-400/45 hover:bg-emerald-500/15"
-          aria-label="WhatsApp"
+          aria-label={t("ariaWhatsapp")}
         >
           <MessageCircle className="h-7 w-7 text-emerald-400" aria-hidden />
         </a>

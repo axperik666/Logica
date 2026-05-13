@@ -150,6 +150,8 @@
     "switchTo": "Switch language"
   },
   "leads": {
+    "ariaTelegram": "Open Telegram",
+    "ariaWhatsapp": "Open WhatsApp",
     "successMessengersHint": "Fastest reply — Telegram or WhatsApp below.",
     "submitErrorRateLimit": "Too many attempts. Wait a minute or message us directly.",
     "submitErrorCaptcha": "Please refresh the page and complete the security check again."

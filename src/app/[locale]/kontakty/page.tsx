@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { Link } from "@/navigation";
 import { BreadcrumbsJsonLd } from "@/components/seo/BreadcrumbsJsonLd";
-import { localePageAlternates } from "@/lib/hreflang";
 import { Benefits } from "@/components/landing/Benefits";
 import { ContactForm } from "@/components/landing/ContactForm";
 import { ContactHero } from "@/components/landing/ContactHero";
 import { ProcessSteps } from "@/components/landing/ProcessSteps";
 import { TrustBar } from "@/components/landing/TrustBar";
+import { localePageAlternates } from "@/lib/hreflang";
 
 export async function generateMetadata({
   params
@@ -24,7 +22,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function ContactsPage({
+export default async function KontaktyPage({
   params
 }: {
   params: Promise<{ locale: string }>;
@@ -42,22 +40,8 @@ export default async function ContactsPage({
           { name: t("title"), path: "/kontakty" }
         ]}
       />
-      <main className="min-h-screen overflow-x-hidden bg-[#020617] text-white">
-        <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#020617]/95 backdrop-blur-md">
-          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-            <Link href="/" className="shrink-0">
-              <Image src="/logo.png" alt="LOGICA Marketing" width={180} height={48} className="h-9 w-auto" priority />
-            </Link>
-            <Link
-              href="/"
-              className="flex items-center gap-1 text-sm text-white/70 transition-colors hover:text-white"
-            >
-              <span aria-hidden>←</span>
-              {t("landingBackHome")}
-            </Link>
-          </div>
-        </nav>
 
+      <main className="overflow-x-hidden bg-[#020617] text-white">
         <ContactHero />
         <TrustBar />
         <Benefits />

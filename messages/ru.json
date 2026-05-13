@@ -150,6 +150,8 @@
     "switchTo": "Переключить язык"
   },
   "leads": {
+    "ariaTelegram": "Открыть Telegram",
+    "ariaWhatsapp": "Открыть WhatsApp",
     "successMessengersHint": "Быстрее всего — Telegram или WhatsApp ниже.",
     "submitErrorRateLimit": "Слишком много попыток. Подождите минуту или напишите напрямую.",
     "submitErrorCaptcha": "Обновите страницу и пройдите проверку ещё раз."
