@@ -82,28 +82,17 @@ export default function Navbar() {
 
   const itemClass = (active: boolean) =>
     cn(
-      "relative inline-flex h-10 items-center justify-center whitespace-nowrap rounded-full px-3.5 text-sm font-medium leading-none transition-all duration-300",
-      active
-        ? "text-[#5ddbff] shadow-[0_0_24px_rgba(0,180,255,0.35)]"
-        : "text-white/85 hover:bg-white/[0.07] hover:text-[#7ee8ff]"
+      "relative inline-flex h-10 items-center justify-center whitespace-nowrap px-2.5 text-sm font-medium leading-none text-white/70 transition-colors duration-200 sm:px-3",
+      active ? "text-[#7ee8ff]" : "hover:text-white"
     );
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.08] bg-[linear-gradient(180deg,rgba(28,34,58,0.58)_0%,rgba(20,26,44,0.5)_100%)] shadow-[0_8px_40px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.11)] backdrop-blur-xl backdrop-saturate-[1.75] supports-[backdrop-filter]:bg-[linear-gradient(180deg,rgba(28,34,58,0.44)_0%,rgba(20,26,44,0.36)_100%)]">
-      <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_110%_100%_at_50%_-35%,rgba(0,180,255,0.16),transparent_52%),radial-gradient(ellipse_55%_70%_at_100%_-10%,rgba(139,92,246,0.09),transparent_48%)]"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#00b4ff]/55 to-transparent"
-        aria-hidden
-      />
-
+    <nav className="fixed left-0 right-0 top-0 z-50 bg-[linear-gradient(180deg,rgba(22,28,48,0.72)_0%,rgba(18,22,40,0.45)_100%)] backdrop-blur-xl backdrop-saturate-150 supports-[backdrop-filter]:bg-[linear-gradient(180deg,rgba(22,28,48,0.5)_0%,rgba(18,22,40,0.28)_100%)]">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <div className="flex h-[var(--header-h)] min-h-[4.375rem] items-center justify-between gap-3 md:gap-5 lg:min-h-[5.75rem]">
           <Link
             href="/"
-            className="group flex shrink-0 items-center gap-3 rounded-xl outline-none ring-cyan-400/0 transition ring-offset-2 ring-offset-[#060814] focus-visible:ring-2"
+            className="group flex shrink-0 items-center gap-3 rounded-lg outline-none ring-cyan-400/0 transition focus-visible:ring-2 focus-visible:ring-cyan-400/40"
           >
             <span className="relative">
               <span className="absolute -inset-1 rounded-xl bg-gradient-to-r from-cyan-500/20 via-transparent to-violet-500/15 opacity-0 blur-md transition group-hover:opacity-100" />
@@ -138,9 +127,8 @@ export default function Navbar() {
                 type="button"
                 className={cn(
                   itemClass(websiteActive),
-                  "cursor-pointer gap-1.5 border-0 bg-transparent px-3.5",
-                  "inline-flex items-center",
-                  !websiteActive && "hover:bg-white/[0.07]"
+                  "cursor-pointer gap-1 border-0 bg-transparent px-2.5 sm:px-3",
+                  "inline-flex items-center"
                 )}
                 aria-haspopup="menu"
                 aria-label={tNav("websiteCreateAria")}
@@ -160,7 +148,7 @@ export default function Navbar() {
                 role="menu"
               >
                 <div className="h-4 w-full" aria-hidden />
-                <div className="rounded-2xl border border-cyan-400/25 bg-[linear-gradient(165deg,rgba(18,22,38,0.98)_0%,rgba(10,12,24,0.97)_100%)] p-2 shadow-[0_24px_80px_rgba(0,0,0,0.65),0_0_0_1px_rgba(255,255,255,0.04)_inset] backdrop-blur-xl">
+                <div className="rounded-2xl bg-[rgba(14,18,36,0.94)] p-2 shadow-[0_20px_60px_rgba(0,0,0,0.5)] backdrop-blur-2xl">
                   {WEBSITE_MENU_KEYS.map((key) => (
                     <Link
                       key={key}
@@ -194,9 +182,8 @@ export default function Navbar() {
                 type="button"
                 className={cn(
                   itemClass(moreActive),
-                  "cursor-pointer gap-1.5 border-0 bg-transparent px-3.5",
-                  "inline-flex items-center",
-                  !moreActive && "hover:bg-white/[0.07]"
+                  "cursor-pointer gap-1 border-0 bg-transparent px-2.5 sm:px-3",
+                  "inline-flex items-center"
                 )}
                 aria-haspopup="menu"
                 aria-label={tNav("moreMenuAria")}
@@ -216,7 +203,7 @@ export default function Navbar() {
                 role="menu"
               >
                 <div className="h-4 w-full" aria-hidden />
-                <div className="rounded-2xl border border-cyan-400/25 bg-[linear-gradient(165deg,rgba(18,22,38,0.98)_0%,rgba(10,12,24,0.97)_100%)] p-2 shadow-[0_24px_80px_rgba(0,0,0,0.65)] backdrop-blur-xl">
+                <div className="rounded-2xl bg-[rgba(14,18,36,0.94)] p-2 shadow-[0_20px_60px_rgba(0,0,0,0.5)] backdrop-blur-2xl">
                   <Link
                     href="/o-nas"
                     role="menuitem"
@@ -245,41 +232,38 @@ export default function Navbar() {
 
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">
             <div
-              className="hidden items-stretch rounded-full border border-cyan-400/30 bg-[linear-gradient(160deg,rgba(12,18,40,0.92)_0%,rgba(8,12,28,0.88)_100%)] p-0.5 shadow-[inset_0_1px_0_rgba(0,191,255,0.15)] md:flex"
+              className="hidden items-center gap-0.5 text-xs font-semibold uppercase tracking-wider text-white/45 md:flex"
               role="group"
               aria-label={tHeader("switchTo")}
             >
               {routing.locales.map((loc, idx) => {
                 const active = locale === loc;
                 return (
-                  <div key={loc} className="flex items-stretch">
+                  <span key={loc} className="flex items-center">
                     {idx > 0 ? (
-                      <span
-                        className="my-1.5 w-px shrink-0 bg-gradient-to-b from-transparent via-white/25 to-transparent"
-                        aria-hidden
-                      />
+                      <span className="mx-1.5 select-none text-white/20" aria-hidden>
+                        ·
+                      </span>
                     ) : null}
                     <Link
                       href={pathname}
                       locale={loc}
                       prefetch={false}
                       className={cn(
-                        "flex min-h-9 items-center rounded-full px-3.5 text-xs font-bold uppercase tracking-wider transition sm:min-h-10 sm:px-4 sm:text-[13px]",
-                        active
-                          ? "bg-gradient-to-b from-white to-white/90 text-gray-900 shadow-[0_0_28px_rgba(0,191,255,0.35)]"
-                          : "text-white/75 hover:bg-white/10 hover:text-white"
+                        "min-h-9 px-1 py-2 transition sm:min-h-10",
+                        active ? "text-[#7ee8ff]" : "hover:text-white/90"
                       )}
                     >
                       {LOCALE_LABELS[loc] ?? loc.toUpperCase()}
                     </Link>
-                  </div>
+                  </span>
                 );
               })}
             </div>
 
             <Link
               href="/kontakty"
-              className="inline-flex max-w-[9.5rem] items-center justify-center truncate rounded-full bg-gradient-to-r from-[#00b4ff] to-[#0090d4] px-3.5 py-2 text-[11px] font-bold uppercase tracking-wide text-white shadow-[0_0_32px_rgba(0,180,255,0.45)] transition hover:brightness-110 hover:shadow-[0_0_44px_rgba(0,200,255,0.55)] sm:max-w-none sm:px-6 sm:py-2.5 sm:text-xs md:px-7"
+              className="inline-flex max-w-[10rem] shrink-0 items-center justify-center truncate text-sm font-semibold text-[#7ee8ff] transition hover:text-[#a8f0ff] sm:max-w-none"
             >
               {tNav("ctaStrategy")}
             </Link>
@@ -287,7 +271,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setIsOpen((v) => !v)}
-              className="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] text-white transition hover:bg-white/10 md:hidden"
+              className="flex min-h-11 min-w-11 items-center justify-center rounded-lg text-white/85 transition hover:bg-white/[0.06] hover:text-white md:hidden"
               aria-expanded={isOpen}
               aria-label={isOpen ? tHeader("closeMenu") : tHeader("openMenu")}
             >
