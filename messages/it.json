@@ -244,6 +244,35 @@
     "hintContact": "Telegram, WhatsApp o email — come preferisci il primo messaggio.",
     "hintMessage": "Bastano 2–4 frasi: offerta, geo, obiettivo o problema attuale.",
     "stickyBarCta": "Vai al modulo",
+    "landingBackHome": "Torna alla home",
+    "landingHeroPulse": "Risposta su messenger — fino a ~15 minuti",
+    "landingH1Line1": "Invia una richiesta —",
+    "landingH1Accent": "chiariamo il task",
+    "landingH1Mid": "e ti diamo",
+    "landingH1Line3": "un piano di crescita in tempi rapidi",
+    "landingHeroLead": "Siti • Ads • Performance. Niente deck infiniti o pacchetti forzati. Ti diremo con onestà se siamo il fit giusto.",
+    "landingCtaTelegram": "Scrivi su Telegram",
+    "landingCtaScrollForm": "Compila il modulo",
+    "landingBenefitsTitle": "Perché lasciano qui la richiesta",
+    "landingBenefits": [
+      {
+        "title": "Passo successivo chiaro",
+        "desc": "Niente deck generici: focus sul task e sulla compatibilità."
+      },
+      {
+        "title": "Numeri e trasparenza",
+        "desc": "Concordiamo cosa conta come successo e riportiamo senza vanity metrics."
+      },
+      {
+        "title": "Onestà sul fit",
+        "desc": "Ti diremo se nicchia, budget o scope non sono allineati al nostro modo di lavorare."
+      }
+    ],
+    "landingFullFormTitle": "Richiesta completa",
+    "landingFullFormLead": "Due passi: contatto e contesto. Oppure Telegram — spesso è più veloce.",
+    "landingHeroFormTitle": "Richiesta veloce",
+    "landingHeroFormLead": "Nome e messenger — risposta umana. Nota facoltativa sotto.",
+    "landingHeroConsent": "Cliccando Invia accetti il trattamento dei dati per rispondere alla richiesta.",
     "step1Title": "Invia la richiesta",
     "step1Desc": "Descrivi il task e lascia un contatto comodo.",
     "step2Title": "Chiariamo sui messenger",

@@ -3,6 +3,7 @@
 import { FormEvent, useCallback, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/cn";
 import { track } from "@/lib/analytics";
 import { TurnstileField } from "@/components/TurnstileField";
 import { LeadMessengersHint } from "@/components/contacts/LeadMessengersHint";
@@ -15,7 +16,7 @@ type Err =
   | "CAPTCHA"
   | null;
 
-export function KontaktyForm() {
+export function KontaktyForm({ embedded }: { embedded?: boolean }) {
   const t = useTranslations("contactsPage");
   const tl = useTranslations("leads");
   const [step, setStep] = useState(0);
@@ -91,7 +92,7 @@ export function KontaktyForm() {
   }
 
   return (
-    <form className="mt-8 grid gap-4" onSubmit={onSubmit}>
+    <form className={cn("grid gap-4", embedded ? "mt-6" : "mt-8")} onSubmit={onSubmit}>
       <input type="hidden" name="source" value="kontakty" />
       <input
         type="text"

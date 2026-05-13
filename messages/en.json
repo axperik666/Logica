@@ -244,6 +244,35 @@
     "hintContact": "Telegram handle, WhatsApp number, or email — how we should reach you first.",
     "hintMessage": "2–4 sentences are enough: offer, geo, goal, or what’s broken today.",
     "stickyBarCta": "Go to form",
+    "landingBackHome": "Back to home",
+    "landingHeroPulse": "Messenger reply — up to ~15 minutes",
+    "landingH1Line1": "Leave a request —",
+    "landingH1Accent": "we’ll clarify the task",
+    "landingH1Mid": "and share",
+    "landingH1Line3": "a growth plan outline fast",
+    "landingHeroLead": "Sites • Ads • Performance. No endless decks or forced packages. We’ll say honestly if we’re the right fit.",
+    "landingCtaTelegram": "Message on Telegram",
+    "landingCtaScrollForm": "Fill out the form",
+    "landingBenefitsTitle": "Why teams leave a lead here",
+    "landingBenefits": [
+      {
+        "title": "A clear next step",
+        "desc": "No generic 40-slide decks — we focus on your task and whether we’re a fit."
+      },
+      {
+        "title": "Numbers & transparency",
+        "desc": "We agree what success means and report without vanity metrics."
+      },
+      {
+        "title": "Honesty on fit",
+        "desc": "We’ll tell you directly if niche, budget, or scope isn’t aligned with how we work."
+      }
+    ],
+    "landingFullFormTitle": "Full request",
+    "landingFullFormLead": "Two steps: contact details and context. Or write on Telegram — often fastest.",
+    "landingHeroFormTitle": "Quick request",
+    "landingHeroFormLead": "Name and messenger — we reply with a human message. Optional note below.",
+    "landingHeroConsent": "By clicking Send, you agree we process this data to respond to your request.",
     "step1Title": "Send a request",
     "step1Desc": "Describe the task and leave a convenient contact.",
     "step2Title": "We clarify in messengers",

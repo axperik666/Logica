@@ -81,7 +81,12 @@ export async function ingestLeadForm(formData: FormData): Promise<LeadIngestResu
   const email = field(formData, "email");
   const niche = field(formData, "niche");
 
-  if (source === "kontakty" || source === "roi-calculator" || source === "sections-ds-lead") {
+  if (
+    source === "kontakty" ||
+    source === "kontakty-hero" ||
+    source === "roi-calculator" ||
+    source === "sections-ds-lead"
+  ) {
     if (!name || !contact) {
       return { outcome: "reject", reason: "VALIDATION" };
     }

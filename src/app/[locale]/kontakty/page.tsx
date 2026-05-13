@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { ContactsPagePremium } from "@/components/contacts/ContactsPagePremium";
 import { BreadcrumbsJsonLd } from "@/components/seo/BreadcrumbsJsonLd";
 import { localePageAlternates } from "@/lib/hreflang";
+import { Benefits } from "@/components/landing/Benefits";
+import { ContactForm } from "@/components/landing/ContactForm";
+import { ContactHero } from "@/components/landing/ContactHero";
+import { ProcessSteps } from "@/components/landing/ProcessSteps";
+import { TrustBar } from "@/components/landing/TrustBar";
 
 export async function generateMetadata({
   params
@@ -28,7 +32,7 @@ export default async function ContactsPage({
   const t = await getTranslations({ locale, namespace: "contactsPage" });
 
   return (
-    <section className="tech-bg relative min-h-[60vh] overflow-hidden">
+    <>
       <BreadcrumbsJsonLd
         locale={locale}
         items={[
@@ -36,7 +40,15 @@ export default async function ContactsPage({
           { name: t("title"), path: "/kontakty" }
         ]}
       />
-      <ContactsPagePremium />
-    </section>
+      <div className="min-h-screen bg-[#020617] text-white">
+        <ContactHero />
+        <Benefits />
+        <ProcessSteps />
+        <TrustBar />
+        <section id="full-form" className="scroll-mt-[calc(var(--header-h)+1rem)]">
+          <ContactForm />
+        </section>
+      </div>
+    </>
   );
 }
