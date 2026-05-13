@@ -74,7 +74,7 @@ export function SiteSplash() {
     >
       <video
         ref={videoRef}
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 h-full w-full object-cover brightness-[1.1] contrast-[1.04] saturate-[1.05] max-md:brightness-[1.22] max-md:contrast-[1.06]"
         src={SPLASH_SRC}
         playsInline
         muted
@@ -84,9 +84,9 @@ export function SiteSplash() {
         onError={finish}
       />
 
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/40" aria-hidden />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-black/25 max-md:from-black/35 max-md:via-transparent max-md:to-black/15" aria-hidden />
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/90 to-transparent" aria-hidden />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/75 to-transparent max-md:from-black/45 max-md:h-24" aria-hidden />
 
       <div className="relative z-10 mt-auto flex justify-center p-6 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
         <button
