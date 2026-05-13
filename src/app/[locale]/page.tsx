@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import FloatingPlatformLogos from "@/components/FloatingPlatformLogos";
 import InteractiveBackground from "@/components/InteractiveBackground";
+import { SiteSplash } from "@/components/SiteSplash";
 import { Hero } from "@/components/sections/Hero";
 import { TrustStrip } from "@/components/sections/TrustStrip";
 import { TrustBar } from "@/components/sections/TrustBar";
@@ -51,6 +52,7 @@ export default function HomePage() {
   return (
     <>
       <HomePageJsonLd />
+      <SiteSplash />
       <Hero>
         <>
           <InteractiveBackground

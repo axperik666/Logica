@@ -61,8 +61,7 @@ export function Hero({ children }: HeroProps) {
             videoActive ? "opacity-[0.78]" : "opacity-0"
           )}
         >
-          <source src="/hero-bg.webm" type="video/webm" />
-          <source src="/hero-bg.mp4" type="video/mp4" />
+          <source src="/videos/site-bg-loop.mp4" type="video/mp4" />
         </video>
       </motion.div>
 
