@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { useInView, motion } from "framer-motion";
 import Image from "next/image";
-import { Linkedin, Send } from "lucide-react";
+import { MessageCircle, Send } from "lucide-react";
 import { MotionDiv, MotionSection } from "@/components/motion";
 import { useTranslations } from "next-intl";
 import { CONTACTS } from "@/lib/contacts";
@@ -15,7 +15,6 @@ type Member = {
   bio: string;
   initials: string;
   photo?: string;
-  linkedinUrl?: string;
 };
 
 function InitialsFill({ initials }: { initials: string }) {
@@ -35,12 +34,12 @@ function InitialsFill({ initials }: { initials: string }) {
 export function Team() {
   const t = useTranslations("homeTeam");
   const tSec = useTranslations("sectionsSeo");
+  const tContact = useTranslations("contactsPage");
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.08, margin: "0px 0px 80px 0px" });
 
   const raw = t.raw("members");
   const members = Array.isArray(raw) ? (raw as Member[]) : [];
-  const companyLinkedIn = t("linkedinCompanyUrl");
 
   return (
     <MotionSection
@@ -130,18 +129,18 @@ export function Team() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/12 bg-white/[0.05] text-cyan-300 transition hover:border-cyan-400/40 hover:bg-cyan-400/10 hover:text-white"
-                    aria-label="Telegram"
+                    aria-label={tContact("ariaTelegram")}
                   >
-                    <Send className="h-4 w-4" />
+                    <Send className="h-4 w-4" aria-hidden />
                   </a>
                   <a
-                    href={m.linkedinUrl ?? companyLinkedIn}
+                    href={CONTACTS.whatsappHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/12 bg-white/[0.05] text-white/70 transition hover:border-cyan-400/40 hover:bg-cyan-400/10 hover:text-white"
-                    aria-label="LinkedIn"
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/12 bg-white/[0.05] text-emerald-200/90 transition hover:border-emerald-400/40 hover:bg-emerald-500/10 hover:text-white"
+                    aria-label={tContact("ariaWhatsapp")}
                   >
-                    <Linkedin className="h-4 w-4" />
+                    <MessageCircle className="h-4 w-4" aria-hidden />
                   </a>
                 </div>
               </motion.article>
