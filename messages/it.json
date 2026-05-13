@@ -258,16 +258,16 @@
     "landingBenefitsTitle": "Perché lasciano qui la richiesta",
     "landingBenefits": [
       {
-        "title": "Passo chiaro dopo",
-        "desc": "Niente deck generici — subito un piano sul tuo task"
+        "title": "Passo successivo chiaro",
+        "desc": "— non presentazioni generiche"
       },
       {
         "title": "Numeri e tracking",
-        "desc": "Lavoriamo solo con risultati misurabili"
+        "desc": "— niente metriche «belle» solo per il report"
       },
       {
-        "title": "Approccio onesto",
-        "desc": "Se il formato non è adatto — te lo diciamo subito «no»"
+        "title": "Te lo diciamo onestamente",
+        "desc": "se il formato del task non è per noi"
       }
     ],
     "landingProcessTitle": "Come funziona",
