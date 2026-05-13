@@ -57,7 +57,7 @@ export function Hero({ children }: HeroProps) {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative isolate flex min-h-[100dvh] items-center justify-center overflow-hidden bg-[#020308]"
+      className="relative isolate flex min-h-[100dvh] overflow-hidden bg-[#020308] max-md:flex-col md:items-center md:justify-center"
     >
       <motion.div
         className="absolute inset-0 z-0 will-change-transform md:inset-[-5%]"
@@ -102,7 +102,7 @@ export function Hero({ children }: HeroProps) {
       </motion.div>
 
       <motion.div
-        className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6"
+        className="relative z-10 mx-auto flex w-full max-w-5xl flex-col px-4 text-center sm:px-6 max-md:flex-1 max-md:justify-between max-md:pt-0 max-md:pb-[max(0.75rem,env(safe-area-inset-bottom))] md:block md:min-h-0 md:py-0"
         style={
           reduceMotion || narrowMobile
             ? undefined
@@ -112,7 +112,7 @@ export function Hero({ children }: HeroProps) {
               }
         }
       >
-        <>
+        <div className="max-md:-mt-1 max-md:shrink-0 md:contents">
           <motion.p
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
@@ -144,7 +144,7 @@ export function Hero({ children }: HeroProps) {
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.72, delay: 0.1, ease: easeOut }}
-            className="mx-auto mb-4 max-w-[min(100%,22rem)] text-pretty text-[clamp(1.35rem,5.9vw,2.35rem)] font-semibold leading-[1.1] tracking-[-0.03em] text-white [text-shadow:0_2px_28px_rgba(0,0,0,0.75),0_1px_0_rgba(0,0,0,0.5)] min-[400px]:max-w-none min-[480px]:text-[clamp(1.85rem,7vw,3.75rem)] sm:mb-6 sm:leading-[1.02] sm:tracking-[-0.04em] md:mb-5 md:text-7xl md:leading-[1.08] md:tracking-[-0.035em] md:[text-shadow:0_6px_64px_rgba(0,0,0,0.65)] lg:text-8xl"
+            className="mx-auto mb-3 max-w-[min(100%,22rem)] text-pretty text-[clamp(1.35rem,5.9vw,2.35rem)] font-semibold leading-[1.1] tracking-[-0.03em] text-white [text-shadow:0_2px_28px_rgba(0,0,0,0.75),0_1px_0_rgba(0,0,0,0.5)] min-[400px]:max-w-none min-[480px]:text-[clamp(1.85rem,7vw,3.75rem)] max-md:mb-2 sm:mb-6 sm:leading-[1.02] sm:tracking-[-0.04em] md:mb-5 md:text-7xl md:leading-[1.08] md:tracking-[-0.035em] md:[text-shadow:0_6px_64px_rgba(0,0,0,0.65)] lg:text-8xl"
           >
             {t("homeVideoLine1")}
             <br />
@@ -165,11 +165,13 @@ export function Hero({ children }: HeroProps) {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.52, delay: 0.12, ease: easeOut }}
-            className="mx-auto mb-8 max-w-md text-pretty text-[0.9rem] font-medium leading-snug text-white/90 md:hidden"
+            className="mx-auto mb-0 max-w-md text-pretty text-[0.9rem] font-medium leading-snug text-white/90 max-md:mb-0 md:hidden"
           >
             {t("homeVideoSubMobile")}
           </motion.p>
+        </div>
 
+        <div className="max-md:mt-auto max-md:flex max-md:flex-col max-md:gap-5 md:contents">
           <motion.div
             initial={{ opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
@@ -193,39 +195,39 @@ export function Hero({ children }: HeroProps) {
               {t("ctaSecondary")}
             </MotionLink>
           </motion.div>
-        </>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.85, duration: 0.55, ease: easeOut }}
-          className="mt-10 flex flex-col items-center gap-2 sm:mt-16"
-        >
-          <Link
-            href={homeHashHref("platforms")}
-            className="group inline-flex flex-col items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/45 transition-[gap,color] duration-300 ease-out hover:text-cyan-200/90 group-hover:gap-0"
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.85, duration: 0.55, ease: easeOut }}
+            className="mt-10 flex flex-col items-center gap-2 max-md:mt-0 sm:mt-16"
           >
-            <span className="block max-h-10 overflow-hidden text-center transition-[max-height,opacity,margin] duration-300 ease-out group-hover:max-h-0 group-hover:opacity-0 group-hover:mb-0">
-              {t("scrollDiscover")}
-            </span>
-            <motion.span
-              aria-hidden
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.12] bg-black/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm transition-[border,background] group-hover:border-cyan-400/25 group-hover:bg-white/[0.07] max-md:bg-black/35 max-md:backdrop-blur-none"
-              animate={
-                reduceMotion
-                  ? undefined
-                  : { y: [0, 11, 0] }
-              }
-              transition={
-                reduceMotion
-                  ? undefined
-                  : { duration: 1.65, repeat: Infinity, ease: "easeInOut" }
-              }
+            <Link
+              href={homeHashHref("platforms")}
+              className="group inline-flex flex-col items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/45 transition-[gap,color] duration-300 ease-out hover:text-cyan-200/90 group-hover:gap-0"
             >
-              <ChevronDown className="h-5 w-5 text-cyan-200/75" strokeWidth={2} />
-            </motion.span>
-          </Link>
-        </motion.div>
+              <span className="block max-h-10 overflow-hidden text-center transition-[max-height,opacity,margin] duration-300 ease-out group-hover:max-h-0 group-hover:opacity-0 group-hover:mb-0">
+                {t("scrollDiscover")}
+              </span>
+              <motion.span
+                aria-hidden
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.12] bg-black/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm transition-[border,background] group-hover:border-cyan-400/25 group-hover:bg-white/[0.07] max-md:bg-black/35 max-md:backdrop-blur-none"
+                animate={
+                  reduceMotion
+                    ? undefined
+                    : { y: [0, 11, 0] }
+                }
+                transition={
+                  reduceMotion
+                    ? undefined
+                    : { duration: 1.65, repeat: Infinity, ease: "easeInOut" }
+                }
+              >
+                <ChevronDown className="h-5 w-5 text-cyan-200/75" strokeWidth={2} />
+              </motion.span>
+            </Link>
+          </motion.div>
+        </div>
       </motion.div>
     </section>
   );
