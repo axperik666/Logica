@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname } from "@/navigation";
 import { routing } from "@/i18n/routing";
@@ -87,7 +87,7 @@ export default function Navbar() {
     );
 
   return (
-    <nav className="fixed left-0 right-0 top-0 z-50 border-0 bg-transparent shadow-none ring-0">
+    <nav className="fixed left-0 right-0 top-0 z-50 border-0 bg-transparent shadow-none ring-0 max-md:bg-transparent max-md:shadow-none">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <div className="grid h-[var(--header-h)] min-h-[4.375rem] grid-cols-[1fr_auto_1fr] items-center gap-3 lg:min-h-[5.75rem]">
           <div className="flex min-w-0 items-center justify-start">
@@ -215,11 +215,19 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setIsOpen((v) => !v)}
-              className="flex min-h-11 min-w-11 items-center justify-center rounded-md text-white transition hover:bg-white/[0.06] md:hidden"
+              className="flex min-h-11 min-w-11 items-center justify-center rounded-md text-white max-md:bg-transparent max-md:hover:bg-transparent max-md:active:bg-transparent md:hover:bg-white/[0.06] md:hidden"
               aria-expanded={isOpen}
               aria-label={isOpen ? tHeader("closeMenu") : tHeader("openMenu")}
             >
-              {isOpen ? <X className="h-5 w-5" strokeWidth={2} /> : <Menu className="h-5 w-5" strokeWidth={2} />}
+              {isOpen ? (
+                <X className="h-5 w-5" strokeWidth={2} />
+              ) : (
+                <span className="flex w-[1.35rem] flex-col gap-[5px]" aria-hidden>
+                  <span className="h-[2px] w-full rounded-full bg-white" />
+                  <span className="h-[2px] w-full rounded-full bg-white" />
+                  <span className="h-[2px] w-full rounded-full bg-white" />
+                </span>
+              )}
             </button>
           </div>
         </div>

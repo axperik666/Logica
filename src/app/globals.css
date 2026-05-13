@@ -793,7 +793,7 @@ header.site-header.glass-nav:hover::after {
     animation: none !important;
     filter: none !important;
     transform: none !important;
-    opacity: 0.4;
+    opacity: 0.52;
   }
 }
 

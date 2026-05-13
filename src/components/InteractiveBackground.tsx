@@ -121,7 +121,9 @@ export default function InteractiveBackground({
       if (prevW > 0 && prevH > 0 && existing.length === targetN) {
         const sx = w / prevW;
         const sy = h / prevH;
-        if (sx >= 0.86 && sx <= 1.16 && sy >= 0.86 && sy <= 1.16) {
+        const lo = isMob ? 0.72 : 0.86;
+        const hi = isMob ? 1.32 : 1.16;
+        if (sx >= lo && sx <= hi && sy >= lo && sy <= hi) {
           for (const p of existing) {
             p.baseX *= sx;
             p.baseY *= sy;
@@ -141,7 +143,7 @@ export default function InteractiveBackground({
 
     const scheduleResize = () => {
       if (resizeDebounceRef.current) clearTimeout(resizeDebounceRef.current);
-      const delay = isMobileRef.current ? 260 : 120;
+      const delay = isMobileRef.current ? 420 : 120;
       resizeDebounceRef.current = setTimeout(() => {
         resizeDebounceRef.current = null;
         syncCanvasSize();

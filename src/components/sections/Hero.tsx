@@ -1,6 +1,6 @@
 "use client";
 
-import { type ReactNode, useRef, useState } from "react";
+import { type ReactNode, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import { ChevronDown } from "lucide-react";
@@ -14,6 +14,19 @@ const MotionLink = motion(Link);
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 
+const NARROW_MQ = "(max-width: 767px)";
+
+function subscribeMaxMd767(cb: () => void) {
+  if (typeof window === "undefined") return () => {};
+  const mq = window.matchMedia(NARROW_MQ);
+  mq.addEventListener("change", cb);
+  return () => mq.removeEventListener("change", cb);
+}
+
+function getMaxMd767(): boolean {
+  return typeof window !== "undefined" && window.matchMedia(NARROW_MQ).matches;
+}
+
 type HeroProps = {
   children?: ReactNode;
 };
@@ -24,6 +37,9 @@ export function Hero({ children }: HeroProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const parallax = useMouseParallax(sectionRef, { maxPx: 72, layerBoost: 1.12 });
   const reduceMotion = useReducedMotion();
+  /** Мобилка: без scroll/parallax на контенте и слоях — иначе скачки dvh/адресной строки дают «мигание». */
+  const narrowMobile = useSyncExternalStore(subscribeMaxMd767, getMaxMd767, () => false);
+  const motionLayers = !reduceMotion && !narrowMobile;
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -45,7 +61,7 @@ export function Hero({ children }: HeroProps) {
     >
       <motion.div
         className="absolute inset-0 z-0 will-change-transform md:inset-[-5%]"
-        style={{ x: parallax.backX, y: parallax.backY }}
+        style={motionLayers ? { x: parallax.backX, y: parallax.backY } : undefined}
       >
         <video
           autoPlay
@@ -75,8 +91,8 @@ export function Hero({ children }: HeroProps) {
 
       {/* Один слой: тон + aurora + лёгкая виньетка (mid parallax) */}
       <motion.div
-        className="pointer-events-none absolute inset-0 z-[2] will-change-transform bg-gradient-to-b from-black/10 via-[#141c32]/38 to-black/55 max-md:from-black/[0.02] max-md:via-[#182238]/12 max-md:to-black/22 md:from-black/[0.04] md:via-[#141c32]/22 md:to-black/38"
-        style={{ x: parallax.midX, y: parallax.midY }}
+        className="pointer-events-none absolute inset-0 z-[2] will-change-transform bg-gradient-to-b from-black/10 via-[#141c32]/38 to-black/55 max-md:from-black/[0.02] max-md:via-[#182238]/10 max-md:to-black/18 md:from-black/[0.04] md:via-[#141c32]/22 md:to-black/38"
+        style={motionLayers ? { x: parallax.midX, y: parallax.midY } : undefined}
       >
         <div className="premium-aurora hero-premium-aurora absolute inset-0 md:opacity-[0.55]" />
         <div
@@ -88,7 +104,7 @@ export function Hero({ children }: HeroProps) {
       <motion.div
         className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6"
         style={
-          reduceMotion
+          reduceMotion || narrowMobile
             ? undefined
             : {
                 opacity: heroContentFade,
@@ -96,8 +112,7 @@ export function Hero({ children }: HeroProps) {
               }
         }
       >
-        {/* Мобилка: лёгкая «подложка» только под блок текста — фон виден по краям; десктоп без плашки */}
-        <div className="max-md:rounded-[1.75rem] max-md:border max-md:border-white/[0.14] max-md:bg-gradient-to-b max-md:from-[rgba(4,10,26,0.52)] max-md:to-[rgba(4,10,26,0.34)] max-md:px-4 max-md:py-6 max-md:shadow-[0_18px_56px_rgba(0,0,0,0.42)] max-md:backdrop-blur-md md:contents">
+        <>
           <motion.p
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
@@ -173,12 +188,12 @@ export function Hero({ children }: HeroProps) {
               href={homeSectionHref("cases")}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="inline-flex min-h-[3.25rem] items-center justify-center rounded-2xl border border-white/[0.22] bg-white/[0.06] px-6 py-3.5 text-center text-sm font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-md transition-colors hover:border-cyan-400/35 hover:bg-white/[0.1] sm:min-h-0 sm:px-10 sm:py-4 sm:text-base"
+              className="inline-flex min-h-[3.25rem] items-center justify-center rounded-2xl border border-white/[0.22] bg-white/[0.06] px-6 py-3.5 text-center text-sm font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-md transition-colors hover:border-cyan-400/35 hover:bg-white/[0.1] max-md:bg-black/30 max-md:backdrop-blur-none sm:min-h-0 sm:px-10 sm:py-4 sm:text-base"
             >
               {t("ctaSecondary")}
             </MotionLink>
           </motion.div>
-        </div>
+        </>
 
         <motion.div
           initial={{ opacity: 0 }}
@@ -195,7 +210,7 @@ export function Hero({ children }: HeroProps) {
             </span>
             <motion.span
               aria-hidden
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.12] bg-white/[0.04] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm transition-[border,background] group-hover:border-cyan-400/25 group-hover:bg-white/[0.07]"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.12] bg-black/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm transition-[border,background] group-hover:border-cyan-400/25 group-hover:bg-white/[0.07] max-md:bg-black/35 max-md:backdrop-blur-none"
               animate={
                 reduceMotion
                   ? undefined
