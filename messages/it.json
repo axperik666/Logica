@@ -258,18 +258,54 @@
     "landingBenefitsTitle": "Perché lasciano qui la richiesta",
     "landingBenefits": [
       {
-        "title": "Passo successivo chiaro",
-        "desc": "Niente deck generici: focus sul task e sulla compatibilità."
+        "title": "Passo chiaro dopo",
+        "desc": "Niente deck generici — subito un piano sul tuo task"
       },
       {
-        "title": "Numeri e trasparenza",
-        "desc": "Concordiamo cosa conta come successo e riportiamo senza vanity metrics."
+        "title": "Numeri e tracking",
+        "desc": "Lavoriamo solo con risultati misurabili"
       },
       {
-        "title": "Onestà sul fit",
-        "desc": "Ti diremo se nicchia, budget o scope non sono allineati al nostro modo di lavorare."
+        "title": "Approccio onesto",
+        "desc": "Se il formato non è adatto — te lo diciamo subito «no»"
       }
     ],
+    "landingProcessTitle": "Come funziona",
+    "trustStripItems": [
+      {
+        "kind": "boldMid",
+        "before": "Risposta su messenger — ",
+        "bold": "~15 min",
+        "icon": "arrow"
+      },
+      {
+        "kind": "plain",
+        "text": "Leggiamo ogni richiesta a mano",
+        "icon": "check"
+      },
+      {
+        "kind": "plain",
+        "text": "Niente spam né funnel automatici",
+        "icon": "spark"
+      },
+      {
+        "kind": "plain",
+        "text": "Ti diremo con onestà se non siamo il fit giusto",
+        "icon": "fire"
+      }
+    ],
+    "landingLabelName": "Come possiamo chiamarti?",
+    "landingPlaceholderNameCompany": "Nome / Azienda",
+    "landingLabelContactCombo": "Niche e contatto",
+    "landingPlaceholderContactHero": "Telegram / WhatsApp / Telefono",
+    "landingFieldNiche": "Niche",
+    "landingPlaceholderNiche": "Es.: dentistico, corsi online…",
+    "landingFieldTask": "Cosa serve fare?",
+    "landingPlaceholderTask": "Descrivi brevemente il task…",
+    "landingSubmitCta": "Invia richiesta",
+    "landingFormHint": "Risposta entro ~15 minuti • No spam",
+    "landingSuccessTitle": "Richiesta ricevuta!",
+    "landingSuccessSub": "Ti rispondiamo entro ~15 minuti su messenger.",
     "landingFullFormTitle": "Richiesta completa",
     "landingFullFormLead": "Due passi: contatto e contesto. Oppure Telegram — spesso è più veloce.",
     "landingHeroFormTitle": "Richiesta veloce",

@@ -259,17 +259,53 @@
     "landingBenefits": [
       {
         "title": "A clear next step",
-        "desc": "No generic 40-slide decks — we focus on your task and whether we’re a fit."
+        "desc": "Not generic decks — a plan tailored to your task"
       },
       {
-        "title": "Numbers & transparency",
-        "desc": "We agree what success means and report without vanity metrics."
+        "title": "Numbers & tracking",
+        "desc": "We work only with measurable outcomes"
       },
       {
-        "title": "Honesty on fit",
-        "desc": "We’ll tell you directly if niche, budget, or scope isn’t aligned with how we work."
+        "title": "Honest approach",
+        "desc": "If the task isn’t a fit — we’ll say “no” upfront"
       }
     ],
+    "landingProcessTitle": "How it works",
+    "trustStripItems": [
+      {
+        "kind": "boldMid",
+        "before": "Messenger reply — ",
+        "bold": "~15 min",
+        "icon": "arrow"
+      },
+      {
+        "kind": "plain",
+        "text": "We read every request manually",
+        "icon": "check"
+      },
+      {
+        "kind": "plain",
+        "text": "No spam or automated funnels",
+        "icon": "spark"
+      },
+      {
+        "kind": "plain",
+        "text": "We’ll say honestly if we’re not the right fit",
+        "icon": "fire"
+      }
+    ],
+    "landingLabelName": "How should we address you?",
+    "landingPlaceholderNameCompany": "Name / Company",
+    "landingLabelContactCombo": "Niche & contact",
+    "landingPlaceholderContactHero": "Telegram / WhatsApp / Phone",
+    "landingFieldNiche": "Niche",
+    "landingPlaceholderNiche": "e.g. dentistry, online courses…",
+    "landingFieldTask": "What do you need done?",
+    "landingPlaceholderTask": "Briefly describe the task…",
+    "landingSubmitCta": "Submit request",
+    "landingFormHint": "We reply within ~15 minutes • No spam",
+    "landingSuccessTitle": "Request received!",
+    "landingSuccessSub": "We’ll respond within ~15 minutes in messenger.",
     "landingFullFormTitle": "Full request",
     "landingFullFormLead": "Two steps: contact details and context. Or write on Telegram — often fastest.",
     "landingHeroFormTitle": "Quick request",

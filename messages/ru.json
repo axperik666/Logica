@@ -259,17 +259,41 @@
     "landingBenefits": [
       {
         "title": "Понятный следующий шаг",
-        "desc": "Без общих дек на десятки слайдов — сразу разбор задачи и честная оценка fit."
+        "desc": "Не общие презентации — сразу план под вашу задачу"
       },
       {
-        "title": "Цифры и прозрачность",
-        "desc": "Договоримся, что считать успехом, и покажем отчётность без «красивых» метрик ради отчёта."
+        "title": "Цифры и трекинг",
+        "desc": "Работаем только с измеримыми результатами"
       },
       {
-        "title": "Честность по формату",
-        "desc": "Скажем прямо, если ниша, бюджет или тип задачи пока не совпадают с тем, как мы работаем."
+        "title": "Честный подход",
+        "desc": "Если формат задачи не наш — сразу скажем «нет»"
       }
     ],
+    "landingProcessTitle": "Как это работает",
+    "trustStripItems": [
+      {
+        "kind": "boldMid",
+        "before": "Ответ в мессенджере — ",
+        "bold": "15 минут",
+        "icon": "arrow"
+      },
+      { "kind": "plain", "text": "Читаем каждую заявку вручную", "icon": "check" },
+      { "kind": "plain", "text": "Без спама и автоматических воронок", "icon": "spark" },
+      { "kind": "plain", "text": "Честно скажем, если формат не наш", "icon": "fire" }
+    ],
+    "landingLabelName": "Как к вам обращаться?",
+    "landingPlaceholderNameCompany": "Имя / Компания",
+    "landingLabelContactCombo": "Ниша и контакт",
+    "landingPlaceholderContactHero": "Telegram / WhatsApp / Телефон",
+    "landingFieldNiche": "Ниша",
+    "landingPlaceholderNiche": "Например: стоматология, онлайн-курсы…",
+    "landingFieldTask": "Что нужно сделать?",
+    "landingPlaceholderTask": "Коротко опишите задачу…",
+    "landingSubmitCta": "Отправить заявку",
+    "landingFormHint": "Отвечаем в течение 15 минут • Без спама",
+    "landingSuccessTitle": "Заявка получена!",
+    "landingSuccessSub": "Отвечаем в течение 15 минут в мессенджере.",
     "landingFullFormTitle": "Подробная заявка",
     "landingFullFormLead": "Два шага: контакт и задача. Или напишите сразу в Telegram — так часто быстрее.",
     "landingHeroFormTitle": "Быстрая заявка",
