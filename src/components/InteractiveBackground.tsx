@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { cn } from "@/lib/cn";
 
 const ACCENT = "#00bfff";
-const LINK_DIST = 162;
+const LINK_DIST = 148;
 const ATTRACT_DIST = 208;
 const MOBILE_GLOW_RADIUS = 255;
 const CURSOR_GLOW_RADIUS = 165;
@@ -12,7 +12,7 @@ const DEFAULT_COUNT = 118;
 const MIN_PARTICLES = 80;
 const MAX_PARTICLES = 120;
 /** Меньше точек и связей на телефонах — меньше лагов при O(n²) отрисовке */
-const MOBILE_PARTICLE_CAP = 52;
+const MOBILE_PARTICLE_CAP = 58;
 
 const SHADOW_BLUR = 15;
 const ATTRACT_FORCE = 0.098;
@@ -20,7 +20,7 @@ const DAMPING = 0.91;
 const HOME_SPRING = 0.053;
 
 function clampOpacity(t: number): number {
-  return Math.min(0.85, Math.max(0.15, t));
+  return Math.min(0.92, Math.max(0.18, t));
 }
 
 function hexToRgb(hex: string) {
@@ -215,9 +215,9 @@ export default function InteractiveBackground({
         }
       }
 
-      const t = performance.now() * 0.00074;
-      const idleAmp = isMobile ? 1.58 : 2.12;
-      const idleAmp2 = isMobile ? 0.56 : 0.74;
+      const t = performance.now() * 0.00082;
+      const idleAmp = isMobile ? 2.05 : 2.65;
+      const idleAmp2 = isMobile ? 0.72 : 0.92;
 
       const drift = (bx: number, by: number) => ({
         ox:
@@ -234,8 +234,8 @@ export default function InteractiveBackground({
         ctx.save();
         const radius = isMobile ? MOBILE_GLOW_RADIUS : CURSOR_GLOW_RADIUS;
         const g = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, radius);
-        g.addColorStop(0, isMobile ? "rgba(0,191,255,0.48)" : "rgba(0,191,255,0.45)");
-        g.addColorStop(0.5, isMobile ? "rgba(0,191,255,0.12)" : "rgba(0,191,255,0.11)");
+        g.addColorStop(0, isMobile ? "rgba(0,191,255,0.55)" : "rgba(0,191,255,0.52)");
+        g.addColorStop(0.5, isMobile ? "rgba(0,191,255,0.16)" : "rgba(0,191,255,0.14)");
         g.addColorStop(1, "rgba(0,191,255,0)");
         ctx.fillStyle = g;
         ctx.fillRect(0, 0, w, h);
@@ -259,7 +259,7 @@ export default function InteractiveBackground({
           const d = Math.hypot(ax - bx, ay - by);
           if (d >= LINK_DIST) continue;
 
-          const alpha = clampOpacity(0.15 + (1 - d / LINK_DIST) * 0.7);
+          const alpha = clampOpacity(0.18 + (1 - d / LINK_DIST) * 0.76);
           ctx.strokeStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${alpha})`;
           ctx.lineWidth = 1;
           ctx.beginPath();

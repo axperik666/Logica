@@ -55,7 +55,7 @@ export default function HomePage() {
         <>
           <InteractiveBackground
             className="absolute inset-0 z-[-1] min-h-full min-w-full"
-            particleCount={118}
+            particleCount={120}
           />
           {SHOW_FLOATING_PLATFORM_LOGOS ? <FloatingPlatformLogos /> : null}
         </>

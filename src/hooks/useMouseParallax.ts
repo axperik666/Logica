@@ -24,24 +24,29 @@ export type MouseParallaxLayers = {
  */
 export function useMouseParallax(
   containerRef: RefObject<HTMLElement | null>,
-  options?: { maxPx?: number }
+  options?: {
+    maxPx?: number;
+    /** >1 — заметнее сдвиг слоёв (hero). */
+    layerBoost?: number;
+  }
 ): MouseParallaxLayers {
   const reduceMotion = useReducedMotion();
   const maxPx = options?.maxPx ?? 22;
+  const boost = options?.layerBoost ?? 1;
 
   const rawX = useMotionValue(0);
   const rawY = useMotionValue(0);
 
-  const springConfig = { stiffness: 58, damping: 28, mass: 0.32 };
+  const springConfig = { stiffness: 64, damping: 26, mass: 0.3 };
   const x = useSpring(rawX, springConfig);
   const y = useSpring(rawY, springConfig);
 
-  const backX = useTransform(x, (v) => v * 0.38);
-  const backY = useTransform(y, (v) => v * 0.38);
-  const midX = useTransform(x, (v) => v * 0.22);
-  const midY = useTransform(y, (v) => v * 0.22);
-  const frontX = useTransform(x, (v) => v * 0.55);
-  const frontY = useTransform(y, (v) => v * 0.55);
+  const backX = useTransform(x, (v) => v * 0.42 * boost);
+  const backY = useTransform(y, (v) => v * 0.42 * boost);
+  const midX = useTransform(x, (v) => v * 0.28 * boost);
+  const midY = useTransform(y, (v) => v * 0.28 * boost);
+  const frontX = useTransform(x, (v) => v * 0.62 * boost);
+  const frontY = useTransform(y, (v) => v * 0.62 * boost);
 
   const moveRaf = useRef<number | null>(null);
   const pending = useRef({ x: 0, y: 0 });
@@ -110,7 +115,7 @@ export function useMouseParallax(
       el.removeEventListener("pointerup", reset);
       el.removeEventListener("pointercancel", reset);
     };
-  }, [containerRef, maxPx, rawX, rawY, reduceMotion]);
+  }, [containerRef, maxPx, boost, rawX, rawY, reduceMotion]);
 
   return { backX, backY, midX, midY, frontX, frontY };
 }

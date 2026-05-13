@@ -22,7 +22,7 @@ export function Hero({ children }: HeroProps) {
   const t = useTranslations("hero");
   const [videoActive, setVideoActive] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
-  const parallax = useMouseParallax(sectionRef, { maxPx: 46 });
+  const parallax = useMouseParallax(sectionRef, { maxPx: 72, layerBoost: 1.12 });
   const reduceMotion = useReducedMotion();
 
   const { scrollYProgress } = useScroll({
@@ -34,8 +34,8 @@ export function Hero({ children }: HeroProps) {
     damping: 28,
     mass: 0.35
   });
-  const heroContentFade = useTransform(scrollSmooth, [0, 0.42], [1, 0.88]);
-  const heroContentLift = useTransform(scrollSmooth, [0, 1], [0, 42]);
+  const heroContentFade = useTransform(scrollSmooth, [0, 0.38], [1, 0.78]);
+  const heroContentLift = useTransform(scrollSmooth, [0, 1], [0, 56]);
 
   return (
     <section
@@ -44,7 +44,7 @@ export function Hero({ children }: HeroProps) {
       className="relative isolate flex min-h-[100dvh] items-center justify-center overflow-hidden bg-[#020308]"
     >
       <motion.div
-        className="absolute inset-[-6%] z-0 will-change-transform"
+        className="absolute inset-[-8%] z-0 will-change-transform"
         style={{ x: parallax.backX, y: parallax.backY }}
       >
         <video
@@ -57,8 +57,8 @@ export function Hero({ children }: HeroProps) {
           onLoadedData={() => setVideoActive(true)}
           onPlaying={() => setVideoActive(true)}
           className={cn(
-            "h-full w-full scale-[1.06] object-cover transition-opacity duration-[900ms] ease-out",
-            videoActive ? "opacity-[0.68]" : "opacity-0"
+            "h-full w-full scale-[1.1] object-cover transition-opacity duration-[900ms] ease-out",
+            videoActive ? "opacity-[0.78]" : "opacity-0"
           )}
         >
           <source src="/hero-bg.webm" type="video/webm" />
@@ -70,15 +70,15 @@ export function Hero({ children }: HeroProps) {
       {children}
 
       <motion.div
-        className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-black/45 via-[#050810]/88 to-black will-change-transform"
+        className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-black/38 via-[#050810]/82 to-black will-change-transform"
         style={{ x: parallax.midX, y: parallax.midY }}
       />
       <motion.div
         className="pointer-events-none absolute inset-0 z-[1] will-change-transform"
         style={{ x: parallax.frontX, y: parallax.frontY }}
       >
-        <div className="premium-aurora absolute inset-0" />
-        <div className="hero-vignette-ring absolute inset-0" />
+        <div className="premium-aurora hero-premium-aurora absolute inset-0" />
+        <div className="hero-vignette-ring hero-vignette-ring--intense absolute inset-0" />
       </motion.div>
       <div className="premium-grain pointer-events-none absolute inset-0 z-[2]" aria-hidden />
 
@@ -94,21 +94,21 @@ export function Hero({ children }: HeroProps) {
         }
       >
         <motion.p
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, ease: easeOut }}
+          transition={{ duration: 0.58, ease: easeOut }}
           className="mx-auto mb-5 max-w-[22rem] text-pretty text-[9px] font-semibold uppercase leading-snug tracking-[0.28em] text-cyan-200/85 min-[400px]:max-w-none min-[400px]:text-[10px] min-[400px]:tracking-[0.34em] sm:mb-6 sm:text-[11px] sm:tracking-[0.38em]"
         >
           {t("homeHeroKicker")}
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: -16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.04, ease: easeOut }}
+          initial={{ opacity: 0, y: -22, scale: 0.94 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.68, delay: 0.05, ease: easeOut }}
           className="mb-10 flex justify-center"
         >
-          <div className="rounded-2xl border border-white/[0.14] bg-white/[0.06] px-8 py-4 shadow-[0_0_0_1px_rgba(0,200,255,0.12),0_24px_80px_rgba(0,0,0,0.45),0_0_64px_rgba(0,180,255,0.18)] backdrop-blur-xl sm:px-10 sm:py-5">
+          <div className="rounded-2xl border border-white/[0.16] bg-white/[0.07] px-8 py-4 shadow-[0_0_0_1px_rgba(0,220,255,0.18),0_28px_96px_rgba(0,0,0,0.5),0_0_80px_rgba(0,200,255,0.28)] backdrop-blur-xl sm:px-10 sm:py-5">
             <Image
               src="/logo.png"
               alt="LOGICA Marketing"
@@ -121,10 +121,10 @@ export function Hero({ children }: HeroProps) {
         </motion.div>
 
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.65, delay: 0.1, ease: easeOut }}
-          className="mx-auto mb-5 max-w-[min(100%,22rem)] text-pretty text-[clamp(1.45rem,6.5vw,2.65rem)] font-semibold leading-[1.08] tracking-[-0.035em] text-white drop-shadow-[0_4px_48px_rgba(0,0,0,0.55)] min-[400px]:max-w-none min-[480px]:text-[clamp(1.85rem,7vw,3.75rem)] sm:mb-6 sm:leading-[1.02] sm:tracking-[-0.04em] md:text-7xl lg:text-8xl"
+          transition={{ duration: 0.72, delay: 0.1, ease: easeOut }}
+          className="mx-auto mb-5 max-w-[min(100%,22rem)] text-pretty text-[clamp(1.45rem,6.5vw,2.65rem)] font-semibold leading-[1.08] tracking-[-0.035em] text-white drop-shadow-[0_6px_64px_rgba(0,0,0,0.65)] min-[400px]:max-w-none min-[480px]:text-[clamp(1.85rem,7vw,3.75rem)] sm:mb-6 sm:leading-[1.02] sm:tracking-[-0.04em] md:text-7xl lg:text-8xl"
         >
           {t("homeVideoLine1")}
           <br />
@@ -134,25 +134,25 @@ export function Hero({ children }: HeroProps) {
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 14 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, delay: 0.16, ease: easeOut }}
+          transition={{ duration: 0.58, delay: 0.14, ease: easeOut }}
           className="mx-auto mb-10 max-w-xl text-pretty text-[0.9375rem] font-medium leading-snug text-white/72 sm:mb-12 sm:max-w-2xl sm:text-xl sm:leading-relaxed"
         >
           {t("homeVideoSub")}
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, delay: 0.22, ease: easeOut }}
+          transition={{ duration: 0.58, delay: 0.2, ease: easeOut }}
           className="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center sm:gap-4"
         >
           <MotionLink
             href="/kontakty"
-            whileHover={{ scale: 1.03 }}
+            whileHover={{ scale: 1.045 }}
             whileTap={{ scale: 0.98 }}
-            className="inline-flex min-h-[3.25rem] items-center justify-center rounded-2xl bg-gradient-to-r from-white via-white to-white/95 px-6 py-3.5 text-center text-sm font-semibold text-[#0a0a12] shadow-[0_0_0_1px_rgba(255,255,255,0.5),0_8px_40px_rgba(0,200,255,0.35),0_24px_64px_rgba(0,0,0,0.35)] transition-[box-shadow] hover:shadow-[0_0_0_1px_rgba(255,255,255,0.65),0_12px_56px_rgba(0,220,255,0.45)] sm:min-h-0 sm:px-11 sm:py-4 sm:text-base"
+            className="inline-flex min-h-[3.25rem] items-center justify-center rounded-2xl bg-gradient-to-r from-white via-white to-white/95 px-6 py-3.5 text-center text-sm font-semibold text-[#0a0a12] shadow-[0_0_0_1px_rgba(255,255,255,0.55),0_10px_48px_rgba(0,210,255,0.42),0_28px_72px_rgba(0,0,0,0.4)] transition-[box-shadow] hover:shadow-[0_0_0_1px_rgba(255,255,255,0.72),0_14px_64px_rgba(0,230,255,0.52)] sm:min-h-0 sm:px-11 sm:py-4 sm:text-base"
           >
             {t("homeVideoCta")}
           </MotionLink>
@@ -186,12 +186,12 @@ export function Hero({ children }: HeroProps) {
               animate={
                 reduceMotion
                   ? undefined
-                  : { y: [0, 6, 0] }
+                  : { y: [0, 11, 0] }
               }
               transition={
                 reduceMotion
                   ? undefined
-                  : { duration: 2.2, repeat: Infinity, ease: "easeInOut" }
+                  : { duration: 1.65, repeat: Infinity, ease: "easeInOut" }
               }
             >
               <ChevronDown className="h-5 w-5 text-cyan-200/75" strokeWidth={2} />
