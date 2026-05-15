@@ -999,22 +999,34 @@
     ]
   },
   "trustBar": {
-    "badge": "Доверие",
+    "badge": "Клиенты · performance",
     "title": "Бренды, с которыми мы масштабируем медиа и продукт",
-    "subtitle": "Монограммы и названия отражают реальные проекты — те же дисциплины, что в кейсах на сайте.",
+    "subtitle": "Сайт, реклама и экономика в одном контуре — от e‑commerce и медицины до EdTech и SaaS. Ниже — живые проекты с цифрами из кейсов.",
+    "stats": [
+      { "value": "47+", "label": "запусков" },
+      { "value": "12", "label": "ниш" },
+      { "value": "3.8×", "label": "ср. рост ROAS" }
+    ],
+    "featuredKicker": "Свежие wins",
+    "featuredCaseIds": ["furniture-store", "edu-center", "dentistry"],
+    "featuredCta": "Разбор кейса",
+    "marqueeKicker": "В работе сейчас",
+    "ctaCases": "Все кейсы с цифрами",
+    "ctaContact": "Обсудить ваш проект",
+    "footnote": "Названия — реальные проекты; подробности и методология — в разделе кейсов.",
     "brands": [
-      { "label": "VitaMed", "abbr": "VM" },
-      { "label": "NordMebel", "abbr": "NM" },
-      { "label": "LexPro", "abbr": "LX" },
-      { "label": "SkillNova", "abbr": "SN" },
-      { "label": "Éclat Studio", "abbr": "ÉC" },
-      { "label": "BuildCraft", "abbr": "BC" },
-      { "label": "TechPoint", "abbr": "TP" },
-      { "label": "SmileLine", "abbr": "SL" },
-      { "label": "PrimeEstate", "abbr": "PE" },
-      { "label": "Pulse Gym", "abbr": "PG" },
-      { "label": "Atelier Mebel", "abbr": "AM" },
-      { "label": "AutoHub", "abbr": "AH" }
+      { "label": "VitaMed", "abbr": "VM", "niche": "Медицина", "win": "+340% лидов" },
+      { "label": "NordMebel", "abbr": "NM", "niche": "E-commerce", "win": "ROAS 8.4" },
+      { "label": "LexPro", "abbr": "LX", "niche": "Юриспруденция", "win": "+180% заявок" },
+      { "label": "SkillNova", "abbr": "SN", "niche": "EdTech", "win": "12 400 студентов" },
+      { "label": "Éclat Studio", "abbr": "ÉC", "niche": "Beauty", "win": "+290% записей" },
+      { "label": "BuildCraft", "abbr": "BC", "niche": "Строительство", "win": "47 объектов" },
+      { "label": "TechPoint", "abbr": "TP", "niche": "E-commerce", "win": "+520% продаж" },
+      { "label": "SmileLine", "abbr": "SL", "niche": "Медицина", "win": "380 пациентов/мес" },
+      { "label": "PrimeEstate", "abbr": "PE", "niche": "Недвижимость", "win": "$2.8M с лида" },
+      { "label": "Pulse Gym", "abbr": "PG", "niche": "Фитнес", "win": "+410% абонементов" },
+      { "label": "Atelier Mebel", "abbr": "AM", "niche": "Производство", "win": "+670% заявок" },
+      { "label": "AutoHub", "abbr": "AH", "niche": "Авто", "win": "940 клиентов" }
     ]
   },
   "homeResults": {

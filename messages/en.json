@@ -998,22 +998,34 @@
     ]
   },
   "trustBar": {
-    "badge": "Trust",
-    "title": "Brands we grow with media & product",
-    "subtitle": "Logos and monograms represent active and recent client work — same disciplines as our case studies.",
+    "badge": "Clients · performance",
+    "title": "Brands we scale with media & product",
+    "subtitle": "Site, paid media and unit economics in one loop — from e‑commerce and healthcare to EdTech and SaaS. Below: live projects with numbers from our cases.",
+    "stats": [
+      { "value": "47+", "label": "launches" },
+      { "value": "12", "label": "verticals" },
+      { "value": "3.8×", "label": "avg ROAS lift" }
+    ],
+    "featuredKicker": "Recent wins",
+    "featuredCaseIds": ["furniture-store", "edu-center", "dentistry"],
+    "featuredCta": "See the case",
+    "marqueeKicker": "Active & recent accounts",
+    "ctaCases": "All cases with numbers",
+    "ctaContact": "Discuss your project",
+    "footnote": "Names reflect real engagements; methodology and detail live in our case library.",
     "brands": [
-      { "label": "VitaMed", "abbr": "VM" },
-      { "label": "NordMebel", "abbr": "NM" },
-      { "label": "LexPro", "abbr": "LX" },
-      { "label": "SkillNova", "abbr": "SN" },
-      { "label": "Éclat Studio", "abbr": "ÉC" },
-      { "label": "BuildCraft", "abbr": "BC" },
-      { "label": "TechPoint", "abbr": "TP" },
-      { "label": "SmileLine", "abbr": "SL" },
-      { "label": "PrimeEstate", "abbr": "PE" },
-      { "label": "Pulse Gym", "abbr": "PG" },
-      { "label": "Atelier Mebel", "abbr": "AM" },
-      { "label": "AutoHub", "abbr": "AH" }
+      { "label": "VitaMed", "abbr": "VM", "niche": "Healthcare", "win": "+340% leads" },
+      { "label": "NordMebel", "abbr": "NM", "niche": "E-commerce", "win": "ROAS 8.4" },
+      { "label": "LexPro", "abbr": "LX", "niche": "Legal", "win": "+180% inquiries" },
+      { "label": "SkillNova", "abbr": "SN", "niche": "EdTech", "win": "12.4k students" },
+      { "label": "Éclat Studio", "abbr": "ÉC", "niche": "Beauty", "win": "+290% bookings" },
+      { "label": "BuildCraft", "abbr": "BC", "niche": "Construction", "win": "47 projects" },
+      { "label": "TechPoint", "abbr": "TP", "niche": "E-commerce", "win": "+520% sales" },
+      { "label": "SmileLine", "abbr": "SL", "niche": "Healthcare", "win": "380 patients/mo" },
+      { "label": "PrimeEstate", "abbr": "PE", "niche": "Real estate", "win": "$2.8M from lead" },
+      { "label": "Pulse Gym", "abbr": "PG", "niche": "Fitness", "win": "+410% memberships" },
+      { "label": "Atelier Mebel", "abbr": "AM", "niche": "Manufacturing", "win": "+670% leads" },
+      { "label": "AutoHub", "abbr": "AH", "niche": "Automotive", "win": "940 clients" }
     ]
   },
   "homeResults": {
