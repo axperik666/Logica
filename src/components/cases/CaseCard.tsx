@@ -11,6 +11,7 @@ import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/navigation";
+import { cn } from "@/lib/cn";
 
 
 
@@ -57,52 +58,46 @@ export default function CaseCard({
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const [hasError, setHasError] = useState(false);
-
-
+  const [videoReady, setVideoReady] = useState(false);
 
   const aria = `${client} — ${t("gridViewCase")}`;
-
-
+  const initial = client.trim().charAt(0).toUpperCase() || "?";
 
   return (
-
     <motion.div
-
       ref={ref}
-
       whileHover={{ y: -14 }}
-
       className="group relative min-h-[300px] overflow-hidden rounded-3xl border border-white/5 bg-zinc-950 shadow-2xl aspect-[4/5] sm:aspect-[16/10] sm:min-h-0"
-
     >
+      <div
+        className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-br from-cyan-950/80 via-zinc-900 to-violet-950/70"
+        aria-hidden
+      >
+        <span className="absolute inset-0 flex items-center justify-center text-6xl font-bold tracking-tighter text-white/[0.07] sm:text-7xl">
+          {initial}
+        </span>
+      </div>
 
       {isInView && !hasError ? (
-
         <video
-
           src={video}
-
           autoPlay
-
           muted
-
           loop
-
           playsInline
-
-          preload="none"
-
+          preload="metadata"
+          onLoadedData={() => setVideoReady(true)}
           onError={() => setHasError(true)}
-
-          className="pointer-events-none absolute inset-0 z-0 h-full w-full scale-110 object-cover transition-transform duration-700 group-hover:scale-100"
-
+          className={cn(
+            "pointer-events-none absolute inset-0 z-[1] h-full w-full scale-110 object-cover transition-all duration-700 group-hover:scale-100",
+            videoReady ? "opacity-100" : "opacity-0"
+          )}
         />
-
       ) : null}
 
 
 
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-black/80 via-black/25 to-transparent transition-all group-hover:via-black/35" />
+      <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-t from-black/80 via-black/25 to-transparent transition-all group-hover:via-black/35" />
 
 
 

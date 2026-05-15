@@ -10,21 +10,13 @@ import { Services } from "@/components/sections/Services";
 import { Results } from "@/components/sections/Results";
 import { Process } from "@/components/sections/Process";
 import { WhyUs } from "@/components/sections/WhyUs";
-import { HomeGrowthBento } from "@/components/sections/HomeGrowthBento";
-import { HomeSpotlightCase } from "@/components/sections/HomeSpotlightCase";
 import { Team } from "@/components/sections/Team";
-import { Certifications } from "@/components/sections/Certifications";
-import { Industries } from "@/components/sections/Industries";
-import CasesSection from "@/components/sections/CasesSection";
-import { Testimonials } from "@/components/sections/Testimonials";
-import { LatestInsights } from "@/components/sections/LatestInsights";
-import { ROICalculator } from "@/components/sections/ROICalculator";
-import { CTA } from "@/components/sections/CTA";
+import { HomeBelowFold } from "@/components/sections/HomeBelowFold";
 import { HomePageJsonLd } from "@/components/seo/HomePageJsonLd";
 import { absoluteLocalizedUrl, languageAlternates } from "@/lib/hreflang";
 
-/** Свежие кейсы и переводы без устаревшего статического снимка страницы. */
-export const dynamic = "force-dynamic";
+/** ISR: переводы и кейсы обновляются раз в час без force-dynamic. */
+export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -63,15 +55,7 @@ export default function HomePage() {
       <Process />
       <Team />
       <WhyUs />
-      <Certifications />
-      <Industries />
-      <HomeGrowthBento />
-      <HomeSpotlightCase />
-      <CasesSection />
-      <Testimonials limit={6} />
-      <LatestInsights />
-      <ROICalculator />
-      <CTA />
+      <HomeBelowFold />
     </>
   );
 }

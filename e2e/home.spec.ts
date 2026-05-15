@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test.describe("home", () => {
   test("loads default locale and shows hero", async ({ page }) => {
-    await page.goto("/en");
+    await page.goto("/ru");
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible({
       timeout: 30_000
     });

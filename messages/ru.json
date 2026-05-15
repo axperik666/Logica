@@ -158,7 +158,9 @@
   },
   "floatingCta": {
     "ariaLabel": "Открыть контакты и получить стратегию",
-    "label": "Стратегия"
+    "label": "Стратегия",
+    "whatsappAria": "Написать в WhatsApp",
+    "whatsappLabel": "WhatsApp"
   },
   "homeSpotlight": {
     "kicker": "Сначала доказательства",
@@ -1018,9 +1020,27 @@
     "featuredCaseIds": ["furniture-store", "edu-center", "dentistry"],
     "featuredCta": "Разбор кейса",
     "marqueeKicker": "В работе сейчас",
+    "marqueeKickerLogos": "Премиум-бренды",
+    "marqueeKickerCases": "Проекты из кейсов",
     "ctaCases": "Все кейсы с цифрами",
     "ctaContact": "Обсудить ваш проект",
     "footnote": "Названия — реальные проекты; подробности и методология — в разделе кейсов.",
+    "brandLogos": [
+      { "label": "Lacoste", "logo": "Lacoste.png", "niche": "Fashion", "win": "DTC · EU" },
+      { "label": "Ford", "logo": "Ford.png", "niche": "Automotive", "win": "Lead gen" },
+      { "label": "Ralph Lauren", "logo": "Ralph.png", "niche": "Premium retail", "win": "ROAS 5.8" },
+      { "label": "Bottega Veneta", "logo": "Bottega.png", "niche": "Luxury", "win": "+42% GMV" },
+      { "label": "Baldinini", "logo": "Baldinini.png", "niche": "Fashion", "win": "CPL −28%" },
+      { "label": "Emporio Armani", "logo": "Emporio Armani.png", "niche": "Luxury", "win": "Full funnel" }
+    ],
+    "caseBrands": [
+      { "label": "NordMebel", "abbr": "NM", "niche": "E-commerce", "win": "ROAS 8.4" },
+      { "label": "SkillNova", "abbr": "SN", "niche": "EdTech", "win": "12 400 студентов" },
+      { "label": "SmileLine", "abbr": "SL", "niche": "Медицина", "win": "380 пациентов/мес" },
+      { "label": "TechPoint", "abbr": "TP", "niche": "E-commerce", "win": "+520% продаж" },
+      { "label": "PrimeEstate", "abbr": "PE", "niche": "Недвижимость", "win": "$2.8M с лида" },
+      { "label": "AutoHub", "abbr": "AH", "niche": "Авто", "win": "940 клиентов" }
+    ],
     "brands": [
       { "label": "Lacoste", "logo": "Lacoste.png", "niche": "Fashion", "win": "DTC · EU" },
       { "label": "Ford", "logo": "Ford.png", "niche": "Automotive", "win": "Lead gen" },
@@ -1196,8 +1216,8 @@
     "title": "Официальные партнёры и сертификаты",
     "subtitle": "Программы платформ и статусы, которые мы поддерживаем — актуальная экспертиза по каналам.",
     "partners": [
-      { "key": "google", "abbr": "G", "label": "Google Partners" },
-      { "key": "meta", "abbr": "M", "label": "Meta Business Partner" },
+      { "key": "google", "abbr": "G", "label": "Google Partners", "logo": "googleads.png" },
+      { "key": "meta", "abbr": "M", "label": "Meta Business Partner", "logo": "instagram.png" },
       { "key": "tiktok", "abbr": "TT", "label": "TikTok Ads Partner" },
       { "key": "yandex", "abbr": "Я", "label": "Яндекс. Сертифицированный" },
       { "key": "vk", "abbr": "VK", "label": "VK Реклама" },

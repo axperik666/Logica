@@ -6,30 +6,7 @@ import { Award } from "lucide-react";
 import { MotionDiv, MotionSection } from "@/components/motion";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/cn";
-
-type Partner = { key: string; abbr: string; label: string };
-
-function PartnerTile({ abbr, label }: Pick<Partner, "abbr" | "label">) {
-  return (
-    <div
-      className={cn(
-        "group/tile flex h-[4.25rem] w-[8.75rem] shrink-0 flex-col items-center justify-center rounded-2xl border border-white/[0.12] bg-[rgba(5,9,24,0.72)] px-3 backdrop-blur-xl transition-all duration-500 sm:h-[4.75rem] sm:w-[10.25rem]",
-        "grayscale-[0.88] contrast-[1.06]",
-        "hover:grayscale-0 hover:border-cyan-400/45 hover:shadow-[0_0_32px_rgba(34,211,238,0.32),0_16px_48px_rgba(0,0,0,0.45)]"
-      )}
-    >
-      <span
-        aria-hidden
-        className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500/25 to-violet-500/15 text-[11px] font-bold tracking-tight text-cyan-100/90 shadow-inner ring-1 ring-white/10 transition group-hover/tile:from-cyan-400/40 group-hover/tile:text-white sm:text-xs"
-      >
-        {abbr}
-      </span>
-      <span className="mt-2 max-w-[9.5rem] text-center text-[9px] font-semibold uppercase leading-tight tracking-[0.1em] text-white/55 transition hover:text-white/90 sm:text-[10px]">
-        {label}
-      </span>
-    </div>
-  );
-}
+import { CertPartnerTile, type CertPartner } from "@/components/sections/CertPartnerTile";
 
 export function Certifications() {
   const t = useTranslations("certifications");
@@ -39,7 +16,7 @@ export function Certifications() {
   const isInView = useInView(ref, { once: true, amount: 0.06 });
 
   const raw = t.raw("partners");
-  const partners = Array.isArray(raw) ? (raw as Partner[]) : [];
+  const partners = Array.isArray(raw) ? (raw as CertPartner[]) : [];
   const rowDouble = [...partners, ...partners];
 
   return (
@@ -95,14 +72,14 @@ export function Certifications() {
             <div className="overflow-hidden py-1">
               <div className="flex w-max gap-4 sm:gap-5 home-logo-marquee-track pr-4 sm:pr-5">
                 {rowDouble.map((p, i) => (
-                  <PartnerTile key={`${p.key}-${i}`} abbr={p.abbr} label={p.label} />
+                  <CertPartnerTile key={`${p.key}-${i}`} {...p} />
                 ))}
               </div>
             </div>
           ) : (
             <div className="flex flex-wrap justify-center gap-4 py-2">
               {partners.map((p) => (
-                <PartnerTile key={p.key} abbr={p.abbr} label={p.label} />
+                <CertPartnerTile key={p.key} {...p} />
               ))}
             </div>
           )}

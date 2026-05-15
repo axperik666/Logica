@@ -143,18 +143,21 @@ export function TrustBar() {
 
   const rawBrands = t.raw("brands");
   const brands = Array.isArray(rawBrands) ? (rawBrands as Brand[]) : [];
+  const rawLogos = t.raw("brandLogos");
+  const rawCases = t.raw("caseBrands");
+  const logoBrands = Array.isArray(rawLogos) ? (rawLogos as Brand[]) : brands.filter((b) => b.logo);
+  const caseBrands = Array.isArray(rawCases) ? (rawCases as Brand[]) : brands.filter((b) => !b.logo);
+  const rowA = logoBrands.length > 0 ? logoBrands : brands.slice(0, Math.ceil(brands.length / 2));
+  const rowB =
+    caseBrands.length > 0 ? caseBrands : brands.slice(Math.ceil(brands.length / 2));
+  const rowADouble = [...rowA, ...rowA];
+  const rowBDouble = [...rowB, ...rowB];
   const rawStats = t.raw("stats");
   const stats = Array.isArray(rawStats) ? (rawStats as Stat[]) : [];
   const rawFeatured = t.raw("featuredCaseIds");
   const featuredCaseIds = Array.isArray(rawFeatured) ? (rawFeatured as string[]) : [];
   const rawPillars = t.raw("pillars");
   const pillars = Array.isArray(rawPillars) ? (rawPillars as string[]) : [];
-
-  const half = Math.ceil(brands.length / 2);
-  const rowA = brands.slice(0, half);
-  const rowB = brands.slice(half);
-  const rowADouble = [...rowA, ...rowA];
-  const rowBDouble = [...rowB, ...rowB];
 
   const [heroCaseId, ...sideCaseIds] = featuredCaseIds;
 
@@ -321,6 +324,9 @@ export function TrustBar() {
             {!reduceMotion ? (
               <>
                 <div className="relative overflow-hidden pb-2">
+                  <p className="mb-3 px-3 text-center text-[10px] font-semibold uppercase tracking-[0.22em] text-cyan-200/70 sm:text-left">
+                    {t("marqueeKickerLogos")}
+                  </p>
                   <div className="home-logo-marquee-track flex w-max gap-3 px-2 sm:gap-4">
                     {rowADouble.map((b, i) => (
                       <TrustBarLogoTile key={`a-${b.label}-${i}`} {...b} index={i % rowA.length} />
@@ -328,6 +334,9 @@ export function TrustBar() {
                   </div>
                 </div>
                 <div className="relative overflow-hidden pt-2">
+                  <p className="mb-3 px-3 text-center text-[10px] font-semibold uppercase tracking-[0.22em] text-white/40 sm:text-left">
+                    {t("marqueeKickerCases")}
+                  </p>
                   <div className="home-logo-marquee-track-reverse flex w-max gap-3 px-2 sm:gap-4">
                     {rowBDouble.map((b, i) => (
                       <TrustBarLogoTile key={`b-${b.label}-${i}`} {...b} index={i % rowB.length} />

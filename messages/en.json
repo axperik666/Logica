@@ -158,7 +158,9 @@
   },
   "floatingCta": {
     "ariaLabel": "Open contacts to get a strategy",
-    "label": "Get strategy"
+    "label": "Get strategy",
+    "whatsappAria": "Message on WhatsApp",
+    "whatsappLabel": "WhatsApp"
   },
   "homeSpotlight": {
     "kicker": "Proof-first",
@@ -1017,9 +1019,27 @@
     "featuredCaseIds": ["furniture-store", "edu-center", "dentistry"],
     "featuredCta": "See the case",
     "marqueeKicker": "Active & recent accounts",
+    "marqueeKickerLogos": "Premium brands",
+    "marqueeKickerCases": "Case-study clients",
     "ctaCases": "All cases with numbers",
     "ctaContact": "Discuss your project",
     "footnote": "Names reflect real engagements; methodology and detail live in our case library.",
+    "brandLogos": [
+      { "label": "Lacoste", "logo": "Lacoste.png", "niche": "Fashion", "win": "DTC · EU" },
+      { "label": "Ford", "logo": "Ford.png", "niche": "Automotive", "win": "Lead gen" },
+      { "label": "Ralph Lauren", "logo": "Ralph.png", "niche": "Premium retail", "win": "ROAS 5.8" },
+      { "label": "Bottega Veneta", "logo": "Bottega.png", "niche": "Luxury", "win": "+42% GMV" },
+      { "label": "Baldinini", "logo": "Baldinini.png", "niche": "Fashion", "win": "CPL −28%" },
+      { "label": "Emporio Armani", "logo": "Emporio Armani.png", "niche": "Luxury", "win": "Full funnel" }
+    ],
+    "caseBrands": [
+      { "label": "NordMebel", "abbr": "NM", "niche": "E-commerce", "win": "ROAS 8.4" },
+      { "label": "SkillNova", "abbr": "SN", "niche": "EdTech", "win": "12.4k students" },
+      { "label": "SmileLine", "abbr": "SL", "niche": "Healthcare", "win": "380 patients/mo" },
+      { "label": "TechPoint", "abbr": "TP", "niche": "E-commerce", "win": "+520% sales" },
+      { "label": "PrimeEstate", "abbr": "PE", "niche": "Real estate", "win": "$2.8M from lead" },
+      { "label": "AutoHub", "abbr": "AH", "niche": "Automotive", "win": "940 clients" }
+    ],
     "brands": [
       { "label": "Lacoste", "logo": "Lacoste.png", "niche": "Fashion", "win": "DTC · EU" },
       { "label": "Ford", "logo": "Ford.png", "niche": "Automotive", "win": "Lead gen" },
@@ -1195,8 +1215,8 @@
     "title": "Official partners & certifications",
     "subtitle": "Platform programs and credentials we maintain — so execution stays current.",
     "partners": [
-      { "key": "google", "abbr": "G", "label": "Google Partners" },
-      { "key": "meta", "abbr": "M", "label": "Meta Business Partner" },
+      { "key": "google", "abbr": "G", "label": "Google Partners", "logo": "googleads.png" },
+      { "key": "meta", "abbr": "M", "label": "Meta Business Partner", "logo": "instagram.png" },
       { "key": "tiktok", "abbr": "TT", "label": "TikTok Ads Partner" },
       { "key": "yandex", "abbr": "Y", "label": "Yandex Certified" },
       { "key": "vk", "abbr": "VK", "label": "VK Ads" },
