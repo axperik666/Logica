@@ -12,10 +12,12 @@ type Brand = { label: string; abbr: string; niche?: string; win?: string };
 type Stat = { value: string; label: string };
 
 function LogoTile({ label, abbr, niche, win }: Brand) {
+  const footer = niche || win;
+
   return (
     <div
       className={cn(
-        "group/tile relative flex h-[4.75rem] w-[9.25rem] shrink-0 flex-col items-center justify-center overflow-hidden rounded-2xl border border-white/[0.12] bg-gradient-to-b from-white/[0.09] to-[rgba(5,10,28,0.78)] px-3 shadow-[0_12px_40px_rgba(0,0,0,0.38),inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-xl transition-all duration-500 sm:h-[5.1rem] sm:w-[10.5rem]",
+        "group/tile relative flex h-[5rem] w-[9.25rem] shrink-0 flex-col items-center justify-between overflow-hidden rounded-2xl border border-white/[0.12] bg-gradient-to-b from-white/[0.09] to-[rgba(5,10,28,0.78)] px-3 py-2.5 shadow-[0_12px_40px_rgba(0,0,0,0.38),inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-xl transition-all duration-500 sm:h-[5.35rem] sm:w-[10.5rem] sm:py-3",
         "grayscale-[0.75] contrast-[1.05]",
         "before:pointer-events-none before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-br before:from-cyan-400/22 before:via-transparent before:to-violet-500/18 before:opacity-0 before:transition-opacity before:duration-500 group-hover/tile:before:opacity-100",
         "hover:grayscale-0 hover:border-cyan-400/45 hover:shadow-[0_0_40px_rgba(34,211,238,0.3),0_20px_56px_rgba(0,0,0,0.5)] motion-safe:hover:-translate-y-1"
@@ -25,24 +27,36 @@ function LogoTile({ label, abbr, niche, win }: Brand) {
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"
         aria-hidden
       />
-      {win ? (
-        <span className="absolute right-2 top-2 rounded-full border border-cyan-400/35 bg-cyan-500/15 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wide text-cyan-100 opacity-0 transition-all duration-300 group-hover/tile:opacity-100 sm:text-[10px]">
-          {win}
+      <div className="flex flex-col items-center pt-0.5">
+        <span
+          aria-hidden
+          className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500/35 to-violet-500/22 text-[11px] font-bold tracking-tight text-cyan-50 shadow-[inset_0_1px_0_rgba(255,255,255,0.15)] ring-1 ring-white/15 transition duration-500 group-hover/tile:from-cyan-400/50 group-hover/tile:to-violet-400/30 sm:h-9 sm:w-9 sm:text-xs"
+        >
+          {abbr}
         </span>
-      ) : null}
-      <span
-        aria-hidden
-        className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500/35 to-violet-500/22 text-xs font-bold tracking-tight text-cyan-50 shadow-[inset_0_1px_0_rgba(255,255,255,0.15)] ring-1 ring-white/15 transition duration-500 group-hover/tile:from-cyan-400/50 group-hover/tile:to-violet-400/30 group-hover/tile:shadow-[0_0_24px_rgba(34,211,238,0.4)]"
-      >
-        {abbr}
-      </span>
-      <span className="relative mt-1.5 max-w-[8.5rem] truncate text-center text-[10px] font-semibold uppercase tracking-[0.1em] text-white/62 transition group-hover/tile:text-white/95 sm:text-[11px]">
-        {label}
-      </span>
-      {niche ? (
-        <span className="relative mt-0.5 text-[9px] font-medium uppercase tracking-[0.14em] text-white/38 transition group-hover/tile:text-cyan-200/80 sm:text-[10px]">
-          {niche}
+        <span className="relative mt-1.5 line-clamp-2 max-w-[8.25rem] text-center text-[10px] font-semibold uppercase leading-tight tracking-[0.08em] text-white/62 transition group-hover/tile:text-white/95 sm:max-w-[9rem] sm:text-[11px]">
+          {label}
         </span>
+      </motion.div>
+
+      {footer ? (
+        <div className="relative flex min-h-[1.35rem] w-full items-center justify-center px-0.5">
+          {niche ? (
+            <span className="text-center text-[9px] font-medium uppercase leading-tight tracking-[0.12em] text-white/38 transition-opacity duration-200 group-hover/tile:opacity-0 sm:text-[10px]">
+              {niche}
+            </span>
+          ) : null}
+          {win ? (
+            <span
+              className={cn(
+                "absolute inset-x-0 text-center text-[9px] font-bold uppercase leading-tight tracking-[0.06em] text-cyan-200/95 transition-opacity duration-200 sm:text-[10px]",
+                niche ? "opacity-0 group-hover/tile:opacity-100" : "opacity-100"
+              )}
+            >
+              <span className="line-clamp-2">{win}</span>
+            </span>
+          ) : null}
+        </div>
       ) : null}
     </div>
   );
