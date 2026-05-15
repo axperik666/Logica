@@ -211,7 +211,37 @@ export default function Navbar() {
             </div>
           </div>
 
-          <div className="flex items-center justify-end">
+          <div className="flex items-center justify-end gap-2 sm:gap-3">
+            <div
+              className="hidden items-center gap-0.5 text-xs font-semibold uppercase tracking-wider text-white/45 md:flex"
+              role="group"
+              aria-label={tHeader("switchTo")}
+            >
+              {routing.locales.map((loc, idx) => {
+                const active = locale === loc;
+                return (
+                  <span key={loc} className="flex items-center">
+                    {idx > 0 ? (
+                      <span className="mx-1.5 select-none text-white/20" aria-hidden>
+                        ·
+                      </span>
+                    ) : null}
+                    <Link
+                      href={pathname}
+                      locale={loc}
+                      prefetch={false}
+                      className={cn(
+                        "min-h-9 px-1 py-2 transition sm:min-h-10",
+                        active ? "text-[#7ee8ff]" : "hover:text-white/90"
+                      )}
+                    >
+                      {LOCALE_LABELS[loc] ?? loc.toUpperCase()}
+                    </Link>
+                  </span>
+                );
+              })}
+            </div>
+
             <button
               type="button"
               onClick={() => setIsOpen((v) => !v)}
