@@ -1,81 +1,18 @@
 "use client";
 
 import { useRef } from "react";
-import { useInView, useReducedMotion } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Sparkles, Zap } from "lucide-react";
 import { MotionDiv, MotionSection } from "@/components/motion";
 import { useTranslations } from "next-intl";
 import { Link } from "@/navigation";
 import { cn } from "@/lib/cn";
+import { useCardTilt } from "@/hooks/useCardTilt";
+import { TrustBarLogoTile, type TrustBrand } from "@/components/sections/TrustBarLogoTile";
 
-type Brand = { label: string; abbr: string; niche?: string; win?: string };
+type Brand = TrustBrand;
 type Stat = { value: string; label: string };
 
-function LogoTile({ label, abbr, niche, win, index }: Brand & { index: number }) {
-  const footer = niche || win;
-  const num = String(index + 1).padStart(2, "0");
-
-  return (
-    <div className="trust-tile-wrap group/trust-tile shrink-0">
-      <div className="trust-tile-shell">
-        <div
-          className={cn(
-            "relative z-[1] flex h-[5.15rem] w-[9.5rem] flex-col items-center justify-between overflow-hidden rounded-[calc(1.15rem-1px)] px-3 py-2.5 sm:h-[5.5rem] sm:w-[10.75rem] sm:py-3",
-            "bg-[linear-gradient(165deg,rgba(14,20,42,0.95)_0%,rgba(6,10,24,0.98)_55%,rgba(4,8,18,1)_100%)]",
-            "grayscale-[0.7] contrast-[1.04] transition-[filter] duration-500 group-hover/trust-tile:grayscale-0"
-          )}
-        >
-          <div
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(34,211,238,0.14),transparent_65%)] opacity-0 transition-opacity duration-500 group-hover/trust-tile:opacity-100"
-            aria-hidden
-          />
-          <span
-            className="pointer-events-none absolute left-2.5 top-2 text-[9px] font-bold tabular-nums tracking-widest text-white/20 transition group-hover/trust-tile:text-cyan-300/55"
-            aria-hidden
-          >
-            {num}
-          </span>
-
-          <div className="relative flex flex-col items-center pt-1">
-            <span
-              aria-hidden
-              className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400/30 to-violet-500/25 text-[11px] font-bold text-white shadow-[0_0_20px_rgba(34,211,238,0.25),inset_0_1px_0_rgba(255,255,255,0.2)] ring-1 ring-white/20 transition duration-500 group-hover/trust-tile:scale-105 sm:h-9 sm:w-9 sm:text-xs"
-            >
-              {abbr}
-            </span>
-            <span className="relative mt-1.5 line-clamp-2 max-w-[8.5rem] text-center text-[10px] font-semibold uppercase leading-tight tracking-[0.07em] text-white/65 transition group-hover/trust-tile:text-white sm:text-[11px]">
-              {label}
-            </span>
-          </div>
-
-          {footer ? (
-            <div className="relative flex min-h-[1.4rem] w-full items-center justify-center px-0.5">
-              {niche ? (
-                <span className="text-center text-[9px] font-medium uppercase leading-tight tracking-[0.14em] text-white/36 transition-all duration-300 group-hover/trust-tile:translate-y-1 group-hover/trust-tile:opacity-0 sm:text-[10px]">
-                  {niche}
-                </span>
-              ) : null}
-              {win ? (
-                <span
-                  className={cn(
-                    "absolute inset-x-0 translate-y-1 text-center text-[9px] font-bold uppercase leading-tight tracking-[0.05em] text-cyan-200 transition-all duration-300 sm:text-[10px]",
-                    niche
-                      ? "opacity-0 group-hover/trust-tile:translate-y-0 group-hover/trust-tile:opacity-100"
-                      : "opacity-90"
-                  )}
-                >
-                  <span className="inline-block rounded-full border border-cyan-400/30 bg-cyan-500/10 px-2 py-0.5 line-clamp-2">
-                    {win}
-                  </span>
-                </span>
-              ) : null}
-            </div>
-          ) : null}
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function FeaturedCard({
   caseId,
@@ -89,6 +26,10 @@ function FeaturedCard({
   const t = useTranslations("trustBar");
   const tCases = useTranslations("cases");
   const base = `items.${caseId}`;
+  const { ref, rotateX, rotateY, onPointerMove, onPointerLeave, disabled } = useCardTilt({
+    maxDeg: hero ? 5 : 6,
+    stiffness: 200
+  });
 
   return (
     <MotionDiv
@@ -100,13 +41,24 @@ function FeaturedCard({
           transition: { duration: 0.52, delay: 0.1 + index * 0.08 }
         }
       }}
-      className={cn(
-        "group/feat relative flex h-full flex-col overflow-hidden rounded-[1.35rem] border border-white/[0.1] p-5 backdrop-blur-xl transition-all duration-500 sm:p-6",
+      className={cn("h-full [perspective:1200px]", hero && "lg:min-h-[18.5rem]")}
+    >
+      <motion.div
+        ref={ref}
+        onPointerMove={onPointerMove}
+        onPointerLeave={onPointerLeave}
+        style={{
+          rotateX: disabled ? 0 : rotateX,
+          rotateY: disabled ? 0 : rotateY,
+          transformStyle: "preserve-3d",
+          height: "100%"
+        }}
+        className={cn(
+          "group/feat relative flex h-full flex-col overflow-hidden rounded-[1.35rem] border border-white/[0.1] p-5 backdrop-blur-xl transition-all duration-500 sm:p-6",
         "bg-[linear-gradient(155deg,rgba(255,255,255,0.09)_0%,rgba(10,14,32,0.88)_38%,rgba(4,8,20,0.96)_100%)]",
         "shadow-[0_24px_64px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.1)]",
         "hover:border-cyan-400/40 hover:shadow-[0_28px_72px_rgba(0,0,0,0.5),0_0_56px_rgba(34,211,238,0.14)]",
-        "motion-safe:hover:-translate-y-1",
-        hero && "lg:min-h-[18.5rem]"
+        "motion-safe:hover:-translate-y-1"
       )}
     >
       <div
@@ -177,6 +129,7 @@ function FeaturedCard({
           <ArrowRight className="h-4 w-4 transition-transform group-hover/feat:translate-x-0.5" />
         )}
       </Link>
+      </motion.div>
     </MotionDiv>
   );
 }
@@ -370,14 +323,14 @@ export function TrustBar() {
                 <div className="relative overflow-hidden pb-2">
                   <div className="home-logo-marquee-track flex w-max gap-3 px-2 sm:gap-4">
                     {rowADouble.map((b, i) => (
-                      <LogoTile key={`a-${b.label}-${i}`} {...b} index={i % rowA.length} />
+                      <TrustBarLogoTile key={`a-${b.label}-${i}`} {...b} index={i % rowA.length} />
                     ))}
                   </div>
                 </div>
                 <div className="relative overflow-hidden pt-2">
                   <div className="home-logo-marquee-track-reverse flex w-max gap-3 px-2 sm:gap-4">
                     {rowBDouble.map((b, i) => (
-                      <LogoTile key={`b-${b.label}-${i}`} {...b} index={i % rowB.length} />
+                      <TrustBarLogoTile key={`b-${b.label}-${i}`} {...b} index={i % rowB.length} />
                     ))}
                   </div>
                 </div>
@@ -385,7 +338,7 @@ export function TrustBar() {
             ) : (
               <div className="relative flex flex-wrap justify-center gap-3 px-4 sm:gap-4">
                 {brands.map((b, i) => (
-                  <LogoTile key={b.label} {...b} index={i} />
+                  <TrustBarLogoTile key={b.label} {...b} index={i} />
                 ))}
               </div>
             )}
