@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { useInView, useReducedMotion } from "framer-motion";
-import { ArrowRight, Sparkles, TrendingUp } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Sparkles, Zap } from "lucide-react";
 import { MotionDiv, MotionSection } from "@/components/motion";
 import { useTranslations } from "next-intl";
 import { Link } from "@/navigation";
@@ -11,58 +11,81 @@ import { cn } from "@/lib/cn";
 type Brand = { label: string; abbr: string; niche?: string; win?: string };
 type Stat = { value: string; label: string };
 
-function LogoTile({ label, abbr, niche, win }: Brand) {
+function LogoTile({ label, abbr, niche, win, index }: Brand & { index: number }) {
   const footer = niche || win;
+  const num = String(index + 1).padStart(2, "0");
 
   return (
-    <div
-      className={cn(
-        "group/tile relative flex h-[5rem] w-[9.25rem] shrink-0 flex-col items-center justify-between overflow-hidden rounded-2xl border border-white/[0.12] bg-gradient-to-b from-white/[0.09] to-[rgba(5,10,28,0.78)] px-3 py-2.5 shadow-[0_12px_40px_rgba(0,0,0,0.38),inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-xl transition-all duration-500 sm:h-[5.35rem] sm:w-[10.5rem] sm:py-3",
-        "grayscale-[0.75] contrast-[1.05]",
-        "before:pointer-events-none before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-br before:from-cyan-400/22 before:via-transparent before:to-violet-500/18 before:opacity-0 before:transition-opacity before:duration-500 group-hover/tile:before:opacity-100",
-        "hover:grayscale-0 hover:border-cyan-400/45 hover:shadow-[0_0_40px_rgba(34,211,238,0.3),0_20px_56px_rgba(0,0,0,0.5)] motion-safe:hover:-translate-y-1"
-      )}
-    >
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"
-        aria-hidden
-      />
-      <div className="flex flex-col items-center pt-0.5">
-        <span
-          aria-hidden
-          className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500/35 to-violet-500/22 text-[11px] font-bold tracking-tight text-cyan-50 shadow-[inset_0_1px_0_rgba(255,255,255,0.15)] ring-1 ring-white/15 transition duration-500 group-hover/tile:from-cyan-400/50 group-hover/tile:to-violet-400/30 sm:h-9 sm:w-9 sm:text-xs"
+    <div className="trust-tile-wrap group/trust-tile shrink-0">
+      <div className="trust-tile-shell">
+        <div
+          className={cn(
+            "relative z-[1] flex h-[5.15rem] w-[9.5rem] flex-col items-center justify-between overflow-hidden rounded-[calc(1.15rem-1px)] px-3 py-2.5 sm:h-[5.5rem] sm:w-[10.75rem] sm:py-3",
+            "bg-[linear-gradient(165deg,rgba(14,20,42,0.95)_0%,rgba(6,10,24,0.98)_55%,rgba(4,8,18,1)_100%)]",
+            "grayscale-[0.7] contrast-[1.04] transition-[filter] duration-500 group-hover/trust-tile:grayscale-0"
+          )}
         >
-          {abbr}
-        </span>
-        <span className="relative mt-1.5 line-clamp-2 max-w-[8.25rem] text-center text-[10px] font-semibold uppercase leading-tight tracking-[0.08em] text-white/62 transition group-hover/tile:text-white/95 sm:max-w-[9rem] sm:text-[11px]">
-          {label}
-        </span>
-      </motion.div>
+          <div
+            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(34,211,238,0.14),transparent_65%)] opacity-0 transition-opacity duration-500 group-hover/trust-tile:opacity-100"
+            aria-hidden
+          />
+          <span
+            className="pointer-events-none absolute left-2.5 top-2 text-[9px] font-bold tabular-nums tracking-widest text-white/20 transition group-hover/trust-tile:text-cyan-300/55"
+            aria-hidden
+          >
+            {num}
+          </span>
 
-      {footer ? (
-        <div className="relative flex min-h-[1.35rem] w-full items-center justify-center px-0.5">
-          {niche ? (
-            <span className="text-center text-[9px] font-medium uppercase leading-tight tracking-[0.12em] text-white/38 transition-opacity duration-200 group-hover/tile:opacity-0 sm:text-[10px]">
-              {niche}
-            </span>
-          ) : null}
-          {win ? (
+          <div className="relative flex flex-col items-center pt-1">
             <span
-              className={cn(
-                "absolute inset-x-0 text-center text-[9px] font-bold uppercase leading-tight tracking-[0.06em] text-cyan-200/95 transition-opacity duration-200 sm:text-[10px]",
-                niche ? "opacity-0 group-hover/tile:opacity-100" : "opacity-100"
-              )}
+              aria-hidden
+              className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400/30 to-violet-500/25 text-[11px] font-bold text-white shadow-[0_0_20px_rgba(34,211,238,0.25),inset_0_1px_0_rgba(255,255,255,0.2)] ring-1 ring-white/20 transition duration-500 group-hover/trust-tile:scale-105 sm:h-9 sm:w-9 sm:text-xs"
             >
-              <span className="line-clamp-2">{win}</span>
+              {abbr}
             </span>
+            <span className="relative mt-1.5 line-clamp-2 max-w-[8.5rem] text-center text-[10px] font-semibold uppercase leading-tight tracking-[0.07em] text-white/65 transition group-hover/trust-tile:text-white sm:text-[11px]">
+              {label}
+            </span>
+          </div>
+
+          {footer ? (
+            <div className="relative flex min-h-[1.4rem] w-full items-center justify-center px-0.5">
+              {niche ? (
+                <span className="text-center text-[9px] font-medium uppercase leading-tight tracking-[0.14em] text-white/36 transition-all duration-300 group-hover/trust-tile:translate-y-1 group-hover/trust-tile:opacity-0 sm:text-[10px]">
+                  {niche}
+                </span>
+              ) : null}
+              {win ? (
+                <span
+                  className={cn(
+                    "absolute inset-x-0 translate-y-1 text-center text-[9px] font-bold uppercase leading-tight tracking-[0.05em] text-cyan-200 transition-all duration-300 sm:text-[10px]",
+                    niche
+                      ? "opacity-0 group-hover/trust-tile:translate-y-0 group-hover/trust-tile:opacity-100"
+                      : "opacity-90"
+                  )}
+                >
+                  <span className="inline-block rounded-full border border-cyan-400/30 bg-cyan-500/10 px-2 py-0.5 line-clamp-2">
+                    {win}
+                  </span>
+                </span>
+              ) : null}
+            </div>
           ) : null}
         </div>
-      ) : null}
+      </div>
     </div>
   );
 }
 
-function FeaturedCard({ caseId, index }: { caseId: string; index: number }) {
+function FeaturedCard({
+  caseId,
+  index,
+  hero = false
+}: {
+  caseId: string;
+  index: number;
+  hero?: boolean;
+}) {
   const t = useTranslations("trustBar");
   const tCases = useTranslations("cases");
   const base = `items.${caseId}`;
@@ -70,37 +93,89 @@ function FeaturedCard({ caseId, index }: { caseId: string; index: number }) {
   return (
     <MotionDiv
       variants={{
-        hidden: { opacity: 0, y: 16 },
+        hidden: { opacity: 0, y: hero ? 20 : 14 },
         show: {
           opacity: 1,
           y: 0,
-          transition: { duration: 0.48, delay: 0.08 + index * 0.07 }
+          transition: { duration: 0.52, delay: 0.1 + index * 0.08 }
         }
       }}
-      className="group/feat relative flex flex-col overflow-hidden rounded-2xl border border-white/[0.11] bg-gradient-to-br from-white/[0.07] via-[rgba(8,12,28,0.85)] to-[rgba(4,8,20,0.92)] p-5 shadow-[0_20px_56px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md transition-all duration-400 hover:border-cyan-400/35 hover:shadow-[0_24px_64px_rgba(0,0,0,0.45),0_0_48px_rgba(34,211,238,0.12)] motion-safe:hover:-translate-y-0.5 sm:p-6"
+      className={cn(
+        "group/feat relative flex h-full flex-col overflow-hidden rounded-[1.35rem] border border-white/[0.1] p-5 backdrop-blur-xl transition-all duration-500 sm:p-6",
+        "bg-[linear-gradient(155deg,rgba(255,255,255,0.09)_0%,rgba(10,14,32,0.88)_38%,rgba(4,8,20,0.96)_100%)]",
+        "shadow-[0_24px_64px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.1)]",
+        "hover:border-cyan-400/40 hover:shadow-[0_28px_72px_rgba(0,0,0,0.5),0_0_56px_rgba(34,211,238,0.14)]",
+        "motion-safe:hover:-translate-y-1",
+        hero && "lg:min-h-[18.5rem]"
+      )}
     >
       <div
-        className="pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full bg-cyan-400/10 blur-2xl transition group-hover/feat:bg-cyan-400/20"
+        className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-violet-500/15 blur-3xl transition duration-700 group-hover/feat:bg-violet-500/25"
         aria-hidden
       />
+      <div
+        className="pointer-events-none absolute -bottom-10 -left-10 h-36 w-36 rounded-full bg-cyan-400/12 blur-3xl"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/50 to-transparent"
+        aria-hidden
+      />
+
       <div className="relative flex items-start justify-between gap-3">
-        <span className="rounded-full border border-white/12 bg-white/[0.06] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/55">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-white/12 bg-black/25 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/55">
+          <Zap className="h-3 w-3 text-cyan-300/90" aria-hidden />
           {tCases(`${base}.niche`)}
         </span>
-        <span className="shrink-0 rounded-xl bg-gradient-to-br from-cyan-500/25 to-violet-500/20 px-2.5 py-1 text-sm font-bold tabular-nums text-cyan-50 ring-1 ring-cyan-400/25">
-          {tCases(`${base}.result`)}
-        </span>
+        {hero ? (
+          <span className="rounded-full border border-cyan-400/25 bg-cyan-500/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-cyan-100/90">
+            {t("featuredHeroTag")}
+          </span>
+        ) : null}
       </div>
-      <h3 className="relative mt-4 text-lg font-semibold tracking-tight text-white sm:text-xl">
+
+      <p
+        className={cn(
+          "relative mt-5 font-bold tabular-nums tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-cyan-100 to-cyan-300/90",
+          hero ? "text-4xl sm:text-5xl lg:text-[3.25rem] lg:leading-none" : "text-2xl sm:text-3xl"
+        )}
+      >
+        {tCases(`${base}.result`)}
+      </p>
+      <p className="relative mt-1 text-[11px] font-medium uppercase tracking-[0.16em] text-white/40">
+        {tCases(`${base}.period`)}
+      </p>
+
+      <h3
+        className={cn(
+          "relative font-semibold tracking-tight text-white",
+          hero ? "mt-6 text-xl sm:text-2xl" : "mt-4 text-lg sm:text-xl"
+        )}
+      >
         {tCases(`${base}.client`)}
       </h3>
-      <p className="relative mt-2 line-clamp-2 text-sm leading-relaxed text-white/62">{tCases(`${base}.summary`)}</p>
+      <p
+        className={cn(
+          "relative mt-2 text-sm leading-relaxed text-white/62",
+          hero ? "line-clamp-3 sm:text-base" : "line-clamp-2"
+        )}
+      >
+        {tCases(`${base}.summary`)}
+      </p>
+
       <Link
         href="/kejsy"
-        className="relative mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-cyan-200 transition hover:text-white"
+        className={cn(
+          "relative mt-auto inline-flex items-center gap-2 text-sm font-semibold text-cyan-200 transition hover:text-white",
+          hero ? "pt-6" : "pt-5"
+        )}
       >
         {t("featuredCta")}
-        <ArrowRight className="h-4 w-4 transition-transform group-hover/feat:translate-x-0.5" aria-hidden />
+        {hero ? (
+          <ArrowUpRight className="h-4 w-4 transition-transform group-hover/feat:translate-x-0.5 group-hover/feat:-translate-y-0.5" />
+        ) : (
+          <ArrowRight className="h-4 w-4 transition-transform group-hover/feat:translate-x-0.5" />
+        )}
       </Link>
     </MotionDiv>
   );
@@ -119,6 +194,8 @@ export function TrustBar() {
   const stats = Array.isArray(rawStats) ? (rawStats as Stat[]) : [];
   const rawFeatured = t.raw("featuredCaseIds");
   const featuredCaseIds = Array.isArray(rawFeatured) ? (rawFeatured as string[]) : [];
+  const rawPillars = t.raw("pillars");
+  const pillars = Array.isArray(rawPillars) ? (rawPillars as string[]) : [];
 
   const half = Math.ceil(brands.length / 2);
   const rowA = brands.slice(0, half);
@@ -126,30 +203,32 @@ export function TrustBar() {
   const rowADouble = [...rowA, ...rowA];
   const rowBDouble = [...rowB, ...rowB];
 
+  const [heroCaseId, ...sideCaseIds] = featuredCaseIds;
+
   return (
     <MotionSection
       ref={ref}
       id="trust-bar"
-      className="full-bleed relative overflow-x-clip border-y border-white/[0.08] bg-[linear-gradient(180deg,rgba(4,8,22,0.96)_0%,rgba(3,5,14,0.98)_50%,rgba(5,9,22,0.95)_100%)] py-14 sm:py-20"
+      className="full-bleed relative overflow-x-clip border-y border-white/[0.08] bg-[#03050e] py-16 sm:py-24"
       initial="hidden"
       animate={isInView ? "show" : "hidden"}
       variants={{
         hidden: {},
-        show: { transition: { staggerChildren: 0.06, delayChildren: 0.02 } }
+        show: { transition: { staggerChildren: 0.05, delayChildren: 0.02 } }
       }}
     >
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_85%_55%_at_50%_-25%,rgba(0,200,255,0.16),transparent_58%),radial-gradient(ellipse_50%_45%_at_100%_60%,rgba(139,92,246,0.1),transparent_55%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_60%_at_15%_-10%,rgba(0,200,255,0.18),transparent_55%),radial-gradient(ellipse_70%_50%_at_95%_20%,rgba(139,92,246,0.14),transparent_50%),radial-gradient(ellipse_60%_40%_at_50%_100%,rgba(34,211,238,0.08),transparent_55%)]"
         aria-hidden
       />
-      <div className="pointer-events-none absolute inset-0 opacity-[0.4] mix-blend-screen" aria-hidden>
-        <div className="premium-aurora !relative !inset-auto min-h-[140%] -translate-y-[18%] opacity-75 md:opacity-90" />
+      <div className="pointer-events-none absolute inset-0 opacity-[0.45] mix-blend-screen" aria-hidden>
+        <div className="premium-aurora !relative !inset-auto min-h-[150%] -translate-y-[20%] opacity-80" />
       </div>
       <div
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.022)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.022)_1px,transparent_1px)] bg-[size:52px_52px] [mask-image:radial-gradient(ellipse_80%_70%_at_50%_35%,black,transparent)]"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:radial-gradient(ellipse_85%_75%_at_50%_30%,black,transparent)]"
         aria-hidden
       />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/25 to-transparent" aria-hidden />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent" aria-hidden />
 
       <div className="site-container relative">
         <div className="sr-only">
@@ -159,33 +238,40 @@ export function TrustBar() {
 
         <MotionDiv
           variants={{
-            hidden: { opacity: 0, y: 10 },
-            show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+            hidden: { opacity: 0, y: 12 },
+            show: { opacity: 1, y: 0, transition: { duration: 0.55 } }
           }}
-          className="mx-auto max-w-3xl text-center"
+          className="grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end lg:gap-12"
         >
-          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/35 bg-gradient-to-r from-cyan-500/[0.15] via-white/[0.04] to-violet-500/[0.1] px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-cyan-100/95 shadow-[0_0_28px_rgba(34,211,238,0.14),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-md">
-            <Sparkles className="h-3.5 w-3.5 text-cyan-200" aria-hidden />
-            {t("badge")}
+          <div className="text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/35 bg-gradient-to-r from-cyan-500/[0.18] via-white/[0.05] to-violet-500/[0.12] px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-cyan-50/95 shadow-[0_0_32px_rgba(34,211,238,0.16),inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur-md">
+              <Sparkles className="h-3.5 w-3.5 text-cyan-200" aria-hidden />
+              {t("badge")}
+            </div>
+            <h2 className="mt-5 text-balance text-2xl font-semibold tracking-tight text-white sm:mt-6 sm:text-3xl lg:text-[2.35rem] lg:leading-[1.12]">
+              <span className="block text-white/92">{t("titlePrefix")}</span>
+              <span className="brand-glow mt-1 block bg-gradient-to-r from-cyan-200 via-white to-violet-200 bg-clip-text text-transparent">
+                {t("titleHighlight")}
+              </span>
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-pretty text-sm leading-relaxed text-white/65 sm:text-base lg:mx-0">
+              {t("subtitle")}
+            </p>
           </div>
-          <h2 className="brand-glow mt-5 text-balance text-xl font-semibold tracking-tight text-white sm:mt-6 sm:text-2xl md:text-[1.75rem] md:leading-tight lg:text-3xl">
-            {t("title")}
-          </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-pretty text-sm leading-relaxed text-white/70 sm:mt-4 sm:text-base">
-            {t("subtitle")}
-          </p>
 
           {stats.length > 0 ? (
-            <ul className="mt-8 flex flex-wrap items-stretch justify-center gap-3 sm:gap-4">
+            <ul className="grid grid-cols-3 gap-2 sm:gap-3 lg:gap-3">
               {stats.map((s, i) => (
                 <li
                   key={`${s.label}-${i}`}
-                  className="min-w-[7.5rem] flex-1 rounded-2xl border border-white/[0.1] bg-gradient-to-b from-white/[0.08] to-white/[0.02] px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-sm sm:min-w-[8.5rem] sm:px-5 sm:py-3.5"
+                  className="relative overflow-hidden rounded-2xl border border-white/[0.1] bg-[linear-gradient(160deg,rgba(255,255,255,0.08)_0%,rgba(255,255,255,0.02)_100%)] px-3 py-3.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-md sm:px-4 sm:py-4"
                 >
-                  <p className="text-2xl font-bold tabular-nums tracking-tight text-white sm:text-[1.65rem]">
-                    {s.value}
-                  </p>
-                  <p className="mt-0.5 text-[11px] font-medium uppercase tracking-[0.12em] text-white/50 sm:text-xs">
+                  <div
+                    className="pointer-events-none absolute inset-y-2 left-0 w-0.5 rounded-full bg-gradient-to-b from-cyan-300/80 to-violet-400/60"
+                    aria-hidden
+                  />
+                  <p className="pl-2 text-xl font-bold tabular-nums tracking-tight text-white sm:text-2xl">{s.value}</p>
+                  <p className="pl-2 mt-1 text-[9px] font-semibold uppercase leading-snug tracking-[0.1em] text-white/48 sm:text-[10px]">
                     {s.label}
                   </p>
                 </li>
@@ -194,23 +280,56 @@ export function TrustBar() {
           ) : null}
         </MotionDiv>
 
+        {pillars.length > 0 ? (
+          <MotionDiv
+            variants={{ hidden: { opacity: 0 }, show: { opacity: 1, transition: { duration: 0.4, delay: 0.08 } } }}
+            className="mt-8 flex flex-wrap items-center justify-center gap-2 lg:mt-10 lg:justify-start"
+          >
+            {pillars.map((line) => (
+              <span
+                key={line}
+                className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-[11px] font-medium text-white/72 backdrop-blur-sm sm:text-xs"
+              >
+                {line}
+              </span>
+            ))}
+          </MotionDiv>
+        ) : null}
+
         {featuredCaseIds.length > 0 ? (
           <MotionDiv
             variants={{
               hidden: { opacity: 0 },
-              show: { opacity: 1, transition: { duration: 0.45, delay: 0.1 } }
+              show: { opacity: 1, transition: { duration: 0.45, delay: 0.12 } }
             }}
-            className="mt-12 sm:mt-14"
+            className="mt-12 sm:mt-16"
           >
-            <div className="mb-5 flex items-center justify-center gap-2 sm:mb-6">
-              <TrendingUp className="h-4 w-4 text-cyan-300/90" aria-hidden />
-              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-cyan-100/80">
-                {t("featuredKicker")}
-              </p>
+            <div className="mb-6 flex flex-col gap-2 sm:mb-8 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-cyan-200/85">
+                  {t("featuredKicker")}
+                </p>
+                <p className="mt-1 max-w-md text-sm text-white/50">{t("featuredLead")}</p>
+              </div>
+              <Link
+                href="/kejsy"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-white/70 transition hover:text-cyan-200"
+              >
+                {t("featuredViewAll")}
+                <ArrowUpRight className="h-4 w-4" aria-hidden />
+              </Link>
             </div>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
-              {featuredCaseIds.map((id, i) => (
-                <FeaturedCard key={id} caseId={id} index={i} />
+
+            <div className="grid gap-4 lg:grid-cols-12 lg:grid-rows-2 lg:gap-5">
+              {heroCaseId ? (
+                <div className="lg:col-span-7 lg:row-span-2">
+                  <FeaturedCard caseId={heroCaseId} index={0} hero />
+                </div>
+              ) : null}
+              {sideCaseIds.map((id, i) => (
+                <div key={id} className="lg:col-span-5">
+                  <FeaturedCard caseId={id} index={i + 1} />
+                </div>
               ))}
             </div>
           </MotionDiv>
@@ -219,45 +338,61 @@ export function TrustBar() {
         <MotionDiv
           variants={{
             hidden: { opacity: 0 },
-            show: { opacity: 1, transition: { duration: 0.55, delay: 0.14 } }
+            show: { opacity: 1, transition: { duration: 0.55, delay: 0.16 } }
           }}
-          className="mt-12 sm:mt-14"
+          className="mt-14 sm:mt-16"
         >
-          <p className="mb-5 text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45 sm:mb-6">
-            {t("marqueeKicker")}
-          </p>
+          <div className="mb-6 flex flex-col items-center justify-between gap-3 sm:flex-row sm:items-center">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-white/45">
+              {t("marqueeKicker")}
+            </p>
+            <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-100/90">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/70 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+              </span>
+              {t("marqueeLive")}
+            </span>
+          </div>
+
           <div
             className={cn(
-              "group-trust-marquee relative mx-auto max-w-[100vw] overflow-hidden rounded-[1.65rem] border border-white/[0.1] bg-gradient-to-b from-white/[0.06] to-transparent px-4 py-6 shadow-[0_24px_72px_rgba(0,0,0,0.42),inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md sm:rounded-[1.85rem] sm:px-6 sm:py-8",
-              !reduceMotion && "[mask-image:linear-gradient(90deg,transparent,black_6%,black_94%,transparent)]"
+              "trust-marquee-stage group-trust-marquee relative overflow-hidden rounded-[1.75rem] border border-white/[0.09] bg-[linear-gradient(180deg,rgba(255,255,255,0.04)_0%,rgba(255,255,255,0.01)_100%)] py-7 shadow-[0_28px_80px_rgba(0,0,0,0.48),inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-lg sm:py-9",
+              !reduceMotion && "[mask-image:linear-gradient(90deg,transparent,black_5%,black_95%,transparent)]"
             )}
           >
+            <div
+              className="pointer-events-none absolute inset-x-8 top-0 h-24 bg-[radial-gradient(ellipse_at_center,rgba(34,211,238,0.12),transparent_70%)]"
+              aria-hidden
+            />
             {!reduceMotion ? (
               <>
-                <div className="overflow-hidden pb-1">
-                  <div className="home-logo-marquee-track flex w-max gap-3 sm:gap-4">
+                <div className="relative overflow-hidden pb-2">
+                  <div className="home-logo-marquee-track flex w-max gap-3 px-2 sm:gap-4">
                     {rowADouble.map((b, i) => (
-                      <LogoTile key={`a-${b.label}-${i}`} {...b} />
+                      <LogoTile key={`a-${b.label}-${i}`} {...b} index={i % rowA.length} />
                     ))}
                   </div>
                 </div>
-                <div className="overflow-hidden pt-2">
-                  <div className="home-logo-marquee-track-reverse flex w-max gap-3 sm:gap-4">
+                <div className="relative overflow-hidden pt-2">
+                  <div className="home-logo-marquee-track-reverse flex w-max gap-3 px-2 sm:gap-4">
                     {rowBDouble.map((b, i) => (
-                      <LogoTile key={`b-${b.label}-${i}`} {...b} />
+                      <LogoTile key={`b-${b.label}-${i}`} {...b} index={i % rowB.length} />
                     ))}
                   </div>
                 </div>
               </>
             ) : (
-              <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
-                {brands.map((b) => (
-                  <LogoTile key={b.label} {...b} />
+              <div className="relative flex flex-wrap justify-center gap-3 px-4 sm:gap-4">
+                {brands.map((b, i) => (
+                  <LogoTile key={b.label} {...b} index={i} />
                 ))}
               </div>
             )}
           </div>
-          <p className="mx-auto mt-4 max-w-xl text-center text-xs leading-relaxed text-white/42">{t("footnote")}</p>
+          <p className="mx-auto mt-5 max-w-xl text-center text-xs leading-relaxed text-white/40 lg:text-left">
+            {t("footnote")}
+          </p>
         </MotionDiv>
 
         <MotionDiv
@@ -265,17 +400,17 @@ export function TrustBar() {
             hidden: { opacity: 0, y: 8 },
             show: { opacity: 1, y: 0, transition: { duration: 0.45, delay: 0.2 } }
           }}
-          className="mt-10 flex flex-col items-center justify-center gap-3 sm:mt-12 sm:flex-row sm:gap-4"
+          className="mt-12 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center sm:justify-center lg:justify-start"
         >
           <Link
             href="/kejsy"
-            className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/[0.06] px-8 text-sm font-semibold text-white transition hover:border-white/35 hover:bg-white/[0.1] sm:w-auto"
+            className="inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-2xl border border-white/18 bg-white/[0.04] px-8 text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/[0.08] sm:flex-none sm:min-w-[12rem]"
           >
             {t("ctaCases")}
           </Link>
           <Link
             href="/kontakty"
-            className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-cyan-400 to-cyan-300 px-8 text-sm font-semibold text-[#041018] shadow-[0_0_32px_rgba(34,211,238,0.35)] transition hover:brightness-105 motion-safe:hover:scale-[1.02] sm:w-auto"
+            className="inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-cyan-400 via-cyan-300 to-teal-300 px-8 text-sm font-semibold text-[#041018] shadow-[0_0_40px_rgba(34,211,238,0.38)] transition hover:brightness-105 motion-safe:hover:scale-[1.02] sm:flex-none sm:min-w-[14rem]"
           >
             {t("ctaContact")}
             <ArrowRight className="h-4 w-4" aria-hidden />

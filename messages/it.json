@@ -1001,7 +1001,14 @@
   "trustBar": {
     "badge": "Clienti · performance",
     "title": "Brand con cui scaliamo media e prodotto",
-    "subtitle": "Sito, paid media ed economia in un unico flusso — da e‑commerce e sanità a EdTech e SaaS. Sotto: progetti reali con numeri dai case study.",
+    "titlePrefix": "Brand con cui",
+    "titleHighlight": "scaliamo media e prodotto",
+    "subtitle": "Sito, paid media ed economia in un unico flusso — come le migliori agency US e Asia: test rapidi, numeri chiari, un team su prodotto e media.",
+    "pillars": ["Sito × ads × analytics", "12+ verticali", "Report per le decisioni"],
+    "featuredLead": "Un win flagship, EdTech e sanità — stesse discipline dei case completi.",
+    "featuredViewAll": "Tutti i case",
+    "featuredHeroTag": "Flagship",
+    "marqueeLive": "Live",
     "stats": [
       { "value": "47+", "label": "lanci" },
       { "value": "12", "label": "verticali" },

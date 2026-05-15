@@ -700,6 +700,118 @@ header.site-header.glass-nav:hover::after {
   }
 }
 
+/* Trust bar: agency-style tiles & marquee */
+@property --trust-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes trust-border-spin {
+  to {
+    --trust-angle: 360deg;
+  }
+}
+
+@keyframes trust-beam-sweep {
+  0% {
+    transform: translateX(-120%) skewX(-12deg);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.55;
+  }
+
+  85% {
+    opacity: 0.35;
+  }
+
+  100% {
+    transform: translateX(220%) skewX(-12deg);
+    opacity: 0;
+  }
+}
+
+.trust-tile-shell {
+  position: relative;
+  border-radius: 1.15rem;
+  padding: 1px;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.03) 42%,
+    rgba(34, 211, 238, 0.12) 100%
+  );
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s ease;
+}
+
+.trust-tile-shell::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: 0;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--trust-angle),
+    rgba(34, 211, 238, 0.85),
+    rgba(167, 139, 250, 0.75),
+    rgba(34, 211, 238, 0.2),
+    rgba(34, 211, 238, 0.85)
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.trust-tile-wrap:hover .trust-tile-shell::before,
+.trust-tile-wrap:focus-within .trust-tile-shell::before {
+  opacity: 1;
+  animation: trust-border-spin 3.8s linear infinite;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .trust-tile-wrap:hover .trust-tile-shell {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow:
+      0 22px 48px rgba(0, 0, 0, 0.45),
+      0 0 40px rgba(34, 211, 238, 0.18);
+  }
+}
+
+.trust-marquee-stage {
+  position: relative;
+  isolation: isolate;
+}
+
+.trust-marquee-stage::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    105deg,
+    transparent 42%,
+    rgba(255, 255, 255, 0.07) 50%,
+    transparent 58%
+  );
+  animation: trust-beam-sweep 7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trust-tile-shell::before,
+  .trust-marquee-stage::after {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+
+  .trust-tile-wrap:hover .trust-tile-shell {
+    transform: none;
+  }
+}
+
 /* Премиум-слой: мягкое «сияние» (секции + hero) */
 .premium-aurora {
   pointer-events: none;

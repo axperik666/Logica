@@ -1000,7 +1000,14 @@
   "trustBar": {
     "badge": "Clients · performance",
     "title": "Brands we scale with media & product",
-    "subtitle": "Site, paid media and unit economics in one loop — from e‑commerce and healthcare to EdTech and SaaS. Below: live projects with numbers from our cases.",
+    "titlePrefix": "Brands we",
+    "titleHighlight": "scale with media & product",
+    "subtitle": "Site, paid media and unit economics in one loop — the way leading US & Asia performance shops work: fast tests, clear numbers, one team on product and media.",
+    "pillars": ["Site × ads × analytics", "12+ verticals", "Decision-ready reporting"],
+    "featuredLead": "A flagship win plus EdTech and healthcare — same playbooks as full case studies.",
+    "featuredViewAll": "All cases",
+    "featuredHeroTag": "Flagship",
+    "marqueeLive": "Live",
     "stats": [
       { "value": "47+", "label": "launches" },
       { "value": "12", "label": "verticals" },
