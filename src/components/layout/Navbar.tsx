@@ -213,7 +213,7 @@ export default function Navbar() {
 
           <div className="flex items-center justify-end gap-2 sm:gap-3">
             <div
-              className="hidden items-center gap-0.5 text-xs font-semibold uppercase tracking-wider text-white/45 md:flex"
+              className="relative z-[1] hidden shrink-0 items-center gap-0.5 text-[13px] font-semibold uppercase tracking-wider md:flex"
               role="group"
               aria-label={tHeader("switchTo")}
             >
@@ -222,7 +222,7 @@ export default function Navbar() {
                 return (
                   <span key={loc} className="flex items-center">
                     {idx > 0 ? (
-                      <span className="mx-1.5 select-none text-white/20" aria-hidden>
+                      <span className="mx-1.5 select-none text-white/40" aria-hidden>
                         ·
                       </span>
                     ) : null}
@@ -231,8 +231,10 @@ export default function Navbar() {
                       locale={loc}
                       prefetch={false}
                       className={cn(
-                        "min-h-9 px-1 py-2 transition sm:min-h-10",
-                        active ? "text-[#7ee8ff]" : "hover:text-white/90"
+                        "min-h-9 px-1.5 py-2 transition sm:min-h-10",
+                        active
+                          ? "font-bold text-[#7ee8ff]"
+                          : "text-white/85 hover:text-white"
                       )}
                     >
                       {LOCALE_LABELS[loc] ?? loc.toUpperCase()}
